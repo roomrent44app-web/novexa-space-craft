@@ -702,3 +702,4 @@ body:has(.plans-page) .site-header .brand-logo img { height: clamp(47px, 5.1vw, 
   .fq-item { padding-top: calc(var(--pu) * 8); padding-bottom: calc(var(--pu) * 8); }
   .fq-cta { background-size: 112% auto; background-position: 40% 62%; min-height: calc(var(--pu) * 131); }
 }
+@media (min-width: 768px) { .fq-cta { background-size: 100% auto; background-position: center 66%; } }
