@@ -1,9 +1,6 @@
 import { ArrowRight, Bell, CalendarDays, ShieldCheck, Users } from "lucide-react";
+import { hiwHeroAvif, hiwHeroWebp, hiwCtaAvif, hiwCtaWebp } from "@/data/images";
 import { Link } from "react-router-dom";
-import hiwHeroAvif from "@/assets/hiw-hero-clone.jpg?format=avif&width=1584&quality=70&imagetools";
-import hiwHeroWebp from "@/assets/hiw-hero-clone.jpg?format=webp&width=1584&quality=76&imagetools";
-import hiwCtaAvif from "@/assets/hiw-cta-clone.jpg?format=avif&width=1584&quality=68&imagetools";
-import hiwCtaWebp from "@/assets/hiw-cta-clone.jpg?format=webp&width=1584&quality=74&imagetools";
 import { orderLink } from "@/data/fiveam";
 import { useSeo } from "@/hooks/useSeo";
 import { useImagePreload } from "@/hooks/useImagePreload";
