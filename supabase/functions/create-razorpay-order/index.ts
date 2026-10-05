@@ -1,4 +1,9 @@
-import { createClient, corsHeaders } from 'npm:@supabase/supabase-js@2'
+import { createClient } from 'npm:@supabase/supabase-js@2'
+
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+}
 import { z } from 'npm:zod@3.25.76'
 
 const BodySchema = z.object({ planCode: z.string().min(1).max(30) })
