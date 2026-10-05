@@ -1,26 +1,142 @@
-import { Star } from "lucide-react";
-import student from "@/assets/5am-student.jpg";
-import priya from "@/assets/student-priya.jpg";
-import ananya from "@/assets/student-ananya.jpg";
-import rohit from "@/assets/student-rohit.jpg";
-import { FeatureStrip, Hero, PlansSection, Steps, StudyCta, Eyebrow } from "@/components/site/FiveAmSections";
+import { useState } from "react";
+import { ArrowRight, Bell, BookOpen, CalendarDays, ClipboardList, HeartHandshake, ShieldCheck, Star, TrendingUp, Users, Video, Zap } from "lucide-react";
+import heroImg from "@/assets/home-hero-ref.jpg";
+import communityImg from "@/assets/home-community-ref.jpg";
+import ctaImg from "@/assets/home-cta-ref.jpg";
+import priya from "@/assets/avatar-priya.jpg";
+import ananya from "@/assets/avatar-ananya.jpg";
+import rohit from "@/assets/avatar-rohit.jpg";
+import { MONTHLY_PLANS, orderLink, WEEKLY_PLANS } from "@/data/fiveam";
 import { useSeo } from "@/hooks/useSeo";
 
-const stories=[
-  ["Priya S.","NEET Aspirant","5AM.co.in helped me build a study routine. Now I never miss my 5 AM ever again!",priya],
-  ["Ananya K.","UPSC Aspirant","The wake-up calls and live study sessions keep me consistent and motivated.",ananya],
-  ["Rohit M.","JEE Aspirant","Such a supportive community! I feel more productive and focused every day.",rohit],
+const features = [
+  { Icon: Users, title: <>Live<br />Study Sessions</>, text: <>Study together<br />with a community</> },
+  { Icon: Bell, title: <>Daily<br />Wake-Up Calls</>, text: <>Get a wakeup call<br />and never miss 5 AM</> },
+  { Icon: TrendingUp, title: <>Stay Consistent</>, text: <>Track progress<br />and build habits</> },
+  { Icon: Users, title: <>Supportive<br />Community</>, text: <>Surround yourself<br />with like-minded students</> },
+  { Icon: BookOpen, title: <>Be a Better You</>, text: <>Daily motivation<br />and study support</> },
 ];
 
-export default function Index(){
-  useSeo({title:"5AM Study Community",description:"Join India's 5AM study community for live study sessions, daily wake-up calls and consistent progress.",path:"/"});
-  return <>
-    <Hero home eyebrow="Study Together at 5 AM" title="JOIN THE STUDY ROOM" accent="AT 5AM" text="Get daily wake-up calls, live study sessions and a supportive community to stay consistent in your study journey." />
-    <FeatureStrip />
-    <PlansSection home />
-    <section className="home-community grid md:grid-cols-2"><div className="relative"><img src={student} width={1440} height={960} loading="lazy" alt="Student building a consistent early morning study routine" className="h-full w-full object-cover"/><p className="community-image-note">Disciplined<br/>Students<br/>Build<br/>Brighter<br/>Futures ♡</p></div><div className="flex items-center bg-background p-8 md:p-14"><div><Eyebrow>A Community That Cares</Eyebrow><h2 className="section-title mt-3">More Than Just<br/>Wake-Up Calls</h2><p className="mt-4 max-w-xl leading-7 text-muted-foreground">5AM.co.in is a platform where students from all over India come together to study, stay consistent and grow with a supportive community.</p><div className="community-stats mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">{[["10K+","Students Joined"],["Daily","Live Study Sessions"],["High","Consistency Rate"],["100%","Student Support"]].map(x=><div key={x[1]}><strong className="text-2xl text-primary">{x[0]}</strong><p className="text-xs text-muted-foreground">{x[1]}</p></div>)}</div></div></div></section>
-    <Steps home />
-    <section className="home-stories section-cream py-16"><div className="site-container"><Eyebrow>What Our Students Say</Eyebrow><h2 className="section-title mt-2">Real Stories. Real Progress.</h2><div className="mt-8 grid gap-4 md:grid-cols-3">{stories.map(([name,role,quote,photo])=><article className="testimonial" key={name}><div className="testimonial-quote"><img src={photo} width={816} height={816} loading="lazy" alt={`${name}, ${role}`} /><p>“{quote}”</p></div><div className="testimonial-person"><div><h3>{name}</h3><p>{role}</p></div><div className="ml-auto flex text-accent">{[1,2,3,4,5].map(n=><Star key={n} className="h-4 w-4 fill-current"/>)}</div></div></article>)}</div></div></section>
-    <StudyCta home />
-  </>;
+const stats = [["10K+", "Students Joined"], ["Daily", "Live Study Sessions"], ["High", "Consistency Rate"], ["100%", "Student Support"]];
+
+const steps = [
+  { Icon: ClipboardList, title: "Choose Your Plan", text: <>Pick a weekly or monthly plan<br />that suits you.</> },
+  { Icon: Bell, title: "Get Daily Wake-Up Calls", text: <>Receive a wake-up call at 5 AM<br />on your selected days.</> },
+  { Icon: Users, title: "Join the Study Community", text: <>Attend live study sessions and stay consistent with like-minded students.</> },
+];
+
+const stories = [
+  { name: "Priya S.", role: "NEET Aspirant", quote: "5AM.co.in helped me build a study routine. Now I never miss my 5 AM ever again!", photo: priya },
+  { name: "Ananya K.", role: "UPSC Aspirant", quote: "The wake-up calls and live study sessions keep me consistent and motivated.", photo: ananya },
+  { name: "Rohit M.", role: "JEE Aspirant", quote: "Such a supportive community! I feel more productive and focused every day.", photo: rohit },
+];
+
+function Rays({ className = "" }: { className?: string }) {
+  return <svg className={`h-rays ${className}`} viewBox="0 0 40 44" aria-hidden="true"><path d="M8 18 L30 4 M6 26 L36 24 M8 34 L30 42" /></svg>;
+}
+function Underline() {
+  return <svg className="h-underline" viewBox="0 0 120 12" preserveAspectRatio="none" aria-hidden="true"><path d="M3 8 Q60 1 117 6" /></svg>;
+}
+function Tag({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) {
+  return <span className={dark ? "h-tag h-tag-dark" : "h-tag"}>{children}</span>;
+}
+
+export default function Index() {
+  useSeo({ title: "5AM Study Community", description: "Join India's 5AM study community for live study sessions, daily wake-up calls and consistent progress.", path: "/" });
+  const [period, setPeriod] = useState<"weekly" | "monthly">("weekly");
+  const plans = period === "weekly" ? WEEKLY_PLANS : MONTHLY_PLANS;
+
+  return <div className="home">
+    {/* HERO */}
+    <section className="h-hero" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.92) 0%, hsl(var(--ink)/.72) 28%, hsl(var(--ink)/.15) 50%, hsl(var(--ink)/0) 62%), url(${heroImg})` }}>
+      <div className="h-in">
+        <Tag dark>Study Together at 5 AM</Tag>
+        <h1 className="h-hero-title">JOIN THE<br />STUDY ROOM<br />AT <span className="h-5am">5AM</span><Rays className="h-hero-rays" /></h1>
+        <p className="h-hero-tag">Same Time. Better You.</p>
+        <p className="h-hero-text">Get daily wake-up calls, live study sessions and a supportive community to stay consistent in your study journey.</p>
+        <div className="h-hero-btns">
+          <a className="h-btn h-btn-orange h-btn-big" href={orderLink()} target="_blank" rel="noreferrer"><Video className="h-btn-ico" fill="currentColor" /><span>Join the Study Room<br />at 5 AM <ArrowRight /></span></a>
+          <a className="h-btn h-btn-white h-btn-big" href={orderLink("Community Registration")} target="_blank" rel="noreferrer"><Users className="h-btn-ico" /><span>Register to<br />Community <ArrowRight /></span></a>
+        </div>
+        <div className="h-proof"><span><Users /> Students All Over India</span><span><ShieldCheck /> Safe &amp; Supportive</span><span><Zap /> Build Consistency</span></div>
+      </div>
+    </section>
+
+    {/* FEATURES */}
+    <section className="h-features"><div className="h-in">
+      {features.map((f, i) => <div className="h-feature" key={i}><span className="h-feature-ico"><f.Icon /></span><h3>{f.title}</h3><p>{f.text}</p></div>)}
+    </div></section>
+
+    {/* PLANS */}
+    <section className="h-plans"><div className="h-in">
+      <div className="h-center"><Tag>Our Plans</Tag></div>
+      <h2 className="h-title h-center">Choose <span className="h-u">Your<Underline /></span> Plan<Rays className="h-title-rays" /></h2>
+      <p className="h-sub">Stay consistent with daily wake-up calls and access to our study community.</p>
+      <div className="h-tabs" role="tablist" aria-label="Plan period">
+        <button role="tab" aria-selected={period === "weekly"} className={period === "weekly" ? "active" : ""} onClick={() => setPeriod("weekly")}>Weekly Plans</button>
+        <button role="tab" aria-selected={period === "monthly"} className={period === "monthly" ? "active" : ""} onClick={() => setPeriod("monthly")}>Monthly Plans</button>
+      </div>
+      <div className={`h-cards ${plans.length === 3 ? "three" : ""}`}>
+        {plans.map(p => <article key={p.days} className={p.popular ? "h-card popular" : "h-card"}>
+          {p.popular && <span className="h-badge"><Star fill="currentColor" /> Most Popular</span>}
+          <span className="h-card-ico">{p.popular ? <HeartHandshake /> : <CalendarDays />}</span>
+          <h3>{p.days} Days</h3>
+          <p>{p.calls} Wake-Up Calls</p>
+          <strong>₹{p.price.toLocaleString("en-IN")}</strong>
+          <a className="h-btn h-btn-orange h-card-btn" href={orderLink(`${p.days} Days Plan - ₹${p.price}`)} target="_blank" rel="noreferrer">Get Started</a>
+        </article>)}
+      </div>
+    </div></section>
+
+    {/* COMMUNITY */}
+    <section className="h-community">
+      <div className="h-community-img"><img src={communityImg} alt="Disciplined students build brighter futures — student studying at sunrise" loading="lazy" width={1264} height={848} /></div>
+      <div className="h-community-body">
+        <Tag>A Community That Cares</Tag>
+        <h2 className="h-title">More Than Just<br />Wake-Up Calls<Rays className="h-comm-rays" /></h2>
+        <p className="h-comm-text">5AM.co.in is a platform where students from all over India come together to study, stay consistent and grow with a supportive community.</p>
+        <div className="h-stats">{stats.map(([v, l]) => <div key={l}><strong>{v}</strong><span>{l}</span></div>)}</div>
+      </div>
+    </section>
+
+    {/* STEPS */}
+    <section className="h-steps"><div className="h-in">
+      <div className="h-center"><Tag>How It Works</Tag></div>
+      <h2 className="h-title h-center">Get Started <span className="h-u">in 3<Underline /></span> Simple Steps</h2>
+      <div className="h-steps-grid">
+        {steps.map((s, i) => <article key={s.title} className="h-step">
+          <span className="h-step-num">{i + 1}</span>
+          <div><span className="h-step-ico"><s.Icon /></span><h3>{s.title}</h3><p>{s.text}</p></div>
+        </article>)}
+      </div>
+    </div></section>
+
+    {/* STORIES */}
+    <section className="h-stories"><div className="h-in">
+      <Tag>What Our Students Say</Tag>
+      <h2 className="h-title">Real <span className="h-u">Stories.<Underline /></span> Real Progress.<Rays className="h-title-rays" /></h2>
+      <div className="h-story-grid">
+        {stories.map(s => <article key={s.name} className="h-story">
+          <img src={s.photo} alt={`${s.name}, ${s.role}`} loading="lazy" width={512} height={512} />
+          <div>
+            <p>“{s.quote}”</p>
+            <div className="h-story-foot"><div><h3>{s.name}</h3><span>{s.role}</span></div><div className="h-stars">{[1, 2, 3, 4, 5].map(n => <Star key={n} fill="currentColor" />)}</div></div>
+          </div>
+        </article>)}
+      </div>
+    </div></section>
+
+    {/* CTA */}
+    <section className="h-cta" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.97) 0%, hsl(var(--ink)/.85) 35%, hsl(var(--ink)/.1) 62%, hsl(var(--ink)/0) 75%), url(${ctaImg})` }}>
+      <div className="h-in">
+        <Tag dark>It's Time</Tag>
+        <h2 className="h-cta-title">Join the Study Room<br /><span className="h-cta-l2">at <span className="h-5am">5AM</span><Rays className="h-cta-rays" /></span></h2>
+        <p className="h-cta-text">Be part of a supportive community and take one step<br />towards a more focused and productive you.</p>
+        <div className="h-cta-btns">
+          <a className="h-btn h-btn-orange" href={orderLink()} target="_blank" rel="noreferrer"><Video fill="currentColor" /> Join the Study Room at 5 AM <ArrowRight /></a>
+          <a className="h-btn h-btn-white" href={orderLink("Community Registration")} target="_blank" rel="noreferrer"><Users /> Register to Community <ArrowRight /></a>
+        </div>
+      </div>
+    </section>
+  </div>;
 }
