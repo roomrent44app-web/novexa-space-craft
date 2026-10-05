@@ -6,9 +6,6 @@ interface BeforeInstallPromptEvent extends Event {
   userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
 }
 
-const DISMISS_KEY = "5am-install-dismissed-at";
-const DISMISS_DAYS = 3;
-
 function isStandalone(): boolean {
   return (
     window.matchMedia("(display-mode: standalone)").matches ||
@@ -27,37 +24,35 @@ export default function InstallPrompt() {
 
   useEffect(() => {
     if (isStandalone()) return;
-    const dismissedAt = Number(localStorage.getItem(DISMISS_KEY) || 0);
-    if (dismissedAt && Date.now() - dismissedAt < DISMISS_DAYS * 86400000) return;
 
     const onPrompt = (e: Event) => {
       e.preventDefault();
       setDeferred(e as BeforeInstallPromptEvent);
-      setOpen(true);
     };
+    const onInstalled = () => setOpen(false);
     window.addEventListener("beforeinstallprompt", onPrompt);
+    window.addEventListener("appinstalled", onInstalled);
 
-    // iPhone/iPad have no beforeinstallprompt — show manual instructions instead.
-    if (isIos()) {
-      const t = window.setTimeout(() => {
-        setIos(true);
-        setOpen(true);
-      }, 2500);
-      return () => {
-        window.clearTimeout(t);
-        window.removeEventListener("beforeinstallprompt", onPrompt);
-      };
-    }
-    return () => window.removeEventListener("beforeinstallprompt", onPrompt);
+    // Show on every website visit until the app is installed.
+    const showTimer = window.setTimeout(() => {
+      setIos(isIos());
+      setOpen(true);
+    }, 700);
+
+    return () => {
+      window.clearTimeout(showTimer);
+      window.removeEventListener("beforeinstallprompt", onPrompt);
+      window.removeEventListener("appinstalled", onInstalled);
+    };
   }, []);
 
-  const close = () => {
-    localStorage.setItem(DISMISS_KEY, String(Date.now()));
-    setOpen(false);
-  };
+  const close = () => setOpen(false);
 
   const install = async () => {
-    if (!deferred) return;
+    if (!deferred) {
+      window.alert('Open your browser menu and choose "Install app" or "Add to Home screen".');
+      return;
+    }
     await deferred.prompt();
     const choice = await deferred.userChoice;
     if (choice.outcome === "accepted") {
