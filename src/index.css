@@ -467,3 +467,14 @@ body:has(.plans-page) .site-header .brand-logo img { height: clamp(47px, 5.1vw, 
 @media (max-width: 767px) {
   .h-plans .h-title, .h-community-body .h-title, .h-steps .h-title, .h-stories .h-title, .h-cta-title { font-size: 29px; }
 }
+
+/* Edge-to-edge layout like the design: sections fill the screen width, type keeps its compact size */
+.h-in { width: 100%; max-width: 1440px; }
+@media (min-width: 768px) {
+  .h-hero { height: max(calc(var(--u) * 425), calc(100vw * 425 / 793 * .86)); max-height: 640px; }
+  .h-community { height: max(calc(var(--u) * 282), calc(100vw * 282 / 793 * .86)); max-height: 460px; }
+  .h-community-body { display: flex; flex-direction: column; justify-content: center; padding-top: 0; }
+  .h-cta { height: max(calc(var(--u) * 221), calc(100vw * 221 / 793 * .8)); max-height: 360px; }
+  .h-cta .h-in { display: flex; flex-direction: column; justify-content: center; height: 100%; padding-top: 0; }
+  .h-hero .h-in { display: flex; flex-direction: column; justify-content: center; padding-top: 0; }
+}
