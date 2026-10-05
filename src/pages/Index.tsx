@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, Bell, BookOpen, CalendarDays, ClipboardList, HeartHandshake, ShieldCheck, Star, TrendingUp, Users, Video, Zap } from "lucide-react";
+import { ArrowRight, Bell, BookOpen, CalendarDays, ClipboardList, HeartHandshake, ShieldCheck, Star, Users, Video, Zap } from "lucide-react";
 import heroImg from "@/assets/home-hero-ref.jpg";
 import communityImg from "@/assets/home-community-ref.jpg";
 import ctaImg from "@/assets/home-cta-ref.jpg";
