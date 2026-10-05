@@ -185,11 +185,11 @@ main { overflow-x: clip; }
 /* hero */
 .h-hero { background-size: cover; background-position: center right; color: hsl(var(--primary-foreground)); height: calc(var(--u) * 425); }
 .h-hero .h-in { padding: calc(var(--u) * 29) 0 0 calc(var(--u) * 48); height: 100%; }
-.h-hero-title { font-family: "Fredoka", sans-serif; font-weight: 700; font-size: calc(var(--u) * 47); line-height: .86; letter-spacing: .005em; margin-top: calc(var(--u) * 11); color: hsl(var(--primary-foreground)); text-shadow: 0 2px 10px hsl(var(--ink) / .35); }
+.h-hero-title { font-family: "Titan One", "Fredoka", sans-serif; font-weight: 400; font-size: calc(var(--u) * 43); line-height: .95; transform: rotate(-3deg); transform-origin: left bottom; letter-spacing: .005em; margin-top: calc(var(--u) * 11); color: hsl(var(--primary-foreground)); text-shadow: 0 2px 10px hsl(var(--ink) / .35); }
 .h-5am { font-size: 1.5em; line-height: .8; background: linear-gradient(180deg, hsl(40 100% 58%), hsl(30 100% 52%)); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: none; vertical-align: -.04em; }
 .h-hero-rays { width: calc(var(--u) * 28); height: calc(var(--u) * 34); margin-left: calc(var(--u) * 6); vertical-align: calc(var(--u) * 2); }
 .h-hero-tag { font-family: "Nunito Sans", sans-serif; font-weight: 800; font-style: italic; font-size: calc(var(--u) * 18.5); margin-top: calc(var(--u) * 14); letter-spacing: -.01em; }
-.h-hero-text { font-size: calc(var(--u) * 13); line-height: 1.38; max-width: calc(var(--u) * 285); margin-top: calc(var(--u) * 9); color: hsl(var(--primary-foreground) / .92); }
+.h-hero-text { font-size: calc(var(--u) * 13.5); line-height: 1.33; max-width: calc(var(--u) * 280); margin-top: calc(var(--u) * 9); color: hsl(var(--primary-foreground) / .92); }
 .h-hero-btns { display: flex; gap: calc(var(--u) * 11); margin-top: calc(var(--u) * 19); margin-left: calc(var(--u) * -3); }
 .h-btn-big { height: calc(var(--u) * 54); border-radius: calc(var(--u) * 17); font-size: calc(var(--u) * 12.5); justify-content: flex-start; gap: calc(var(--u) * 10); }
 .h-btn-big.h-btn-orange { width: calc(var(--u) * 181); padding-left: calc(var(--u) * 21); }
