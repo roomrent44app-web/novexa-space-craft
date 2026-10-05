@@ -703,3 +703,29 @@ body:has(.plans-page) .site-header .brand-logo img { height: clamp(47px, 5.1vw, 
   .fq-cta { background-size: 112% auto; background-position: 40% 62%; min-height: calc(var(--pu) * 131); }
 }
 @media (min-width: 768px) { .fq-cta { background-size: 100% auto; background-position: center 66%; } }
+/* FAQs parity pass 3 */
+@media (min-width: 768px) {
+  body:has(.faq-page) .site-header .nav-link:not(.active) { color: hsl(var(--ink)); }
+  body:has(.faq-page) .site-header .nav-link { font-weight: 700; }
+  .fq-hero .p-eyebrow { font-size: calc(var(--pu) * 8.6); letter-spacing: .2em; }
+  .fq-hero .l2 .p-rays { right: calc(var(--pu) * -36); bottom: calc(var(--pu) * -8); }
+  .fq-list .p-section-heading h2 { font-family: "Fredoka", sans-serif; font-weight: 700; -webkit-text-stroke: 0; letter-spacing: -.005em; transform: rotate(-1deg); }
+  .fq-list .p-section-heading p { color: hsl(var(--ink)); font-size: calc(var(--pu) * 12.4); }
+  .fq-body h3 { font-family: "Fredoka", sans-serif; font-weight: 600; -webkit-text-stroke: 0; letter-spacing: 0; font-size: calc(var(--pu) * 14.8); }
+  .fq-body p { color: hsl(var(--ink)); font-size: calc(var(--pu) * 12.1); line-height: 1.3; }
+  .fq-ico { width: calc(var(--pu) * 52); height: calc(var(--pu) * 52); }
+  .fq-ico svg { width: calc(var(--pu) * 27); height: calc(var(--pu) * 27); }
+  .fq-item { grid-template-columns: calc(var(--pu) * 52) 1fr calc(var(--pu) * 23); }
+  .fq-cta { background-color: hsl(var(--ink)); background-repeat: no-repeat; background-size: 100% 100%, auto 146% !important; background-position: 0 0, calc(100% + var(--pu) * 6) 60% !important; }
+  .fq-cta h2 { font-size: calc(var(--pu) * 31); }
+}
+@media (max-width: 767px) {
+  .fq-body h3 { font-family: "Fredoka", sans-serif; font-weight: 600; -webkit-text-stroke: 0; }
+  .fq-list .p-section-heading h2 { font-family: "Fredoka", sans-serif; font-weight: 700; -webkit-text-stroke: 0; }
+}
+@media (min-width: 768px) {
+  body:has(.faq-page) .nav-link:not(.active) { color: hsl(var(--ink)); }
+  body:has(.faq-page) .nav-link { font-weight: 700; }
+  .fq-cta { background-size: 100% 100%, auto 172% !important; background-position: 0 0, calc(100% + var(--pu) * 4) 62% !important; }
+  .fq-cta h2 { font-size: calc(var(--pu) * 29.5); }
+}
