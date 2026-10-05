@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import Logo from "./Logo";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -18,6 +18,10 @@ export default function Header() {
       <nav className="site-nav" aria-label="Main navigation">
         {links.map(([to,label]) => <NavLink key={to} to={to} end={to === "/"} className={({isActive}) => cn("nav-link", isActive && "active")}>{label}</NavLink>)}
       </nav>
+      <div className="header-auth hidden md:flex">
+        <Link to="/account" className="nav-link">Login</Link>
+        <Link to="/account?mode=signup" className="nav-link header-signup">Sign Up</Link>
+      </div>
       <a className="h-btn h-btn-orange header-cta" href={orderLink("Community Registration")} target="_blank" rel="noreferrer">Register to Community <ArrowRight /></a>
       <Button
         variant="ghost"
@@ -33,6 +37,8 @@ export default function Header() {
     </div>
     {open && <nav id="mobile-navigation" className="mobile-navigation md:hidden" aria-label="Mobile navigation">
       {links.map(([to,label]) => <NavLink key={to} to={to} end={to === "/"} onClick={() => setOpen(false)} className={({ isActive }) => cn("mobile-nav-link", isActive && "active")}>{label}</NavLink>)}
+      <Link to="/account" onClick={() => setOpen(false)} className="mobile-nav-link">Login</Link>
+      <Link to="/account?mode=signup" onClick={() => setOpen(false)} className="mobile-nav-link">Create Account</Link>
       <a className="h-btn h-btn-orange mobile-register" href={orderLink("Community Registration")} target="_blank" rel="noreferrer" onClick={() => setOpen(false)}>Register to Community <ArrowRight /></a>
     </nav>}
   </header>;
