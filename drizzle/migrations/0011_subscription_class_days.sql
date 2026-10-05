@@ -1,0 +1,1 @@
+ALTER TABLE public.subscriptions ADD COLUMN IF NOT EXISTS class_days text[] NOT NULL DEFAULT '{}';

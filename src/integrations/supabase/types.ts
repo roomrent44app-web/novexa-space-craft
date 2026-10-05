@@ -259,6 +259,7 @@ export type Database = {
           admin_notes: string
           amount_paise: number
           cancelled_at: string | null
+          class_days: string[]
           created_at: string
           duration_days: number
           expires_at: string | null
@@ -279,6 +280,7 @@ export type Database = {
           admin_notes?: string
           amount_paise: number
           cancelled_at?: string | null
+          class_days?: string[]
           created_at?: string
           duration_days: number
           expires_at?: string | null
@@ -299,6 +301,7 @@ export type Database = {
           admin_notes?: string
           amount_paise?: number
           cancelled_at?: string | null
+          class_days?: string[]
           created_at?: string
           duration_days?: number
           expires_at?: string | null
