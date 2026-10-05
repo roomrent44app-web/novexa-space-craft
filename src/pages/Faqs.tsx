@@ -1,6 +1,93 @@
-import { Plus } from "lucide-react";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { FAQS } from "@/data/fiveam";
-import { Eyebrow, Hero, StudyCta } from "@/components/site/FiveAmSections";
+import { useState, type ReactNode } from "react";
+import { ArrowRight, Bell, Clock, IndianRupee, Laptop, Phone, Plus, ShieldCheck, Star, Users } from "lucide-react";
+import faqHero from "@/assets/faq-hero-clone.jpg";
+import faqCta from "@/assets/faq-cta-clone.jpg";
+import { FAQS, orderLink } from "@/data/fiveam";
 import { useSeo } from "@/hooks/useSeo";
-export default function Faqs(){useSeo({title:"FAQs",description:"Answers about 5AM wake-up calls, study sessions, community access and payments.",path:"/faqs"});return <><Hero compact eyebrow="Frequently Asked Questions" title="Got Questions?" accent="We've Got You" text="Find answers to everything about wake-up calls, study sessions and our community."/><section className="section-cream py-16"><div className="site-container max-w-5xl text-center"><Eyebrow>FAQs</Eyebrow><h2 className="section-title mt-2">Everything You Need to Know</h2><p className="section-subtitle">Quick answers to help you get started with 5AM.co.in</p><Accordion type="single" collapsible className="mt-8 grid gap-3 text-left">{FAQS.map((f,i)=><AccordionItem key={f.q} value={`item-${i}`} className="faq-row"><AccordionTrigger className="gap-4 py-5 text-base font-extrabold hover:no-underline [&>svg]:hidden"><span className="faq-plus"><Plus/></span><span>{f.q}</span></AccordionTrigger><AccordionContent className="pl-[60px] pr-5 text-sm leading-6 text-muted-foreground">{f.a}</AccordionContent></AccordionItem>)}</Accordion></div></section><StudyCta title="We're Here to Help!"/></>}
+
+function Rays() {
+  return <span className="p-rays" aria-hidden="true"><i /><i /><i /></span>;
+}
+
+const ChartFilled = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <rect x="3" y="13" width="4.5" height="8" rx="1" /><rect x="9.75" y="8.5" width="4.5" height="12.5" rx="1" /><rect x="16.5" y="4" width="4.5" height="17" rx="1" />
+  </svg>
+);
+
+const UsersFilled = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <circle cx="12" cy="7" r="3.4" /><circle cx="5" cy="9" r="2.5" /><circle cx="19" cy="9" r="2.5" />
+    <path d="M5.5 20c0-3.9 2.9-6.6 6.5-6.6s6.5 2.7 6.5 6.6z" /><path d="M.8 19c0-2.8 1.7-4.6 4.2-4.6.8 0 1.5.2 2.1.5A8.3 8.3 0 0 0 4.4 19z" /><path d="M23.2 19c0-2.8-1.7-4.6-4.2-4.6-.8 0-1.5.2-2.1.5a8.3 8.3 0 0 1 2.7 4.1z" />
+  </svg>
+);
+
+const faqIcons: ReactNode[] = [
+  <Phone fill="currentColor" strokeWidth={1.2} />,
+  <Star fill="currentColor" strokeWidth={1.2} />,
+  <IndianRupee strokeWidth={2.6} />,
+  <Laptop strokeWidth={2.6} />,
+  <Clock strokeWidth={2.4} />,
+  <UsersFilled />,
+];
+
+/** Renders "**bold**" markers and "\n" line breaks from the shared FAQ copy. */
+function RichText({ text }: { text: string }) {
+  return <>{text.split("\n").map((line, li) => <span key={li} className="block">
+    {line.split(/(\*\*[^*]+\*\*)/g).map((part, pi) => part.startsWith("**") ? <b key={pi}>{part.slice(2, -2)}</b> : part)}
+  </span>)}</>;
+}
+
+const heroBenefits = [
+  { Icon: () => <Users />, label: <>Live<br />Study Sessions</> },
+  { Icon: () => <Bell />, label: <>Daily<br />Wake-Up Calls</> },
+  { Icon: () => <ShieldCheck />, label: <>Safe &amp; Positive<br />Environment</> },
+  { Icon: ChartFilled, label: <>Build<br />Consistency</> },
+];
+
+export default function Faqs() {
+  useSeo({ title: "FAQs", description: "Answers about 5AM wake-up calls, study sessions, community access and payments.", path: "/faqs" });
+  const [open, setOpen] = useState<boolean[]>(() => FAQS.map(() => true));
+
+  return <div className="plans-page faq-page">
+    <section className="fq-hero" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.78) 0%, hsl(var(--ink)/.55) 34%, hsl(var(--ink)/0) 58%), url(${faqHero})` }}>
+      <div className="p-shell">
+        <span className="p-eyebrow">Frequently Asked Questions</span>
+        <h1><span className="l1">Got Questions?</span><span className="l2">We've Got You<Rays /></span></h1>
+        <p>Find answers to everything about wake-up calls,<br />study sessions and our community.</p>
+        <div className="fq-hero-benefits">
+          {heroBenefits.map(({ Icon, label }, i) => <div key={i}><span><Icon /></span><b>{label}</b></div>)}
+        </div>
+      </div>
+    </section>
+
+    <section className="fq-list">
+      <div className="p-shell">
+        <div className="p-section-heading">
+          <span className="p-eyebrow light">FAQs</span>
+          <h2>Everything You Need to Know<Rays /></h2>
+          <p>Quick answers to help you get started with 5AM.co.in</p>
+        </div>
+        <div className="fq-items">
+          {FAQS.map((f, i) => <article className="fq-item" key={f.q}>
+            <span className="fq-ico">{faqIcons[i] ?? <Star fill="currentColor" />}</span>
+            <div className="fq-body">
+              <h3>{f.q}</h3>
+              {open[i] && <p><RichText text={f.a} /></p>}
+            </div>
+            <button type="button" className="fq-plus" aria-expanded={open[i]} aria-label={open[i] ? `Hide answer: ${f.q}` : `Show answer: ${f.q}`} onClick={() => setOpen(o => o.map((v, j) => j === i ? !v : v))}><Plus /></button>
+          </article>)}
+        </div>
+      </div>
+    </section>
+
+    <section className="fq-cta" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.8) 0%, hsl(var(--ink)/.55) 40%, hsl(var(--ink)/0) 62%), url(${faqCta})` }}>
+      <div className="p-shell">
+        <span className="p-eyebrow">Still Have Questions?</span>
+        <h2>We're Here to Help!<Rays /></h2>
+        <p>Join thousands of students and start your 5AM journey today.</p>
+        <a className="fq-btn" href={orderLink("Community Registration")} target="_blank" rel="noreferrer">Register to Community <ArrowRight /></a>
+      </div>
+    </section>
+  </div>;
+}
