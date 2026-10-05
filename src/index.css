@@ -907,3 +907,4 @@ img { height: auto; }
 .adm-card form{display:grid;gap:14px}
 .adm-title{font-family:"Fredoka",sans-serif;font-weight:700;font-size:28px;color:hsl(var(--ink))}
 .adm-sub{font-size:14px;color:hsl(var(--ink)/.75)}
+.acc-class{display:grid;gap:8px;justify-items:start;padding:14px;border-radius:14px;background:hsl(var(--peach, 24 100% 94%))}
