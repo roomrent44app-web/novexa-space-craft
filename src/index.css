@@ -144,7 +144,7 @@
   --peach-deep: 24 90% 91%;
   --amber: 36 100% 54%;
   --gold-line: 38 55% 58%;
-  --u: clamp(1px, calc(100vw / 1100), 1.2px);
+  --u: clamp(1px, calc(100vw / 793), 1.2px);
 }
 @media (max-width: 767px) { :root { --u: 1.05px; } }
 
