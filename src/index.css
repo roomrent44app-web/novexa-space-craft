@@ -723,3 +723,9 @@ body:has(.plans-page) .site-header .brand-logo img { height: clamp(47px, 5.1vw, 
   .fq-body h3 { font-family: "Fredoka", sans-serif; font-weight: 600; -webkit-text-stroke: 0; }
   .fq-list .p-section-heading h2 { font-family: "Fredoka", sans-serif; font-weight: 700; -webkit-text-stroke: 0; }
 }
+@media (min-width: 768px) {
+  body:has(.faq-page) .nav-link:not(.active) { color: hsl(var(--ink)); }
+  body:has(.faq-page) .nav-link { font-weight: 700; }
+  .fq-cta { background-size: 100% 100%, auto 172% !important; background-position: 0 0, calc(100% + var(--pu) * 4) 62% !important; }
+  .fq-cta h2 { font-size: calc(var(--pu) * 29.5); }
+}
