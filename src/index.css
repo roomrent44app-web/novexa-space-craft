@@ -1027,3 +1027,31 @@ img { height: auto; }
 .admin-stat{display:grid;align-content:center;gap:4px;padding:16px;border:1px solid hsl(var(--border));border-radius:8px;background:hsl(var(--card));box-shadow:var(--shadow-soft)}
 .admin-stat small{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:hsl(var(--muted-foreground))}
 .admin-stat b{font-family:"Fredoka",sans-serif;font-size:22px;color:hsl(var(--foreground))}
+
+/* Shared button sizing: keep actions readable and comfortably tappable on every page. */
+.account-plan > .h-btn,
+.account-class > .h-btn,
+.adm-card form > .h-btn {
+  width: 100%;
+  min-height: 46px;
+  font-size: 15px;
+}
+.admin-toolbar > button,
+.admin-actions > button,
+.admin-save-class {
+  min-height: 42px;
+  padding-inline: 16px;
+}
+@media (max-width: 767px) {
+  .h-btn,
+  .p-card-button,
+  .hw-btn,
+  .fq-btn,
+  .adm-btn {
+    min-height: 46px;
+  }
+  .h-card,
+  .p-card {
+    height: auto;
+  }
+}
