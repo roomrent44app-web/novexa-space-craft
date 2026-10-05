@@ -32,12 +32,18 @@ export function useSeo({ title, description, path, image, noindex, jsonLd }: Seo
     setMeta("name", "description", description);
     setMeta("name", "robots", noindex ? "noindex, nofollow" : "index, follow");
 
-    setMeta("property", "og:type", path === "/" ? "website" : "article");
+    setMeta("property", "og:type", "website");
     setMeta("property", "og:title", fullTitle);
     setMeta("property", "og:description", description);
     setMeta("property", "og:url", url);
     setMeta("property", "og:site_name", CONTACT.brand);
-    if (image) setMeta("property", "og:image", image);
+    if (image) {
+      setMeta("property", "og:image", image);
+      setMeta("name", "twitter:image", image);
+    } else {
+      document.head.querySelector('meta[property="og:image"]')?.remove();
+      document.head.querySelector('meta[name="twitter:image"]')?.remove();
+    }
 
     setMeta("name", "twitter:card", "summary_large_image");
     setMeta("name", "twitter:title", fullTitle);
