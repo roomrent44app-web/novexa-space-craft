@@ -903,3 +903,7 @@ img { height: auto; }
 
 .header-auth{align-items:center;gap:clamp(8px,1vw,14px);margin-right:clamp(6px,1vw,12px);white-space:nowrap}
 .header-signup{border:1.5px solid currentColor;border-radius:999px;padding:4px 12px}
+.adm-wrap{max-width:460px;margin:0 auto;padding:clamp(32px,6vw,64px) 16px;width:100%;box-sizing:border-box}
+.adm-card form{display:grid;gap:14px}
+.adm-title{font-family:"Fredoka",sans-serif;font-weight:700;font-size:28px;color:hsl(var(--ink))}
+.adm-sub{font-size:14px;color:hsl(var(--ink)/.75)}
