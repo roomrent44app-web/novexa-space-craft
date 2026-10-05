@@ -2,16 +2,19 @@ import { ArrowRight, Bell, BookOpen, CalendarDays, Check, ShieldCheck, TrendingU
 import { Button } from "@/components/ui/button";
 import { FEATURES, MONTHLY_PLANS, orderLink, WEEKLY_PLANS } from "@/data/fiveam";
 import hero from "@/assets/5am-hero.jpg";
+import homeHero from "@/assets/5am-home-hero-parity.jpg";
+import homeCta from "@/assets/5am-home-cta-parity.jpg";
 
 const icons = { Users, Bell, Chart: TrendingUp, Shield: ShieldCheck, Book: BookOpen };
 
 export function Eyebrow({children}:{children: React.ReactNode}) { return <p className="section-eyebrow">{children}</p>; }
 
 export function Hero({ eyebrow, title, accent, text, compact=false, home=false }: { eyebrow:string; title:string; accent:string; text:string; compact?:boolean; home?:boolean }) {
-  return <section className={`${compact ? "page-hero compact" : "page-hero"}${home ? " home-hero" : ""}`} style={{backgroundImage:`linear-gradient(90deg, hsl(var(--foreground)/.93) 0%, hsl(var(--foreground)/.63) 47%, hsl(var(--foreground)/.04) 100%), url(${hero})`}}>
+  const image = home ? homeHero : hero;
+  return <section className={`${compact ? "page-hero compact" : "page-hero"}${home ? " home-hero" : ""}`} style={{backgroundImage:`linear-gradient(90deg, hsl(var(--foreground)/.9) 0%, hsl(var(--foreground)/.5) 42%, hsl(var(--foreground)/0) 67%), url(${image})`}}>
     <div className="site-container relative z-10 py-16 md:py-24">
       <Eyebrow>{eyebrow}</Eyebrow>
-      <h1 className="hero-title mt-4">{title}<br/><span>{accent}</span></h1>
+      <h1 className="hero-title mt-4">{home ? <><span className="hero-main-line">JOIN THE</span><br/><span className="hero-main-line">STUDY ROOM</span></> : title}<br/><span>{accent}</span></h1>
       {home && <p className="home-tagline">Same Time. Better You.</p>}
       <p className="mt-4 max-w-lg text-base leading-7 text-primary-foreground/90 md:text-lg">{text}</p>
       {!compact && <div className="mt-7 flex flex-wrap gap-3"><Button asChild size="lg"><a href={orderLink()} target="_blank" rel="noreferrer">Join the Study Room at 5 AM <ArrowRight /></a></Button><Button asChild size="lg" variant="secondary"><a href={orderLink("Community Registration")} target="_blank" rel="noreferrer"><Users /> Register to Community <ArrowRight /></a></Button></div>}
@@ -28,6 +31,6 @@ export function PlansSection({full=false,home=false}:{full?:boolean;home?:boolea
 
 export function Steps({home=false}:{home?:boolean}) { const steps=[{icon:CalendarDays,title:"Choose Your Plan",text:"Pick a weekly or monthly plan that suits you."},{icon:Bell,title:"Get Daily Wake-Up Calls",text:"Receive a wake-up call at 5 AM on your selected days."},{icon:Users,title:"Join the Study Community",text:"Attend live study sessions and stay consistent with like-minded students."}]; return <section className={`py-16 md:py-20${home ? " home-steps" : ""}`}><div className="site-container text-center"><Eyebrow>How It Works</Eyebrow><h2 className="section-title mt-2">Get Started in 3 Simple Steps</h2><div className="mt-10 grid gap-5 md:grid-cols-3">{steps.map((s,i)=><article className="step-card" key={s.title}><span className="step-number">{i+1}</span><span className="feature-icon mx-auto"><s.icon /></span><h3>{s.title}</h3><p>{s.text}</p></article>)}</div></div></section>; }
 
-export function StudyCta({title="Join the Study Room at 5AM",home=false}:{title?:string;home?:boolean}) { return <section className={home ? "home-cta" : "site-container pb-16"}><div className="study-cta" style={{backgroundImage:`linear-gradient(90deg,hsl(var(--foreground)/.96),hsl(var(--foreground)/.55)),url(${hero})`}}><div><Eyebrow>It's Time</Eyebrow><h2>{title}</h2><p>Be part of a supportive community and take one step towards a more focused and productive you.</p><div className="mt-6 flex flex-wrap gap-3"><Button asChild size="lg"><a href={orderLink()} target="_blank" rel="noreferrer">Join the Study Room at 5 AM <ArrowRight /></a></Button><Button asChild variant="secondary" size="lg"><a href={orderLink("Community Registration")} target="_blank" rel="noreferrer"><Users /> Register to Community <ArrowRight /></a></Button></div></div></div></section>; }
+export function StudyCta({title="Join the Study Room at 5AM",home=false}:{title?:string;home?:boolean}) { const image=home?homeCta:hero; return <section className={home ? "home-cta" : "site-container pb-16"}><div className="study-cta" style={{backgroundImage:`linear-gradient(90deg,hsl(var(--foreground)/.96),hsl(var(--foreground)/.7) 42%,hsl(var(--foreground)/.03) 78%),url(${image})`}}><div><Eyebrow>It's Time</Eyebrow><h2>{title}</h2><p>Be part of a supportive community and take one step towards a more focused and productive you.</p><div className="mt-6 flex flex-wrap gap-3"><Button asChild size="lg"><a href={orderLink()} target="_blank" rel="noreferrer">Join the Study Room at 5 AM <ArrowRight /></a></Button><Button asChild variant="secondary" size="lg"><a href={orderLink("Community Registration")} target="_blank" rel="noreferrer"><Users /> Register to Community <ArrowRight /></a></Button></div></div></div></section>; }
 
 export function Checklist() { return <ul className="mt-5 grid gap-3">{["Wake up at 5 AM","Study with 5AM.co.in","Be consistent","Make progress","Be proud"].map(x=><li key={x} className="flex items-center gap-3"><span className="grid h-6 w-6 place-items-center rounded-full bg-primary text-primary-foreground"><Check className="h-4 w-4" /></span>{x}</li>)}</ul>; }
