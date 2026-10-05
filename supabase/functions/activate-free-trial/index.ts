@@ -43,7 +43,7 @@ Deno.serve(async (req) => {
     const blocked = (existing ?? []).some(
       (row) => row.plan_code === TRIAL.planCode || row.status === 'active' || row.status === 'pending',
     )
-    if (blocked) return json({ error: 'The free trial can be used only once per account.' }, 409)
+    if (blocked) return json({ ok: false, error: 'The free trial can be used only once per account.' })
 
     const startsAt = new Date()
     const expiresAt = new Date(startsAt.getTime() + TRIAL.days * 86400000)
