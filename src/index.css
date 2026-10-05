@@ -594,3 +594,19 @@ body:has(.plans-page) .site-header .brand-logo img { height: clamp(47px, 5.1vw, 
   .hw-cta-feats { flex-wrap: wrap; gap: 10px 0; } .hw-cta-feats > div { font-size: 11px; }
   .hw-cta-feats svg { width: 20px; height: 20px; }
 }
+/* How It Works parity pass 2 */
+.hw-hero .p-shell { padding-bottom: calc(var(--pu) * 58); }
+.hw-hero .l1 { font-size: calc(var(--pu) * 50); }
+.hw-hero .l2 { font-size: calc(var(--pu) * 62); }
+.hw-hero .l3 { font-size: calc(var(--pu) * 34); }
+.hw-hero p { font-size: calc(var(--pu) * 15); color: hsl(var(--primary-foreground)); }
+.hw-process .p-section-heading h2, .hw-step h3 { font-family: "Chewy", "Kalam", cursive; font-weight: 400; font-style: normal; transform: none; -webkit-text-stroke: calc(var(--pu) * .35) currentColor; }
+.hw-step { height: calc(var(--pu) * 166); }
+.hw-step h3 { margin-top: calc(var(--pu) * 8); }
+.hw-ico svg { stroke-width: 1.9; }
+.hw-cta h2 { font-size: calc(var(--pu) * 35); }
+@media (max-width: 767px) {
+  .hw-hero .l1 { font-size: 38px; } .hw-hero .l2 { font-size: 48px; } .hw-hero .l3 { font-size: 26px; }
+  .hw-hero p { font-size: 15px; } .hw-step { height: auto; } .hw-cta h2 { font-size: 38px; }
+  .hw-process .p-section-heading h2 { font-size: 28px; } .hw-step h3 { font-size: 21px; }
+}
