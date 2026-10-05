@@ -13,7 +13,7 @@ type Subscription = {
   plan_name: string;
   duration_days: number;
   amount_paise: number;
-  status: "pending" | "active" | "expired" | "failed";
+  status: "pending" | "active" | "expired" | "failed" | "cancelled";
   starts_at: string | null;
   expires_at: string | null;
 };
