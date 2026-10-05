@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { User } from "@supabase/supabase-js";
+import { FunctionsHttpError } from "@supabase/supabase-js";
 import { CalendarClock, CheckCircle2, Clock3, CreditCard, LogOut, RefreshCw, UserRound, Video } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import Attendance from "@/components/site/Attendance";
@@ -21,6 +22,16 @@ type Subscription = {
 const formatDate = (value: string | null) => value
   ? new Date(value).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Kolkata" })
   : "—";
+
+const fnError = async (error: unknown, fallback: string) => {
+  if (error instanceof FunctionsHttpError) {
+    try {
+      const body = await error.context.json() as { error?: string };
+      return body.error ?? fallback;
+    } catch { return fallback; }
+  }
+  return error instanceof Error ? error.message : fallback;
+};
 
 export default function Account() {
   useSeo({ title: "Student Panel — 5AM", description: "Manage your 5AM plan, class access and attendance.", path: "/account" });
@@ -98,7 +109,7 @@ export default function Account() {
     try {
       if (selected.code === "trial-3d") {
         const { error } = await supabase.functions.invoke("activate-free-trial", { body: {} });
-        if (error) throw new Error("Could not start the free trial. Please try again.");
+        if (error) throw new Error(await fnError(error, "Could not start the free trial. Please try again."));
         setMsg("Your 3 Days Free Trial is active!");
       } else {
         await purchasePlan(selected.code, { name: profile.full_name, email: user.email ?? "", phone: profile.phone });
