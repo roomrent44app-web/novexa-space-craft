@@ -508,3 +508,21 @@ body:has(.plans-page) .site-header .brand-logo img { height: clamp(47px, 5.1vw, 
 .p-hero-benefits b { line-height: 1.25; }
 .p-hero-benefits { gap: calc(var(--pu) * 10) !important; } .p-hero-benefits > div { gap: calc(var(--pu) * 5) !important; }
 .p-hero-benefits svg { stroke-width: 2.2; }
+/* Plans parity pass 3 — measured against the 1086px reference */
+@media (min-width: 768px) {
+  body:has(.plans-page) .site-header-row { height: clamp(58px, 7.07vw, 80px); }
+  body:has(.plans-page) .site-header .brand-logo img { height: clamp(48px, 5.85vw, 64px); }
+  .p-hero h1 { font-size: calc(var(--pu) * 59.5); }
+  .p-section-heading.monthly { margin-top: calc(var(--pu) * 7); }
+  .p-section-heading.monthly + .p-grid { margin-top: calc(var(--pu) * 14); }
+  .p-benefit-strip .p-shell { grid-template-columns: repeat(4, auto); justify-content: space-between; }
+}
+@media (min-width: 768px) { .p-benefit p, .p-benefit h3 { white-space: nowrap; } }
+@media (min-width: 768px) {
+  body:has(.plans-page) .header-cta { background: hsl(var(--primary)); font-family: "Fredoka", sans-serif; font-weight: 600; height: clamp(36px, 4.2vw, 46px); padding: 0 clamp(22px, 2.6vw, 30px); font-size: clamp(14px, 1.6vw, 17px); box-shadow: 0 6px 14px -8px hsl(var(--primary) / .7); }
+  body:has(.plans-page) .nav-link:not(.active) { color: hsl(var(--ink)); }
+  body:has(.plans-page) .nav-link { font-weight: 600; font-size: clamp(12.5px, 1.36vw, 15px); }
+}
+.plans-page { background: radial-gradient(ellipse at 50% 55%, hsl(var(--cream)), hsl(var(--peach))); }
+.plans-page .p-pricing, .plans-page .p-benefit-strip { background: transparent; }
+.p-card.popular { border-color: hsl(var(--gold-line)); }
