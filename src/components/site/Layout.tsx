@@ -11,5 +11,5 @@ export default function Layout({ children }: { children: ReactNode }) {
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
   }, [pathname]);
   useAllImagesPreload(pathname);
-  return <div className="min-h-screen"><Header /><main>{children}</main><Footer /></div>;
+  return <div className="min-h-screen"><Header /><main>{children}</main><Footer /><BottomNav /></div>;
 }
