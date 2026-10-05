@@ -3,6 +3,7 @@ import { plansHeroAvif, plansHeroWebp } from "@/data/images";
 import { MONTHLY_PLANS, orderLink, PLANS_PAGE_WEEKLY } from "@/data/fiveam";
 import { useSeo } from "@/hooks/useSeo";
 import { useImagePreload } from "@/hooks/useImagePreload";
+import { Link } from "react-router-dom";
 
 const UsersFilled = () => <Users fill="currentColor" strokeWidth={1.6} />;
 const BellFilled = () => <Bell fill="currentColor" strokeWidth={1.8} />;
@@ -37,7 +38,7 @@ function PlanCard({ plan }: { plan: { days: number; calls: number; price: number
     <h3>{plan.days} Days</h3>
     <p>{plan.calls} Wake-Up Calls</p>
     <strong>₹{plan.price.toLocaleString("en-IN")}</strong>
-    <a className="p-card-button" href={orderLink(`${plan.days} Days Plan - ₹${plan.price}`)} target="_blank" rel="noreferrer">Get Started <ArrowRight /></a>
+    <Link className="p-card-button" to={`/account?plan=${plan.days}d-${plan.price}`}>Get Started <ArrowRight /></Link>
   </article>;
 }
 

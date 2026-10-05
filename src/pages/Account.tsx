@@ -1,47 +1,80 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { User } from "@supabase/supabase-js";
+import { CalendarClock, CheckCircle2, Clock3, CreditCard, LogOut, RefreshCw, UserRound, Video } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import Attendance from "@/components/site/Attendance";
+import { PURCHASE_PLANS } from "@/data/fiveam";
+import { purchasePlan } from "@/lib/razorpay";
 import { useSeo } from "@/hooks/useSeo";
 
+type Subscription = {
+  id: string;
+  plan_code: string;
+  plan_name: string;
+  duration_days: number;
+  amount_paise: number;
+  status: "pending" | "active" | "expired" | "failed";
+  starts_at: string | null;
+  expires_at: string | null;
+};
+
+const formatDate = (value: string | null) => value
+  ? new Date(value).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Kolkata" })
+  : "—";
+
 export default function Account() {
-  useSeo({ title: "My Account — 5AM", description: "Create your 5AM account or log in.", path: "/account" });
+  useSeo({ title: "Student Panel — 5AM", description: "Manage your 5AM plan, class access and attendance.", path: "/account" });
+  const params = useMemo(() => new URLSearchParams(window.location.search), []);
   const [user, setUser] = useState<User | null>(null);
   const [ready, setReady] = useState(false);
-  const [mode, setMode] = useState<"login" | "signup">(
-    new URLSearchParams(window.location.search).get("mode") === "signup" ? "signup" : "login",
-  );
+  const [mode, setMode] = useState<"login" | "signup">(params.get("mode") === "signup" ? "signup" : "login");
   const [form, setForm] = useState({ name: "", phone: "", email: "", password: "" });
   const [profile, setProfile] = useState({ full_name: "", phone: "" });
   const [msg, setMsg] = useState("");
   const [busy, setBusy] = useState(false);
   const [cls, setCls] = useState<{ meet_link: string; class_time: string } | null>(null);
+  const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
+  const [attendanceCount, setAttendanceCount] = useState(0);
+  const [selectedPlan, setSelectedPlan] = useState(params.get("plan") ?? "21d-1099");
 
   useEffect(() => {
-    const { data } = supabase.auth.onAuthStateChange((_e, s) => setUser(s?.user ?? null));
+    const { data } = supabase.auth.onAuthStateChange((_e, session) => setUser(session?.user ?? null));
     supabase.auth.getUser().then(({ data }) => { setUser(data.user); setReady(true); });
     return () => data.subscription.unsubscribe();
   }, []);
 
-  useEffect(() => {
+  const loadDashboard = useCallback(async () => {
     if (!user) return;
-    supabase.from("profiles").select("full_name, phone").eq("id", user.id).maybeSingle()
-      .then(({ data }) => data && setProfile(data));
-    supabase.from("class_settings").select("meet_link, class_time").eq("id", 1).maybeSingle()
-      .then(({ data }) => setCls(data));
+    const now = new Date();
+    const monthStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1)).toISOString().slice(0, 10);
+    const [profileResult, classResult, subscriptionResult, attendanceResult] = await Promise.all([
+      supabase.from("profiles").select("full_name, phone").eq("id", user.id).maybeSingle(),
+      supabase.from("class_settings").select("meet_link, class_time").eq("id", 1).maybeSingle(),
+      supabase.from("subscriptions").select("id,plan_code,plan_name,duration_days,amount_paise,status,starts_at,expires_at").order("created_at", { ascending: false }),
+      supabase.from("attendance").select("id", { count: "exact", head: true }).eq("user_id", user.id).gte("day", monthStart),
+    ]);
+    if (profileResult.data) setProfile(profileResult.data);
+    setCls(classResult.data);
+    setSubscriptions((subscriptionResult.data ?? []) as Subscription[]);
+    setAttendanceCount(attendanceResult.count ?? 0);
   }, [user]);
 
-  const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, [k]: e.target.value });
+  useEffect(() => { loadDashboard(); }, [loadDashboard]);
 
-  const submit = async (e: React.FormEvent) => {
-    e.preventDefault(); setBusy(true); setMsg("");
+  const active = subscriptions.find((item) => item.status === "active" && item.expires_at && new Date(item.expires_at).getTime() > Date.now());
+  const latest = active ?? subscriptions[0];
+  const daysLeft = active?.expires_at ? Math.max(0, Math.ceil((new Date(active.expires_at).getTime() - Date.now()) / 86400000)) : 0;
+  const selected = PURCHASE_PLANS.find((plan) => plan.code === selectedPlan) ?? PURCHASE_PLANS[PURCHASE_PLANS.length - 1];
+
+  const set = (key: keyof typeof form) => (event: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, [key]: event.target.value });
+  const submit = async (event: React.FormEvent) => {
+    event.preventDefault(); setBusy(true); setMsg("");
     if (mode === "signup") {
       const { data, error } = await supabase.auth.signUp({
         email: form.email, password: form.password,
         options: { emailRedirectTo: window.location.origin + "/account", data: { full_name: form.name, phone: form.phone } },
       });
-      if (error) setMsg(error.message);
-      else if (!data.session) setMsg("Account created! You can log in now.");
+      setMsg(error ? error.message : data.session ? "Account created. Welcome to your student panel!" : "Account created! You can log in now.");
     } else {
       const { error } = await supabase.auth.signInWithPassword({ email: form.email, password: form.password });
       if (error) setMsg(error.message);
@@ -57,45 +90,58 @@ export default function Account() {
     setBusy(false);
   };
 
-  if (!ready) return <main className="adm-wrap"><p>Loading…</p></main>;
+  const pay = async () => {
+    if (!user || !selected) return;
+    setBusy(true); setMsg("");
+    try {
+      await purchasePlan(selected.code, { name: profile.full_name, email: user.email ?? "", phone: profile.phone });
+      setMsg("Payment successful. Your plan is active!");
+      await loadDashboard();
+    } catch (error) {
+      setMsg(error instanceof Error ? error.message : "Payment could not be completed.");
+    }
+    setBusy(false);
+  };
 
-  return <main className="adm-wrap">
-    <div className="adm-card">
-      {user ? <>
-        <h1 className="adm-title">My Account</h1>
-        <p className="adm-sub">{user.email}</p>
-        <div className="acc-class">
-          <strong>Live Class</strong>
-          {cls?.class_time && <span className="adm-sub">{cls.class_time}</span>}
-          {cls?.meet_link
-            ? <a className="h-btn h-btn-orange" href={cls.meet_link} target="_blank" rel="noreferrer">Join Class</a>
-            : <span className="adm-sub">The class link will appear here soon.</span>}
-        </div>
-        <Attendance userId={user.id} />
-        <label className="adm-label">Full name<input className="adm-input" value={profile.full_name} onChange={e => setProfile({ ...profile, full_name: e.target.value })} /></label>
-        <label className="adm-label">Mobile<input className="adm-input" value={profile.phone} onChange={e => setProfile({ ...profile, phone: e.target.value })} /></label>
+  if (!ready) return <main className="account-page"><p>Loading…</p></main>;
+  if (!user) return <main className="adm-wrap"><div className="adm-card"><form onSubmit={submit}>
+    <h1 className="adm-title">{mode === "login" ? "Student Login" : "Create Account"}</h1>
+    <p className="adm-sub">Log in to join class, track attendance and manage your plan.</p>
+    {mode === "signup" && <>
+      <label className="adm-label">Full name<input className="adm-input" required value={form.name} onChange={set("name")} /></label>
+      <label className="adm-label">Mobile<input className="adm-input" type="tel" value={form.phone} onChange={set("phone")} /></label>
+    </>}
+    <label className="adm-label">Email<input className="adm-input" type="email" required value={form.email} onChange={set("email")} /></label>
+    <label className="adm-label">Password<input className="adm-input" type="password" required minLength={6} value={form.password} onChange={set("password")} /></label>
+    {msg && <p className="adm-sub">{msg}</p>}
+    <button className="h-btn h-btn-orange" disabled={busy} type="submit">{busy ? "Please wait…" : mode === "login" ? "Login" : "Create Account"}</button>
+    <p className="adm-sub">{mode === "login" ? "New here? " : "Already have an account? "}<button className="acc-text-btn" type="button" onClick={() => { setMode(mode === "login" ? "signup" : "login"); setMsg(""); }}>{mode === "login" ? "Create account" : "Login"}</button></p>
+  </form></div></main>;
+
+  return <main className="account-page"><div className="account-shell">
+    <header className="account-head"><div><span className="p-eyebrow light">Student Panel</span><h1>Good morning, {profile.full_name || "Student"}</h1><p>{user.email}</p></div><button className="account-logout" onClick={() => supabase.auth.signOut()}><LogOut /> Log out</button></header>
+
+    <section className="account-summary" aria-label="Dashboard summary">
+      <article><span><CreditCard /></span><div><small>Current plan</small><strong>{active?.plan_name ?? "No active plan"}</strong></div></article>
+      <article><span><CalendarClock /></span><div><small>Plan expires</small><strong>{active ? formatDate(active.expires_at) : "Choose a plan"}</strong></div></article>
+      <article><span><Clock3 /></span><div><small>Days remaining</small><strong>{active ? `${daysLeft} days` : "0 days"}</strong></div></article>
+      <article><span><CheckCircle2 /></span><div><small>This month</small><strong>{attendanceCount} days present</strong></div></article>
+    </section>
+
+    <div className="account-grid">
+      <section className="account-card account-plan">
+        <div className="account-card-title"><div><small>Subscription</small><h2>{active ? "Your plan is active" : latest?.status === "pending" ? "Payment pending" : "Choose your plan"}</h2></div><span className={`account-status ${active ? "active" : ""}`}>{active ? "Active" : latest?.status === "pending" ? "Pending" : "Inactive"}</span></div>
+        {active && <div className="account-plan-details"><div><small>Started</small><b>{formatDate(active.starts_at)}</b></div><div><small>Expires</small><b>{formatDate(active.expires_at)}</b></div><div><small>Paid</small><b>₹{(active.amount_paise / 100).toLocaleString("en-IN")}</b></div></div>}
+        <label className="account-select">{active && daysLeft > 3 ? "Buy another plan" : active ? "Renew your plan" : "Select a plan"}<select value={selectedPlan} onChange={(event) => setSelectedPlan(event.target.value)}>{PURCHASE_PLANS.map((plan) => <option key={plan.code} value={plan.code}>{plan.name} — ₹{plan.price.toLocaleString("en-IN")}</option>)}</select></label>
+        <button className="h-btn h-btn-orange" onClick={pay} disabled={busy}><CreditCard /> {busy ? "Please wait…" : `Pay ₹${selected?.price.toLocaleString("en-IN")}`}</button>
         {msg && <p className="adm-sub">{msg}</p>}
-        <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-          <button className="h-btn h-btn-orange" disabled={busy} onClick={save}>Save</button>
-          <button className="h-btn" onClick={() => supabase.auth.signOut()}>Log out</button>
-        </div>
-      </> : <form onSubmit={submit}>
-        <h1 className="adm-title">{mode === "login" ? "Login" : "Create Account"}</h1>
-        {mode === "signup" && <>
-          <label className="adm-label">Full name<input className="adm-input" required value={form.name} onChange={set("name")} /></label>
-          <label className="adm-label">Mobile<input className="adm-input" type="tel" value={form.phone} onChange={set("phone")} /></label>
-        </>}
-        <label className="adm-label">Email<input className="adm-input" type="email" required value={form.email} onChange={set("email")} /></label>
-        <label className="adm-label">Password<input className="adm-input" type="password" required minLength={6} value={form.password} onChange={set("password")} /></label>
-        {msg && <p className="adm-sub">{msg}</p>}
-        <button className="h-btn h-btn-orange" disabled={busy} type="submit">{mode === "login" ? "Login" : "Create Account"}</button>
-        <p className="adm-sub" style={{ marginTop: 14 }}>
-          {mode === "login" ? "New here? " : "Already have an account? "}
-          <button type="button" style={{ color: "var(--primary-orange, #f4511e)", fontWeight: 700 }} onClick={() => { setMode(mode === "login" ? "signup" : "login"); setMsg(""); }}>
-            {mode === "login" ? "Create account" : "Login"}
-          </button>
-        </p>
-      </form>}
+      </section>
+
+      <section className="account-card account-class"><span className="account-class-icon"><Video /></span><small>Live Class</small><h2>Join the 5AM Study Room</h2>{cls?.class_time && <p>{cls.class_time}</p>}{cls?.meet_link ? <a className="h-btn h-btn-orange" href={cls.meet_link} target="_blank" rel="noreferrer">Join Class <Video /></a> : <p>The class link will appear here soon.</p>}</section>
     </div>
-  </main>;
+
+    <Attendance userId={user.id} />
+
+    <section className="account-card account-profile"><div className="account-card-title"><div><small>My details</small><h2>Profile</h2></div><UserRound /></div><div className="account-profile-grid"><label className="adm-label">Full name<input className="adm-input" value={profile.full_name} onChange={(event) => setProfile({ ...profile, full_name: event.target.value })} /></label><label className="adm-label">Mobile<input className="adm-input" value={profile.phone} onChange={(event) => setProfile({ ...profile, phone: event.target.value })} /></label></div><button className="h-btn account-save" disabled={busy} onClick={save}><RefreshCw /> Save Details</button></section>
+  </div></main>;
 }
