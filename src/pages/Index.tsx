@@ -93,7 +93,7 @@ export default function Index() {
       <div className="h-community-img"><img src={communityImg} alt="Disciplined students build brighter futures — student studying at sunrise" loading="lazy" width={1264} height={848} /></div>
       <div className="h-community-body">
         <Tag>A Community That Cares</Tag>
-        <h2 className="h-title">More Than Just<br />Wake-Up Calls<Rays className="h-comm-rays" /></h2>
+        <h2 className="h-title">More Than Just<br /><span className="h-comm-u">Wake-Up Calls<Underline /></span><Rays className="h-comm-rays" /></h2>
         <p className="h-comm-text">5AM.co.in is a platform where students from all over India come together to study, stay consistent and grow with a supportive community.</p>
         <div className="h-stats">{stats.map(([v, l]) => <div key={l}><strong>{v}</strong><span>{l}</span></div>)}</div>
       </div>

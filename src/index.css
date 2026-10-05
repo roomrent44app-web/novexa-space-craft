@@ -313,3 +313,15 @@ main { overflow-x: clip; }
   .h-cta .h-in { padding: 28px 18px 32px; }
   .h-cta-text br { display: none; }
 }
+/* parity refinements */
+.h-title, .h-cta-title { -webkit-text-stroke: calc(var(--u) * .55) currentColor; }
+.h-stories .h-title, .h-cta-title { display: block; width: fit-content; }
+.h-story p { font-size: calc(var(--u) * 10.5); }
+.h-story { padding-right: calc(var(--u) * 16); }
+.h-steps-grid { margin-top: calc(var(--u) * 14); }
+.h-step h3 { margin-top: calc(var(--u) * 4); }
+.h-steps .h-in { padding-bottom: calc(var(--u) * 22); }
+.h-comm-text { max-width: calc(var(--u) * 300); margin-top: calc(var(--u) * 16); }
+.h-comm-u { position: relative; display: inline-block; }
+.h-comm-u .h-underline { bottom: calc(var(--u) * -5); }
+@media (max-width: 767px) { .h-title, .h-cta-title { -webkit-text-stroke: 0; } }
