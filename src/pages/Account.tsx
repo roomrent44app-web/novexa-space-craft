@@ -32,7 +32,7 @@ export default function Account() {
   const [profile, setProfile] = useState({ full_name: "", phone: "" });
   const [msg, setMsg] = useState("");
   const [busy, setBusy] = useState(false);
-  const [cls, setCls] = useState<{ meet_link: string; class_time: string } | null>(null);
+  const [cls, setCls] = useState<{ meet_link: string; class_time: string; temporary_meet_link: string; temporary_class_time: string; monthly_meet_link: string; monthly_class_time: string; active_link_mode: "temporary" | "monthly" } | null>(null);
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [attendanceCount, setAttendanceCount] = useState(0);
   const [selectedPlan, setSelectedPlan] = useState(params.get("plan") ?? "21d-1099");
@@ -49,7 +49,7 @@ export default function Account() {
     const monthStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1)).toISOString().slice(0, 10);
     const [profileResult, classResult, subscriptionResult, attendanceResult] = await Promise.all([
       supabase.from("profiles").select("full_name, phone").eq("id", user.id).maybeSingle(),
-      supabase.from("class_settings").select("meet_link, class_time").eq("id", 1).maybeSingle(),
+      supabase.from("class_settings").select("meet_link,class_time,temporary_meet_link,temporary_class_time,monthly_meet_link,monthly_class_time,active_link_mode").eq("id", 1).maybeSingle(),
       supabase.from("subscriptions").select("id,plan_code,plan_name,duration_days,amount_paise,status,starts_at,expires_at").order("created_at", { ascending: false }),
       supabase.from("attendance").select("id", { count: "exact", head: true }).eq("user_id", user.id).gte("day", monthStart),
     ]);
@@ -65,6 +65,8 @@ export default function Account() {
   const latest = active ?? subscriptions[0];
   const daysLeft = active?.expires_at ? Math.max(0, Math.ceil((new Date(active.expires_at).getTime() - Date.now()) / 86400000)) : 0;
   const selected = PURCHASE_PLANS.find((plan) => plan.code === selectedPlan) ?? PURCHASE_PLANS[PURCHASE_PLANS.length - 1];
+  const activeClassLink = cls?.active_link_mode === "temporary" ? cls.temporary_meet_link : cls?.monthly_meet_link;
+  const activeClassTime = cls?.active_link_mode === "temporary" ? cls.temporary_class_time : cls?.monthly_class_time;
 
   const set = (key: keyof typeof form) => (event: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, [key]: event.target.value });
   const submit = async (event: React.FormEvent) => {
@@ -137,7 +139,7 @@ export default function Account() {
         {msg && <p className="adm-sub">{msg}</p>}
       </section>
 
-      <section className="account-card account-class"><span className="account-class-icon"><Video /></span><small>Live Class</small><h2>Join the 5AM Study Room</h2>{cls?.class_time && <p>{cls.class_time}</p>}{cls?.meet_link ? <a className="h-btn h-btn-orange" href={cls.meet_link} target="_blank" rel="noreferrer">Join Class <Video /></a> : <p>The class link will appear here soon.</p>}</section>
+      <section className="account-card account-class"><span className="account-class-icon"><Video /></span><small>{cls?.active_link_mode === "temporary" ? "Temporary Live Class" : "Full Month Live Class"}</small><h2>Join the 5AM Study Room</h2>{activeClassTime && <p>{activeClassTime}</p>}{activeClassLink ? <a className="h-btn h-btn-orange" href={activeClassLink} target="_blank" rel="noreferrer">Join Class <Video /></a> : <p>The class link will appear here soon.</p>}</section>
     </div>
 
     <Attendance userId={user.id} />
