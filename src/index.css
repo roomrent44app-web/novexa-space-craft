@@ -347,6 +347,3 @@ main { overflow-x: clip; }
 .h-story-foot { gap: 10px; padding-top: 6px; }
 .h-story-foot span { font-size: max(13px, calc(var(--u) * 10.5)); }
 .h-stars svg { width: max(13px, calc(var(--u) * 10.5)); height: max(13px, calc(var(--u) * 10.5)); }
-@media (min-width: 768px) and (max-width: 1023px) {
-  .h-story-grid { grid-template-columns: repeat(2, 1fr); }
-}
