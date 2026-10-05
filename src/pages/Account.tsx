@@ -41,7 +41,7 @@ export default function Account() {
         options: { emailRedirectTo: window.location.origin + "/account", data: { full_name: form.name, phone: form.phone } },
       });
       if (error) setMsg(error.message);
-      else if (!data.session) setMsg("Account created! Please check your email and click the confirmation link, then log in.");
+      else if (!data.session) setMsg("Account created! You can log in now.");
     } else {
       const { error } = await supabase.auth.signInWithPassword({ email: form.email, password: form.password });
       if (error) setMsg(error.message);
