@@ -158,6 +158,33 @@ export type Database = {
         }
         Relationships: []
       }
+      nimble_call_log: {
+        Row: {
+          created_at: string
+          day: string
+          id: string
+          response: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          day: string
+          id?: string
+          response?: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          day?: string
+          id?: string
+          response?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       physical_orders: {
         Row: {
           address: string
