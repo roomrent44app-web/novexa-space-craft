@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import logoAvif from "@/assets/5am-logo.png?format=avif&width=240&quality=78";
-import logoWebp from "@/assets/5am-logo.png?format=webp&width=240&quality=82";
+import logoAvif from "@/assets/5am-logo.png?format=avif&width=240&quality=78&imagetools";
+import logoWebp from "@/assets/5am-logo.png?format=webp&width=240&quality=82&imagetools";
 
 export default function Logo({ className = "" }: { className?: string }) {
   return (

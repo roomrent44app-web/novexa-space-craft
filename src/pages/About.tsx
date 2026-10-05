@@ -1,8 +1,8 @@
 import { Bell, BookOpen, ChartLine, Check, HeartHandshake, MessageCircle, Shield, ShieldCheck, Sunrise, Users } from "lucide-react";
-import aboutHeroAvif from "@/assets/about-hero.jpg?format=avif&width=1600&quality=70";
-import aboutHeroWebp from "@/assets/about-hero.jpg?format=webp&width=1600&quality=76";
-import studentAvif from "@/assets/5am-student.jpg?format=avif&width=900&quality=68";
-import studentWebp from "@/assets/5am-student.jpg?format=webp&width=900&quality=74";
+import aboutHeroAvif from "@/assets/about-hero.jpg?format=avif&width=1600&quality=70&imagetools";
+import aboutHeroWebp from "@/assets/about-hero.jpg?format=webp&width=1600&quality=76&imagetools";
+import studentAvif from "@/assets/5am-student.jpg?format=avif&width=900&quality=68&imagetools";
+import studentWebp from "@/assets/5am-student.jpg?format=webp&width=900&quality=74&imagetools";
 import { orderLink } from "@/data/fiveam";
 import { useSeo } from "@/hooks/useSeo";
 import { useImagePreload } from "@/hooks/useImagePreload";

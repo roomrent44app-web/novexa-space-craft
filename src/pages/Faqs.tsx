@@ -1,9 +1,9 @@
 import { useState, type ReactNode } from "react";
 import { ArrowRight, Bell, Clock, IndianRupee, Laptop, Phone, Plus, ShieldCheck, Star, Users } from "lucide-react";
-import faqHeroAvif from "@/assets/faq-hero-clone.jpg?format=avif&width=1584&quality=70";
-import faqHeroWebp from "@/assets/faq-hero-clone.jpg?format=webp&width=1584&quality=76";
-import faqCtaAvif from "@/assets/faq-cta-clone.jpg?format=avif&width=1584&quality=68";
-import faqCtaWebp from "@/assets/faq-cta-clone.jpg?format=webp&width=1584&quality=74";
+import faqHeroAvif from "@/assets/faq-hero-clone.jpg?format=avif&width=1584&quality=70&imagetools";
+import faqHeroWebp from "@/assets/faq-hero-clone.jpg?format=webp&width=1584&quality=76&imagetools";
+import faqCtaAvif from "@/assets/faq-cta-clone.jpg?format=avif&width=1584&quality=68&imagetools";
+import faqCtaWebp from "@/assets/faq-cta-clone.jpg?format=webp&width=1584&quality=74&imagetools";
 import { FAQS, orderLink } from "@/data/fiveam";
 import { useSeo } from "@/hooks/useSeo";
 import { useImagePreload } from "@/hooks/useImagePreload";
