@@ -266,6 +266,7 @@ export type Database = {
           plan_name: string
           razorpay_order_id: string
           razorpay_payment_id: string | null
+          source: string
           starts_at: string | null
           status: Database["public"]["Enums"]["subscription_status"]
           updated_at: string
@@ -285,6 +286,7 @@ export type Database = {
           plan_name: string
           razorpay_order_id: string
           razorpay_payment_id?: string | null
+          source?: string
           starts_at?: string | null
           status?: Database["public"]["Enums"]["subscription_status"]
           updated_at?: string
@@ -304,6 +306,7 @@ export type Database = {
           plan_name?: string
           razorpay_order_id?: string
           razorpay_payment_id?: string | null
+          source?: string
           starts_at?: string | null
           status?: Database["public"]["Enums"]["subscription_status"]
           updated_at?: string
@@ -350,7 +353,12 @@ export type Database = {
         | "processing"
         | "delivered"
         | "cancelled"
-      subscription_status: "pending" | "active" | "expired" | "failed"
+      subscription_status:
+        | "pending"
+        | "active"
+        | "expired"
+        | "failed"
+        | "cancelled"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -486,7 +494,13 @@ export const Constants = {
         "delivered",
         "cancelled",
       ],
-      subscription_status: ["pending", "active", "expired", "failed"],
+      subscription_status: [
+        "pending",
+        "active",
+        "expired",
+        "failed",
+        "cancelled",
+      ],
     },
   },
 } as const
