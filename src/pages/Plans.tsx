@@ -1,6 +1,5 @@
 import { ArrowRight, Bell, ShieldCheck, CalendarDays, Star, Users } from "lucide-react";
-import plansHeroAvif from "@/assets/plans-hero-clone.jpg?format=avif&width=1584&quality=70&imagetools";
-import plansHeroWebp from "@/assets/plans-hero-clone.jpg?format=webp&width=1584&quality=76&imagetools";
+import { plansHeroAvif, plansHeroWebp } from "@/data/images";
 import { MONTHLY_PLANS, orderLink, PLANS_PAGE_WEEKLY } from "@/data/fiveam";
 import { useSeo } from "@/hooks/useSeo";
 import { useImagePreload } from "@/hooks/useImagePreload";

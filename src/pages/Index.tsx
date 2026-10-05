@@ -1,17 +1,6 @@
 import { useState } from "react";
+import { heroAvif, heroWebp, communityAvif, communityWebp, ctaAvif, ctaWebp, priyaAvif, priyaWebp, ananyaAvif, ananyaWebp, rohitAvif, rohitWebp } from "@/data/images";
 import { ArrowRight, Bell, BookOpen, CalendarDays, ClipboardList, HeartHandshake, ShieldCheck, Star, Users, Video, Zap } from "lucide-react";
-import heroAvif from "@/assets/home-hero-ref.jpg?format=avif&width=1376&quality=70&imagetools";
-import heroWebp from "@/assets/home-hero-ref.jpg?format=webp&width=1376&quality=76&imagetools";
-import communityAvif from "@/assets/home-community-ref.jpg?format=avif&width=1264&quality=68&imagetools";
-import communityWebp from "@/assets/home-community-ref.jpg?format=webp&width=1264&quality=74&imagetools";
-import ctaAvif from "@/assets/home-cta-ref.jpg?format=avif&width=1600&quality=68&imagetools";
-import ctaWebp from "@/assets/home-cta-ref.jpg?format=webp&width=1600&quality=74&imagetools";
-import priyaAvif from "@/assets/avatar-priya.jpg?format=avif&width=256&height=256&fit=cover&quality=68&imagetools";
-import priyaWebp from "@/assets/avatar-priya.jpg?format=webp&width=256&height=256&fit=cover&quality=74&imagetools";
-import ananyaAvif from "@/assets/avatar-ananya.jpg?format=avif&width=256&height=256&fit=cover&quality=68&imagetools";
-import ananyaWebp from "@/assets/avatar-ananya.jpg?format=webp&width=256&height=256&fit=cover&quality=74&imagetools";
-import rohitAvif from "@/assets/avatar-rohit.jpg?format=avif&width=256&height=256&fit=cover&quality=68&imagetools";
-import rohitWebp from "@/assets/avatar-rohit.jpg?format=webp&width=256&height=256&fit=cover&quality=74&imagetools";
 import { MONTHLY_PLANS, orderLink, WEEKLY_PLANS } from "@/data/fiveam";
 import { useSeo } from "@/hooks/useSeo";
 import { useImagePreload } from "@/hooks/useImagePreload";
@@ -107,7 +96,7 @@ export default function Index() {
 
     {/* COMMUNITY */}
     <section className="h-community">
-      <div className="h-community-img"><picture><source srcSet={communityAvif} type="image/avif" /><img src={communityWebp} alt="Disciplined students build brighter futures — student studying at sunrise" loading="lazy" decoding="async" width={1264} height={848} /></picture></div>
+      <div className="h-community-img"><picture><source srcSet={communityAvif} type="image/avif" /><img src={communityWebp} alt="Disciplined students build brighter futures — student studying at sunrise" loading="eager" decoding="async" width={1264} height={848} /></picture></div>
       <div className="h-community-body">
         <Tag>A Community That Cares</Tag>
         <h2 className="h-title">More Than Just<br /><span className="h-comm-u">Wake-Up Calls<Underline /></span><Rays className="h-comm-rays" /></h2>
@@ -134,7 +123,7 @@ export default function Index() {
       <h2 className="h-title">Real <span className="h-u">Stories.<Underline /></span> Real Progress.<Rays className="h-title-rays" /></h2>
       <div className="h-story-grid">
         {stories.map(s => <article key={s.name} className="h-story">
-          <picture><source srcSet={s.avif} type="image/avif" /><img src={s.webp} alt={`${s.name}, ${s.role}`} loading="lazy" decoding="async" width={256} height={256} /></picture>
+          <picture><source srcSet={s.avif} type="image/avif" /><img src={s.webp} alt={`${s.name}, ${s.role}`} loading="eager" decoding="async" width={256} height={256} /></picture>
           <div>
             <p>“{s.quote}”</p>
             <div className="h-story-foot"><div><h3>{s.name}</h3><span>{s.role}</span></div><div className="h-stars">{[1, 2, 3, 4, 5].map(n => <Star key={n} fill="currentColor" />)}</div></div>

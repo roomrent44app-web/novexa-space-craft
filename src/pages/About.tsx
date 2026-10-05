@@ -1,8 +1,5 @@
 import { Bell, BookOpen, ChartLine, Check, HeartHandshake, MessageCircle, Shield, ShieldCheck, Sunrise, Users } from "lucide-react";
-import aboutHeroAvif from "@/assets/about-hero.jpg?format=avif&width=1600&quality=70&imagetools";
-import aboutHeroWebp from "@/assets/about-hero.jpg?format=webp&width=1600&quality=76&imagetools";
-import studentAvif from "@/assets/5am-student.jpg?format=avif&width=900&quality=68&imagetools";
-import studentWebp from "@/assets/5am-student.jpg?format=webp&width=900&quality=74&imagetools";
+import { aboutHeroAvif, aboutHeroWebp, studentAvif, studentWebp } from "@/data/images";
 import { orderLink } from "@/data/fiveam";
 import { useSeo } from "@/hooks/useSeo";
 import { useImagePreload } from "@/hooks/useImagePreload";
@@ -50,7 +47,7 @@ export default function About() {
       <section className="ab-purpose">
         <div className="p-shell">
           <div className="ab-purpose-grid">
-            <picture><source srcSet={studentAvif} type="image/avif" /><img src={studentWebp} width={900} height={600} loading="lazy" decoding="async" alt="A 5AM community student studying at sunrise" className="ab-photo" /></picture>
+            <picture><source srcSet={studentAvif} type="image/avif" /><img src={studentWebp} width={900} height={600} loading="eager" decoding="async" alt="A 5AM community student studying at sunrise" className="ab-photo" /></picture>
             <div className="ab-purpose-body">
               <span className="p-eyebrow light">Our Purpose</span>
               <h2>Disciplined Students Build <em>Brighter Futures</em><Rays /></h2>
