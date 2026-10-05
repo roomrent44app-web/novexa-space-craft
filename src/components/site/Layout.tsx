@@ -2,6 +2,7 @@ import { ReactNode, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
+import BottomNav from "./BottomNav";
 import { useAllImagesPreload } from "@/hooks/useAllImagesPreload";
 
 export default function Layout({ children }: { children: ReactNode }) {
