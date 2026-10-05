@@ -5,12 +5,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Layout from "@/components/site/Layout";
 import Index from "./pages/Index.tsx";
+import Plans from "./pages/Plans.tsx";
+import HowItWorks from "./pages/HowItWorks.tsx";
 import About from "./pages/About.tsx";
-import Services from "./pages/Services.tsx";
-import ServiceDetail from "./pages/ServiceDetail.tsx";
-import Blog from "./pages/Blog.tsx";
-import BlogDetail from "./pages/BlogDetail.tsx";
-import Contact from "./pages/Contact.tsx";
+import Faqs from "./pages/Faqs.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -22,13 +20,11 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<Layout><Index /></Layout>} />
+          <Route path="/plans" element={<Layout><Plans /></Layout>} />
+          <Route path="/how-it-works" element={<Layout><HowItWorks /></Layout>} />
           <Route path="/about" element={<Layout><About /></Layout>} />
-          <Route path="/services" element={<Layout><Services /></Layout>} />
-          <Route path="/services/:slug" element={<Layout><ServiceDetail /></Layout>} />
-          <Route path="/blog" element={<Layout><Blog /></Layout>} />
-          <Route path="/blog/:slug" element={<Layout><BlogDetail /></Layout>} />
-          <Route path="/contact" element={<Layout><Contact /></Layout>} />
+          <Route path="/faqs" element={<Layout><Faqs /></Layout>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

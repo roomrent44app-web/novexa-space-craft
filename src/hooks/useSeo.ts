@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { CONTACT } from "@/data/travel";
+import { CONTACT } from "@/data/fiveam";
 
 const SITE_URL = `https://${CONTACT.domain}`;
 

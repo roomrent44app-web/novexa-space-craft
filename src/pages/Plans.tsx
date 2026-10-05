@@ -1,0 +1,3 @@
+import { FeatureStrip, Hero, PlansSection, StudyCta } from "@/components/site/FiveAmSections";
+import { useSeo } from "@/hooks/useSeo";
+export default function Plans(){useSeo({title:"Plans",description:"Choose a weekly or monthly 5AM plan with wake-up calls and study community access.",path:"/plans"});return <><Hero compact eyebrow="Our Plans" title="Invest in a" accent="Better You" text="Choose a plan, get daily wake-up calls and join a supportive study community to stay consistent and achieve your goals."/><PlansSection full/><FeatureStrip limit={4}/><StudyCta/></>}
