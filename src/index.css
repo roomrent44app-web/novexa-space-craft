@@ -90,12 +90,46 @@
   .faq-row { @apply rounded-md border bg-card px-5 shadow-soft; }
   .faq-plus { @apply order-last ml-auto grid h-8 w-8 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground; }
   .faq-plus svg { @apply h-4 w-4; }
+  .home-hero { @apply min-h-[620px]; }
+  .home-hero .site-container { @apply pt-16 md:pt-20; }
+  .home-hero .hero-title { @apply max-w-[650px] text-[52px] leading-[.93] md:text-[72px]; }
+  .home-hero .home-tagline { @apply mt-5 text-xl font-extrabold italic text-primary-foreground md:text-2xl; }
+  .home-hero .home-proof span { @apply flex items-center gap-2; }
+  .home-hero .home-proof svg { @apply h-5 w-5; }
+  .plan-tabs { @apply mx-auto mt-5 grid max-w-2xl grid-cols-2 rounded-md bg-card p-1 text-sm font-extrabold shadow-soft; }
+  .plan-tabs span { @apply rounded-md px-5 py-3; }
+  .plan-tabs .active { @apply bg-primary text-primary-foreground; }
+  .home-plans { @apply py-12 md:py-14; }
+  .home-plans .section-title { @apply md:text-[46px]; }
+  .home-plans .plan-card { @apply min-h-[230px] p-5; }
+  .home-plans .mt-8.grid { @apply mt-5; }
+  .home-community { @apply min-h-[440px]; }
+  .home-community > div { @apply min-h-[400px]; }
+  .community-image-note { @apply absolute right-7 top-12 rotate-[-5deg] text-center text-xl font-extrabold italic leading-7 text-foreground; }
+  .community-stats > div { @apply rounded-md bg-card p-3 text-center shadow-soft; }
+  .community-stats strong { @apply block text-xl md:text-2xl; }
+  .home-steps { @apply py-12 md:py-14; }
+  .home-steps .mt-10 { @apply mt-7; }
+  .home-steps .step-card { @apply border-0 bg-transparent py-4 shadow-none md:border-r; }
+  .home-steps .step-card:last-child { @apply border-r-0; }
+  .home-steps .step-number { @apply left-2 top-2; }
+  .home-stories { @apply py-12; }
+  .home-stories .mt-8 { @apply mt-6; }
+  .home-stories .testimonial { @apply p-5; }
+  .testimonial-person { @apply mt-4 flex items-center gap-3; }
+  .testimonial-person h3 { @apply mt-0; }
+  .home-cta .study-cta { @apply m-0 min-h-[350px] rounded-none px-5 py-12 md:px-[max(2rem,calc((100vw-80rem)/2+2rem))]; }
+  .home-cta .study-cta h2 { @apply max-w-lg text-4xl md:text-5xl; }
 }
 
 @media (max-width: 640px) {
   .page-hero { min-height:610px; background-position:62% center; }
   .page-hero.compact { min-height:500px; }
   .hero-title { font-size:2.8rem; }
+  .home-hero { min-height:680px; }
+  .home-hero .hero-title { font-size:2.75rem; }
+  .home-community > div { min-height:360px; }
+  .community-image-note { display:none; }
 }
 
 @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition-duration:.001ms!important; } }
