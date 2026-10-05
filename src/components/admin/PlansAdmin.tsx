@@ -1,34 +1,29 @@
 import { useMemo, useState } from "react";
 import { Download, Search } from "lucide-react";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import AdminSelect from "./AdminSelect";
-import type { AdminData, Profile, Subscription } from "./types";
-import { downloadCsv, formatMoney, formatDate, monthKey } from "./utils";
-import { indiaDay } from "./utils";
+import type { AdminData } from "./types";
+import { downloadCsv, formatDate, formatMoney, indiaDay } from "./utils";
 
 const DAY_ORDER = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 export default function PlansAdmin({ data }: { data: AdminData }) {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
-  const month = indiaDay().slice(0, 7);
 
-  const profileMap = useMemo(() => new Map<string, Profile>(data.profiles.map((item) => [item.id, item])), [data.profiles]);
+  const profileMap = useMemo(() => new Map(data.profiles.map((item) => [item.id, item])), [data.profiles]);
 
-  const rows = useMemo(() => {
-    const list = data.subscriptions
-      .slice()
-      .sort((a, b) => b.created_at.localeCompare(a.created_at));
-    return list.filter((item) => {
+  const rows = useMemo(() => data.subscriptions
+    .slice()
+    .sort((a, b) => b.created_at.localeCompare(a.created_at))
+    .filter((item) => {
       const profile = profileMap.get(item.user_id);
       const text = `${profile?.full_name ?? ""} ${profile?.email ?? ""} ${profile?.phone ?? ""} ${item.plan_name}`.toLowerCase();
       if (!text.includes(search.toLowerCase())) return false;
-      if (filter === "all") return true;
-      if (filter === "active") return item.status === "active";
-      return item.status === filter;
-    });
-  }, [data.subscriptions, profileMap, search, filter]);
+      return filter === "all" || item.status === filter;
+    }), [data.subscriptions, profileMap, search, filter]);
 
   const planCounts = useMemo(() => {
     const counts = new Map<string, number>();
@@ -43,6 +38,7 @@ export default function PlansAdmin({ data }: { data: AdminData }) {
   }, [data.subscriptions]);
 
   const studentCount = new Set(data.subscriptions.map((item) => item.user_id)).size;
+  const activeCount = data.subscriptions.filter((item) => item.status === "active").length;
 
   const exportRows = () => downloadCsv("5am-plan-choices.csv", [
     ["Student", "Email", "Mobile", "Plan", "Class days", "Amount", "Status", "Starts", "Expires"],
@@ -66,11 +62,11 @@ export default function PlansAdmin({ data }: { data: AdminData }) {
     <div className="admin-stat-grid">
       <div className="admin-stat"><small>Plans taken</small><b>{data.subscriptions.length}</b></div>
       <div className="admin-stat"><small>Students with plans</small><b>{studentCount}</b></div>
-      <div className="admin-stat"><small>Active right now</small><b>{data.subscriptions.filter((item) => item.status === "active").length}</b></div>
+      <div className="admin-stat"><small>Active right now</small><b>{activeCount}</b></div>
       {planCounts.slice(0, 2).map(([name, count]) => <div key={name} className="admin-stat"><small>{name}</small><b>{count}</b></div>)}
     </div>
     <div className="admin-toolbar">
-      <label className="admin-search"><Search/><Input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search student or plan" /><Input hidden /></label>
+      <label className="admin-search"><Search/><Input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search student or plan" /></label>
       <AdminSelect label="Plan status" value={filter} onChange={setFilter} options={[{ value: "all", label: "All plans" }, { value: "active", label: "Active" }, { value: "pending", label: "Pending" }, { value: "expired", label: "Expired" }, { value: "cancelled", label: "Cancelled" }, { value: "failed", label: "Failed" }]} />
       <Button variant="outline" onClick={exportRows}><Download /> Export</Button>
     </div>
@@ -98,11 +94,4 @@ export default function PlansAdmin({ data }: { data: AdminData }) {
       <section className="admin-panel"><div className="admin-panel-head"><div><small>Class day choices</small><h2>How many students picked each day</h2></div></div>{dayCounts.map(([day, count]) => <div key={day} className="admin-meter-row"><span>{day}</span><div className="admin-meter"><i style={{ width: `${Math.round((count / Math.max(1, studentCount)) * 100)}%` }} /></div><b>{count}</b></div>)}</section>
     </div>
   </div>;
-}
-
-// keep AttendanceRow/Subscription types referenced for consumers
-export type { Subscription };
-
-declare module "./utils" {
-  export function monthKeyUnused(value: string): string;
 }
