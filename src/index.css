@@ -503,4 +503,4 @@ body:has(.plans-page) .site-header .brand-logo img { height: clamp(47px, 5.1vw, 
 .p-benefit-icon { border: 0; background: hsl(var(--peach-deep)); }
 .p-benefit-icon svg { width: calc(var(--pu) * 29); height: calc(var(--pu) * 29); }
 .p-benefit h3 { font-weight: 800; font-size: calc(var(--pu) * 10.5); }
-@media (max-width: 767px) { .p-hero h1 { font-size: 50px; } .p-hero { background-image: linear-gradient(90deg, hsl(var(--ink)/.8), hsl(var(--ink)/.4)), var(--none, none); } }
+@media (max-width: 767px) { .p-hero h1 { font-size: 50px; } }
