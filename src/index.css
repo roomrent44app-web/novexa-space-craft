@@ -175,7 +175,7 @@ main { overflow-x: clip; }
 .h-tag { display: inline-block; font-family: "Nunito Sans", sans-serif; font-size: calc(var(--u) * 9.5); font-weight: 700; letter-spacing: .2em; text-transform: uppercase; line-height: 1; color: hsl(var(--primary)); border: 1px solid hsl(var(--primary) / .6); border-radius: 999px; padding: calc(var(--u) * 3.5) calc(var(--u) * 12); background: hsl(var(--cream) / .6); }
 .h-tag-dark { color: hsl(40 60% 88%); border-color: hsl(var(--gold-line)); background: transparent; }
 .h-center { text-align: center; }
-.h-title { font-family: "Titan One", "Fredoka", sans-serif; font-weight: 400; font-size: calc(var(--u) * 27); line-height: 1.12; color: hsl(var(--ink)); letter-spacing: .01em; position: relative; }
+.h-title { font-family: "Chewy", "Titan One", sans-serif; font-weight: 400; font-size: calc(var(--u) * 29); line-height: 1.12; color: hsl(var(--ink)); letter-spacing: .01em; position: relative; }
 .h-u { position: relative; display: inline-block; }
 .h-underline { position: absolute; left: -2%; width: 104%; bottom: calc(var(--u) * -6); height: calc(var(--u) * 7); overflow: visible; }
 .h-underline path { fill: none; stroke: hsl(var(--primary)); stroke-width: 3.2; stroke-linecap: round; }
@@ -213,7 +213,7 @@ main { overflow-x: clip; }
 /* plans */
 .h-plans { background: linear-gradient(180deg, hsl(var(--peach)), hsl(30 80% 96%)); }
 .h-plans .h-in { padding: calc(var(--u) * 18) calc(var(--u) * 25) calc(var(--u) * 23); }
-.h-plans .h-title { font-size: calc(var(--u) * 31); margin-top: calc(var(--u) * 5); transform: rotate(-2.2deg); }
+.h-plans .h-title { font-size: calc(var(--u) * 33); margin-top: calc(var(--u) * 5); transform: rotate(-2.2deg); }
 .h-title-rays { position: absolute; margin-left: calc(var(--u) * 6); top: calc(var(--u) * -14); }
 .h-sub { text-align: center; font-size: calc(var(--u) * 12.5); color: hsl(var(--ink) / .85); margin-top: calc(var(--u) * 12); }
 .h-tabs { display: grid; grid-template-columns: 1fr 1fr; width: calc(var(--u) * 427); height: calc(var(--u) * 43); margin: calc(var(--u) * 12) auto 0; padding: calc(var(--u) * 3.5); background: hsl(0 0% 100% / .85); border: 1px solid hsl(28 60% 88%); border-radius: calc(var(--u) * 8); box-shadow: 0 calc(var(--u)*4) calc(var(--u)*14) calc(var(--u)*-6) hsl(var(--ink) / .2); }
@@ -239,7 +239,7 @@ main { overflow-x: clip; }
 .h-community-img img { width: 100%; height: 100%; object-fit: cover; object-position: left center; }
 .h-community-img::after { content: ""; position: absolute; inset: 0 0 0 auto; width: 18%; background: linear-gradient(90deg, hsl(var(--cream) / 0), hsl(var(--cream))); }
 .h-community-body { padding: calc(var(--u) * 22) calc(var(--u) * 28) 0 calc(var(--u) * 17); }
-.h-community-body .h-title { font-size: calc(var(--u) * 26.5); margin-top: calc(var(--u) * 9); line-height: 1.13; }
+.h-community-body .h-title { font-size: calc(var(--u) * 29); margin-top: calc(var(--u) * 9); line-height: 1.13; }
 .h-comm-rays { position: absolute; margin-left: calc(var(--u) * 70); top: calc(var(--u) * 14); transform: rotate(10deg); }
 .h-comm-text { font-size: calc(var(--u) * 12.5); line-height: 1.38; max-width: calc(var(--u) * 305); margin-top: calc(var(--u) * 20); color: hsl(var(--ink) / .85); }
 .h-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: calc(var(--u) * 8); margin-top: calc(var(--u) * 15); }
@@ -250,7 +250,7 @@ main { overflow-x: clip; }
 /* steps */
 .h-steps { background: linear-gradient(180deg, hsl(var(--cream)), hsl(32 70% 96%)); }
 .h-steps .h-in { padding: calc(var(--u) * 21) calc(var(--u) * 33) calc(var(--u) * 28) calc(var(--u) * 38); }
-.h-steps .h-title { font-size: calc(var(--u) * 26); margin-top: calc(var(--u) * 6); transform: rotate(-1.2deg); }
+.h-steps .h-title { font-size: calc(var(--u) * 28.5); margin-top: calc(var(--u) * 6); transform: rotate(-1.2deg); }
 .h-steps-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; margin-top: calc(var(--u) * 20); }
 .h-step { position: relative; display: flex; gap: calc(var(--u) * 12); }
 .h-step + .h-step { padding-left: calc(var(--u) * 19); }
@@ -264,7 +264,7 @@ main { overflow-x: clip; }
 /* stories */
 .h-stories { background: linear-gradient(180deg, hsl(32 70% 96%), hsl(var(--cream))); }
 .h-stories .h-in { padding: calc(var(--u) * 29) calc(var(--u) * 36) calc(var(--u) * 24) calc(var(--u) * 40); }
-.h-stories .h-title { font-size: calc(var(--u) * 26); margin-top: calc(var(--u) * 6); margin-left: calc(var(--u) * 6); transform: rotate(-1.2deg); transform-origin: left; display: inline-block; }
+.h-stories .h-title { font-size: calc(var(--u) * 28.5); margin-top: calc(var(--u) * 6); margin-left: calc(var(--u) * 6); transform: rotate(-1.2deg); transform-origin: left; display: inline-block; }
 .h-story-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: calc(var(--u) * 12); margin-top: calc(var(--u) * 17); }
 .h-story { display: flex; gap: calc(var(--u) * 10); height: calc(var(--u) * 106); padding: calc(var(--u) * 11) calc(var(--u) * 12); background: hsl(0 0% 100%); border: 1px solid hsl(30 40% 90%); border-radius: calc(var(--u) * 8); box-shadow: 0 calc(var(--u)*4) calc(var(--u)*14) calc(var(--u)*-8) hsl(var(--ink) / .2); }
 .h-story img { width: calc(var(--u) * 44); height: calc(var(--u) * 44); border-radius: 999px; object-fit: cover; flex-shrink: 0; }
@@ -279,7 +279,7 @@ main { overflow-x: clip; }
 /* final cta */
 .h-cta { background-size: cover; background-position: center right; height: calc(var(--u) * 221); color: hsl(var(--primary-foreground)); }
 .h-cta .h-in { padding: calc(var(--u) * 20) 0 0 calc(var(--u) * 40); }
-.h-cta-title { font-family: "Titan One", "Fredoka", sans-serif; font-weight: 400; font-size: calc(var(--u) * 28.5); line-height: 1.12; margin-top: calc(var(--u) * 6); transform: rotate(-2deg); transform-origin: left; display: inline-block; }
+.h-cta-title { font-family: "Chewy", "Titan One", sans-serif; font-weight: 400; font-size: calc(var(--u) * 31); line-height: 1.12; margin-top: calc(var(--u) * 6); transform: rotate(-2deg); transform-origin: left; display: inline-block; }
 .h-cta-l2 { display: inline-block; margin-left: calc(var(--u) * 52); }
 .h-cta-title .h-5am { font-size: 1.3em; }
 .h-cta-rays { margin-left: calc(var(--u) * 4); }
