@@ -1005,3 +1005,10 @@ img { height: auto; }
 .signup-check input{margin-top:.2rem;accent-color:hsl(var(--primary));width:18px;height:18px;flex-shrink:0}
 .signup-actions{display:flex;gap:.75rem;margin-top:.5rem}
 .signup-actions .h-btn{flex:1;justify-content:center}
+
+.class-days{margin:.75rem 0}
+.class-days p{font-size:.9rem;margin-bottom:.5rem;color:hsl(var(--foreground))}
+.class-days-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:.35rem}
+.class-days-grid button{padding:.55rem 0;border-radius:10px;border:1px solid hsl(var(--border));background:hsl(var(--card));font-weight:600;font-size:.82rem;color:hsl(var(--foreground))}
+.class-days-grid button.on{background:hsl(var(--primary));border-color:hsl(var(--primary));color:hsl(var(--primary-foreground))}
+.class-days-grid button:disabled{opacity:.4}

@@ -78,6 +78,13 @@
       "when": 1791229677068,
       "tag": "0010_profile_registration_details",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1791229872070,
+      "tag": "0011_subscription_class_days",
+      "breakpoints": true
     }
   ]
 }

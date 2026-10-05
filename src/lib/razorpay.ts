@@ -53,9 +53,9 @@ const functionError = async (error: unknown, fallback: string) => {
   return error instanceof Error ? error.message : fallback;
 };
 
-export async function purchasePlan(planCode: string, customer: { name: string; email: string; phone: string }) {
+export async function purchasePlan(planCode: string, customer: { name: string; email: string; phone: string }, classDays: string[] = []) {
   const [orderResult] = await Promise.all([
-    supabase.functions.invoke("create-razorpay-order", { body: { planCode } }),
+    supabase.functions.invoke("create-razorpay-order", { body: { planCode, classDays } }),
     loadCheckout(),
   ]);
   if (orderResult.error) throw new Error(await functionError(orderResult.error, "Could not start payment."));
