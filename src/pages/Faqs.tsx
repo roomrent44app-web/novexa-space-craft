@@ -49,6 +49,9 @@ export default function Faqs() {
   useSeo({ title: "FAQs", description: "Answers about 5AM wake-up calls, study sessions, community access and payments.", path: "/faqs" });
   useImagePreload(faqHeroAvif);
   const [open, setOpen] = useState<boolean[]>(() => FAQS.map(() => true));
+  const toggle = (i: number) => setOpen(o => o.map((v, j) => j === i ? !v : v));
+  /** Clicking anywhere on a row (except its own controls) shows or hides that answer. */
+  const onRow = (i: number) => (e: React.MouseEvent) => { if (!(e.target as HTMLElement).closest("button")) toggle(i); };
 
   return <div className="plans-page faq-page">
     <section className="fq-hero" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.78) 0%, hsl(var(--ink)/.55) 34%, hsl(var(--ink)/0) 58%), image-set(url("${faqHeroAvif}") type("image/avif"), url("${faqHeroWebp}") type("image/webp"))` }}>
@@ -70,13 +73,13 @@ export default function Faqs() {
           <p>Quick answers to help you get started with 5AM.co.in</p>
         </div>
         <div className="fq-items">
-          {FAQS.map((f, i) => <article className="fq-item" key={f.q}>
-            <span className="fq-ico">{faqIcons[i] ?? <Star fill="currentColor" />}</span>
+          {FAQS.map((f, i) => <article className="fq-item" key={f.q} onClick={onRow(i)}>
+            <span className="fq-ico" aria-hidden="true">{faqIcons[i] ?? <Star fill="currentColor" />}</span>
             <div className="fq-body">
-              <h3>{f.q}</h3>
-              {open[i] && <p><RichText text={f.a} /></p>}
+              <h3><button type="button" className="fq-q-btn" aria-expanded={open[i]} aria-controls={`fq-ans-${i}`} onClick={() => toggle(i)}>{f.q}</button></h3>
+              <div id={`fq-ans-${i}`} className="fq-ans" hidden={!open[i]}><p><RichText text={f.a} /></p></div>
             </div>
-            <button type="button" className="fq-plus" aria-expanded={open[i]} aria-label={open[i] ? `Hide answer: ${f.q}` : `Show answer: ${f.q}`} onClick={() => setOpen(o => o.map((v, j) => j === i ? !v : v))}><Plus /></button>
+            <button type="button" className="fq-plus" aria-expanded={open[i]} aria-controls={`fq-ans-${i}`} aria-label={open[i] ? `Hide answer: ${f.q}` : `Show answer: ${f.q}`} onClick={() => toggle(i)}><Plus /></button>
           </article>)}
         </div>
       </div>
