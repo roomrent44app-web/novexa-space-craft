@@ -1023,3 +1023,7 @@ img { height: auto; }
 .admin-days{display:flex;flex-wrap:wrap;gap:4px}
 .admin-day-chip{padding:2px 7px;border-radius:999px;background:hsl(var(--surface));color:hsl(var(--primary));font-size:10px;font-weight:900}
 @media(max-width:900px){.admin-two-col{grid-template-columns:1fr}}
+.admin-stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.admin-stat{display:grid;align-content:center;gap:4px;padding:16px;border:1px solid hsl(var(--border));border-radius:8px;background:hsl(var(--card));box-shadow:var(--shadow-soft)}
+.admin-stat small{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:hsl(var(--muted-foreground))}
+.admin-stat b{font-family:"Fredoka",sans-serif;font-size:22px;color:hsl(var(--foreground))}
