@@ -11,7 +11,6 @@ export const CONTACT = {
 export const WEEKLY_PLANS = [
   { days: 3, calls: 3, price: 149 },
   { days: 5, calls: 5, price: 199 },
-  { days: 6, calls: 6, price: 229 },
   { days: 7, calls: 7, price: 249, popular: true },
 ];
 
