@@ -64,6 +64,13 @@
       "when": 1791228006129,
       "tag": "0008_allow_free_trial_amount",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1791228074170,
+      "tag": "0009_allow_free_trial_source",
+      "breakpoints": true
     }
   ]
 }

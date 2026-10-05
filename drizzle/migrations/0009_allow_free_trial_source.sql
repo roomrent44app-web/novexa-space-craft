@@ -1,0 +1,2 @@
+ALTER TABLE public.subscriptions DROP CONSTRAINT subscriptions_source_check;
+ALTER TABLE public.subscriptions ADD CONSTRAINT subscriptions_source_check CHECK (source IN ('razorpay', 'manual', 'free_trial'));
