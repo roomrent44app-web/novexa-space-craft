@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
+import Attendance from "@/components/site/Attendance";
 import { useSeo } from "@/hooks/useSeo";
 
 export default function Account() {
@@ -70,6 +71,7 @@ export default function Account() {
             ? <a className="h-btn h-btn-orange" href={cls.meet_link} target="_blank" rel="noreferrer">Join Class</a>
             : <span className="adm-sub">The class link will appear here soon.</span>}
         </div>
+        <Attendance userId={user.id} />
         <label className="adm-label">Full name<input className="adm-input" value={profile.full_name} onChange={e => setProfile({ ...profile, full_name: e.target.value })} /></label>
         <label className="adm-label">Mobile<input className="adm-input" value={profile.phone} onChange={e => setProfile({ ...profile, phone: e.target.value })} /></label>
         {msg && <p className="adm-sub">{msg}</p>}
