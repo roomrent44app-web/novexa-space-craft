@@ -978,6 +978,43 @@ img { height: auto; }
     padding-bottom: 62px;
   }
 }
+
+/* Compact icon and text actions still retain a full touch target. */
+.fq-plus,
+.ip-close,
+.admin-topbar button,
+.admin-gallery-grid figcaption button,
+.admin-sidebar-foot > button,
+.att-nav button {
+  min-width: 40px;
+  min-height: 40px;
+  display: inline-grid;
+  place-items: center;
+}
+.fq-plus {
+  width: 40px;
+  height: 40px;
+}
+.acc-text-btn {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  padding-inline: 4px;
+  font-size: 14px;
+}
+.bottom-nav-item {
+  min-height: 58px;
+  font-size: 12px;
+}
+.admin-content-list article {
+  grid-template-columns: 54px minmax(0, 1fr) 40px 40px;
+}
+.admin-content-list article > button {
+  min-width: 40px;
+  min-height: 40px;
+  display: grid;
+  place-items: center;
+}
 @media (min-width: 768px) {
   .bottom-nav {
     display: none;
