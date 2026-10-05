@@ -520,5 +520,9 @@ body:has(.plans-page) .site-header .brand-logo img { height: clamp(47px, 5.1vw, 
 @media (min-width: 768px) { .p-benefit p, .p-benefit h3 { white-space: nowrap; } }
 @media (min-width: 768px) {
   body:has(.plans-page) .header-cta { background: hsl(var(--primary)); font-family: "Fredoka", sans-serif; font-weight: 600; height: clamp(36px, 4.2vw, 46px); padding: 0 clamp(22px, 2.6vw, 30px); font-size: clamp(14px, 1.6vw, 17px); box-shadow: 0 6px 14px -8px hsl(var(--primary) / .7); }
-  body:has(.plans-page) .nav-link { color: hsl(var(--ink)); font-weight: 600; font-size: clamp(12.5px, 1.36vw, 15px); }
+  body:has(.plans-page) .nav-link:not(.active) { color: hsl(var(--ink)); }
+  body:has(.plans-page) .nav-link { font-weight: 600; font-size: clamp(12.5px, 1.36vw, 15px); }
 }
+.plans-page { background: radial-gradient(ellipse at 50% 55%, hsl(var(--cream)), hsl(var(--peach))); }
+.plans-page .p-pricing, .plans-page .p-benefit-strip { background: transparent; }
+.p-card.popular { border-color: hsl(var(--gold-line)); }
