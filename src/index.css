@@ -37,21 +37,21 @@
   }
   * { @apply border-border; }
   html { scroll-behavior: smooth; }
-  body { @apply m-0 bg-background font-sans text-foreground antialiased; }
-  h1,h2,h3,h4 { @apply font-sans font-extrabold; letter-spacing:0; }
+  body { @apply m-0 bg-background text-foreground antialiased; font-family:"Nunito Sans",sans-serif; }
+  h1,h2,h3,h4 { font-family:"Fredoka",sans-serif; font-weight:700; letter-spacing:0; }
   ::selection { @apply bg-primary/25; }
 }
 
 @layer components {
-  .site-container { @apply mx-auto w-full max-w-7xl px-5 md:px-8; }
-  .site-header { @apply sticky top-0 z-50 border-b bg-background/95 shadow-soft backdrop-blur; }
+  .site-container { @apply mx-auto w-full max-w-[1180px] px-5 md:px-8; }
+  .site-header { @apply sticky top-0 z-50 border-b bg-background shadow-soft; }
   .nav-link { @apply relative py-2 text-sm font-bold text-foreground/75 transition-colors hover:text-primary; }
   .nav-link.active { @apply text-primary; }
   .nav-link.active::after { content:""; @apply absolute inset-x-0 -bottom-1 h-0.5 bg-primary; }
-  .brand-logo { @apply relative flex min-w-[76px] flex-col leading-none text-foreground; }
-  .brand-five { @apply text-[25px] font-black; }
-  .brand-domain { @apply ml-3 text-[9px] font-extrabold; }
-  .brand-sun { @apply absolute -right-1 -top-3 text-lg text-primary; }
+  .brand-logo { @apply relative flex min-w-[86px] flex-col leading-none text-foreground; transform:rotate(-2deg); }
+  .brand-five { @apply text-[31px] font-black; font-family:"Fredoka",sans-serif; }
+  .brand-domain { @apply ml-5 text-[9px] font-extrabold; }
+  .brand-sun { @apply absolute right-1 -top-3 text-xl text-primary; }
   .footer-logo { @apply inline-flex text-primary-foreground; }
   .footer-logo .brand-sun { @apply text-accent; }
   .page-hero { @apply relative min-h-[570px] bg-cover bg-center text-primary-foreground; }
@@ -90,43 +90,49 @@
   .faq-row { @apply rounded-md border bg-card px-5 shadow-soft; }
   .faq-plus { @apply order-last ml-auto grid h-8 w-8 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground; }
   .faq-plus svg { @apply h-4 w-4; }
-  .home-hero { @apply min-h-[620px]; }
-  .home-hero .site-container { @apply pt-16 md:pt-20; }
-  .home-hero .hero-title { @apply max-w-[650px] text-[52px] leading-[.93] md:text-[72px]; }
+  .home-hero { @apply min-h-[610px] bg-cover; background-position:center; }
+  .home-hero .site-container { @apply pt-12 md:pt-14; }
+  .home-hero .hero-title { @apply max-w-[500px] text-[52px] leading-[.91] md:text-[64px]; }
   .home-hero .home-tagline { @apply mt-5 text-xl font-extrabold italic text-primary-foreground md:text-2xl; }
+  .home-hero .home-proof { @apply mt-7; }
   .home-hero .home-proof span { @apply flex items-center gap-2; }
   .home-hero .home-proof svg { @apply h-5 w-5; }
-  .plan-tabs { @apply mx-auto mt-5 grid max-w-2xl grid-cols-2 rounded-md bg-card p-1 text-sm font-extrabold shadow-soft; }
+  .plan-tabs { @apply mx-auto mt-5 grid max-w-[620px] grid-cols-2 rounded-md bg-card p-1 text-sm font-extrabold shadow-soft; }
   .plan-tabs span { @apply rounded-md px-5 py-3; }
   .plan-tabs .active { @apply bg-primary text-primary-foreground; }
-  .home-plans { @apply py-12 md:py-14; }
+  .home-plans { @apply py-10 md:py-12; }
   .home-plans .section-title { @apply md:text-[46px]; }
   .home-plans .plan-card { @apply min-h-[230px] p-5; }
   .home-plans .mt-8.grid { @apply mt-5; }
-  .home-community { @apply min-h-[440px]; }
-  .home-community > div { @apply min-h-[400px]; }
+  .home-community { @apply min-h-[420px]; }
+  .home-community > div { @apply min-h-[420px]; }
   .community-image-note { @apply absolute right-7 top-12 rotate-[-5deg] text-center text-xl font-extrabold italic leading-7 text-foreground; }
   .community-stats > div { @apply rounded-md bg-card p-3 text-center shadow-soft; }
   .community-stats strong { @apply block text-xl md:text-2xl; }
-  .home-steps { @apply py-12 md:py-14; }
+  .home-steps { @apply py-10 md:py-12; }
   .home-steps .mt-10 { @apply mt-7; }
   .home-steps .step-card { @apply border-0 bg-transparent py-4 shadow-none md:border-r; }
   .home-steps .step-card:last-child { @apply border-r-0; }
   .home-steps .step-number { @apply left-2 top-2; }
-  .home-stories { @apply py-12; }
+  .home-stories { @apply py-10; }
   .home-stories .mt-8 { @apply mt-6; }
   .home-stories .testimonial { @apply p-5; }
   .testimonial-person { @apply mt-4 flex items-center gap-3; }
   .testimonial-person h3 { @apply mt-0; }
-  .home-cta .study-cta { @apply m-0 min-h-[350px] rounded-none px-5 py-12 md:px-[max(2rem,calc((100vw-80rem)/2+2rem))]; }
-  .home-cta .study-cta h2 { @apply max-w-lg text-4xl md:text-5xl; }
+  .home-cta .study-cta { @apply m-0 min-h-[300px] rounded-none bg-cover bg-center px-5 py-10 md:px-[max(2rem,calc((100vw-73.75rem)/2+2rem))]; }
+  .home-cta .study-cta h2 { @apply max-w-[490px] text-4xl md:text-5xl; }
+}
+
+@media (min-width: 768px) {
+  .home-hero .site-container { padding-left:max(2rem,calc((100vw - 1180px)/2 + 2rem)); }
+  .home-community > div:last-child { padding-left:64px; padding-right:max(2rem,calc((100vw - 1180px)/2 + 2rem)); }
 }
 
 @media (max-width: 640px) {
   .page-hero { min-height:610px; background-position:62% center; }
   .page-hero.compact { min-height:500px; }
   .hero-title { font-size:2.8rem; }
-  .home-hero { min-height:680px; }
+  .home-hero { min-height:660px; background-position:60% center; }
   .home-hero .hero-title { font-size:2.75rem; }
   .home-community > div { min-height:360px; }
   .community-image-note { display:none; }
