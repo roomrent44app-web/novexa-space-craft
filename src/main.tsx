@@ -4,6 +4,7 @@ import "@fontsource/fredoka/600.css";
 import "@fontsource/fredoka/700.css";
 import "@fontsource/chewy/400.css";
 import "@fontsource/titan-one/400.css";
+import "@fontsource/kalam/700.css";
 import "@fontsource/nunito-sans/400.css";
 import "@fontsource/nunito-sans/600.css";
 import "@fontsource/nunito-sans/700.css";
