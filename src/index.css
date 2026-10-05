@@ -617,3 +617,4 @@ body:has(.plans-page) .site-header .brand-logo img { height: clamp(47px, 5.1vw, 
   .hw-hero p { font-size: calc(var(--pu) * 14.6); }
   .hw-process .p-section-heading h2 { font-size: calc(var(--pu) * 31); }
 }
+.hw-step h3 { -webkit-text-stroke: 0; } .hw-process .p-section-heading h2 { -webkit-text-stroke: calc(var(--pu) * .2) currentColor; }
