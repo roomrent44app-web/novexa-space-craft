@@ -23,9 +23,9 @@ export const PLANS_PAGE_WEEKLY = [
 export const TRIAL_PLAN = { code: "trial-3d", name: "3 Days Free Trial", days: 3, calls: 3, price: 0 };
 
 export const MONTHLY_PLANS = [
-  { days: 9, calls: 9, price: 499 },
-  { days: 15, calls: 15, price: 799 },
-  { days: 21, calls: 21, price: 1099, popular: true },
+  { days: 9, calls: 9, price: 499, freeTrial: false },
+  { days: 15, calls: 15, price: 799, freeTrial: false },
+  { days: 21, calls: 21, price: 1099, popular: true, freeTrial: false },
 ];
 
 export const PURCHASE_PLANS = [
