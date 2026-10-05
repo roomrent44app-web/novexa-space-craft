@@ -15,6 +15,12 @@ export const WEEKLY_PLANS = [
   { days: 7, calls: 7, price: 249, popular: true },
 ];
 
+export const PLANS_PAGE_WEEKLY = [
+  { days: 3, calls: 3, price: 149 },
+  { days: 4, calls: 4, price: 199 },
+  { days: 6, calls: 6, price: 249 },
+];
+
 export const MONTHLY_PLANS = [
   { days: 9, calls: 9, price: 499 },
   { days: 15, calls: 15, price: 799, popular: true },
