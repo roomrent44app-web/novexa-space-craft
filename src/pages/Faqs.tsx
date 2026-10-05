@@ -26,7 +26,7 @@ const faqIcons: ReactNode[] = [
   <Phone fill="currentColor" strokeWidth={1.2} />,
   <Star fill="currentColor" strokeWidth={1.2} />,
   <IndianRupee strokeWidth={2.6} />,
-  <Laptop strokeWidth={2.2} />,
+  <Laptop strokeWidth={2.6} />,
   <Clock strokeWidth={2.4} />,
   <UsersFilled />,
 ];

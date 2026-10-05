@@ -685,3 +685,16 @@ body:has(.plans-page) .site-header .brand-logo img { height: clamp(47px, 5.1vw, 
   .fq-cta .p-eyebrow { height: 22px; font-size: 10px; } .fq-cta h2 { font-size: 32px; } .fq-cta h2 .p-rays { display: none; }
   .fq-cta p { font-size: 14px; max-width: 60%; } .fq-btn { width: 230px; height: 46px; font-size: 15px; } .fq-btn svg { width: 15px; height: 15px; }
 }
+/* FAQs parity pass 2 */
+@media (min-width: 768px) {
+  .fq-list .p-section-heading h2 { font-size: calc(var(--pu) * 26.5); }
+  .fq-list .p-section-heading p { margin-top: calc(var(--pu) * 4); }
+  .fq-items { margin-top: calc(var(--pu) * 14); gap: calc(var(--pu) * 9); }
+  .fq-item { padding-top: calc(var(--pu) * 6); padding-bottom: calc(var(--pu) * 6); min-height: calc(var(--pu) * 54); }
+  .fq-body h3 { font-size: calc(var(--pu) * 15.3); -webkit-text-stroke: calc(var(--pu) * .25) currentColor; }
+  .fq-body p { font-size: calc(var(--pu) * 11.6); margin-top: calc(var(--pu) * 2); }
+  .fq-cta { min-height: calc(var(--pu) * 124); }
+  .fq-cta .p-shell { padding-top: calc(var(--pu) * 9); padding-bottom: calc(var(--pu) * 9); }
+  .fq-cta h2 { font-family: "Fredoka", sans-serif; font-weight: 700; font-size: calc(var(--pu) * 29); transform: rotate(-1deg); }
+}
+.fq-ico svg { stroke-width: 2.4; }
