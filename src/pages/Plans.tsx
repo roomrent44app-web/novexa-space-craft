@@ -1,4 +1,4 @@
-import { ArrowRight, Bell, CalendarDays, ShieldCheck, Star, Users } from "lucide-react";
+import { ArrowRight, Bell, CalendarDays, Star, Users } from "lucide-react";
 import plansHero from "@/assets/plans-hero-clone.jpg";
 import { MONTHLY_PLANS, orderLink, PLANS_PAGE_WEEKLY } from "@/data/fiveam";
 import { useSeo } from "@/hooks/useSeo";
@@ -11,11 +11,18 @@ const ChartFilled = () => (
   </svg>
 );
 
+const ShieldFilled = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Z" fill="currentColor" />
+    <path d="m8.5 12 2.5 2.5 4.5-5" fill="none" stroke="hsl(var(--primary-foreground))" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
 const benefits = [
-  { Icon: UsersFilled, title: "Live Study Sessions", text: "Study together with a community" },
-  { Icon: BellFilled, title: "Daily Wake-Up Calls", text: "Get a wake-up call and never miss 5 AM" },
-  { Icon: ChartFilled, title: "Stay Consistent", text: "Track progress and build habits" },
-  { Icon: ShieldCheck, title: "Supportive Community", text: "Surround yourself with like-minded students" },
+  { Icon: UsersFilled, key: "live", title: <>Live<br />Study Sessions</>, text: <>Study together<br />with a community</> },
+  { Icon: BellFilled, key: "wake", title: <>Daily<br />Wake-Up Calls</>, text: <>Get a wake-up call<br />and never miss 5 AM</> },
+  { Icon: ChartFilled, key: "consistent", title: <>Stay Consistent</>, text: <>Track progress<br />and build habits</> },
+  { Icon: ShieldFilled, key: "community", title: <>Supportive<br />Community</>, text: <>Surround yourself<br />with like-minded students</> },
 ];
 
 function Rays() {
@@ -45,8 +52,8 @@ export default function Plans() {
         <div className="p-hero-benefits">
           {[benefits[0], benefits[1], benefits[3]].map((benefit) => {
             if (!benefit) return null;
-            const { Icon, title } = benefit;
-            return <div key={title}><span><Icon /></span><b>{title}</b></div>;
+            const { Icon, title, key } = benefit;
+            return <div key={key}><span><Icon /></span><b>{title}</b></div>;
           })}
         </div>
       </div>
@@ -75,7 +82,7 @@ export default function Plans() {
 
     <section className="p-benefit-strip">
       <div className="p-shell">
-        {benefits.map(({ Icon, title, text }) => <div className="p-benefit" key={title}>
+        {benefits.map(({ Icon, title, text, key }) => <div className="p-benefit" key={key}>
           <span className="p-benefit-icon"><Icon /></span>
           <div><h3>{title}</h3><p>{text}</p></div>
         </div>)}
