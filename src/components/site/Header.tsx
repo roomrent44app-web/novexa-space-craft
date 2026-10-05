@@ -19,8 +19,21 @@ export default function Header() {
         {links.map(([to,label]) => <NavLink key={to} to={to} end={to === "/"} className={({isActive}) => cn("nav-link", isActive && "active")}>{label}</NavLink>)}
       </nav>
       <a className="h-btn h-btn-orange header-cta" href={orderLink("Community Registration")} target="_blank" rel="noreferrer">Register to Community <ArrowRight /></a>
-      <Button variant="ghost" size="icon" className="md:hidden" aria-label="Toggle menu" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</Button>
+      <Button
+        variant="ghost"
+        size="icon"
+        className="mobile-menu-trigger md:hidden"
+        aria-label={open ? "Close menu" : "Open menu"}
+        aria-expanded={open}
+        aria-controls="mobile-navigation"
+        onClick={() => setOpen(!open)}
+      >
+        {open ? <X /> : <Menu />}
+      </Button>
     </div>
-    {open && <nav className="site-container flex flex-col border-t py-3 md:hidden">{links.map(([to,label]) => <NavLink key={to} to={to} end={to === "/"} onClick={() => setOpen(false)} className="border-b py-3 text-sm font-bold">{label}</NavLink>)}</nav>}
+    {open && <nav id="mobile-navigation" className="mobile-navigation md:hidden" aria-label="Mobile navigation">
+      {links.map(([to,label]) => <NavLink key={to} to={to} end={to === "/"} onClick={() => setOpen(false)} className={({ isActive }) => cn("mobile-nav-link", isActive && "active")}>{label}</NavLink>)}
+      <a className="h-btn h-btn-orange mobile-register" href={orderLink("Community Registration")} target="_blank" rel="noreferrer" onClick={() => setOpen(false)}>Register to Community <ArrowRight /></a>
+    </nav>}
   </header>;
 }
