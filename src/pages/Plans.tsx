@@ -1,13 +1,7 @@
 import { ArrowRight, Bell, CalendarDays, ShieldCheck, Star, TrendingUp, Users } from "lucide-react";
 import plansHero from "@/assets/plans-hero-ref.jpg";
-import { MONTHLY_PLANS, orderLink } from "@/data/fiveam";
+import { MONTHLY_PLANS, orderLink, PLANS_PAGE_WEEKLY } from "@/data/fiveam";
 import { useSeo } from "@/hooks/useSeo";
-
-const weeklyPlans = [
-  { days: 3, calls: 3, price: 149 },
-  { days: 4, calls: 4, price: 199 },
-  { days: 6, calls: 6, price: 249 },
-];
 
 const benefits = [
   { Icon: Users, title: "Live Study Sessions", text: "Study together with a community" },
@@ -41,7 +35,11 @@ export default function Plans() {
         <h1>Invest in a<br /><span>Better You</span><Rays /></h1>
         <p>Choose a plan, get daily wake-up calls and<br />join a supportive study community to stay<br />consistent and achieve your goals.</p>
         <div className="p-hero-benefits">
-          {benefits.slice(0, 3).map(({ Icon, title }) => <div key={title}><span><Icon /></span><b>{title}</b></div>)}
+          {[benefits[0], benefits[1], benefits[3]].map((benefit) => {
+            if (!benefit) return null;
+            const { Icon, title } = benefit;
+            return <div key={title}><span><Icon /></span><b>{title}</b></div>;
+          })}
         </div>
       </div>
     </section>
@@ -54,7 +52,7 @@ export default function Plans() {
           <p>Short-term plans to build your routine and get started.</p>
         </div>
         <div className="p-grid">
-          {weeklyPlans.map(plan => <PlanCard key={plan.days} plan={plan} />)}
+          {PLANS_PAGE_WEEKLY.map(plan => <PlanCard key={plan.days} plan={plan} />)}
         </div>
 
         <div className="p-section-heading monthly">

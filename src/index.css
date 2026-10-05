@@ -350,6 +350,8 @@ main { overflow-x: clip; }
 
 /* Plans page — proportioned to the supplied 768px reference */
 .plans-page { --pu: calc(min(100vw, 1440px) / 768); background: hsl(var(--cream)); color: hsl(var(--ink)); }
+body:has(.plans-page) .site-header-row { height: calc(min(100vw, 1440px) / 768 * 55); }
+body:has(.plans-page) .site-header .brand-logo img { height: calc(min(100vw, 1440px) / 768 * 47); }
 .p-shell { width: calc(var(--pu) * 768); max-width: 100%; margin: 0 auto; position: relative; }
 .p-hero { height: calc(var(--pu) * 319); color: hsl(var(--primary-foreground)); background-size: cover; background-position: center; overflow: hidden; }
 .p-hero .p-shell { height: 100%; padding: calc(var(--pu) * 23) 0 0 calc(var(--pu) * 45); }
@@ -402,6 +404,8 @@ main { overflow-x: clip; }
 
 @media (max-width: 767px) {
   .plans-page { --pu: 1px; }
+  body:has(.plans-page) .site-header-row { height: 64px; }
+  body:has(.plans-page) .site-header .brand-logo img { height: 50px; }
   .p-shell { width: 100%; }
   .p-hero { height: auto; min-height: 510px; background-position: 64% center; }
   .p-hero .p-shell { padding: 36px 20px 34px; background: hsl(var(--ink) / .25); }
