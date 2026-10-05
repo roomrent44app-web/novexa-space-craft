@@ -1,0 +1,3 @@
+import { Hero, Steps, StudyCta } from "@/components/site/FiveAmSections";
+import { useSeo } from "@/hooks/useSeo";
+export default function HowItWorks(){useSeo({title:"How It Works",description:"Start your 5AM journey in three simple steps: choose a plan, get wake-up calls and join the study room.",path:"/how-it-works"});return <><Hero compact eyebrow="How It Works" title="Your 5AM Journey" accent="in 3 Simple Steps" text="Choose your plan, get your wake-up calls and join a supportive community to stay consistent and achieve your goals."/><Steps/><StudyCta title="Same Time. Better You."/></>}

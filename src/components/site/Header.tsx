@@ -1,105 +1,26 @@
-import { useEffect, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
-import { ChevronDown, Menu, X } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { Menu, X, ArrowRight } from "lucide-react";
+import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
-import { SERVICES, CONTACT } from "@/data/travel";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { orderLink } from "@/data/fiveam";
 
 const links = [
-  { to: "/", label: "Home" },
-  { to: "/about", label: "About" },
-  { to: "/services", label: "Destination", dropdown: true },
-  { to: "/services/tours", label: "Package" },
-  { to: "/blog", label: "Blog" },
-  { to: "/contact", label: "Contact" },
+  ["/", "Home"], ["/plans", "Plans"], ["/how-it-works", "How it Works"], ["/about", "About"], ["/faqs", "FAQs"],
 ];
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const location = useLocation();
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => { setOpen(false); }, [location.pathname]);
-
-  return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-         scrolled || open ? "border-b border-border bg-background/95 shadow-soft backdrop-blur-xl" : "bg-background"
-      )}
-    >
-      <div className="container-luxe flex h-[74px] items-center justify-between">
-        <Logo />
-
-        <nav className="hidden items-center gap-8 lg:flex">
-          {links.map((l) => (
-            <div key={l.to} className="group relative">
-              <NavLink
-                to={l.to}
-                end={l.to === "/"}
-                className={({ isActive }) =>
-                  cn(
-                    "flex items-center gap-1 text-sm font-medium transition-colors",
-                    isActive ? "text-primary" : "text-foreground/80 hover:text-primary"
-                  )
-                }
-              >
-                {l.label}
-                {l.dropdown && <ChevronDown className="h-4 w-4" />}
-              </NavLink>
-
-              {l.dropdown && (
-                <div className="invisible absolute left-1/2 top-full z-50 w-[620px] -translate-x-1/2 pt-4 opacity-0 transition-all duration-300 group-hover:visible group-hover:opacity-100">
-                  <div className="grid max-h-[70vh] grid-cols-2 gap-1 overflow-auto rounded-2xl border border-border bg-popover p-3 shadow-elegant">
-                    {SERVICES.map((s) => (
-                      <Link
-                        key={s.slug}
-                        to={`/services/${s.slug}`}
-                        className="rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-surface-muted hover:text-primary"
-                      >
-                        {s.title}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
-        </nav>
-
-        <a href={`https://wa.me/${CONTACT.whatsapp}`} className="btn-primary hidden rounded-full px-5 py-2.5 lg:inline-flex">+91 97181 19119</a>
-
-        <button className="p-2 text-foreground lg:hidden" aria-label="Toggle menu" onClick={() => setOpen((o) => !o)}>
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
-      </div>
-
-      {open && (
-        <div className="border-t border-border bg-background lg:hidden">
-          <nav className="container-luxe flex max-h-[75vh] flex-col gap-1 overflow-auto py-5">
-            {links.map((l) => (
-              <NavLink
-                key={l.to}
-                to={l.to}
-                end={l.to === "/"}
-                className={({ isActive }) =>
-                  cn("border-b border-border/60 py-3 text-sm", isActive ? "text-primary" : "text-muted-foreground")
-                }
-              >
-                {l.label}
-              </NavLink>
-            ))}
-             <Link to="/contact" className="btn-primary mt-4 justify-center">Plan My Trip</Link>
-          </nav>
-        </div>
-      )}
-    </header>
-  );
+  return <header className="site-header">
+    <div className="site-container flex h-[74px] items-center justify-between">
+      <Logo />
+      <nav className="hidden items-center gap-8 md:flex" aria-label="Main navigation">
+        {links.map(([to,label]) => <NavLink key={to} to={to} end={to === "/"} className={({isActive}) => cn("nav-link", isActive && "active")}>{label}</NavLink>)}
+      </nav>
+      <Button asChild className="hidden rounded-full px-6 md:inline-flex"><a href={orderLink()} target="_blank" rel="noreferrer">Register to Community <ArrowRight /></a></Button>
+      <Button variant="ghost" size="icon" className="md:hidden" aria-label="Toggle menu" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</Button>
+    </div>
+    {open && <nav className="site-container flex flex-col border-t py-3 md:hidden">{links.map(([to,label]) => <NavLink key={to} to={to} end={to === "/"} onClick={() => setOpen(false)} className="border-b py-3 text-sm font-bold">{label}</NavLink>)}</nav>}
+  </header>;
 }
