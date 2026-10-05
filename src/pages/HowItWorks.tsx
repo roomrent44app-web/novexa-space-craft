@@ -1,9 +1,12 @@
 import { ArrowRight, Bell, CalendarDays, ShieldCheck, Users } from "lucide-react";
 import { Link } from "react-router-dom";
-import hiwHero from "@/assets/hiw-hero-clone.jpg";
-import hiwCta from "@/assets/hiw-cta-clone.jpg";
+import hiwHeroAvif from "@/assets/hiw-hero-clone.jpg?format=avif&width=1584&quality=70";
+import hiwHeroWebp from "@/assets/hiw-hero-clone.jpg?format=webp&width=1584&quality=76";
+import hiwCtaAvif from "@/assets/hiw-cta-clone.jpg?format=avif&width=1584&quality=68";
+import hiwCtaWebp from "@/assets/hiw-cta-clone.jpg?format=webp&width=1584&quality=74";
 import { orderLink } from "@/data/fiveam";
 import { useSeo } from "@/hooks/useSeo";
+import { useImagePreload } from "@/hooks/useImagePreload";
 
 function Rays() {
   return <span className="p-rays" aria-hidden="true"><i /><i /><i /></span>;
@@ -23,9 +26,10 @@ const steps = [
 
 export default function HowItWorks() {
   useSeo({ title: "How It Works", description: "Start your 5AM journey in three simple steps: choose a plan, get wake-up calls and join the study room.", path: "/how-it-works" });
+  useImagePreload(hiwHeroAvif);
 
   return <div className="plans-page hiw-page">
-    <section className="hw-hero" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.6) 0%, hsl(var(--ink)/.38) 38%, hsl(var(--ink)/0) 60%), url(${hiwHero})` }}>
+    <section className="hw-hero" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.6) 0%, hsl(var(--ink)/.38) 38%, hsl(var(--ink)/0) 60%), image-set(url("${hiwHeroAvif}") type("image/avif"), url("${hiwHeroWebp}") type("image/webp"))` }}>
       <div className="p-shell">
         <span className="p-eyebrow">How It Works</span>
         <h1>
@@ -58,7 +62,7 @@ export default function HowItWorks() {
     </section>
 
     <section className="hw-cta-wrap">
-      <div className="hw-cta" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.72) 0%, hsl(var(--ink)/.5) 36%, hsl(var(--ink)/0) 62%), url(${hiwCta})` }}>
+      <div className="hw-cta" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.72) 0%, hsl(var(--ink)/.5) 36%, hsl(var(--ink)/0) 62%), image-set(url("${hiwCtaAvif}") type("image/avif"), url("${hiwCtaWebp}") type("image/webp"))` }}>
         <span className="p-eyebrow">Let's Do This</span>
         <h2>Same Time.<br />Better You.<Rays /></h2>
         <p>Take the first step towards a focused<br />and more productive you.</p>

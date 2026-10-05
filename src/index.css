@@ -155,6 +155,7 @@ main { overflow-x: clip; }
 .site-header { position: sticky; top: 0; z-index: 50; background: hsl(var(--cream)); border-bottom: 1px solid hsl(var(--border) / .6); box-shadow: 0 2px 10px -6px hsl(var(--ink) / .18); }
 .site-header-row { display: flex; align-items: center; height: clamp(58px, 6vw, 72px); padding: 0 calc(var(--u) * 36) 0 calc(var(--u) * 38); }
 .brand-logo { display: block; transform: none; min-width: 0; }
+.brand-logo picture { display: block; }
 .brand-logo img { height: calc(var(--u) * 54); width: auto; display: block; }
 .site-header .brand-logo img { height: clamp(46px, 5.2vw, 60px); }
 .footer-logo img { filter: brightness(0) invert(1); height: 54px; }
@@ -238,6 +239,7 @@ main { overflow-x: clip; }
 /* community */
 .h-community { display: grid; grid-template-columns: 54.2% 45.8%; height: calc(var(--u) * 282); background: hsl(var(--cream)); }
 .h-community-img { position: relative; overflow: hidden; }
+.h-community-img picture { display: block; width: 100%; height: 100%; }
 .h-community-img img { width: 100%; height: 100%; object-fit: cover; object-position: left center; }
 .h-community-img::after { content: ""; position: absolute; inset: 0 0 0 auto; width: 18%; background: linear-gradient(90deg, hsl(var(--cream) / 0), hsl(var(--cream))); }
 .h-community-body { padding: calc(var(--u) * 22) calc(var(--u) * 28) 0 calc(var(--u) * 17); }

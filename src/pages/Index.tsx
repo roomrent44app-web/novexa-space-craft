@@ -1,13 +1,20 @@
 import { useState } from "react";
 import { ArrowRight, Bell, BookOpen, CalendarDays, ClipboardList, HeartHandshake, ShieldCheck, Star, Users, Video, Zap } from "lucide-react";
-import heroImg from "@/assets/home-hero-ref.jpg";
-import communityImg from "@/assets/home-community-ref.jpg";
-import ctaImg from "@/assets/home-cta-ref.jpg";
-import priya from "@/assets/avatar-priya.jpg";
-import ananya from "@/assets/avatar-ananya.jpg";
-import rohit from "@/assets/avatar-rohit.jpg";
+import heroAvif from "@/assets/home-hero-ref.jpg?format=avif&width=1376&quality=70";
+import heroWebp from "@/assets/home-hero-ref.jpg?format=webp&width=1376&quality=76";
+import communityAvif from "@/assets/home-community-ref.jpg?format=avif&width=1264&quality=68";
+import communityWebp from "@/assets/home-community-ref.jpg?format=webp&width=1264&quality=74";
+import ctaAvif from "@/assets/home-cta-ref.jpg?format=avif&width=1600&quality=68";
+import ctaWebp from "@/assets/home-cta-ref.jpg?format=webp&width=1600&quality=74";
+import priyaAvif from "@/assets/avatar-priya.jpg?format=avif&width=256&height=256&fit=cover&quality=68";
+import priyaWebp from "@/assets/avatar-priya.jpg?format=webp&width=256&height=256&fit=cover&quality=74";
+import ananyaAvif from "@/assets/avatar-ananya.jpg?format=avif&width=256&height=256&fit=cover&quality=68";
+import ananyaWebp from "@/assets/avatar-ananya.jpg?format=webp&width=256&height=256&fit=cover&quality=74";
+import rohitAvif from "@/assets/avatar-rohit.jpg?format=avif&width=256&height=256&fit=cover&quality=68";
+import rohitWebp from "@/assets/avatar-rohit.jpg?format=webp&width=256&height=256&fit=cover&quality=74";
 import { MONTHLY_PLANS, orderLink, WEEKLY_PLANS } from "@/data/fiveam";
 import { useSeo } from "@/hooks/useSeo";
+import { useImagePreload } from "@/hooks/useImagePreload";
 
 const UsersFilled = () => <Users fill="currentColor" strokeWidth={1.6} />;
 const ChartFilled = () => (
@@ -35,9 +42,9 @@ const steps = [
 ];
 
 const stories = [
-  { name: "Priya S.", role: "NEET Aspirant", quote: "5AM.co.in helped me build a study routine. Now I never miss my 5 AM ever again!", photo: priya },
-  { name: "Ananya K.", role: "UPSC Aspirant", quote: "The wake-up calls and live study sessions keep me consistent and motivated.", photo: ananya },
-  { name: "Rohit M.", role: "JEE Aspirant", quote: "Such a supportive community! I feel more productive and focused every day.", photo: rohit },
+  { name: "Priya S.", role: "NEET Aspirant", quote: "5AM.co.in helped me build a study routine. Now I never miss my 5 AM ever again!", avif: priyaAvif, webp: priyaWebp },
+  { name: "Ananya K.", role: "UPSC Aspirant", quote: "The wake-up calls and live study sessions keep me consistent and motivated.", avif: ananyaAvif, webp: ananyaWebp },
+  { name: "Rohit M.", role: "JEE Aspirant", quote: "Such a supportive community! I feel more productive and focused every day.", avif: rohitAvif, webp: rohitWebp },
 ];
 
 function Rays({ className = "" }: { className?: string }) {
@@ -52,12 +59,13 @@ function Tag({ children, dark = false }: { children: React.ReactNode; dark?: boo
 
 export default function Index() {
   useSeo({ title: "5AM Study Community", description: "Join India's 5AM study community for live study sessions, daily wake-up calls and consistent progress.", path: "/" });
+  useImagePreload(heroAvif);
   const [period, setPeriod] = useState<"weekly" | "monthly">("weekly");
   const plans = period === "weekly" ? WEEKLY_PLANS : MONTHLY_PLANS;
 
   return <div className="home">
     {/* HERO */}
-    <section className="h-hero" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.92) 0%, hsl(var(--ink)/.72) 28%, hsl(var(--ink)/.15) 50%, hsl(var(--ink)/0) 62%), url(${heroImg})` }}>
+    <section className="h-hero" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.92) 0%, hsl(var(--ink)/.72) 28%, hsl(var(--ink)/.15) 50%, hsl(var(--ink)/0) 62%), image-set(url("${heroAvif}") type("image/avif"), url("${heroWebp}") type("image/webp"))` }}>
       <div className="h-in">
         <Tag dark>Study Together at 5 AM</Tag>
         <h1 className="h-hero-title">JOIN THE<br />STUDY ROOM<br />AT <span className="h-5am">5AM</span><Rays className="h-hero-rays" /></h1>
@@ -99,7 +107,7 @@ export default function Index() {
 
     {/* COMMUNITY */}
     <section className="h-community">
-      <div className="h-community-img"><img src={communityImg} alt="Disciplined students build brighter futures — student studying at sunrise" loading="lazy" width={1264} height={848} /></div>
+      <div className="h-community-img"><picture><source srcSet={communityAvif} type="image/avif" /><img src={communityWebp} alt="Disciplined students build brighter futures — student studying at sunrise" loading="lazy" decoding="async" width={1264} height={848} /></picture></div>
       <div className="h-community-body">
         <Tag>A Community That Cares</Tag>
         <h2 className="h-title">More Than Just<br /><span className="h-comm-u">Wake-Up Calls<Underline /></span><Rays className="h-comm-rays" /></h2>
@@ -126,7 +134,7 @@ export default function Index() {
       <h2 className="h-title">Real <span className="h-u">Stories.<Underline /></span> Real Progress.<Rays className="h-title-rays" /></h2>
       <div className="h-story-grid">
         {stories.map(s => <article key={s.name} className="h-story">
-          <img src={s.photo} alt={`${s.name}, ${s.role}`} loading="lazy" width={512} height={512} />
+          <picture><source srcSet={s.avif} type="image/avif" /><img src={s.webp} alt={`${s.name}, ${s.role}`} loading="lazy" decoding="async" width={256} height={256} /></picture>
           <div>
             <p>“{s.quote}”</p>
             <div className="h-story-foot"><div><h3>{s.name}</h3><span>{s.role}</span></div><div className="h-stars">{[1, 2, 3, 4, 5].map(n => <Star key={n} fill="currentColor" />)}</div></div>
@@ -136,7 +144,7 @@ export default function Index() {
     </div></section>
 
     {/* CTA */}
-    <section className="h-cta" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.97) 0%, hsl(var(--ink)/.85) 35%, hsl(var(--ink)/.1) 62%, hsl(var(--ink)/0) 75%), url(${ctaImg})` }}>
+    <section className="h-cta" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.97) 0%, hsl(var(--ink)/.85) 35%, hsl(var(--ink)/.1) 62%, hsl(var(--ink)/0) 75%), image-set(url("${ctaAvif}") type("image/avif"), url("${ctaWebp}") type("image/webp"))` }}>
       <div className="h-in">
         <Tag dark>It's Time</Tag>
         <h2 className="h-cta-title">Join the Study Room<br /><span className="h-cta-l2">at <span className="h-5am">5AM</span><Rays className="h-cta-rays" /></span></h2>

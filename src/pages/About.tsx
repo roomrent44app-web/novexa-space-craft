@@ -1,8 +1,11 @@
 import { Bell, BookOpen, ChartLine, Check, HeartHandshake, MessageCircle, Shield, ShieldCheck, Sunrise, Users } from "lucide-react";
-import aboutHero from "@/assets/about-hero.jpg";
-import student from "@/assets/5am-student.jpg";
+import aboutHeroAvif from "@/assets/about-hero.jpg?format=avif&width=1600&quality=70";
+import aboutHeroWebp from "@/assets/about-hero.jpg?format=webp&width=1600&quality=76";
+import studentAvif from "@/assets/5am-student.jpg?format=avif&width=900&quality=68";
+import studentWebp from "@/assets/5am-student.jpg?format=webp&width=900&quality=74";
 import { orderLink } from "@/data/fiveam";
 import { useSeo } from "@/hooks/useSeo";
+import { useImagePreload } from "@/hooks/useImagePreload";
 
 const Rays = () => <span className="p-rays" aria-hidden="true"><i /><i /><i /></span>;
 
@@ -28,9 +31,10 @@ const checklist = [
 
 export default function About() {
   useSeo({ title: "About", description: "Meet 5AM, the supportive early-morning study community helping students build consistency.", path: "/about" });
+  useImagePreload(aboutHeroAvif);
   return (
     <div className="plans-page about-page">
-      <section className="ab-hero" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.72), hsl(var(--ink)/.42) 45%, hsl(var(--ink)/.12) 70%), url(${aboutHero})` }}>
+      <section className="ab-hero" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.72), hsl(var(--ink)/.42) 45%, hsl(var(--ink)/.12) 70%), image-set(url("${aboutHeroAvif}") type("image/avif"), url("${aboutHeroWebp}") type("image/webp"))` }}>
         <div className="p-shell">
           <span className="p-eyebrow">About 5AM</span>
           <h1><span className="l1">Same Time.</span><span className="l2">Better You.<Rays /></span></h1>
@@ -46,7 +50,7 @@ export default function About() {
       <section className="ab-purpose">
         <div className="p-shell">
           <div className="ab-purpose-grid">
-            <img src={student} width={1440} height={960} loading="lazy" alt="A 5AM community student studying at sunrise" className="ab-photo" />
+            <picture><source srcSet={studentAvif} type="image/avif" /><img src={studentWebp} width={900} height={600} loading="lazy" decoding="async" alt="A 5AM community student studying at sunrise" className="ab-photo" /></picture>
             <div className="ab-purpose-body">
               <span className="p-eyebrow light">Our Purpose</span>
               <h2>Disciplined Students Build <em>Brighter Futures</em><Rays /></h2>
@@ -80,7 +84,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="fq-cta ab-cta" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.85), hsl(var(--ink)/.55) 45%, hsl(var(--ink)/.2) 75%), url(${aboutHero})` }}>
+      <section className="fq-cta ab-cta" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.85), hsl(var(--ink)/.55) 45%, hsl(var(--ink)/.2) 75%), image-set(url("${aboutHeroAvif}") type("image/avif"), url("${aboutHeroWebp}") type("image/webp"))` }}>
         <div className="p-shell">
           <span className="p-eyebrow">Join the Community</span>
           <h2>Wake Up. Show Up. Grow.<Rays /></h2>

@@ -1,7 +1,9 @@
 import { ArrowRight, Bell, ShieldCheck, CalendarDays, Star, Users } from "lucide-react";
-import plansHero from "@/assets/plans-hero-clone.jpg";
+import plansHeroAvif from "@/assets/plans-hero-clone.jpg?format=avif&width=1584&quality=70";
+import plansHeroWebp from "@/assets/plans-hero-clone.jpg?format=webp&width=1584&quality=76";
 import { MONTHLY_PLANS, orderLink, PLANS_PAGE_WEEKLY } from "@/data/fiveam";
 import { useSeo } from "@/hooks/useSeo";
+import { useImagePreload } from "@/hooks/useImagePreload";
 
 const UsersFilled = () => <Users fill="currentColor" strokeWidth={1.6} />;
 const BellFilled = () => <Bell fill="currentColor" strokeWidth={1.8} />;
@@ -42,9 +44,10 @@ function PlanCard({ plan }: { plan: { days: number; calls: number; price: number
 
 export default function Plans() {
   useSeo({ title: "Plans", description: "Choose a weekly or monthly 5AM plan with wake-up calls and study community access.", path: "/plans" });
+  useImagePreload(plansHeroAvif);
 
   return <div className="plans-page">
-    <section className="p-hero" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.55) 0%, hsl(var(--ink)/.35) 34%, hsl(var(--ink)/0) 58%), url(${plansHero})` }}>
+    <section className="p-hero" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.55) 0%, hsl(var(--ink)/.35) 34%, hsl(var(--ink)/0) 58%), image-set(url("${plansHeroAvif}") type("image/avif"), url("${plansHeroWebp}") type("image/webp"))` }}>
       <div className="p-shell">
         <span className="p-eyebrow">Our Plans</span>
         <h1>Invest in a<br /><span>Better You</span><Rays /></h1>
