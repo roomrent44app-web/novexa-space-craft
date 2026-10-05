@@ -21,8 +21,9 @@ export default function Attendance({ userId }: { userId: string }) {
   useEffect(() => { load(); }, [ym, userId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const mark = async () => {
-    const { error } = await supabase.from("attendance").insert({ user_id: userId, day: today });
-    if (error && error.code !== "23505") { setMsg(error.message); return; }
+    // Let the server pick today's India date so a wrong phone clock can't block marking.
+    const { error } = await supabase.from("attendance").insert({ user_id: userId });
+    if (error && error.code !== "23505") { setMsg("Could not mark attendance. Please log in again and retry."); return; }
     setMsg("Attendance marked for today ✓");
     if (ym.y === y0 && ym.m === m0) load(); else setYm({ y: y0, m: m0 });
   };
