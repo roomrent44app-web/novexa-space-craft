@@ -484,3 +484,23 @@ body:has(.plans-page) .site-header .brand-logo img { height: clamp(47px, 5.1vw, 
 
 /* Plans: fill the screen width like the design */
 @media (min-width: 768px) { .plans-page .p-shell { width: 100%; max-width: 1440px; } }
+
+/* Plans parity pass 2 */
+@media (min-width: 768px) {
+  .p-hero { height: max(calc(var(--pu) * 319), calc(100vw * 449 / 1086)); max-height: 620px; background-position: center right; }
+  .p-hero .p-shell { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding-top: 0; }
+  .p-benefit-strip .p-shell { width: calc(100% - var(--pu) * 46); }
+}
+.p-hero h1 { font-family: "Fredoka", sans-serif; font-weight: 700; font-size: calc(var(--pu) * 56); line-height: .95; letter-spacing: -.005em; }
+.p-hero-benefits b { font-size: calc(var(--pu) * 11); font-weight: 600; }
+.p-hero-benefits > div { width: auto; }
+.p-hero-benefits > div > span { width: calc(var(--pu) * 37); height: calc(var(--pu) * 37); }
+.p-hero-benefits svg { width: calc(var(--pu) * 19); height: calc(var(--pu) * 19); }
+.p-card h3 { font-family: "Nunito Sans", sans-serif; font-weight: 800; font-size: calc(var(--pu) * 19); }
+.p-card strong { font-family: "Nunito Sans", sans-serif; font-weight: 800; }
+.p-benefit-strip { background: hsl(var(--cream)); }
+.p-benefit-strip .p-shell { background: hsl(var(--peach)); box-shadow: 0 calc(var(--pu)*4) calc(var(--pu)*16) calc(var(--pu)*-10) hsl(var(--ink) / .2); }
+.p-benefit-icon { border: 0; background: hsl(var(--peach-deep)); }
+.p-benefit-icon svg { width: calc(var(--pu) * 29); height: calc(var(--pu) * 29); }
+.p-benefit h3 { font-weight: 800; font-size: calc(var(--pu) * 10.5); }
+@media (max-width: 767px) { .p-hero h1 { font-size: 50px; } .p-hero { background-image: linear-gradient(90deg, hsl(var(--ink)/.8), hsl(var(--ink)/.4)), var(--none, none); } }

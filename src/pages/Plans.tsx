@@ -1,12 +1,20 @@
-import { ArrowRight, Bell, CalendarDays, ShieldCheck, Star, TrendingUp, Users } from "lucide-react";
-import plansHero from "@/assets/plans-hero-ref.jpg";
+import { ArrowRight, Bell, CalendarDays, ShieldCheck, Star, Users } from "lucide-react";
+import plansHero from "@/assets/plans-hero-clone.jpg";
 import { MONTHLY_PLANS, orderLink, PLANS_PAGE_WEEKLY } from "@/data/fiveam";
 import { useSeo } from "@/hooks/useSeo";
 
+const UsersFilled = () => <Users fill="currentColor" strokeWidth={1.6} />;
+const BellFilled = () => <Bell fill="currentColor" strokeWidth={1.8} />;
+const ChartFilled = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <rect x="3" y="13" width="4.5" height="8" rx="1" /><rect x="9.75" y="8.5" width="4.5" height="12.5" rx="1" /><rect x="16.5" y="4" width="4.5" height="17" rx="1" />
+  </svg>
+);
+
 const benefits = [
-  { Icon: Users, title: "Live Study Sessions", text: "Study together with a community" },
-  { Icon: Bell, title: "Daily Wake-Up Calls", text: "Get a wake-up call and never miss 5 AM" },
-  { Icon: TrendingUp, title: "Stay Consistent", text: "Track progress and build habits" },
+  { Icon: UsersFilled, title: "Live Study Sessions", text: "Study together with a community" },
+  { Icon: BellFilled, title: "Daily Wake-Up Calls", text: "Get a wake-up call and never miss 5 AM" },
+  { Icon: ChartFilled, title: "Stay Consistent", text: "Track progress and build habits" },
   { Icon: ShieldCheck, title: "Supportive Community", text: "Surround yourself with like-minded students" },
 ];
 
@@ -29,7 +37,7 @@ export default function Plans() {
   useSeo({ title: "Plans", description: "Choose a weekly or monthly 5AM plan with wake-up calls and study community access.", path: "/plans" });
 
   return <div className="plans-page">
-    <section className="p-hero" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.92) 0%, hsl(var(--ink)/.72) 36%, hsl(var(--ink)/.08) 66%, hsl(var(--ink)/0) 100%), url(${plansHero})` }}>
+    <section className="p-hero" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.55) 0%, hsl(var(--ink)/.35) 34%, hsl(var(--ink)/0) 58%), url(${plansHero})` }}>
       <div className="p-shell">
         <span className="p-eyebrow">Our Plans</span>
         <h1>Invest in a<br /><span>Better You</span><Rays /></h1>
