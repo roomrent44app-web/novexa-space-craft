@@ -698,3 +698,7 @@ body:has(.plans-page) .site-header .brand-logo img { height: clamp(47px, 5.1vw, 
   .fq-cta h2 { font-family: "Fredoka", sans-serif; font-weight: 700; font-size: calc(var(--pu) * 29); transform: rotate(-1deg); }
 }
 .fq-ico svg { stroke-width: 2.4; }
+@media (min-width: 768px) {
+  .fq-item { padding-top: calc(var(--pu) * 8); padding-bottom: calc(var(--pu) * 8); }
+  .fq-cta { background-size: 112% auto; background-position: 40% 62%; min-height: calc(var(--pu) * 131); }
+}
