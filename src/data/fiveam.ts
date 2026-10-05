@@ -9,28 +9,33 @@ export const CONTACT = {
 };
 
 export const WEEKLY_PLANS = [
-  { days: 3, calls: 3, price: 149 },
+  { days: 3, calls: 3, price: 0, freeTrial: true },
   { days: 5, calls: 5, price: 199 },
   { days: 7, calls: 7, price: 249, popular: true },
 ];
 
 export const PLANS_PAGE_WEEKLY = [
-  { days: 3, calls: 3, price: 149 },
+  { days: 3, calls: 3, price: 0, freeTrial: true },
   { days: 4, calls: 4, price: 199 },
   { days: 6, calls: 6, price: 249 },
 ];
 
+export const TRIAL_PLAN = { code: "trial-3d", name: "3 Days Free Trial", days: 3, calls: 3, price: 0 };
+
 export const MONTHLY_PLANS = [
-  { days: 9, calls: 9, price: 499 },
-  { days: 15, calls: 15, price: 799 },
-  { days: 21, calls: 21, price: 1099, popular: true },
+  { days: 9, calls: 9, price: 499, freeTrial: false },
+  { days: 15, calls: 15, price: 799, freeTrial: false },
+  { days: 21, calls: 21, price: 1099, popular: true, freeTrial: false },
 ];
 
-export const PURCHASE_PLANS = [...PLANS_PAGE_WEEKLY, ...MONTHLY_PLANS].map((plan) => ({
-  ...plan,
-  code: `${plan.days}d-${plan.price}`,
-  name: `${plan.days} Days Plan`,
-}));
+export const PURCHASE_PLANS = [
+  TRIAL_PLAN,
+  ...[PLANS_PAGE_WEEKLY[1], PLANS_PAGE_WEEKLY[2], ...MONTHLY_PLANS].map((plan) => ({
+    ...plan,
+    code: `${plan.days}d-${plan.price}`,
+    name: `${plan.days} Days Plan`,
+  })),
+];
 
 export const FEATURES = [
   { icon: "Users", title: "Live Study Sessions", text: "Study together with a community" },

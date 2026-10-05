@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { User } from "@supabase/supabase-js";
+import { FunctionsHttpError } from "@supabase/supabase-js";
 import { CalendarClock, CheckCircle2, Clock3, CreditCard, LogOut, RefreshCw, UserRound, Video } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import Attendance from "@/components/site/Attendance";
@@ -21,6 +22,16 @@ type Subscription = {
 const formatDate = (value: string | null) => value
   ? new Date(value).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Kolkata" })
   : "—";
+
+const fnError = async (error: unknown, fallback: string) => {
+  if (error instanceof FunctionsHttpError) {
+    try {
+      const body = await error.context.json() as { error?: string };
+      return body.error ?? fallback;
+    } catch { return fallback; }
+  }
+  return error instanceof Error ? error.message : fallback;
+};
 
 export default function Account() {
   useSeo({ title: "Student Panel — 5AM", description: "Manage your 5AM plan, class access and attendance.", path: "/account" });
@@ -96,11 +107,17 @@ export default function Account() {
     if (!user || !selected) return;
     setBusy(true); setMsg("");
     try {
-      await purchasePlan(selected.code, { name: profile.full_name, email: user.email ?? "", phone: profile.phone });
-      setMsg("Payment successful. Your plan is active!");
+      if (selected.code === "trial-3d") {
+        const { error } = await supabase.functions.invoke("activate-free-trial", { body: {} });
+        if (error) throw new Error(await fnError(error, "Could not start the free trial. Please try again."));
+        setMsg("Your 3 Days Free Trial is active!");
+      } else {
+        await purchasePlan(selected.code, { name: profile.full_name, email: user.email ?? "", phone: profile.phone });
+        setMsg("Payment successful. Your plan is active!");
+      }
       await loadDashboard();
     } catch (error) {
-      setMsg(error instanceof Error ? error.message : "Payment could not be completed.");
+      setMsg(error instanceof Error ? error.message : "Plan could not be activated.");
     }
     setBusy(false);
   };
@@ -134,8 +151,8 @@ export default function Account() {
       <section className="account-card account-plan">
         <div className="account-card-title"><div><small>Subscription</small><h2>{active ? "Your plan is active" : latest?.status === "pending" ? "Payment pending" : "Choose your plan"}</h2></div><span className={`account-status ${active ? "active" : ""}`}>{active ? "Active" : latest?.status === "pending" ? "Pending" : "Inactive"}</span></div>
         {active && <div className="account-plan-details"><div><small>Started</small><b>{formatDate(active.starts_at)}</b></div><div><small>Expires</small><b>{formatDate(active.expires_at)}</b></div><div><small>Paid</small><b>₹{(active.amount_paise / 100).toLocaleString("en-IN")}</b></div></div>}
-        <label className="account-select">{active && daysLeft > 3 ? "Buy another plan" : active ? "Renew your plan" : "Select a plan"}<select value={selectedPlan} onChange={(event) => setSelectedPlan(event.target.value)}>{PURCHASE_PLANS.map((plan) => <option key={plan.code} value={plan.code}>{plan.name} — ₹{plan.price.toLocaleString("en-IN")}</option>)}</select></label>
-        <button className="h-btn h-btn-orange" onClick={pay} disabled={busy}><CreditCard /> {busy ? "Please wait…" : `Pay ₹${selected?.price.toLocaleString("en-IN")}`}</button>
+        <label className="account-select">{active && daysLeft > 3 ? "Buy another plan" : active ? "Renew your plan" : "Select a plan"}<select value={selectedPlan} onChange={(event) => setSelectedPlan(event.target.value)}>{PURCHASE_PLANS.map((plan) => <option key={plan.code} value={plan.code}>{plan.name} — {plan.price ? `₹${plan.price.toLocaleString("en-IN")}` : "Free"}</option>)}</select></label>
+        <button className="h-btn h-btn-orange" onClick={pay} disabled={busy}><CreditCard /> {busy ? "Please wait…" : selected.code === "trial-3d" ? "Start Free Trial" : `Pay ₹${selected?.price.toLocaleString("en-IN")}`}</button>
         {msg && <p className="adm-sub">{msg}</p>}
       </section>
 

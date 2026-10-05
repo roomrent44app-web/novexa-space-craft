@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { heroAvif, heroWebp, communityAvif, communityWebp, ctaAvif, ctaWebp, priyaAvif, priyaWebp, ananyaAvif, ananyaWebp, rohitAvif, rohitWebp } from "@/data/images";
-import { ArrowRight, Bell, BookOpen, CalendarDays, ClipboardList, HeartHandshake, ShieldCheck, Star, Users, Video, Zap } from "lucide-react";
+import { ArrowRight, Bell, BookOpen, CalendarDays, ClipboardList, Gift, HeartHandshake, ShieldCheck, Star, Users, Video, Zap } from "lucide-react";
 import { MONTHLY_PLANS, orderLink, WEEKLY_PLANS } from "@/data/fiveam";
 import { useSeo } from "@/hooks/useSeo";
 import { useImagePreload } from "@/hooks/useImagePreload";
@@ -84,13 +84,14 @@ export default function Index() {
         <button role="tab" aria-selected={period === "monthly"} className={period === "monthly" ? "active" : ""} onClick={() => setPeriod("monthly")}>Monthly Plans</button>
       </div>
       <div className={`h-cards ${plans.length === 3 ? "three" : ""}`}>
-        {plans.map(p => <article key={p.days} className={p.popular ? "h-card popular" : "h-card"}>
+        {plans.map(p => <article key={p.days} className={p.freeTrial ? "h-card trial" : p.popular ? "h-card popular" : "h-card"}>
           {p.popular && <span className="h-badge"><Star fill="currentColor" /> Most Popular</span>}
-          <span className="h-card-ico">{p.popular ? <HeartHandshake /> : <CalendarDays />}</span>
+          {p.freeTrial && <span className="h-badge trial"><Gift /> Free Trial</span>}
+          <span className="h-card-ico">{p.freeTrial ? <Gift /> : p.popular ? <HeartHandshake /> : <CalendarDays />}</span>
           <h3>{p.days} Days</h3>
           <p>{p.calls} Wake-Up Calls</p>
-          <strong>₹{p.price.toLocaleString("en-IN")}</strong>
-          <Link className="h-btn h-btn-orange h-card-btn" to={`/account?plan=${p.days}d-${p.price}`}>Get Started</Link>
+          <strong>{p.freeTrial ? "Free" : `₹${p.price.toLocaleString("en-IN")}`}</strong>
+          <Link className="h-btn h-btn-orange h-card-btn" to={p.freeTrial ? "/account?plan=trial-3d" : `/account?plan=${p.days}d-${p.price}`}>Get Started</Link>
         </article>)}
       </div>
     </div></section>

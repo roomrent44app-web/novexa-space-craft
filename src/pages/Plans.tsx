@@ -1,4 +1,4 @@
-import { ArrowRight, Bell, ShieldCheck, CalendarDays, Star, Users } from "lucide-react";
+import { ArrowRight, Bell, Gift, ShieldCheck, CalendarDays, Star, Users } from "lucide-react";
 import { plansHeroAvif, plansHeroWebp } from "@/data/images";
 import { MONTHLY_PLANS, orderLink, PLANS_PAGE_WEEKLY } from "@/data/fiveam";
 import { useSeo } from "@/hooks/useSeo";
@@ -31,14 +31,15 @@ function Rays() {
   return <span className="p-rays" aria-hidden="true"><i /><i /><i /></span>;
 }
 
-function PlanCard({ plan }: { plan: { days: number; calls: number; price: number; popular?: boolean } }) {
-  return <article className={plan.popular ? "p-card popular" : "p-card"}>
+function PlanCard({ plan }: { plan: { days: number; calls: number; price: number; popular?: boolean; freeTrial?: boolean } }) {
+  return <article className={plan.freeTrial ? "p-card trial" : plan.popular ? "p-card popular" : "p-card"}>
     {plan.popular && <span className="p-popular"><Star fill="currentColor" /> Most Popular</span>}
+    {plan.freeTrial && <span className="p-popular trial"><Gift /> Free Trial</span>}
     <span className="p-calendar"><CalendarDays /></span>
     <h3>{plan.days} Days</h3>
     <p>{plan.calls} Wake-Up Calls</p>
-    <strong>₹{plan.price.toLocaleString("en-IN")}</strong>
-    <Link className="p-card-button" to={`/account?plan=${plan.days}d-${plan.price}`}>Get Started <ArrowRight /></Link>
+    <strong>{plan.freeTrial ? "Free" : `₹${plan.price.toLocaleString("en-IN")}`}</strong>
+    <Link className="p-card-button" to={plan.freeTrial ? "/account?plan=trial-3d" : `/account?plan=${plan.days}d-${plan.price}`}>Get Started <ArrowRight /></Link>
   </article>;
 }
 
