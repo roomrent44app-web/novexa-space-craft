@@ -455,3 +455,15 @@ body:has(.plans-page) .site-header .brand-logo img { height: clamp(47px, 5.1vw, 
   .h-story h3 { font-size: 15px; }
   .h-stars svg { width: 13px; height: 13px; }
 }
+.h-title, .h-cta-title { line-height: 1; }
+.h-plans .h-title { font-size: calc(var(--u) * 35.5); }
+.h-community-body .h-title { font-size: calc(var(--u) * 29); }
+.h-steps .h-title { font-size: calc(var(--u) * 27.5); }
+.h-stories .h-title { font-size: calc(var(--u) * 27.5); }
+.h-cta-title { font-size: calc(var(--u) * 30.5); }
+.h-cta-title .h-5am, .h-title .h-5am { font-family: "Titan One", "Fredoka", sans-serif; font-weight: 400; -webkit-text-stroke: 0; }
+.h-story h3 { margin-top: calc(var(--u) * 2); }
+.h-story-foot { padding-top: calc(var(--u) * 2); }
+@media (max-width: 767px) {
+  .h-plans .h-title, .h-community-body .h-title, .h-steps .h-title, .h-stories .h-title, .h-cta-title { font-size: 29px; }
+}
