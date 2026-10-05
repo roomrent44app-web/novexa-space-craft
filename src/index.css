@@ -435,3 +435,23 @@ body:has(.plans-page) .site-header .brand-logo img { height: clamp(47px, 5.1vw, 
   .p-benefit h3 { font-size: 12px; }
   .p-benefit p { font-size: 10px; }
 }
+
+/* Round 4 parity: brush-marker headings (Kalam bold), reference text sizes */
+.h-title, .h-cta-title, .p-section-heading h2 { font-family: "Kalam", "Chewy", cursive; font-weight: 700; letter-spacing: -.005em; line-height: 1.05; }
+.h-title, .h-cta-title { -webkit-text-stroke: calc(var(--u) * 1.1) currentColor; }
+.p-section-heading h2 { -webkit-text-stroke: calc(var(--pu) * 1.1) currentColor; }
+.h-hero-title { letter-spacing: -.035em; }
+.h-story p { font-size: calc(var(--u) * 10.5); line-height: 1.5; }
+.h-story h3 { font-size: calc(var(--u) * 11.5); margin-top: calc(var(--u) * 6); }
+.h-story-foot span, .h-story h3 { white-space: nowrap; }
+.h-story-foot span { font-size: calc(var(--u) * 10); }
+.h-story-foot { gap: calc(var(--u) * 8); padding-top: calc(var(--u) * 4); }
+.h-stars svg { width: calc(var(--u) * 10); height: calc(var(--u) * 10); }
+.h-feature-ico svg, .h-step-ico svg { stroke-width: 2.3; }
+.h-feature h3 { font-weight: 800; }
+@media (max-width: 767px) {
+  .h-title, .h-cta-title, .p-section-heading h2 { -webkit-text-stroke: .6px currentColor; }
+  .h-story p, .h-story-foot span { font-size: 13px; }
+  .h-story h3 { font-size: 15px; }
+  .h-stars svg { width: 13px; height: 13px; }
+}

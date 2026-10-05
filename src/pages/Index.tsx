@@ -9,11 +9,20 @@ import rohit from "@/assets/avatar-rohit.jpg";
 import { MONTHLY_PLANS, orderLink, WEEKLY_PLANS } from "@/data/fiveam";
 import { useSeo } from "@/hooks/useSeo";
 
+const UsersFilled = () => <Users fill="currentColor" strokeWidth={1.6} />;
+const ChartFilled = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <rect x="3" y="14" width="4" height="7" rx="1" /><rect x="10" y="10" width="4" height="11" rx="1" /><rect x="17" y="6" width="4" height="15" rx="1" />
+    <path d="M3 10.5 9 5.5l3.5 3L19 3" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M15.5 2.6H20v4.4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
 const features = [
   { Icon: Users, title: <>Live<br />Study Sessions</>, text: <>Study together<br />with a community</> },
   { Icon: Bell, title: <>Daily<br />Wake-Up Calls</>, text: <>Get a wakeup call<br />and never miss 5 AM</> },
-  { Icon: TrendingUp, title: <>Stay Consistent</>, text: <>Track progress<br />and build habits</> },
-  { Icon: Users, title: <>Supportive<br />Community</>, text: <>Surround yourself<br />with like-minded students</> },
+  { Icon: ChartFilled, title: <>Stay Consistent</>, text: <>Track progress<br />and build habits</> },
+  { Icon: UsersFilled, title: <>Supportive<br />Community</>, text: <>Surround yourself<br />with like-minded students</> },
   { Icon: BookOpen, title: <>Be a Better You</>, text: <>Daily motivation<br />and study support</> },
 ];
 
@@ -22,7 +31,7 @@ const stats = [["10K+", "Students Joined"], ["Daily", "Live Study Sessions"], ["
 const steps = [
   { Icon: ClipboardList, title: "Choose Your Plan", text: <>Pick a weekly or monthly plan<br />that suits you.</> },
   { Icon: Bell, title: "Get Daily Wake-Up Calls", text: <>Receive a wake-up call at 5 AM<br />on your selected days.</> },
-  { Icon: Users, title: "Join the Study Community", text: <>Attend live study sessions and stay consistent with like-minded students.</> },
+  { Icon: UsersFilled, title: "Join the Study Community", text: <>Attend live study sessions and stay consistent with like-minded students.</> },
 ];
 
 const stories = [
