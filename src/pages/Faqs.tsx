@@ -1,9 +1,12 @@
 import { useState, type ReactNode } from "react";
 import { ArrowRight, Bell, Clock, IndianRupee, Laptop, Phone, Plus, ShieldCheck, Star, Users } from "lucide-react";
-import faqHero from "@/assets/faq-hero-clone.jpg";
-import faqCta from "@/assets/faq-cta-clone.jpg";
+import faqHeroAvif from "@/assets/faq-hero-clone.jpg?format=avif&width=1584&quality=70&imagetools";
+import faqHeroWebp from "@/assets/faq-hero-clone.jpg?format=webp&width=1584&quality=76&imagetools";
+import faqCtaAvif from "@/assets/faq-cta-clone.jpg?format=avif&width=1584&quality=68&imagetools";
+import faqCtaWebp from "@/assets/faq-cta-clone.jpg?format=webp&width=1584&quality=74&imagetools";
 import { FAQS, orderLink } from "@/data/fiveam";
 import { useSeo } from "@/hooks/useSeo";
+import { useImagePreload } from "@/hooks/useImagePreload";
 
 function Rays() {
   return <span className="p-rays" aria-hidden="true"><i /><i /><i /></span>;
@@ -47,10 +50,11 @@ const heroBenefits = [
 
 export default function Faqs() {
   useSeo({ title: "FAQs", description: "Answers about 5AM wake-up calls, study sessions, community access and payments.", path: "/faqs" });
+  useImagePreload(faqHeroAvif);
   const [open, setOpen] = useState<boolean[]>(() => FAQS.map(() => true));
 
   return <div className="plans-page faq-page">
-    <section className="fq-hero" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.78) 0%, hsl(var(--ink)/.55) 34%, hsl(var(--ink)/0) 58%), url(${faqHero})` }}>
+    <section className="fq-hero" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.78) 0%, hsl(var(--ink)/.55) 34%, hsl(var(--ink)/0) 58%), image-set(url("${faqHeroAvif}") type("image/avif"), url("${faqHeroWebp}") type("image/webp"))` }}>
       <div className="p-shell">
         <span className="p-eyebrow">Frequently Asked Questions</span>
         <h1><span className="l1">Got Questions?</span><span className="l2">We've Got You<Rays /></span></h1>
@@ -81,7 +85,7 @@ export default function Faqs() {
       </div>
     </section>
 
-    <section className="fq-cta" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.8) 0%, hsl(var(--ink)/.55) 40%, hsl(var(--ink)/0) 62%), url(${faqCta})` }}>
+    <section className="fq-cta" style={{ backgroundImage: `linear-gradient(90deg, hsl(var(--ink)/.8) 0%, hsl(var(--ink)/.55) 40%, hsl(var(--ink)/0) 62%), image-set(url("${faqCtaAvif}") type("image/avif"), url("${faqCtaWebp}") type("image/webp"))` }}>
       <div className="p-shell">
         <span className="p-eyebrow">Still Have Questions?</span>
         <h2>We're Here to Help!<Rays /></h2>

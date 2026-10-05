@@ -9,3 +9,4 @@
 - [x] Make all five pages overflow-safe across phone, tablet, laptop, and desktop widths
 - [x] Improve mobile navigation and touch targets
 - [x] Strengthen site-wide metadata, sitemap, and branded search icons
+- [x] Optimize and prioritize imagery across all five pages
