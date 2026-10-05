@@ -1,4 +1,4 @@
-import { ArrowRight, Bell, CalendarDays, Star, Users } from "lucide-react";
+import { ArrowRight, Bell, ShieldCheck, CalendarDays, Star, Users } from "lucide-react";
 import plansHero from "@/assets/plans-hero-clone.jpg";
 import { MONTHLY_PLANS, orderLink, PLANS_PAGE_WEEKLY } from "@/data/fiveam";
 import { useSeo } from "@/hooks/useSeo";
@@ -50,8 +50,7 @@ export default function Plans() {
         <h1>Invest in a<br /><span>Better You</span><Rays /></h1>
         <p>Choose a plan, get daily wake-up calls and<br />join a supportive study community to stay<br />consistent and achieve your goals.</p>
         <div className="p-hero-benefits">
-          {[benefits[0], benefits[1], benefits[3]].map((benefit) => {
-            if (!benefit) return null;
+          {[{ ...benefits[0], Icon: Users }, { ...benefits[1], Icon: Bell }, { ...benefits[3], Icon: ShieldCheck }].map((benefit) => {
             const { Icon, title, key } = benefit;
             return <div key={key}><span><Icon /></span><b>{title}</b></div>;
           })}

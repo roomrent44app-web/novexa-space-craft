@@ -506,3 +506,5 @@ body:has(.plans-page) .site-header .brand-logo img { height: clamp(47px, 5.1vw, 
 @media (max-width: 767px) { .p-hero h1 { font-size: 50px; } }
 .p-benefit p { max-width: none; }
 .p-hero-benefits b { line-height: 1.25; }
+@media (min-width: 768px) { .p-hero { background-size: 116% auto; background-position: right 45%; } }
+.p-hero-benefits svg { stroke-width: 2.2; }
