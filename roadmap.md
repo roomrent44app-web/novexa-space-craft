@@ -12,3 +12,7 @@
 - [x] Optimize and prioritize imagery across all five pages
 - [ ] Add Razorpay checkout with automatic student subscription activation
 - [x] Add student dashboard summary with plan expiry, class access, and attendance overview
+- [ ] Rebuild the admin panel as a premium operations dashboard
+- [ ] Add unified plan-payment and physical-order management
+- [ ] Add student directory, attendance analytics, corrections, and exports
+- [ ] Add temporary and monthly Google Meet links with an admin-selected active link
