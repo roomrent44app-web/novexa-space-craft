@@ -10,6 +10,5 @@ export default function Layout({ children }: { children: ReactNode }) {
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
   }, [pathname]);
   useAllImagesPreload(pathname);
-  const showFooter = !["/", "/plans", "/how-it-works", "/faqs", "/about"].includes(pathname);
-  return <div className="min-h-screen"><Header /><main>{children}</main>{showFooter && <Footer />}</div>;
+  return <div className="min-h-screen"><Header /><main>{children}</main><Footer /></div>;
 }
