@@ -336,3 +336,7 @@ main { overflow-x: clip; }
 @media (max-width: 767px) {
   .h-plans .h-title, .h-community-body .h-title, .h-steps .h-title, .h-stories .h-title, .h-cta-title { font-size: 32px; }
 }
+@media (max-width: 767px) {
+  .site-header .header-cta { display: none; }
+  .h-hero { background-image: linear-gradient(180deg, hsl(var(--ink)/.8), hsl(var(--ink)/.65)), url("@/assets/home-hero-ref.jpg") !important; }
+}
