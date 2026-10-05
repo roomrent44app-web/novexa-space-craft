@@ -11,4 +11,4 @@
 - [x] Strengthen site-wide metadata, sitemap, and branded search icons
 - [x] Optimize and prioritize imagery across all five pages
 - [ ] Add Razorpay checkout with automatic student subscription activation
-- [ ] Add student dashboard summary with plan expiry, class access, and attendance overview
+- [x] Add student dashboard summary with plan expiry, class access, and attendance overview
