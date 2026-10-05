@@ -340,3 +340,13 @@ main { overflow-x: clip; }
   .site-header .header-cta { display: none; }
   .h-hero { background-image: linear-gradient(180deg, hsl(var(--ink)/.8), hsl(var(--ink)/.65)), url("@/assets/home-hero-ref.jpg") !important; }
 }
+/* Testimonial cards: grow with content so text never overflows */
+.h-story { height: auto; min-height: calc(var(--u) * 106); }
+.h-story p { font-size: max(13px, calc(var(--u) * 10.5)); }
+.h-story h3 { font-size: max(15px, calc(var(--u) * 12)); margin-top: 6px; }
+.h-story-foot { gap: 10px; padding-top: 6px; }
+.h-story-foot span { font-size: max(13px, calc(var(--u) * 10.5)); }
+.h-stars svg { width: max(13px, calc(var(--u) * 10.5)); height: max(13px, calc(var(--u) * 10.5)); }
+@media (min-width: 768px) and (max-width: 1023px) {
+  .h-story-grid { grid-template-columns: repeat(2, 1fr); }
+}
