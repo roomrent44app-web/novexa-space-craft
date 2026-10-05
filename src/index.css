@@ -610,3 +610,10 @@ body:has(.plans-page) .site-header .brand-logo img { height: clamp(47px, 5.1vw, 
   .hw-hero p { font-size: 15px; } .hw-step { height: auto; } .hw-cta h2 { font-size: 38px; }
   .hw-process .p-section-heading h2 { font-size: 28px; } .hw-step h3 { font-size: 21px; }
 }
+@media (min-width: 768px) {
+  .hw-hero .l1 { font-size: calc(var(--pu) * 46); }
+  .hw-hero .l2 { font-size: calc(var(--pu) * 57); }
+  .hw-hero .l3 { font-size: calc(var(--pu) * 31); }
+  .hw-hero p { font-size: calc(var(--pu) * 14.6); }
+  .hw-process .p-section-heading h2 { font-size: calc(var(--pu) * 31); }
+}
