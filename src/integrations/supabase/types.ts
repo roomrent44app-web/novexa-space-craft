@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_audit_log: {
+        Row: {
+          action: string
+          actor_id: string
+          created_at: string
+          details: Json
+          id: string
+          target_id: string
+          target_type: string
+        }
+        Insert: {
+          action: string
+          actor_id: string
+          created_at?: string
+          details?: Json
+          id?: string
+          target_id: string
+          target_type: string
+        }
+        Update: {
+          action?: string
+          actor_id?: string
+          created_at?: string
+          details?: Json
+          id?: string
+          target_id?: string
+          target_type?: string
+        }
+        Relationships: []
+      }
       attendance: {
         Row: {
           created_at: string
@@ -73,21 +103,36 @@ export type Database = {
       }
       class_settings: {
         Row: {
+          active_link_mode: Database["public"]["Enums"]["class_link_mode"]
           class_time: string
           id: number
           meet_link: string
+          monthly_class_time: string
+          monthly_meet_link: string
+          temporary_class_time: string
+          temporary_meet_link: string
           updated_at: string
         }
         Insert: {
+          active_link_mode?: Database["public"]["Enums"]["class_link_mode"]
           class_time?: string
           id?: number
           meet_link?: string
+          monthly_class_time?: string
+          monthly_meet_link?: string
+          temporary_class_time?: string
+          temporary_meet_link?: string
           updated_at?: string
         }
         Update: {
+          active_link_mode?: Database["public"]["Enums"]["class_link_mode"]
           class_time?: string
           id?: number
           meet_link?: string
+          monthly_class_time?: string
+          monthly_meet_link?: string
+          temporary_class_time?: string
+          temporary_meet_link?: string
           updated_at?: string
         }
         Relationships: []
@@ -113,9 +158,76 @@ export type Database = {
         }
         Relationships: []
       }
+      physical_orders: {
+        Row: {
+          address: string
+          admin_notes: string
+          amount_paise: number
+          cancelled_at: string | null
+          city: string
+          created_at: string
+          customer_email: string
+          customer_name: string
+          customer_phone: string
+          delivered_at: string | null
+          fulfillment_status: Database["public"]["Enums"]["order_fulfillment_status"]
+          id: string
+          item_name: string
+          order_number: string
+          payment_status: string
+          pincode: string
+          quantity: number
+          state: string
+          updated_at: string
+        }
+        Insert: {
+          address?: string
+          admin_notes?: string
+          amount_paise: number
+          cancelled_at?: string | null
+          city?: string
+          created_at?: string
+          customer_email?: string
+          customer_name: string
+          customer_phone: string
+          delivered_at?: string | null
+          fulfillment_status?: Database["public"]["Enums"]["order_fulfillment_status"]
+          id?: string
+          item_name: string
+          order_number?: string
+          payment_status?: string
+          pincode?: string
+          quantity?: number
+          state?: string
+          updated_at?: string
+        }
+        Update: {
+          address?: string
+          admin_notes?: string
+          amount_paise?: number
+          cancelled_at?: string | null
+          city?: string
+          created_at?: string
+          customer_email?: string
+          customer_name?: string
+          customer_phone?: string
+          delivered_at?: string | null
+          fulfillment_status?: Database["public"]["Enums"]["order_fulfillment_status"]
+          id?: string
+          item_name?: string
+          order_number?: string
+          payment_status?: string
+          pincode?: string
+          quantity?: number
+          state?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
+          email: string
           full_name: string
           id: string
           phone: string
@@ -123,6 +235,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          email?: string
           full_name?: string
           id: string
           phone?: string
@@ -130,6 +243,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          email?: string
           full_name?: string
           id?: string
           phone?: string
@@ -139,10 +253,14 @@ export type Database = {
       }
       subscriptions: {
         Row: {
+          admin_notes: string
           amount_paise: number
+          cancelled_at: string | null
           created_at: string
           duration_days: number
           expires_at: string | null
+          fulfilled_at: string | null
+          fulfillment_status: Database["public"]["Enums"]["order_fulfillment_status"]
           id: string
           plan_code: string
           plan_name: string
@@ -154,10 +272,14 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          admin_notes?: string
           amount_paise: number
+          cancelled_at?: string | null
           created_at?: string
           duration_days: number
           expires_at?: string | null
+          fulfilled_at?: string | null
+          fulfillment_status?: Database["public"]["Enums"]["order_fulfillment_status"]
           id?: string
           plan_code: string
           plan_name: string
@@ -169,10 +291,14 @@ export type Database = {
           user_id: string
         }
         Update: {
+          admin_notes?: string
           amount_paise?: number
+          cancelled_at?: string | null
           created_at?: string
           duration_days?: number
           expires_at?: string | null
+          fulfilled_at?: string | null
+          fulfillment_status?: Database["public"]["Enums"]["order_fulfillment_status"]
           id?: string
           plan_code?: string
           plan_name?: string
@@ -218,6 +344,12 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "user"
+      class_link_mode: "temporary" | "monthly"
+      order_fulfillment_status:
+        | "pending"
+        | "processing"
+        | "delivered"
+        | "cancelled"
       subscription_status: "pending" | "active" | "expired" | "failed"
     }
     CompositeTypes: {
@@ -347,6 +479,13 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "user"],
+      class_link_mode: ["temporary", "monthly"],
+      order_fulfillment_status: [
+        "pending",
+        "processing",
+        "delivered",
+        "cancelled",
+      ],
       subscription_status: ["pending", "active", "expired", "failed"],
     },
   },
