@@ -325,3 +325,14 @@ main { overflow-x: clip; }
 .h-comm-u { position: relative; display: inline-block; }
 .h-comm-u .h-underline { bottom: calc(var(--u) * -5); }
 @media (max-width: 767px) { .h-title, .h-cta-title { -webkit-text-stroke: 0; } }
+.h-plans .h-title { font-size: calc(var(--u) * 38); }
+.h-community-body .h-title { font-size: calc(var(--u) * 33); }
+.h-steps .h-title { font-size: calc(var(--u) * 32); }
+.h-stories .h-title { font-size: calc(var(--u) * 30.5); margin-top: calc(var(--u) * 3); }
+.h-story-grid { margin-top: calc(var(--u) * 13); }
+.h-cta-title { font-size: calc(var(--u) * 35); margin-top: calc(var(--u) * 2); }
+.h-cta-text { margin-top: calc(var(--u) * 4); }
+.h-cta-btns { margin-top: calc(var(--u) * 10); }
+@media (max-width: 767px) {
+  .h-plans .h-title, .h-community-body .h-title, .h-steps .h-title, .h-stories .h-title, .h-cta-title { font-size: 32px; }
+}
