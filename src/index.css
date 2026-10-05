@@ -352,8 +352,8 @@ main { overflow-x: clip; }
 
 /* Plans page — compact desktop scale matching the supplied reference */
 .plans-page { --pu: clamp(1px, calc(100vw / 1100), 1.2px); background: hsl(var(--cream)); color: hsl(var(--ink)); }
-body:has(.plans-page) .site-header-row { height: calc(var(--pu) * 55); }
-body:has(.plans-page) .site-header .brand-logo img { height: calc(var(--pu) * 47); }
+body:has(.plans-page) .site-header-row { height: clamp(55px, 6vw, 66px); }
+body:has(.plans-page) .site-header .brand-logo img { height: clamp(47px, 5.1vw, 56px); }
 .p-shell { width: calc(var(--pu) * 768); max-width: 100%; margin: 0 auto; position: relative; }
 .p-hero { height: calc(var(--pu) * 319); color: hsl(var(--primary-foreground)); background-size: cover; background-position: center; overflow: hidden; }
 .p-hero .p-shell { height: 100%; padding: calc(var(--pu) * 23) 0 0 calc(var(--pu) * 45); }
