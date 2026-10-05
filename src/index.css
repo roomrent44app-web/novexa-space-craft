@@ -978,6 +978,43 @@ img { height: auto; }
     padding-bottom: 62px;
   }
 }
+
+/* Compact icon and text actions still retain a full touch target. */
+.fq-plus,
+.ip-close,
+.admin-topbar button,
+.admin-gallery-grid figcaption button,
+.admin-sidebar-foot > button,
+.att-nav button {
+  min-width: 40px;
+  min-height: 40px;
+  display: inline-grid;
+  place-items: center;
+}
+.fq-plus {
+  width: 40px;
+  height: 40px;
+}
+.acc-text-btn {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  padding-inline: 4px;
+  font-size: 14px;
+}
+.bottom-nav-item {
+  min-height: 58px;
+  font-size: 12px;
+}
+.admin-content-list article {
+  grid-template-columns: 54px minmax(0, 1fr) 40px 40px;
+}
+.admin-content-list article > button {
+  min-width: 40px;
+  min-height: 40px;
+  display: grid;
+  place-items: center;
+}
 @media (min-width: 768px) {
   .bottom-nav {
     display: none;
@@ -1027,3 +1064,112 @@ img { height: auto; }
 .admin-stat{display:grid;align-content:center;gap:4px;padding:16px;border:1px solid hsl(var(--border));border-radius:8px;background:hsl(var(--card));box-shadow:var(--shadow-soft)}
 .admin-stat small{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:hsl(var(--muted-foreground))}
 .admin-stat b{font-family:"Fredoka",sans-serif;font-size:22px;color:hsl(var(--foreground))}
+
+/* Shared button sizing: keep actions readable and comfortably tappable on every page. */
+.h-btn {
+  min-height: 44px;
+  padding-inline: max(18px, calc(var(--u) * 18));
+  font-size: max(15px, calc(var(--u) * 12.5));
+  font-weight: 700;
+}
+.h-btn-big {
+  height: max(50px, calc(var(--u) * 54));
+  font-size: max(15px, calc(var(--u) * 12.5));
+}
+.h-tabs button {
+  min-height: 40px;
+  font-size: max(14px, calc(var(--u) * 13.5));
+}
+.h-card,
+.p-card {
+  height: auto;
+  min-height: max(205px, calc(var(--u) * 205));
+  padding-bottom: 14px;
+}
+.h-card-btn,
+.p-card-button {
+  min-height: 44px;
+  padding-inline: 16px;
+  font-size: max(15px, calc(var(--u) * 12.5));
+}
+.h-card-btn {
+  width: max(150px, calc(var(--u) * 150));
+}
+.p-card-button {
+  width: calc(100% - var(--pu) * 36);
+}
+.h-cta-btns .h-btn,
+.hw-btn,
+.fq-btn {
+  min-height: 44px;
+  padding-inline: 18px;
+  font-size: max(15px, calc(var(--pu) * 12.5));
+}
+.fq-btn {
+  width: max(210px, calc(var(--pu) * 210));
+}
+.cms-more {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  font-size: 15px;
+}
+.adm-btn,
+.adm-tabs button {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+.account-logout {
+  min-height: 44px;
+  padding-inline: 15px;
+  font-size: 14px;
+}
+.account-save {
+  min-height: 44px;
+}
+.ip-later {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6px;
+  padding-inline: 14px;
+  font-size: 14px;
+}
+.signup-actions .h-btn {
+  min-height: 46px;
+}
+.class-days-grid button {
+  min-height: 42px;
+  padding-inline: 2px;
+  font-weight: 700;
+}
+.account-plan > .h-btn,
+.account-class > .h-btn,
+.adm-card form > .h-btn {
+  width: 100%;
+  min-height: 46px;
+  font-size: 15px;
+}
+.admin-toolbar > button,
+.admin-actions > button,
+.admin-save-class {
+  min-height: 42px;
+  padding-inline: 16px;
+}
+@media (max-width: 767px) {
+  .h-btn,
+  .p-card-button,
+  .hw-btn,
+  .fq-btn,
+  .adm-btn {
+    min-height: 46px;
+  }
+  .h-card,
+  .p-card {
+    height: auto;
+  }
+}
