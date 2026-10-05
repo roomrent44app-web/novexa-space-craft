@@ -80,6 +80,7 @@ export default function Account() {
   const active = subscriptions.find((item) => item.status === "active" && item.expires_at && new Date(item.expires_at).getTime() > Date.now());
   const latest = active ?? subscriptions[0];
   const daysLeft = active?.expires_at ? Math.max(0, Math.ceil((new Date(active.expires_at).getTime() - Date.now()) / 86400000)) : 0;
+  const trialUsed = subscriptions.some((s) => s.plan_code === "trial-3d");
   const selected = PURCHASE_PLANS.find((plan) => plan.code === selectedPlan) ?? PURCHASE_PLANS[PURCHASE_PLANS.length - 1];
   const needsDays = selected.days < 7;
   const toggleDay = (d: string) => setClassDays((cur) => cur.includes(d) ? cur.filter((x) => x !== d) : cur.length >= selected.days ? cur : [...cur, d]);
@@ -116,8 +117,10 @@ export default function Account() {
     setBusy(true); setMsg("");
     try {
       if (selected.code === "trial-3d") {
-        const { error } = await supabase.functions.invoke("activate-free-trial", { body: { classDays } });
+        if (trialUsed) throw new Error("The free trial can be used only once per account.");
+        const { data, error } = await supabase.functions.invoke("activate-free-trial", { body: { classDays } });
         if (error) throw new Error(await fnError(error, "Could not start the free trial. Please try again."));
+        if (data?.error) throw new Error(data.error);
         setMsg("Your 3 Days Free Trial is active!");
       } else {
         await purchasePlan(selected.code, { name: profile.full_name, email: user.email ?? "", phone: profile.phone }, needsDays ? classDays : []);
