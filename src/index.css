@@ -62,8 +62,6 @@
   .hero-title span { @apply text-primary; }
   .section-title { @apply text-3xl font-black leading-tight md:text-5xl; }
   .section-subtitle { @apply mx-auto mt-2 max-w-2xl text-sm text-muted-foreground md:text-base; }
-  .feature-grid-5 { @apply grid py-6 sm:grid-cols-2 md:grid-cols-5; }
-  .feature-grid-4 { @apply grid py-6 sm:grid-cols-2 md:grid-cols-4; }
   .feature-item { @apply flex items-center gap-3 border-b p-4 text-left sm:border-r md:flex-col md:border-b-0 md:text-center; }
   .feature-item:last-child { @apply border-r-0; }
   .feature-item h3 { @apply text-sm leading-tight; }
