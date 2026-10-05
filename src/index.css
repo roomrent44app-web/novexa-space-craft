@@ -478,3 +478,6 @@ body:has(.plans-page) .site-header .brand-logo img { height: clamp(47px, 5.1vw, 
   .h-cta .h-in { display: flex; flex-direction: column; justify-content: center; height: 100%; padding-top: 0; }
   .h-hero .h-in { display: flex; flex-direction: column; justify-content: center; padding-top: 0; }
 }
+@media (min-width: 768px) {
+  .h-hero .h-in, .h-cta .h-in, .h-community-body { align-items: flex-start; }
+}
