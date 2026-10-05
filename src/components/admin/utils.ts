@@ -52,7 +52,7 @@ export function attendanceForMonth(rows: AttendanceRow[], month: string) {
 }
 
 export function downloadCsv(filename: string, rows: Array<Array<string | number>>) {
-  const escape = (value: string | number) => `"${String(value).replaceAll('"', '""')}"`;
+  const escape = (value: string | number) => `"${String(value).replace(/"/g, '""')}"`;
   const csv = rows.map((row) => row.map(escape).join(",")).join("\n");
   const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
   const anchor = document.createElement("a");

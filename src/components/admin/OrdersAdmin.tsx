@@ -29,18 +29,19 @@ export default function OrdersAdmin({ data, reload }: { data: AdminData; reload:
     return matches && (kind === "all" || order.kind === kind) && (status === "all" || order.fulfillmentStatus === status);
   });
   const updateStatus = async (order: UnifiedOrder, fulfillmentStatus: FulfillmentStatus) => {
-    const table = order.kind === "plan" ? "subscriptions" : "physical_orders";
     const now = new Date().toISOString();
-    const dates = order.kind === "plan"
-      ? { fulfilled_at: fulfillmentStatus === "delivered" ? now : null, cancelled_at: fulfillmentStatus === "cancelled" ? now : null }
-      : { delivered_at: fulfillmentStatus === "delivered" ? now : null, cancelled_at: fulfillmentStatus === "cancelled" ? now : null };
-    const { error } = await supabase.from(table).update({ fulfillment_status: fulfillmentStatus, ...dates, updated_at: now }).eq("id", order.id);
+    const result = order.kind === "plan"
+      ? await supabase.from("subscriptions").update({ fulfillment_status: fulfillmentStatus, fulfilled_at: fulfillmentStatus === "delivered" ? now : null, cancelled_at: fulfillmentStatus === "cancelled" ? now : null, updated_at: now }).eq("id", order.id)
+      : await supabase.from("physical_orders").update({ fulfillment_status: fulfillmentStatus, delivered_at: fulfillmentStatus === "delivered" ? now : null, cancelled_at: fulfillmentStatus === "cancelled" ? now : null, updated_at: now }).eq("id", order.id);
+    const { error } = result;
     if (error) toast.error(error.message); else { toast.success("Order status updated"); await reload(); }
   };
   const saveNotes = async () => {
     if (!editing) return;
-    const table = editing.kind === "plan" ? "subscriptions" : "physical_orders";
-    const { error } = await supabase.from(table).update({ admin_notes: notes, updated_at: new Date().toISOString() }).eq("id", editing.id);
+    const result = editing.kind === "plan"
+      ? await supabase.from("subscriptions").update({ admin_notes: notes, updated_at: new Date().toISOString() }).eq("id", editing.id)
+      : await supabase.from("physical_orders").update({ admin_notes: notes, updated_at: new Date().toISOString() }).eq("id", editing.id);
+    const { error } = result;
     if (error) toast.error(error.message); else { toast.success("Order notes saved"); setEditing(null); await reload(); }
   };
   const createOrder = async (event: React.FormEvent) => {
