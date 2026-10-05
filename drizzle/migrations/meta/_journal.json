@@ -85,6 +85,13 @@
       "when": 1791229872070,
       "tag": "0011_subscription_class_days",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1791230391567,
+      "tag": "0012_migration",
+      "breakpoints": true
     }
   ]
 }
