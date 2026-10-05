@@ -515,5 +515,5 @@ body:has(.plans-page) .site-header .brand-logo img { height: clamp(47px, 5.1vw, 
   .p-hero h1 { font-size: calc(var(--pu) * 59.5); }
   .p-section-heading.monthly { margin-top: calc(var(--pu) * 7); }
   .p-section-heading.monthly + .p-grid { margin-top: calc(var(--pu) * 6); }
-  .p-benefit-strip .p-shell { grid-template-columns: 1fr 1fr .9fr 1.2fr; }
+  .p-benefit-strip .p-shell { grid-template-columns: 1fr 1.1fr .85fr 1.2fr; }
 }
