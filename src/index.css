@@ -94,6 +94,7 @@
   .home-hero .site-container { @apply pt-12 md:pt-14; }
   .home-hero .hero-title { @apply max-w-[500px] text-[52px] leading-[.91] md:text-[64px]; }
   .home-hero .hero-title,.home-plans .section-title,.home-community .section-title,.home-steps .section-title,.home-stories .section-title,.home-cta .study-cta h2 { font-family:"Chewy",cursive; font-weight:400; }
+  .home-hero .hero-main-line { @apply text-primary-foreground; }
   .home-hero .home-tagline { @apply mt-5 text-xl font-extrabold italic text-primary-foreground md:text-2xl; }
   .home-hero .home-proof { @apply mt-7; }
   .home-hero .home-proof span { @apply flex items-center gap-2; }
