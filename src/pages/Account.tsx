@@ -4,6 +4,7 @@ import { FunctionsHttpError } from "@supabase/supabase-js";
 import { CalendarClock, CheckCircle2, Clock3, CreditCard, LogOut, RefreshCw, UserRound, Video } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import Attendance from "@/components/site/Attendance";
+import SignupWizard from "@/components/site/SignupWizard";
 import { PURCHASE_PLANS } from "@/data/fiveam";
 import { purchasePlan } from "@/lib/razorpay";
 import { useSeo } from "@/hooks/useSeo";
@@ -123,6 +124,7 @@ export default function Account() {
   };
 
   if (!ready) return <main className="account-page"><p>Loading…</p></main>;
+  if (!user && mode === "signup") return <main className="adm-wrap"><div className="adm-card"><SignupWizard onLogin={() => { setMode("login"); setMsg(""); }} /></div></main>;
   if (!user) return <main className="adm-wrap"><div className="adm-card"><form onSubmit={submit}>
     <h1 className="adm-title">{mode === "login" ? "Student Login" : "Create Account"}</h1>
     <p className="adm-sub">Log in to join class, track attendance and manage your plan.</p>
