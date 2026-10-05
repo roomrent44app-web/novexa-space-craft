@@ -14,7 +14,7 @@ export function Hero({ eyebrow, title, accent, text, compact=false, home=false }
   return <section className={`${compact ? "page-hero compact" : "page-hero"}${home ? " home-hero" : ""}`} style={{backgroundImage:`linear-gradient(90deg, hsl(var(--foreground)/.9) 0%, hsl(var(--foreground)/.5) 42%, hsl(var(--foreground)/0) 67%), url(${image})`}}>
     <div className="site-container relative z-10 py-16 md:py-24">
       <Eyebrow>{eyebrow}</Eyebrow>
-      <h1 className="hero-title mt-4">{title}<br/><span>{accent}</span></h1>
+      <h1 className="hero-title mt-4">{home ? <><span className="hero-main-line">JOIN THE</span><br/><span className="hero-main-line">STUDY ROOM</span></> : title}<br/><span>{accent}</span></h1>
       {home && <p className="home-tagline">Same Time. Better You.</p>}
       <p className="mt-4 max-w-lg text-base leading-7 text-primary-foreground/90 md:text-lg">{text}</p>
       {!compact && <div className="mt-7 flex flex-wrap gap-3"><Button asChild size="lg"><a href={orderLink()} target="_blank" rel="noreferrer">Join the Study Room at 5 AM <ArrowRight /></a></Button><Button asChild size="lg" variant="secondary"><a href={orderLink("Community Registration")} target="_blank" rel="noreferrer"><Users /> Register to Community <ArrowRight /></a></Button></div>}
