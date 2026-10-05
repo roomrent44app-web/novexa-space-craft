@@ -137,6 +137,54 @@ export type Database = {
         }
         Relationships: []
       }
+      subscriptions: {
+        Row: {
+          amount_paise: number
+          created_at: string
+          duration_days: number
+          expires_at: string | null
+          id: string
+          plan_code: string
+          plan_name: string
+          razorpay_order_id: string
+          razorpay_payment_id: string | null
+          starts_at: string | null
+          status: Database["public"]["Enums"]["subscription_status"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount_paise: number
+          created_at?: string
+          duration_days: number
+          expires_at?: string | null
+          id?: string
+          plan_code: string
+          plan_name: string
+          razorpay_order_id: string
+          razorpay_payment_id?: string | null
+          starts_at?: string | null
+          status?: Database["public"]["Enums"]["subscription_status"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount_paise?: number
+          created_at?: string
+          duration_days?: number
+          expires_at?: string | null
+          id?: string
+          plan_code?: string
+          plan_name?: string
+          razorpay_order_id?: string
+          razorpay_payment_id?: string | null
+          starts_at?: string | null
+          status?: Database["public"]["Enums"]["subscription_status"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
@@ -170,6 +218,7 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "user"
+      subscription_status: "pending" | "active" | "expired" | "failed"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -298,6 +347,7 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "user"],
+      subscription_status: ["pending", "active", "expired", "failed"],
     },
   },
 } as const

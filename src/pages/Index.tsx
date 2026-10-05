@@ -4,6 +4,7 @@ import { ArrowRight, Bell, BookOpen, CalendarDays, ClipboardList, HeartHandshake
 import { MONTHLY_PLANS, orderLink, WEEKLY_PLANS } from "@/data/fiveam";
 import { useSeo } from "@/hooks/useSeo";
 import { useImagePreload } from "@/hooks/useImagePreload";
+import { Link } from "react-router-dom";
 
 const UsersFilled = () => <Users fill="currentColor" strokeWidth={1.6} />;
 const ChartFilled = () => (
@@ -89,7 +90,7 @@ export default function Index() {
           <h3>{p.days} Days</h3>
           <p>{p.calls} Wake-Up Calls</p>
           <strong>₹{p.price.toLocaleString("en-IN")}</strong>
-          <a className="h-btn h-btn-orange h-card-btn" href={orderLink(`${p.days} Days Plan - ₹${p.price}`)} target="_blank" rel="noreferrer">Get Started</a>
+          <Link className="h-btn h-btn-orange h-card-btn" to={`/account?plan=${p.days}d-${p.price}`}>Get Started</Link>
         </article>)}
       </div>
     </div></section>

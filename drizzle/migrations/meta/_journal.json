@@ -36,6 +36,13 @@
       "when": 1791223600344,
       "tag": "0004_restrict_media_reads",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1791225274059,
+      "tag": "0005_create_student_subscriptions",
+      "breakpoints": true
     }
   ]
 }
