@@ -134,7 +134,9 @@
 
 @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition-duration:.001ms!important; } }
 /* ================= 5AM reference-scaled system =================
-   1u = one pixel of the 793px-wide reference design, scaled to the viewport. */
+   Preserve the reference's compact desktop proportions instead of enlarging
+   every element to fill wide monitors. Photos and section backgrounds remain
+   full width while the content keeps a comfortable desktop reading size. */
 :root {
   --ink: 24 35% 7%;
   --cream: 36 70% 98%;
@@ -142,7 +144,7 @@
   --peach-deep: 24 90% 91%;
   --amber: 36 100% 54%;
   --gold-line: 38 55% 58%;
-  --u: calc(min(100vw, 1440px) / 793);
+  --u: clamp(1px, calc(100vw / 1100), 1.2px);
 }
 @media (max-width: 767px) { :root { --u: 1.05px; } }
 
@@ -348,10 +350,10 @@ main { overflow-x: clip; }
 .h-story-foot span { font-size: max(13px, calc(var(--u) * 10.5)); }
 .h-stars svg { width: max(13px, calc(var(--u) * 10.5)); height: max(13px, calc(var(--u) * 10.5)); }
 
-/* Plans page — proportioned to the supplied 768px reference */
-.plans-page { --pu: calc(min(100vw, 1440px) / 768); background: hsl(var(--cream)); color: hsl(var(--ink)); }
-body:has(.plans-page) .site-header-row { height: calc(min(100vw, 1440px) / 768 * 55); }
-body:has(.plans-page) .site-header .brand-logo img { height: calc(min(100vw, 1440px) / 768 * 47); }
+/* Plans page — compact desktop scale matching the supplied reference */
+.plans-page { --pu: clamp(1px, calc(100vw / 1100), 1.2px); background: hsl(var(--cream)); color: hsl(var(--ink)); }
+body:has(.plans-page) .site-header-row { height: clamp(55px, 6vw, 66px); }
+body:has(.plans-page) .site-header .brand-logo img { height: clamp(47px, 5.1vw, 56px); }
 .p-shell { width: calc(var(--pu) * 768); max-width: 100%; margin: 0 auto; position: relative; }
 .p-hero { height: calc(var(--pu) * 319); color: hsl(var(--primary-foreground)); background-size: cover; background-position: center; overflow: hidden; }
 .p-hero .p-shell { height: 100%; padding: calc(var(--pu) * 23) 0 0 calc(var(--pu) * 45); }
