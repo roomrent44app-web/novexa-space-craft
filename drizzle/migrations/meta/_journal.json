@@ -57,6 +57,13 @@
       "when": 1791225922920,
       "tag": "0007_admin_manual_subscriptions",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1791228006129,
+      "tag": "0008_allow_free_trial_amount",
+      "breakpoints": true
     }
   ]
 }
