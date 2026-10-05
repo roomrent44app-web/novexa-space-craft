@@ -50,6 +50,27 @@ export type Database = {
         }
         Relationships: []
       }
+      class_settings: {
+        Row: {
+          class_time: string
+          id: number
+          meet_link: string
+          updated_at: string
+        }
+        Insert: {
+          class_time?: string
+          id?: number
+          meet_link?: string
+          updated_at?: string
+        }
+        Update: {
+          class_time?: string
+          id?: number
+          meet_link?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       gallery_images: {
         Row: {
           caption: string

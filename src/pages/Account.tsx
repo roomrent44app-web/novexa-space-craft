@@ -14,6 +14,7 @@ export default function Account() {
   const [profile, setProfile] = useState({ full_name: "", phone: "" });
   const [msg, setMsg] = useState("");
   const [busy, setBusy] = useState(false);
+  const [cls, setCls] = useState<{ meet_link: string; class_time: string } | null>(null);
 
   useEffect(() => {
     const { data } = supabase.auth.onAuthStateChange((_e, s) => setUser(s?.user ?? null));
@@ -25,6 +26,8 @@ export default function Account() {
     if (!user) return;
     supabase.from("profiles").select("full_name, phone").eq("id", user.id).maybeSingle()
       .then(({ data }) => data && setProfile(data));
+    supabase.from("class_settings").select("meet_link, class_time").eq("id", 1).maybeSingle()
+      .then(({ data }) => setCls(data));
   }, [user]);
 
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, [k]: e.target.value });
@@ -60,6 +63,13 @@ export default function Account() {
       {user ? <>
         <h1 className="adm-title">My Account</h1>
         <p className="adm-sub">{user.email}</p>
+        <div className="acc-class">
+          <strong>Live Class</strong>
+          {cls?.class_time && <span className="adm-sub">{cls.class_time}</span>}
+          {cls?.meet_link
+            ? <a className="h-btn h-btn-orange" href={cls.meet_link} target="_blank" rel="noreferrer">Join Class</a>
+            : <span className="adm-sub">The class link will appear here soon.</span>}
+        </div>
         <label className="adm-label">Full name<input className="adm-input" value={profile.full_name} onChange={e => setProfile({ ...profile, full_name: e.target.value })} /></label>
         <label className="adm-label">Mobile<input className="adm-input" value={profile.phone} onChange={e => setProfile({ ...profile, phone: e.target.value })} /></label>
         {msg && <p className="adm-sub">{msg}</p>}

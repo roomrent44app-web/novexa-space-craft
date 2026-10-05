@@ -57,7 +57,7 @@ function Login() {
 }
 
 function Dashboard({ email }: { email: string }) {
-  const [tab, setTab] = useState<"blog" | "gallery">("blog");
+  const [tab, setTab] = useState<"blog" | "gallery" | "class">("blog");
   return (
     <div className="cms-page"><div className="p-shell cms-body">
       <div className="adm-top">
@@ -67,11 +67,38 @@ function Dashboard({ email }: { email: string }) {
       <div className="adm-tabs">
         <button className={tab === "blog" ? "on" : ""} onClick={() => setTab("blog")}>Blog Posts</button>
         <button className={tab === "gallery" ? "on" : ""} onClick={() => setTab("gallery")}>Gallery</button>
+        <button className={tab === "class" ? "on" : ""} onClick={() => setTab("class")}>Class Link</button>
       </div>
-      {tab === "blog" ? <BlogAdmin /> : <GalleryAdmin />}
+      {tab === "blog" ? <BlogAdmin /> : tab === "gallery" ? <GalleryAdmin /> : <ClassAdmin />}
     </div></div>
   );
 }
+
+function ClassAdmin() {
+  const [link, setLink] = useState("");
+  const [time, setTime] = useState("");
+  const [msg, setMsg] = useState("");
+  useEffect(() => {
+    supabase.from("class_settings").select("meet_link, class_time").eq("id", 1).maybeSingle()
+      .then(({ data }) => { if (data) { setLink(data.meet_link); setTime(data.class_time); } });
+  }, []);
+  const save = async (e: FormEvent) => {
+    e.preventDefault();
+    if (link && !/^https:\/\/meet\.google\.com\//.test(link.trim())) { setMsg("Please paste a Google Meet link (https://meet.google.com/...)."); return; }
+    const { error } = await supabase.from("class_settings").upsert({ id: 1, meet_link: link.trim(), class_time: time.trim(), updated_at: new Date().toISOString() });
+    setMsg(error ? error.message : "Saved! Users now see this link in their account.");
+  };
+  return (
+    <form className="adm-card" onSubmit={save}>
+      <h2>Google Meet class link</h2>
+      <label>Meet link<input value={link} onChange={e => setLink(e.target.value)} placeholder="https://meet.google.com/abc-defg-hij" /></label>
+      <label>Class time (optional)<input value={time} onChange={e => setTime(e.target.value)} placeholder="Daily 5:00 AM" /></label>
+      {msg && <p>{msg}</p>}
+      <button className="adm-btn" type="submit">Save link</button>
+    </form>
+  );
+}
+
 
 function BlogAdmin() {
   const [posts, setPosts] = useState<Post[]>([]);
