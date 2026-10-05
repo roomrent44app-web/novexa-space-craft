@@ -26,6 +26,12 @@ export const MONTHLY_PLANS = [
   { days: 21, calls: 21, price: 1099, popular: true },
 ];
 
+export const PURCHASE_PLANS = [...PLANS_PAGE_WEEKLY, ...MONTHLY_PLANS].map((plan) => ({
+  ...plan,
+  code: `${plan.days}d-${plan.price}`,
+  name: `${plan.days} Days Plan`,
+}));
+
 export const FEATURES = [
   { icon: "Users", title: "Live Study Sessions", text: "Study together with a community" },
   { icon: "Bell", title: "Daily Wake-Up Calls", text: "Get a wake-up call and never miss 5 AM" },
