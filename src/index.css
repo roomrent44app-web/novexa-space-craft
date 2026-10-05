@@ -845,6 +845,7 @@ img { height: auto; }
 /* ===== Blog / Gallery / Admin (cms-*, adm-*) ===== */
 .cms-page { background: hsl(var(--cream)); min-height: 60vh; overflow-x: clip; }
 .cms-head { background: linear-gradient(180deg, hsl(var(--peach)), hsl(var(--cream))); padding: 56px 0 28px; text-align: center; }
+.cms-head .p-eyebrow { color: hsl(var(--primary)); background: hsl(var(--card)); border-color: hsl(var(--primary) / .55); }
 .cms-head h1, .cms-article h1, .adm-login h1, .adm-top h1 { font-family: "Fredoka", sans-serif; font-weight: 700; font-size: clamp(30px, 4vw, 46px); color: hsl(var(--ink)); line-height: 1.1; margin: 10px 0; }
 .cms-head h1 em, .adm-login h1 em, .adm-top h1 em { font-style: normal; color: hsl(var(--primary)); }
 .cms-head p { color: hsl(var(--ink) / .75); max-width: 560px; margin: 0 auto; }
