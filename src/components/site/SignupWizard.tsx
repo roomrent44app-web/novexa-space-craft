@@ -102,7 +102,7 @@ export default function SignupWizard({ onLogin }: { onLogin: () => void }) {
       <label className="signup-check"><input type="checkbox" checked={agree1} onChange={(e) => setAgree1(e.target.checked)} /> I agree to receive wake-up calls and community updates on WhatsApp.</label>
       <label className="signup-check"><input type="checkbox" checked={agree2} onChange={(e) => setAgree2(e.target.checked)} /> I understand that the wake-up call is a support feature and I am responsible for attending my study session.</label>
     </>}
-    {msg && <p className="adm-sub">{msg}</p>}
+    {msg && <p className="adm-sub" role="alert" style={{ color: msg.startsWith("Account created") ? "hsl(var(--primary))" : "hsl(var(--destructive))", fontWeight: 600 }}>{msg}</p>}
     <div className="signup-actions">
       {step > 0 && <button type="button" className="h-btn" onClick={() => { setStep(step - 1); setMsg(""); }}>Back</button>}
       <button className="h-btn h-btn-orange" disabled={busy} type="submit">{busy ? "Please wait…" : step < last ? "Next" : "Create Account"}</button>
