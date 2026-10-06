@@ -3,8 +3,8 @@ export const CONTACT = {
   mobile: "8400122294",
   tel: "+918400122294",
   whatsapp: "918400122294",
-  email: "brandhousstudio@gma.com",
-  address: "Lucknow Gomati Nagar, Lucknow, Uttar Pradesh 226010",
+  email: "brandhousstudio@gmail.com",
+  address: "Gomti Nagar",
   domain: "5am.co.in",
 };
 
