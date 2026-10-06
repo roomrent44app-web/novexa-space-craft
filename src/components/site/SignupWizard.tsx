@@ -74,7 +74,16 @@ export default function SignupWizard({ onLogin }: { onLogin: () => void }) {
       options: { emailRedirectTo: window.location.origin + "/account", data: { full_name: full_name.trim(), phone: ph.trim(), registration } },
     });
     setBusy(false);
-    if (error) { setMsg(error.message); if (/email|password/i.test(error.message)) setStep(0); return; }
+    if (error) {
+      const m = error.message || "";
+      let friendly = m;
+      if (/already registered|already exists/i.test(m)) friendly = "This email already has an account. Please log in instead, or go Back to step 1 and use another email.";
+      else if (/weak|pwned|leaked|known/i.test(m)) friendly = "This password is too common or has appeared in a data leak. Please go Back to step 1 and choose a stronger password (mix letters, numbers and symbols).";
+      else if (/password/i.test(m)) friendly = `Password problem: ${m} Please go Back to step 1 and change it.`;
+      else if (/email/i.test(m)) friendly = `Email problem: ${m} Please go Back to step 1 and fix it.`;
+      setMsg(friendly);
+      return;
+    }
     setMsg(res.session ? "Account created. Welcome to 5AM!" : "Account created! You can log in now.");
   };
 
