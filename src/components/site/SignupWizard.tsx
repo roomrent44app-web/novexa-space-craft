@@ -74,7 +74,16 @@ export default function SignupWizard({ onLogin }: { onLogin: () => void }) {
       options: { emailRedirectTo: window.location.origin + "/account", data: { full_name: full_name.trim(), phone: ph.trim(), registration } },
     });
     setBusy(false);
-    if (error) { setMsg(error.message); if (/email|password/i.test(error.message)) setStep(0); return; }
+    if (error) {
+      const m = error.message || "";
+      let friendly = m;
+      if (/already registered|already exists/i.test(m)) friendly = "This email already has an account. Please log in instead, or go Back to step 1 and use another email.";
+      else if (/weak|pwned|leaked|known/i.test(m)) friendly = "This password is too common or has appeared in a data leak. Please go Back to step 1 and choose a stronger password (mix letters, numbers and symbols).";
+      else if (/password/i.test(m)) friendly = `Password problem: ${m} Please go Back to step 1 and change it.`;
+      else if (/email/i.test(m)) friendly = `Email problem: ${m} Please go Back to step 1 and fix it.`;
+      setMsg(friendly);
+      return;
+    }
     setMsg(res.session ? "Account created. Welcome to 5AM!" : "Account created! You can log in now.");
   };
 
@@ -93,7 +102,7 @@ export default function SignupWizard({ onLogin }: { onLogin: () => void }) {
       <label className="signup-check"><input type="checkbox" checked={agree1} onChange={(e) => setAgree1(e.target.checked)} /> I agree to receive wake-up calls and community updates on WhatsApp.</label>
       <label className="signup-check"><input type="checkbox" checked={agree2} onChange={(e) => setAgree2(e.target.checked)} /> I understand that the wake-up call is a support feature and I am responsible for attending my study session.</label>
     </>}
-    {msg && <p className="adm-sub">{msg}</p>}
+    {msg && <p className="adm-sub" role="alert" style={{ color: msg.startsWith("Account created") ? "hsl(var(--primary))" : "hsl(var(--destructive))", fontWeight: 600 }}>{msg}</p>}
     <div className="signup-actions">
       {step > 0 && <button type="button" className="h-btn" onClick={() => { setStep(step - 1); setMsg(""); }}>Back</button>}
       <button className="h-btn h-btn-orange" disabled={busy} type="submit">{busy ? "Please wait…" : step < last ? "Next" : "Create Account"}</button>
