@@ -164,6 +164,7 @@ export type Database = {
           day: string
           id: string
           response: string
+          slot: string
           status: string
           user_id: string
         }
@@ -172,6 +173,7 @@ export type Database = {
           day: string
           id?: string
           response?: string
+          slot?: string
           status?: string
           user_id: string
         }
@@ -180,6 +182,7 @@ export type Database = {
           day?: string
           id?: string
           response?: string
+          slot?: string
           status?: string
           user_id?: string
         }

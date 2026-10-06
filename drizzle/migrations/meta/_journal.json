@@ -92,6 +92,13 @@
       "when": 1791230391567,
       "tag": "0012_migration",
       "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1791290437628,
+      "tag": "0013_nimble_call_slots",
+      "breakpoints": true
     }
   ]
 }
