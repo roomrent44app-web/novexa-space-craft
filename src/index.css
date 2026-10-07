@@ -1298,3 +1298,10 @@ img { height: auto; }
 .dash-page .dash-card{box-shadow:0 6px 22px -10px hsl(220 30% 30%/.18);border-color:hsl(var(--dash-line))}
 .dash-page .dash-grid>.dash-card:nth-child(4n+3){background:linear-gradient(180deg,hsl(var(--dash-pink-soft)/.55),hsl(var(--dash-paper)))}
 .dash-page .dash-grid>.dash-card:nth-child(4n+4){background:linear-gradient(180deg,hsl(var(--dash-blue-soft)/.7),hsl(var(--dash-paper)))}
+.dash-page .dash-shell{max-width:960px}
+.dash-page .dash-card-head h3{font-size:21px;font-weight:800}
+.dash-page .dash-card li,.dash-page .dash-card label{font-size:17px}
+.dash-page .chip-orange svg{fill:hsl(var(--dash-orange))}
+.dash-page .lucide-heart{fill:hsl(var(--dash-pink));color:hsl(var(--dash-pink))}
+.dash-page .dash-greet{height:180px}
+@media(max-width:600px){.dash-page .dash-card-head h3{font-size:18px}.dash-page .dash-card li,.dash-page .dash-card label{font-size:15px}.dash-page .dash-greet{height:136px}}
