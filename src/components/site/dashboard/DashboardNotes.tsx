@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { BookText, NotebookPen, Plus, Trash2, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { Button } from "@/components/ui/button";
 
 type Note = { id: string; title: string; body: string; created_at: string };
 
@@ -38,17 +39,15 @@ export default function DashboardNotes({ userId }: { userId: string }) {
     <section className="dash-card dash-notes">
       <header className="dash-card-head">
         <span className="dash-chip chip-pink"><BookText /></span>
-        <div className="dash-card-name"><h3>My Notes</h3><small>Save and organize your study notes</small></div>
-        <button type="button" className="dash-new-note" onClick={() => setOpen(!open)}>
-          {open ? <X /> : <Plus />} {open ? "Close" : "New"}
-        </button>
+        <div className="dash-card-name"><h3>My Notes</h3><small>Save, organize and access your notes</small></div>
+        <span className="dash-card-arrow" aria-hidden="true">›</span>
       </header>
 
       {open && (
         <form className="dash-note-form" onSubmit={save}>
           <input className="dash-input" placeholder="Note title" required value={title} onChange={(e) => setTitle(e.target.value)} />
           <textarea className="dash-input" rows={3} placeholder="Write your note…" value={body} onChange={(e) => setBody(e.target.value)} />
-          <button className="h-btn h-btn-orange" type="submit" disabled={busy}><NotebookPen /> {busy ? "Saving…" : "Save Note"}</button>
+           <Button type="submit" disabled={busy}><NotebookPen /> {busy ? "Saving…" : "Save Note"}</Button>
         </form>
       )}
 
@@ -61,11 +60,12 @@ export default function DashboardNotes({ userId }: { userId: string }) {
               {note.body && <p>{note.body}</p>}
               <small>{new Date(note.created_at).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Kolkata" })}</small>
             </div>
-            <button type="button" aria-label={`Delete ${note.title}`} onClick={() => remove(note.id)}><Trash2 /></button>
+            <Button variant="ghost" size="icon" type="button" aria-label={`Delete ${note.title}`} onClick={() => remove(note.id)}><Trash2 /></Button>
           </li>
         ))}
-        {!notes.length && <li className="dash-empty">No notes yet — tap “New” to create your first note.</li>}
+        {!notes.length && <li className="dash-empty"><BookText /> No notes yet</li>}
       </ul>
+      <Button variant="secondary" type="button" className="dash-new-note" onClick={() => setOpen(!open)}>{open ? <X /> : <Plus />}{open ? "Close" : "Create New Note"}</Button>
     </section>
   );
 }

@@ -1,4 +1,7 @@
 // Single source for every bundled photo variant, so pages and the preloader share exact URLs.
+import dashboardAvif from "@/assets/dashboard-morning.jpg?format=avif&width=1536&quality=75&imagetools";
+import dashboardWebp from "@/assets/dashboard-morning.jpg?format=webp&width=1536&quality=80&imagetools";
+export { dashboardAvif, dashboardWebp };
 import heroAvif from "@/assets/home-hero-ref.jpg?format=avif&width=1376&quality=70&imagetools";
 import heroWebp from "@/assets/home-hero-ref.jpg?format=webp&width=1376&quality=76&imagetools";
 import communityAvif from "@/assets/home-community-ref.jpg?format=avif&width=1264&quality=68&imagetools";
@@ -30,6 +33,7 @@ export { heroAvif, heroWebp, communityAvif, communityWebp, ctaAvif, ctaWebp, pri
 
 // Per-page images (AVIF first; browsers without AVIF skip those preloads automatically).
 export const PAGE_IMAGES: Record<string, { avif: string[]; webp: string[] }> = {
+  "/dashboard": { avif: [dashboardAvif], webp: [dashboardWebp] },
   "/": { avif: [heroAvif, communityAvif, ctaAvif, priyaAvif, ananyaAvif, rohitAvif], webp: [heroWebp, communityWebp, ctaWebp, priyaWebp, ananyaWebp, rohitWebp] },
   "/plans": { avif: [plansHeroAvif], webp: [plansHeroWebp] },
   "/how-it-works": { avif: [hiwHeroAvif, hiwCtaAvif], webp: [hiwHeroWebp, hiwCtaWebp] },

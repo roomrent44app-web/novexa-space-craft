@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Check, ChartNoAxesColumn, Target } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { istDateStr, istMonday } from "@/lib/dashboard";
+import { Button } from "@/components/ui/button";
 
 const DAILY_DEFAULTS = ["Complete 3 study sessions", "Revise 1 chapter", "Solve 50 questions", "Read notes (1 hour)"];
 const WEEKLY_DEFAULTS = ["Complete planned chapters", "Give 1 mock test", "Revise weak topics", "Maintain 80% attendance", "Stay consistent for 7 days"];
@@ -14,11 +15,12 @@ function GoalsCard({ kind, title, badge, defaults, periodKey, userId }: {
   badge: string;
   defaults: string[];
   periodKey: string;
-  userId: string;
+  userId?: string;
 }) {
   const [goals, setGoals] = useState<Goal[]>([]);
 
   const load = useCallback(async () => {
+    if (!userId) { setGoals(defaults.map((title, i) => ({ id: `${kind}-${i}`, title, done: false }))); return; }
     const { data } = await supabase.from("student_goals").select("id,title,done")
       .eq("user_id", userId).eq("kind", kind).eq("period_key", periodKey).order("created_at");
     let rows = (data ?? []) as Goal[];
@@ -35,10 +37,8 @@ function GoalsCard({ kind, title, badge, defaults, periodKey, userId }: {
 
   const toggle = async (goal: Goal) => {
     setGoals((cur) => cur.map((g) => (g.id === goal.id ? { ...g, done: !g.done } : g)));
-    await supabase.from("student_goals").update({ done: !goal.done }).eq("id", goal.id);
+    if (userId) await supabase.from("student_goals").update({ done: !goal.done }).eq("id", goal.id);
   };
-
-  const done = goals.filter((g) => g.done).length;
 
   return (
     <section className={`dash-card dash-goals-${kind}`}>
@@ -49,14 +49,13 @@ function GoalsCard({ kind, title, badge, defaults, periodKey, userId }: {
         <div className="dash-card-name"><h3>{title}</h3></div>
         <span className="dash-badge">{badge}</span>
       </header>
-      <p className="dash-goal-count"><b>{done}</b>/{goals.length} done</p>
       <ul className="dash-goal-list">
         {goals.map((goal) => (
           <li key={goal.id}>
-            <button type="button" aria-pressed={goal.done} onClick={() => toggle(goal)}>
+            <Button variant="ghost" type="button" aria-pressed={goal.done} onClick={() => toggle(goal)}>
               <span className="dash-tick">{goal.done && <Check />}</span>
               <span>{goal.title}</span>
-            </button>
+            </Button>
           </li>
         ))}
         {!goals.length && <li className="dash-empty">Loading your goals…</li>}
@@ -65,7 +64,7 @@ function GoalsCard({ kind, title, badge, defaults, periodKey, userId }: {
   );
 }
 
-export default function DashboardGoals({ userId }: { userId: string }) {
+export default function DashboardGoals({ userId }: { userId?: string }) {
   return (
     <>
       <GoalsCard kind="daily" title="Daily Goals" badge="Today" defaults={DAILY_DEFAULTS} periodKey={istDateStr()} userId={userId} />
