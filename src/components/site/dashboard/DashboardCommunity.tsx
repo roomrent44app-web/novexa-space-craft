@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Heart, MessageSquarePlus, UsersRound } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { timeAgo } from "@/lib/dashboard";
+import { Button } from "@/components/ui/button";
 
 const CATEGORIES = ["All", "Progress", "Doubts", "Motivation", "Study Tips"] as const;
 const POST_CATEGORIES = CATEGORIES.slice(1) as unknown as string[];
@@ -65,9 +66,9 @@ export default function DashboardCommunity({ userId, displayName }: { userId: st
           <h3>Community</h3>
           <small>Share your progress, doubts and stay motivated together.</small>
         </div>
-        <button type="button" className="h-btn h-btn-orange dash-post-btn" onClick={() => setComposing(!composing)}>
+        <Button type="button" className="dash-post-btn" onClick={() => setComposing(!composing)}>
           <MessageSquarePlus /> {composing ? "Close" : "Post"}
-        </button>
+        </Button>
       </header>
 
       {composing && (
@@ -76,13 +77,13 @@ export default function DashboardCommunity({ userId, displayName }: { userId: st
             {POST_CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
           </select>
           <textarea className="dash-input" rows={2} placeholder="Share something with the 5AM community…" required value={text} onChange={(e) => setText(e.target.value)} />
-          <button className="h-btn h-btn-orange" type="submit" disabled={busy}>{busy ? "Posting…" : "Publish Post"}</button>
+           <Button type="submit" disabled={busy}>{busy ? "Posting…" : "Publish Post"}</Button>
         </form>
       )}
 
       <div className="dash-cat-row" role="tablist" aria-label="Post categories">
         {CATEGORIES.map((c) => (
-          <button key={c} type="button" role="tab" aria-selected={filter === c} className={filter === c ? "on" : ""} onClick={() => setFilter(c)}>{c}</button>
+          <Button variant="ghost" key={c} type="button" role="tab" aria-selected={filter === c} className={filter === c ? "on" : ""} onClick={() => setFilter(c)}>{c}</Button>
         ))}
       </div>
 
@@ -95,9 +96,9 @@ export default function DashboardCommunity({ userId, displayName }: { userId: st
               <div className="dash-feed-body">
                 <div className="dash-feed-top"><b>{post.author_name}</b><small>{timeAgo(post.created_at)} · {post.category}</small></div>
                 <p>{post.content}</p>
-                <button type="button" className={liked ? "liked" : ""} aria-pressed={liked} onClick={() => toggleLike(post)}>
+                <Button variant="ghost" type="button" className={liked ? "liked" : ""} aria-pressed={liked} onClick={() => toggleLike(post)}>
                   <Heart /> {post.community_post_likes.length}
-                </button>
+                </Button>
               </div>
             </li>
           );
