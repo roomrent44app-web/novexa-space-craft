@@ -1,11 +1,11 @@
-import { Home, CalendarCheck, Images, Newspaper, UserRound } from "lucide-react";
+import { Home, CalendarCheck, GraduationCap, Newspaper, UserRound } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 const items = [
   { to: "/", label: "Home", Icon: Home },
   { to: "/plans", label: "Plans", Icon: CalendarCheck },
-  { to: "/gallery", label: "Gallery", Icon: Images },
+  { to: "/dashboard", label: "Student Dashboard", Icon: GraduationCap },
   { to: "/blog", label: "Blog", Icon: Newspaper },
   { to: "/account", label: "Account", Icon: UserRound },
 ];
