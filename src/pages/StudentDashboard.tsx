@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { Link } from "react-router-dom";
-import { Bell, BookText, CalendarCheck, CheckCircle2, Circle, Crown, Flame, Plus, Search, Sun, Target, MoreVertical } from "lucide-react";
+import { BookText, CalendarCheck, CheckCircle2, Circle, Crown, Flame, Plus, Sun, Target, MoreVertical } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Logo from "@/components/site/Logo";
+
 import { dashboardAvif, dashboardWebp, dashboardStudentsWebp } from "@/data/images";
 import { supabase } from "@/integrations/supabase/client";
 import { useSeo } from "@/hooks/useSeo";
