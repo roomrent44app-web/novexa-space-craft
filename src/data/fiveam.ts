@@ -1,6 +1,6 @@
 export const CONTACT = {
   brand: "5AM",
-  mobile: "8400122294",
+  mobile: "+91 8400122294",
   tel: "+918400122294",
   whatsapp: "918400122294",
   email: "brandhousstudio@gmail.com",
