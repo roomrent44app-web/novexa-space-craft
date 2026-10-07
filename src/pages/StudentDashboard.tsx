@@ -62,7 +62,7 @@ export default function StudentDashboard() {
 
   useEffect(() => { loadAll(); }, [loadAll]);
 
-  if (!ready || !user) return <main className="dash-page"><p className="dash-loading">Loading your dashboard…</p></main>;
+  if (!ready) return <main className="dash-page"><p className="dash-loading">Loading your dashboard…</p></main>;
 
   const greet = greeting();
   const firstName = (name || "Student").split(" ")[0];
@@ -78,7 +78,11 @@ export default function StudentDashboard() {
     ? Math.min(active.duration_days, Math.max(1, Math.floor((Date.now() - new Date(active.starts_at).getTime()) / 86400000) + 1))
     : 0;
   const planProgress = active ? Math.round((planDay / active.duration_days) * 100) : 0;
-  const myStreak = board.find((row) => row.user_id === user.id)?.streak_days ?? 0;
+  const myStreak = user ? board.find((row) => row.user_id === user.id)?.streak_days ?? 0 : 0;
+  const guestCard = (title: string, text: string) => <section className="dash-card">
+    <header className="dash-card-head"><div className="dash-card-name"><h3>{title}</h3><small>{text}</small></div></header>
+    <div className="dash-tracker-empty"><Link className="h-btn h-btn-orange" to="/account">Login to use</Link></div>
+  </section>;
   const top5 = board.slice(0, 5);
 
   return <main className="dash-page" data-tick={tick}>
@@ -90,8 +94,13 @@ export default function StudentDashboard() {
           <p>“A better you, one morning at a time.”</p>
         </div>
         <div className="dash-greet-actions">
-          <Link className="dash-greet-link" to="/account">My Plan &amp; Subscription</Link>
-          <button className="dash-greet-link ghost" onClick={() => supabase.auth.signOut()}><LogOut /> Log out</button>
+          {user ? <>
+            <Link className="dash-greet-link" to="/account">My Plan &amp; Subscription</Link>
+            <button className="dash-greet-link ghost" onClick={() => supabase.auth.signOut()}><LogOut /> Log out</button>
+          </> : <>
+            <Link className="dash-greet-link" to="/account">Login</Link>
+            <Link className="dash-greet-link ghost" to="/account?mode=signup">Create Account</Link>
+          </>}
         </div>
       </section>
 
@@ -133,7 +142,7 @@ export default function StudentDashboard() {
           )}
         </section>
 
-        <DashboardGoals userId={user.id} />
+        {user ? <DashboardGoals userId={user.id} /> : <>{guestCard("Daily Goals", "Plan your study day")}{guestCard("Weekly Goals", "Plan your week")}</>}
 
         <section className="dash-card dash-streak">
           <header className="dash-card-head">
@@ -153,10 +162,10 @@ export default function StudentDashboard() {
           </ol>
         </section>
 
-        <DashboardNotes userId={user.id} />
+        {user ? <DashboardNotes userId={user.id} /> : guestCard("My Notes", "Save, organize and access your notes")}
       </div>
 
-      <DashboardCommunity userId={user.id} displayName={name} />
+      {user ? <DashboardCommunity userId={user.id} displayName={name} /> : guestCard("Community", "Share your progress, doubts and stay motivated together.")}
     </div>
   </main>;
 }
