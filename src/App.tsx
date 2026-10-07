@@ -11,10 +11,10 @@ import About from "./pages/About.tsx";
 import Faqs from "./pages/Faqs.tsx";
 import Blog from "./pages/Blog.tsx";
 import BlogPost from "./pages/BlogPost.tsx";
-import Gallery from "./pages/Gallery.tsx";
 import Admin from "./pages/Admin.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Account from "./pages/Account.tsx";
+import StudentDashboard from "./pages/StudentDashboard.tsx";
 
 const queryClient = new QueryClient();
 
@@ -32,7 +32,7 @@ const App = () => (
           <Route path="/faqs" element={<Layout><Faqs /></Layout>} />
           <Route path="/blog" element={<Layout><Blog /></Layout>} />
           <Route path="/blog/:slug" element={<Layout><BlogPost /></Layout>} />
-          <Route path="/gallery" element={<Layout><Gallery /></Layout>} />
+          <Route path="/dashboard" element={<Layout><StudentDashboard /></Layout>} />
           <Route path="/admin" element={<Layout><Admin /></Layout>} />
           <Route path="/account" element={<Layout><Account /></Layout>} />
           <Route path="*" element={<NotFound />} />

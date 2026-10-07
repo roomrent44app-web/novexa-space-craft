@@ -1,12 +1,14 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { FunctionsHttpError } from "@supabase/supabase-js";
-import { CalendarClock, CheckCircle2, Clock3, CreditCard, LogOut, RefreshCw, UserRound, Video } from "lucide-react";
+import { Link } from "react-router-dom";
+import { CalendarClock, CheckCircle2, Clock3, CreditCard, LayoutDashboard, LogOut, RefreshCw, UserRound, Video } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import Attendance from "@/components/site/Attendance";
 import SignupWizard from "@/components/site/SignupWizard";
 import { PURCHASE_PLANS } from "@/data/fiveam";
 import { purchasePlan } from "@/lib/razorpay";
+import { greeting } from "@/lib/dashboard";
 import { useSeo } from "@/hooks/useSeo";
 
 type Subscription = {
@@ -150,7 +152,7 @@ export default function Account() {
   </form></div></main>;
 
   return <main className="account-page"><div className="account-shell">
-    <header className="account-head"><div><span className="p-eyebrow light">Student Panel</span><h1>Good morning, {profile.full_name || "Student"}</h1><p>{user.email}</p></div><button className="account-logout" onClick={() => supabase.auth.signOut()}><LogOut /> Log out</button></header>
+    <header className="account-head"><div><span className="p-eyebrow light">Student Panel</span><h1>{greeting().label}, {profile.full_name || "Student"} <span aria-hidden="true">{greeting().icon}</span></h1><p>{user.email}</p></div><div className="account-head-actions"><Link className="h-btn h-btn-orange" to="/dashboard"><LayoutDashboard /> Open Dashboard</Link><button className="account-logout" onClick={() => supabase.auth.signOut()}><LogOut /> Log out</button></div></header>
 
     <section className="account-summary" aria-label="Dashboard summary">
       <article><span><CreditCard /></span><div><small>Current plan</small><strong>{active?.plan_name ?? "No active plan"}</strong></div></article>

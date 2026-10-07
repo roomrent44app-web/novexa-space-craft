@@ -1,6 +1,6 @@
 import type { Database } from "@/integrations/supabase/types";
 
-export type AdminSection = "dashboard" | "orders" | "students" | "plans" | "attendance" | "classes" | "blog" | "gallery";
+export type AdminSection = "dashboard" | "orders" | "students" | "plans" | "attendance" | "classes" | "blog";
 export type FulfillmentStatus = Database["public"]["Enums"]["order_fulfillment_status"];
 export type SubscriptionStatus = Database["public"]["Enums"]["subscription_status"];
 export type Profile = Database["public"]["Tables"]["profiles"]["Row"];
