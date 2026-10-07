@@ -4,7 +4,7 @@ export const CONTACT = {
   tel: "+918400122294",
   whatsapp: "918400122294",
   email: "brandhousstudio@gmail.com",
-  address: "Gomti Nagar",
+  address: "Lucknow, India",
   domain: "5am.co.in",
 };
 
