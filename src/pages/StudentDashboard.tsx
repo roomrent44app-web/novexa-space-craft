@@ -85,7 +85,7 @@ export default function StudentDashboard() {
   const myStreak = user ? board.find((row) => row.user_id === user.id)?.streak_days ?? 0 : 0;
   const top5 = (isPreview ? DASHBOARD_PREVIEW.streaks : board).slice(0, 5);
 
-  return <><header className="dash-topbar"><div className="dash-topbar-inner"><Logo /><div className="dash-topbar-actions"><Button variant="ghost" size="icon" asChild title="Browse study articles"><Link to="/blog" aria-label="Browse study articles"><Search /></Link></Button><Button variant="ghost" size="icon" asChild title="My account"><Link to="/account" aria-label="My account notifications"><Bell /><i /></Link></Button><Link className="dash-profile" to="/account" aria-label="Open my account">{firstName.charAt(0)}</Link></div></div></header><main className="dash-page" data-tick={tick}>
+  return <main className="dash-page" data-tick={tick}>
     <div className="dash-shell">
 
       <section className="dash-greet">

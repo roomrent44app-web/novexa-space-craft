@@ -13,6 +13,5 @@ export default function Layout({ children }: { children: ReactNode }) {
   }, [pathname]);
   useAllImagesPreload(pathname);
   if (pathname === "/admin") return <div className="min-h-screen">{children}</div>;
-  if (pathname === "/dashboard") return <div className="dashboard-layout">{children}<BottomNav /><InstallPrompt /></div>;
   return <div className="min-h-screen"><Header /><main>{children}</main><Footer /><BottomNav /><InstallPrompt /></div>;
 }
