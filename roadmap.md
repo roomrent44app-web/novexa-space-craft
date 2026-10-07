@@ -17,3 +17,5 @@
 - [x] Add student directory, attendance analytics, corrections, and exports
 - [x] Add temporary and monthly Google Meet links with an admin-selected active link
 - [x] Add a highlighted 3-day free trial plan with one-per-account server activation
+- [x] Remove the Gallery section completely (page, nav, footer, admin)
+- [x] Build the full student dashboard with time-based greeting, goals, tracker, streaks, notes, and community
