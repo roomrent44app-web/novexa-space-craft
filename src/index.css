@@ -1305,3 +1305,54 @@ img { height: auto; }
 .dash-page .lucide-heart{fill:hsl(var(--dash-pink));color:hsl(var(--dash-pink))}
 .dash-page .dash-greet{height:180px}
 @media(max-width:600px){.dash-page .dash-card-head h3{font-size:18px}.dash-page .dash-card li,.dash-page .dash-card label{font-size:15px}.dash-page .dash-greet{height:136px}}
+/* ===== Dashboard animations ===== */
+@keyframes dashFadeUp {from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes dashSunPulse {0%,100%{transform:scale(1) rotate(0deg)}50%{transform:scale(1.15) rotate(12deg)}}
+@keyframes dashFlame {0%,100%{transform:scale(1) rotate(-3deg)}50%{transform:scale(1.12) rotate(4deg)}}
+@keyframes dashCrown {0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes dashBannerZoom {from{transform:scale(1.06)}to{transform:scale(1)}}
+@keyframes dashShimmer {from{background-position:-200px 0}to{background-position:200px 0}}
+@keyframes dashPop {0%{transform:scale(.4)}70%{transform:scale(1.2)}100%{transform:scale(1)}}
+@keyframes dashDot {0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.6}}
+
+.dash-page .dash-greet{animation:dashFadeUp .55s ease both}
+.dash-page .dash-banner-photo img{animation:dashBannerZoom 1.4s ease-out both}
+.dash-page .dash-greet h1 svg{animation:dashSunPulse 3.2s ease-in-out infinite}
+.dash-page .dash-grid>.dash-card{animation:dashFadeUp .55s ease both}
+.dash-page .dash-grid>.dash-card:nth-child(1){animation-delay:.08s}
+.dash-page .dash-grid>.dash-card:nth-child(2){animation-delay:.16s}
+.dash-page .dash-grid>.dash-card:nth-child(3){animation-delay:.24s}
+.dash-page .dash-grid>.dash-card:nth-child(4){animation-delay:.32s}
+.dash-page .dash-grid>.dash-card:nth-child(5){animation-delay:.4s}
+.dash-page .dash-grid>.dash-card:nth-child(6){animation-delay:.48s}
+.dash-page .dash-community{animation:dashFadeUp .55s .56s ease both}
+
+.dash-page .dash-card{transition:transform .25s ease,box-shadow .25s ease}
+.dash-page .dash-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px -12px hsl(220 30% 30%/.22)}
+.dash-page .dash-chip{transition:transform .25s ease}
+.dash-page .dash-card:hover .dash-chip{transform:scale(1.08) rotate(-4deg)}
+.dash-page .chip-orange svg{animation:dashFlame 1.8s ease-in-out infinite;transform-origin:50% 90%}
+.dash-page .crown-1{animation:dashCrown 2s ease-in-out infinite}
+.dash-page .dash-card-arrow{transition:transform .2s ease,color .2s ease}
+.dash-page .dash-card:hover .dash-card-arrow{transform:translateX(4px);color:hsl(var(--dash-orange))}
+
+.dash-page .dash-progress span{position:relative;background-image:linear-gradient(100deg,transparent 30%,hsl(0 0% 100%/.45) 50%,transparent 70%);background-size:200px 100%;animation:dashShimmer 2.4s linear infinite}
+.dash-page .dash-week-day .on{animation:dashPop .45s ease both}
+.dash-page .dash-week-day:nth-child(2) .on{animation-delay:.05s}.dash-page .dash-week-day:nth-child(3) .on{animation-delay:.1s}.dash-page .dash-week-day:nth-child(4) .on{animation-delay:.15s}.dash-page .dash-week-day:nth-child(5) .on{animation-delay:.2s}.dash-page .dash-week-day:nth-child(6) .on{animation-delay:.25s}.dash-page .dash-week-day:nth-child(7) .on{animation-delay:.3s}
+.dash-page .dash-tick{transition:transform .2s ease,background .2s ease}
+.dash-page .dash-goal-list button[aria-pressed=true] .dash-tick{animation:dashPop .35s ease}
+.dash-page .dash-streak-avatar{transition:transform .25s ease}
+.dash-page .dash-streak-list li:hover .dash-streak-avatar{transform:scale(1.12)}
+.dash-page .dash-topbar-actions i{animation:dashDot 1.6s ease-in-out infinite}
+.dash-page .dash-cat-row button,.dash-page .dash-cat-row a{transition:transform .2s ease,background .2s ease}
+.dash-page .dash-cat-row button:hover,.dash-page .dash-cat-row a:hover{transform:translateY(-2px)}
+.dash-page .dash-feed li,.dash-page .dash-note-list li{transition:transform .2s ease,box-shadow .2s ease}
+.dash-page .dash-feed li:hover,.dash-page .dash-note-list li:hover{transform:translateY(-2px);box-shadow:0 8px 18px -8px hsl(220 30% 30%/.18)}
+.dash-page .dash-post-btn,.dash-page .dash-new-note{transition:transform .2s ease,filter .2s ease}
+.dash-page .dash-post-btn:hover,.dash-page .dash-new-note:hover{transform:translateY(-2px);filter:brightness(1.05)}
+
+@media(prefers-reduced-motion:reduce){
+  .dash-page .dash-greet,.dash-page .dash-grid>.dash-card,.dash-page .dash-community,.dash-page .dash-banner-photo img{animation:none}
+  .dash-page .dash-greet h1 svg,.dash-page .chip-orange svg,.dash-page .crown-1,.dash-page .dash-progress span,.dash-page .dash-week-day .on,.dash-page .dash-topbar-actions i{animation:none}
+  .dash-page .dash-card,.dash-page .dash-chip,.dash-page .dash-card-arrow,.dash-page .dash-streak-avatar{transition:none}
+}
