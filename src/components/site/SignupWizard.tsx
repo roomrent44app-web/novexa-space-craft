@@ -26,7 +26,7 @@ const STEPS: { title: string; fields: Field[] }[] = [
     { key: "backup_whatsapp", label: "Backup WhatsApp number (optional)", type: "tel", optional: true },
   ]},
   { title: "Community Details", fields: [
-    { key: "heard_from", label: "How did you hear about 5AM.CO.IN?" },
+    { key: "heard_from", label: "How did you hear about 5AM.CO.IN?", type: "select", options: ["Instagram", "YouTube", "By friend", "Other"] },
     { key: "why_join", label: "Why do you want to join the 5 AM Study Community?", type: "textarea" },
     { key: "goal_30_days", label: "Your biggest study goal for the next 30 days?", type: "textarea" },
   ]},
