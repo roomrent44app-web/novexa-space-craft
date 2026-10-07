@@ -8,7 +8,7 @@ import Attendance from "@/components/site/Attendance";
 import SignupWizard from "@/components/site/SignupWizard";
 import { PURCHASE_PLANS } from "@/data/fiveam";
 import { purchasePlan } from "@/lib/razorpay";
-import { greeting } from "@/lib/dashboard";
+import { fallbackName, greeting } from "@/lib/dashboard";
 import { useSeo } from "@/hooks/useSeo";
 
 type Subscription = {
@@ -71,7 +71,10 @@ export default function Account() {
       supabase.from("subscriptions").select("id,plan_code,plan_name,duration_days,amount_paise,status,starts_at,expires_at,class_days").order("created_at", { ascending: false }),
       supabase.from("attendance").select("id", { count: "exact", head: true }).eq("user_id", user.id).gte("day", monthStart),
     ]);
-    if (profileResult.data) setProfile(profileResult.data);
+      if (profileResult.data) {
+        const p = profileResult.data as { full_name: string; phone: string };
+        setProfile({ full_name: (p.full_name ?? "").trim() || fallbackName(user), phone: p.phone ?? "" });
+      }
     setCls(classResult.data);
     setSubscriptions((subscriptionResult.data ?? []) as Subscription[]);
     setAttendanceCount(attendanceResult.count ?? 0);
