@@ -1175,7 +1175,7 @@ img { height: auto; }
 }
 
 /* ===== Student Dashboard: screenshot-matched, isolated palette ===== */
-.dashboard-layout {
+.dashboard-layout,.dash-page {
   --dash-paper: 0 0% 100%; --dash-bg: 40 33% 99%; --dash-ink: 228 34% 9%;
   --dash-muted: 220 9% 40%; --dash-line: 30 20% 95%; --dash-green: 158 100% 35%;
   --dash-blue: 222 100% 59%; --dash-blue-soft: 235 100% 96%;
@@ -1187,7 +1187,7 @@ img { height: auto; }
   background: hsl(var(--dash-bg)); color: hsl(var(--dash-ink));
   font-family: "Nunito Sans", Arial, sans-serif; min-height:100vh;
 }
-.dashboard-layout h1,.dashboard-layout h3,.dashboard-layout b {font-family:"Nunito Sans",Arial,sans-serif;letter-spacing:0}
+.dash-page h1,.dash-page h3,.dash-page b {font-family:"Nunito Sans",Arial,sans-serif;letter-spacing:0}
 .dash-topbar {height:72px;background:hsl(var(--dash-paper));border-bottom:1px solid hsl(var(--dash-line))}
 .dash-topbar-inner {max-width:768px;padding:0 28px;margin:auto;height:100%;display:flex;align-items:center;justify-content:space-between}
 .dash-topbar .brand-logo img {width:82px;height:63px;object-fit:contain}
@@ -1294,3 +1294,7 @@ img { height: auto; }
 @media(max-width:600px){.dash-page {padding:12px 12px 85px}.dash-topbar-inner {padding:0 16px}.dash-topbar-actions {gap:10px}.dash-greet {height:126px}.dash-greet-text {padding:15px 18px;max-width:85%}.dash-greet h1 {font-size:22px;display:block}.dash-greet h1 svg {display:inline-block;vertical-align:middle;width:24px;height:24px}.dash-greet p {font-size:13px}.dash-greet:after {background:linear-gradient(90deg,hsl(var(--dash-orange-soft)) 0%,hsl(var(--dash-orange-soft)/.92) 52%,hsl(var(--dash-orange-soft)/0) 100%)}.dash-grid {grid-template-columns:1fr;gap:12px}.dash-card-name h3 {font-size:18px}.dash-card {padding:14px 16px}.dash-goals-daily,.dash-goals-weekly {min-height:0}.dash-goal-list button {min-height:38px}.dash-cat-row {gap:6px}.dash-cat-row button,.dash-cat-row a {padding:0 11px;font-size:11px}.dash-community .dash-card-name small {font-size:11px}.dash-community .dash-card-head {gap:10px}.dash-community .dash-chip {width:44px;height:44px;flex-basis:44px}.dash-post-btn {padding:0 12px}.dashboard-layout .bottom-nav-item {font-size:10px}.dashboard-layout .bottom-nav-item:nth-child(3) {flex:1.55}.dash-streak-list {gap:10px}}
 @media(prefers-reduced-motion:reduce){.dash-progress span {transition:none}}
 @media(max-width:600px){.dash-sample-label {top:110px;left:18px}.dash-greet-text {max-width:100%}.dash-feed-actions {gap:14px}}
+/* Colourful dashboard cards to match reference */
+.dash-page .dash-card{box-shadow:0 6px 22px -10px hsl(220 30% 30%/.18);border-color:hsl(var(--dash-line))}
+.dash-page .dash-grid>.dash-card:nth-child(4n+3){background:linear-gradient(180deg,hsl(var(--dash-pink-soft)/.55),hsl(var(--dash-paper)))}
+.dash-page .dash-grid>.dash-card:nth-child(4n+4){background:linear-gradient(180deg,hsl(var(--dash-blue-soft)/.7),hsl(var(--dash-paper)))}
