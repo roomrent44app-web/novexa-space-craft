@@ -35,3 +35,12 @@ export const timeAgo = (value: string) => {
   if (days < 7) return `${days}d ago`;
   return new Date(value).toLocaleDateString("en-IN", { day: "numeric", month: "short", timeZone: "Asia/Kolkata" });
 };
+
+// Best available name for a signed-in student: profile row, then auth metadata, then email.
+export const fallbackName = (user: { user_metadata?: Record<string, unknown> | null; email?: string | null }) => {
+  const meta = user.user_metadata ?? {};
+  const metaName = [meta.full_name, meta.name, meta.display_name].find((v) => typeof v === "string" && (v as string).trim());
+  if (metaName) return (metaName as string).trim();
+  if (user.email) return user.email.split("@")[0].replace(/[._-]+/g, " ").trim();
+  return "";
+};
