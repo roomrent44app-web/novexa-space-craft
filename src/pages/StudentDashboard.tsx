@@ -38,7 +38,7 @@ export default function StudentDashboard() {
     return () => data.subscription.unsubscribe();
   }, []);
 
-  useEffect(() => { if (ready && !user) navigate("/account", { replace: true }); }, [ready, user, navigate]);
+  void navigate;
 
   // Keep the greeting current — re-render every minute.
   useEffect(() => { const t = setInterval(() => setTick((n) => n + 1), 60000); return () => clearInterval(t); }, []);
