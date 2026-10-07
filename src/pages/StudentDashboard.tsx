@@ -69,7 +69,7 @@ export default function StudentDashboard() {
 
   const greet = greeting();
   const isPreview = !user;
-  const firstName = (name || (isPreview ? DASHBOARD_PREVIEW.name : "Student")).split(" ")[0];
+  const firstName = isPreview ? "student" : (name || "Student").split(" ")[0];
   const today = istDateStr();
   const weekStart = istMonday(today);
   const weekDays = WEEK_LABELS.map((label, i) => {
