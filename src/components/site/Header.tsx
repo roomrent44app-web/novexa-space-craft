@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { orderLink } from "@/data/fiveam";
 
 const links = [
-  ["/", "Home"], ["/plans", "Plans"], ["/how-it-works", "How it Works"], ["/about", "About"], ["/faqs", "FAQs"], ["/blog", "Blog"], ["/gallery", "Gallery"],
+  ["/", "Home"], ["/plans", "Plans"], ["/how-it-works", "How it Works"], ["/about", "About"], ["/faqs", "FAQs"], ["/blog", "Blog"],
 ];
 
 export default function Header() {
