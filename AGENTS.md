@@ -4,5 +4,5 @@
 - Keep responsive containment rules centralized in the global stylesheet so every public page remains overflow-safe across devices.
 - Process bundled photography through `vite-imagetools`, register every variant in the shared image module, and warm the current page's photos first then other pages' photos in the background so navigation shows images instantly.
 - Activate student subscriptions only through server-verified Razorpay payments, because plan access and expiry must never trust browser-supplied payment data.
-- Keep the student dashboard in a route-specific compact shell with shared navigation and dashboard-scoped CSS tokens so screenshot styling does not change the public pages.
+- Keep the student dashboard on the standard site layout (shared header, footer and bottom nav) with dashboard-scoped CSS tokens so screenshot styling does not change the public pages.
 - Keep dashboard preview records in a frontend-only sample module and show them only to guests, so illustrative activity never becomes real attendance or subscription data.
