@@ -1,7 +1,7 @@
 import { supabase } from "@/integrations/supabase/client";
 
 // Uploads to the private "media" bucket and returns a long-lived signed URL for public display.
-export async function uploadMedia(file: File, folder: "blog" | "gallery") {
+export async function uploadMedia(file: File, folder: "blog") {
   const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
   const path = `${folder}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
   const { error } = await supabase.storage.from("media").upload(path, file, { contentType: file.type, upsert: false });

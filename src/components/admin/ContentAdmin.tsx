@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ImagePlus, Newspaper, Pencil, Plus, Trash2 } from "lucide-react";
+import { Newspaper, Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { uploadMedia, slugify } from "@/lib/media";
@@ -8,7 +8,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 type Post = { id: string; title: string; slug: string; excerpt: string; content: string; cover_url: string | null; published: boolean; created_at: string };
-type Img = { id: string; url: string; caption: string };
 const emptyPost = { id: "", title: "", excerpt: "", content: "", cover_url: null as string | null, published: true };
 
 export function BlogAdmin() {

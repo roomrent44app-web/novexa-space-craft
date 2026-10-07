@@ -1,6 +1,6 @@
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import type { Session } from "@supabase/supabase-js";
-import { BarChart3, BookOpen, CalendarCheck, ClipboardList, GraduationCap, Images, LogOut, Menu, Package, PanelLeftClose, Settings2, UsersRound, X } from "lucide-react";
+import { BarChart3, BookOpen, CalendarCheck, ClipboardList, GraduationCap, LogOut, Menu, Package, PanelLeftClose, Settings2, UsersRound, X } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useSeo } from "@/hooks/useSeo";
@@ -12,7 +12,7 @@ import StudentsAdmin from "@/components/admin/StudentsAdmin";
 import PlansAdmin from "@/components/admin/PlansAdmin";
 import AttendanceAdmin from "@/components/admin/AttendanceAdmin";
 import ClassesAdmin from "@/components/admin/ClassesAdmin";
-import { BlogAdmin, GalleryAdmin } from "@/components/admin/ContentAdmin";
+import { BlogAdmin } from "@/components/admin/ContentAdmin";
 import type { AdminData, AdminSection } from "@/components/admin/types";
 
 const sections = [
@@ -23,7 +23,6 @@ const sections = [
   { id: "attendance", label: "Attendance", Icon: CalendarCheck },
   { id: "classes", label: "Classes", Icon: GraduationCap },
   { id: "blog", label: "Blog", Icon: BookOpen },
-  { id: "gallery", label: "Gallery", Icon: Images },
 ] as const;
 
 const emptyData: AdminData = { profiles: [], subscriptions: [], physicalOrders: [], attendance: [] };
@@ -74,6 +73,5 @@ function Section({section,data,reload,navigate}:{section:AdminSection;data:Admin
   if(section==="plans")return <PlansAdmin data={data}/>;
   if(section==="attendance")return <AttendanceAdmin data={data} reload={reload}/>;
   if(section==="classes")return <ClassesAdmin/>;
-  if(section==="blog")return <BlogAdmin/>;
-  return <GalleryAdmin/>;
+  return <BlogAdmin/>;
 }
