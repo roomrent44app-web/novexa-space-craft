@@ -20,8 +20,6 @@ const STEPS: { title: string; fields: Field[] }[] = [
     { key: "study_goal", label: "Main Study Goal" },
   ]},
   { title: "Wake-Up Call", fields: [
-    { key: "wake_time", label: "Preferred wake-up time", type: "time" },
-    { key: "call_days", label: "How many days do you want wake-up calls?", type: "number" },
     { key: "call_language", label: "Preferred call language", type: "select", options: ["Hindi", "English", "Both"] },
     { key: "backup_whatsapp", label: "Backup WhatsApp number (optional)", type: "tel", optional: true },
   ]},
@@ -36,7 +34,7 @@ const phone = z.string().trim().regex(/^[+]?\d{10,13}$/, "Enter a valid number")
 const stepSchemas = [
   z.object({ full_name: z.string().trim().min(2, "Enter your name").max(100), phone, email: z.string().trim().email("Enter a valid email").max(255), password: z.string().min(6, "Password must be at least 6 characters").max(72), age: z.coerce.number().int().min(5, "Enter a valid age").max(100, "Enter a valid age"), city_state: z.string().trim().min(2, "Required").max(100) }),
   z.object({ student_type: z.string().min(1, "Choose one"), preparing_for: z.string().trim().min(2, "Required").max(150), class_year: z.string().trim().min(1, "Required").max(50), study_goal: z.string().trim().min(2, "Required").max(300) }),
-  z.object({ wake_time: z.string().min(1, "Choose a time"), call_days: z.coerce.number().int().min(1, "Enter days").max(365), call_language: z.string().min(1, "Choose one"), backup_whatsapp: z.union([z.literal(""), phone]) }),
+  z.object({ call_language: z.string().min(1, "Choose one"), backup_whatsapp: z.union([z.literal(""), phone]) }),
   z.object({ heard_from: z.string().trim().min(2, "Required").max(150), why_join: z.string().trim().min(2, "Required").max(500), goal_30_days: z.string().trim().min(2, "Required").max(500) }),
 ];
 
