@@ -8,7 +8,7 @@ import { orderLink } from "@/data/fiveam";
 import { supabase } from "@/integrations/supabase/client";
 
 const links = [
-  ["/", "Home"], ["/plans", "Plans"], ["/how-it-works", "How it Works"], ["/about", "About"], ["/faqs", "FAQs"], ["/blog", "Blog"],
+  ["/", "Home"], ["/plans", "Plans"], ["/how-it-works", "How it Works"], ["/dashboard", "Dashboard"], ["/about", "About"], ["/faqs", "FAQs"], ["/blog", "Blog"],
 ];
 
 export default function Header() {
@@ -27,7 +27,7 @@ export default function Header() {
       </nav>
       <div className="header-auth hidden md:flex">
         {authed ? (
-          <Link to="/dashboard" className="nav-link header-signup">Student Dashboard</Link>
+          <Link to="/account" className="nav-link header-signup">My Account</Link>
         ) : (<>
           <Link to="/account" className="nav-link">Login</Link>
           <Link to="/account?mode=signup" className="nav-link header-signup">Sign Up</Link>
@@ -49,7 +49,7 @@ export default function Header() {
     {open && <nav id="mobile-navigation" className="mobile-navigation md:hidden" aria-label="Mobile navigation">
       {links.map(([to,label]) => <NavLink key={to} to={to} end={to === "/"} onClick={() => setOpen(false)} className={({ isActive }) => cn("mobile-nav-link", isActive && "active")}>{label}</NavLink>)}
       {authed ? (
-        <Link to="/dashboard" onClick={() => setOpen(false)} className="mobile-nav-link">Student Dashboard</Link>
+        <Link to="/account" onClick={() => setOpen(false)} className="mobile-nav-link">My Account</Link>
       ) : (<>
         <Link to="/account" onClick={() => setOpen(false)} className="mobile-nav-link">Login</Link>
         <Link to="/account?mode=signup" onClick={() => setOpen(false)} className="mobile-nav-link">Create Account</Link>
