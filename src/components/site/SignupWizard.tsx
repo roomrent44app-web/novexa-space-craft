@@ -31,16 +31,17 @@ const STEPS: { title: string; fields: Field[] }[] = [
 ];
 
 const phone = z.string().trim().regex(/^[+]?\d{10,13}$/, "Enter a valid number");
+const optionalPhone = z.preprocess((v) => (v === undefined || v === null ? "" : v), z.union([z.literal(""), phone]));
 const stepSchemas = [
   z.object({ full_name: z.string().trim().min(2, "Enter your name").max(100), phone, email: z.string().trim().email("Enter a valid email").max(255), password: z.string().min(6, "Password must be at least 6 characters").max(72), age: z.coerce.number().int().min(5, "Enter a valid age").max(100, "Enter a valid age"), city_state: z.string().trim().min(2, "Required").max(100) }),
   z.object({ student_type: z.string().min(1, "Choose one"), preparing_for: z.string().trim().min(2, "Required").max(150), class_year: z.string().trim().min(1, "Required").max(50), study_goal: z.string().trim().min(2, "Required").max(300) }),
-  z.object({ call_language: z.string().min(1, "Choose one"), backup_whatsapp: z.union([z.literal(""), phone]) }),
+  z.object({ call_language: z.string().min(1, "Choose one"), backup_whatsapp: optionalPhone }),
   z.object({ heard_from: z.string().trim().min(2, "Required").max(150), why_join: z.string().trim().min(2, "Required").max(500), goal_30_days: z.string().trim().min(2, "Required").max(500) }),
 ];
 
 export default function SignupWizard({ onLogin }: { onLogin: () => void }) {
   const [step, setStep] = useState(0);
-  const [data, setData] = useState<Record<string, string>>({ call_language: "Both" });
+  const [data, setData] = useState<Record<string, string>>({ call_language: "Both", backup_whatsapp: "" });
   const [agree1, setAgree1] = useState(false);
   const [agree2, setAgree2] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});

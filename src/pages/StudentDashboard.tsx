@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { dashboardAvif, dashboardWebp, dashboardStudentsWebp } from "@/data/images";
 import { supabase } from "@/integrations/supabase/client";
 import { useSeo } from "@/hooks/useSeo";
-import { addDays, greeting, istDateStr, istMonday } from "@/lib/dashboard";
+import { addDays, fallbackName, greeting, istDateStr, istMonday } from "@/lib/dashboard";
 import DashboardGoals from "@/components/site/dashboard/DashboardGoals";
 import DashboardNotes from "@/components/site/dashboard/DashboardNotes";
 import DashboardCommunity from "@/components/site/dashboard/DashboardCommunity";
@@ -57,7 +57,8 @@ export default function StudentDashboard() {
       supabase.from("attendance").select("day").eq("user_id", user.id).gte("day", weekStart).lte("day", addDays(weekStart, 6)),
       supabase.rpc("get_wakeup_streaks"),
     ]);
-    if (profileResult.data) setName((profileResult.data as { full_name: string }).full_name ?? "");
+    const fromProfile = ((profileResult.data as { full_name: string } | null)?.full_name ?? "").trim();
+    setName(fromProfile || fallbackName(user));
     setActive((subResult.data?.[0] as ActiveSub | undefined) ?? null);
     setPresent(new Set((attendanceResult.data ?? []).map((r: { day: string }) => r.day)));
     setBoard((streakResult.data ?? []) as StreakRow[]);
