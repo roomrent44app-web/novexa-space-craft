@@ -20,3 +20,4 @@
 - [x] Remove the Gallery section completely (page, nav, footer, admin)
 - [x] Build the full student dashboard with time-based greeting, goals, tracker, streaks, notes, and community
 - [x] Match the student dashboard composition and styling to the supplied screenshot
+- [x] Populate the public dashboard with labelled sample data and refine screenshot matching

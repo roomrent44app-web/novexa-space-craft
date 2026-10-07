@@ -20,7 +20,7 @@ function GoalsCard({ kind, title, badge, defaults, periodKey, userId }: {
   const [goals, setGoals] = useState<Goal[]>([]);
 
   const load = useCallback(async () => {
-    if (!userId) { setGoals(defaults.map((title, i) => ({ id: `${kind}-${i}`, title, done: false }))); return; }
+    if (!userId) { setGoals(defaults.map((title, i) => ({ id: `${kind}-${i}`, title, done: i < 2 }))); return; }
     const { data } = await supabase.from("student_goals").select("id,title,done")
       .eq("user_id", userId).eq("kind", kind).eq("period_key", periodKey).order("created_at");
     let rows = (data ?? []) as Goal[];
