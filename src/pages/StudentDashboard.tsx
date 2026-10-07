@@ -1,16 +1,19 @@
 import { useCallback, useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { Link } from "react-router-dom";
-import { Bell, BookText, CalendarCheck, CheckCircle2, Circle, Crown, Flame, Plus, Search, Sun, Target, UsersRound, UserRound } from "lucide-react";
+import { Bell, BookText, CalendarCheck, CheckCircle2, Circle, Crown, Flame, Plus, Search, Sun, Target, MoreVertical } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Logo from "@/components/site/Logo";
-import { dashboardAvif, dashboardWebp } from "@/data/images";
+import { dashboardAvif, dashboardWebp, dashboardStudentsWebp } from "@/data/images";
 import { supabase } from "@/integrations/supabase/client";
 import { useSeo } from "@/hooks/useSeo";
 import { addDays, greeting, istDateStr, istMonday } from "@/lib/dashboard";
 import DashboardGoals from "@/components/site/dashboard/DashboardGoals";
 import DashboardNotes from "@/components/site/dashboard/DashboardNotes";
 import DashboardCommunity from "@/components/site/dashboard/DashboardCommunity";
+
+import { DASHBOARD_PREVIEW } from "@/data/dashboardPreview";
+import DashboardPreviewCommunity from "@/components/site/dashboard/DashboardPreviewCommunity";
 
 type ActiveSub = {
   plan_name: string;
@@ -65,12 +68,13 @@ export default function StudentDashboard() {
   if (!ready) return <main className="dash-page"><p className="dash-loading">Loading your dashboard…</p></main>;
 
   const greet = greeting();
-  const firstName = (name || "Student").split(" ")[0];
+  const isPreview = !user;
+  const firstName = (name || (isPreview ? DASHBOARD_PREVIEW.name : "Student")).split(" ")[0];
   const today = istDateStr();
   const weekStart = istMonday(today);
   const weekDays = WEEK_LABELS.map((label, i) => {
     const key = addDays(weekStart, i);
-    return { label, key, done: present.has(key), future: key > today };
+    return { label, key, done: isPreview ? DASHBOARD_PREVIEW.attendance[i] : present.has(key), future: isPreview ? i === 5 : key > today };
   });
   const weekDone = weekDays.filter((d) => d.done).length;
 
@@ -79,9 +83,9 @@ export default function StudentDashboard() {
     : 0;
   const planProgress = active ? Math.round((planDay / active.duration_days) * 100) : 0;
   const myStreak = user ? board.find((row) => row.user_id === user.id)?.streak_days ?? 0 : 0;
-  const top5 = board.slice(0, 5);
+  const top5 = (isPreview ? DASHBOARD_PREVIEW.streaks : board).slice(0, 5);
 
-  return <><header className="dash-topbar"><div className="dash-topbar-inner"><Logo /><div className="dash-topbar-actions"><Button variant="ghost" size="icon" asChild title="Browse study articles"><Link to="/blog" aria-label="Browse study articles"><Search /></Link></Button><Button variant="ghost" size="icon" asChild title="My account"><Link to="/account" aria-label="My account notifications"><Bell /><i /></Link></Button><Link className="dash-profile" to="/account" aria-label="Open my account">{user ? firstName.charAt(0) : <UserRound />}</Link></div></div></header><main className="dash-page" data-tick={tick}>
+  return <><header className="dash-topbar"><div className="dash-topbar-inner"><Logo /><div className="dash-topbar-actions"><Button variant="ghost" size="icon" asChild title="Browse study articles"><Link to="/blog" aria-label="Browse study articles"><Search /></Link></Button><Button variant="ghost" size="icon" asChild title="My account"><Link to="/account" aria-label="My account notifications"><Bell /><i /></Link></Button><Link className="dash-profile" to="/account" aria-label="Open my account">{firstName.charAt(0)}</Link></div></div></header><main className="dash-page" data-tick={tick}>
     <div className="dash-shell">
 
       <section className="dash-greet">
@@ -92,6 +96,7 @@ export default function StudentDashboard() {
         </div>
       </section>
 
+      {isPreview && <span className="dash-sample-label">Sample dashboard</span>}
       <div className="dash-grid">
         <section className="dash-card dash-week">
           <header className="dash-card-head">
@@ -125,8 +130,8 @@ export default function StudentDashboard() {
             </>
           ) : (
             <div className="dash-tracker-empty">
-              <p className="dash-tracker-day">Day <b>0</b> / 21</p>
-              <div className="dash-progress" role="progressbar" aria-valuenow={0} aria-valuemin={0} aria-valuemax={100} />
+              <p className="dash-tracker-day">Day <b>{isPreview ? DASHBOARD_PREVIEW.planDay : 0}</b> / 21</p>
+              <div className="dash-progress" role="progressbar" aria-label="Habit progress" aria-valuenow={isPreview ? 38 : 0} aria-valuemin={0} aria-valuemax={100}>{isPreview && <span className="dash-preview-progress" />}</div>
             </div>
           )}
         </section>
@@ -142,19 +147,19 @@ export default function StudentDashboard() {
           <ol className="dash-streak-list" aria-label={`Your streak: ${myStreak} days`}>
             {top5.map((row, i) => (
               <li key={row.user_id}>
-                <span className={`dash-streak-avatar rank-${i + 1}`}>{row.full_name.charAt(0).toUpperCase()}</span>
+                <span className={`dash-streak-avatar rank-${i + 1} ${isPreview ? `dash-portrait portrait-${i + 1}` : ""}`}>{isPreview ? <img src={dashboardStudentsWebp} alt={`${row.full_name} — sample portrait`} loading="lazy" width={1000} height={333} /> : row.full_name.charAt(0).toUpperCase()}</span>
                 <div className="dash-streak-name"><Crown className={`crown-${Math.min(i + 1, 3)}`} /><b>#{i + 1}</b></div>
                 <span className="dash-streak-days">{row.streak_days} days</span>
               </li>
             ))}
-            {!top5.length && [1,2,3,4,5].map((rank) => <li key={rank}><span className={`dash-streak-avatar rank-${rank}`}><UserRound /></span><div className="dash-streak-name"><Crown className={`crown-${Math.min(rank,3)}`} /><b>#{rank}</b></div><span className="dash-streak-days">—</span></li>)}
+            {!top5.length && [1,2,3,4,5].map((rank) => <li key={rank}><span className={`dash-streak-avatar rank-${rank}`}><span>—</span></span><div className="dash-streak-name"><Crown className={`crown-${Math.min(rank,3)}`} /><b>#{rank}</b></div><span className="dash-streak-days">—</span></li>)}
           </ol>
         </section>
 
-        {user ? <DashboardNotes userId={user.id} /> : <section className="dash-card dash-notes"><header className="dash-card-head"><span className="dash-chip chip-pink"><BookText /></span><div className="dash-card-name"><h3>My Notes</h3><small>Save, organize and access your notes</small></div><Link className="dash-card-arrow" to="/account" aria-label="Open notes">›</Link></header><ul className="dash-note-list"><li className="dash-empty"><BookText /> No notes yet</li></ul><Button variant="secondary" className="dash-new-note" asChild><Link to="/account"><Plus />Create New Note</Link></Button></section>}
+        {user ? <DashboardNotes userId={user.id} /> : <section className="dash-card dash-notes"><header className="dash-card-head"><span className="dash-chip chip-pink"><BookText /></span><div className="dash-card-name"><h3>My Notes</h3><small>Save, organize and access your notes</small></div><Link className="dash-card-arrow" to="/account" aria-label="Open notes">›</Link></header><ul className="dash-note-list"><li><span className="dash-note-icon"><BookText /></span><div className="dash-note-body"><b>Biochemistry Short Notes</b><small>12 pages · Sample note</small></div><Button variant="ghost" size="icon" asChild><Link to="/account" aria-label="Open sample note"><MoreVertical /></Link></Button></li></ul><Button variant="secondary" className="dash-new-note" asChild><Link to="/account"><Plus />Create New Note</Link></Button></section>}
       </div>
 
-      {user ? <DashboardCommunity userId={user.id} displayName={name} /> : <section className="dash-card dash-community"><header className="dash-card-head"><span className="dash-chip chip-orange"><UsersRound /></span><div className="dash-card-name"><h3>Community</h3><small>Share your progress, doubts and stay motivated together.</small></div><Button className="dash-post-btn" asChild><Link to="/account"><Plus />Post</Link></Button></header><div className="dash-cat-row">{["All","Progress","Doubts","Motivation","Study Tips"].map((category,i) => <Button key={category} variant="ghost" className={i === 0 ? "on" : ""} asChild><Link to="/account">{category}</Link></Button>)}</div><div className="dash-feed"><p className="dash-empty">No posts yet</p></div></section>}
+      {user ? <DashboardCommunity userId={user.id} displayName={name} /> : <DashboardPreviewCommunity />}
     </div>
   </main></>;
 }
