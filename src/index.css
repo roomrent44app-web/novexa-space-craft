@@ -1193,7 +1193,7 @@ img { height: auto; }
 .dash-topbar .brand-logo img {width:82px;height:63px;object-fit:contain}
 .dash-topbar-actions {display:flex;align-items:center;gap:18px}
 .dash-topbar-actions>a {position:relative;color:hsl(var(--dash-ink))}
-.dash-topbar-actions svg {width:24px;height:24px}
+.dash-topbar-actions>a svg {width:24px;height:24px}
 .dash-topbar-actions i {position:absolute;width:9px;height:9px;border-radius:50%;background:hsl(var(--dash-orange));top:7px;right:9px}
 .dash-profile {display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:hsl(var(--dash-peach));font-size:20px;font-weight:700}
 .dash-page {padding:12px 28px 92px;min-height:calc(100vh - 72px)}
@@ -1270,6 +1270,7 @@ img { height: auto; }
 .dash-cat-row {margin-top:12px;display:flex;gap:12px;flex-wrap:wrap}
 .dash-cat-row button,.dash-cat-row a {min-height:34px;height:34px;padding:0 24px;border-radius:11px;border:0;background:hsl(var(--dash-track)/.6);font-size:12px;font-weight:400;color:hsl(var(--dash-muted))}
 .dash-cat-row .on {background:hsl(var(--dash-peach));color:hsl(var(--dash-ink))}
+.dash-cat-row button:hover,.dash-cat-row a:hover {background:hsl(var(--dash-peach));color:hsl(var(--dash-ink))}
 .dash-feed {margin-top:12px;display:grid;gap:10px;min-height:84px}
 .dash-feed li {display:flex;gap:12px;padding:12px;border:1px solid hsl(var(--dash-line));border-radius:10px;box-shadow:var(--dash-shadow)}
 .dash-feed-avatar {width:48px;height:48px;flex:0 0 48px;display:grid;place-items:center;border-radius:50%;background:hsl(var(--dash-peach));color:hsl(var(--dash-orange));font-weight:800}

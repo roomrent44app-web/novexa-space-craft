@@ -126,7 +126,7 @@ export default function StudentDashboard() {
           ) : (
             <div className="dash-tracker-empty">
               <p className="dash-tracker-day">Day <b>0</b> / 21</p>
-              <div className="dash-progress" role="progressbar" aria-valuenow={0} aria-valuemin={0} aria-valuemax={100}><span /></div>
+              <div className="dash-progress" role="progressbar" aria-valuenow={0} aria-valuemin={0} aria-valuemax={100} />
             </div>
           )}
         </section>
