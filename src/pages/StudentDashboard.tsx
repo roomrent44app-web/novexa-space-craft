@@ -161,5 +161,5 @@ export default function StudentDashboard() {
 
       {user ? <DashboardCommunity userId={user.id} displayName={name} /> : <DashboardPreviewCommunity />}
     </div>
-  </main></>;
+  </main>;
 }
