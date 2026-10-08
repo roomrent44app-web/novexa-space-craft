@@ -1755,3 +1755,9 @@ li.is-editing input,.gp-add input {flex:1;min-width:0;border:0;background:transp
   .fs-banner-right p{font-size:.52rem}
   .fs-more{display:none}
 }
+@media (max-width:600px){
+  .fs-hero{grid-template-columns:.9fr 1.1fr;align-items:end}
+  .fs-hero-photo{margin-right:-12px}
+  .fs-hero-photo img{border-radius:14px 0 0 14px}
+  .fs-shell{padding-bottom:20px}
+}
