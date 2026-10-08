@@ -120,6 +120,13 @@
       "when": 1791478688870,
       "tag": "0016_student_journal",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1791478938672,
+      "tag": "0017_community_moderation",
+      "breakpoints": true
     }
   ]
 }

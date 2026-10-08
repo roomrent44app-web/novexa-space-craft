@@ -355,6 +355,35 @@ export type Database = {
         }
         Relationships: []
       }
+      student_bans: {
+        Row: {
+          banned_by: string
+          created_at: string
+          reason: string
+          user_id: string
+        }
+        Insert: {
+          banned_by: string
+          created_at?: string
+          reason?: string
+          user_id: string
+        }
+        Update: {
+          banned_by?: string
+          created_at?: string
+          reason?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_bans_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       student_goals: {
         Row: {
           created_at: string
@@ -567,6 +596,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_banned: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
       app_role: "admin" | "user"
