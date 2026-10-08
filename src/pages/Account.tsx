@@ -52,7 +52,7 @@ export default function Account() {
   const [cls, setCls] = useState<{ meet_link: string; class_time: string; temporary_meet_link: string; temporary_class_time: string; monthly_meet_link: string; monthly_class_time: string; active_link_mode: "temporary" | "monthly" } | null>(null);
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [attendanceCount, setAttendanceCount] = useState(0);
-  const [selectedPlan, setSelectedPlan] = useState(params.get("plan") ?? "21d-1099");
+  const [selectedPlan, setSelectedPlan] = useState(params.get("plan") ?? "21d-699");
   const [classDays, setClassDays] = useState<string[]>([]);
 
   useEffect(() => {
