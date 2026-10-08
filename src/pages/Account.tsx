@@ -109,6 +109,14 @@ export default function Account() {
     setBusy(false);
   };
 
+  const resetPassword = async () => {
+    if (!form.email.trim()) { setMsg("Pehle apna Email ID upar likhiye, phir Forgot Password dabaiye."); return; }
+    setBusy(true); setMsg("");
+    const { error } = await supabase.auth.resetPasswordForEmail(form.email.trim(), { redirectTo: window.location.origin + "/account" });
+    setMsg(error ? error.message : "Password reset link aapke email par bhej diya gaya hai. Apna email check kariye.");
+    setBusy(false);
+  };
+
   const save = async () => {
     if (!user) return;
     setBusy(true);
