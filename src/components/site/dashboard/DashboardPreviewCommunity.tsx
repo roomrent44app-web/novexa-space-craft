@@ -8,7 +8,8 @@ import { dashboardStudentsWebp } from "@/data/images";
 export default function DashboardPreviewCommunity() {
   const [filter, setFilter] = useState("All");
   const [liked, setLiked] = useState<string[]>([]);
-  const posts = filter === "All" ? DASHBOARD_PREVIEW.posts.slice(0, 1) : DASHBOARD_PREVIEW.posts.filter(p => p.category === filter);
+  const posts = filter === "All" ? DASHBOARD_PREVIEW.posts : DASHBOARD_PREVIEW.posts.filter(p => p.category === filter);
+  const loop = posts.length > 1 ? [...posts, ...posts] : posts;
   return <section className="dash-card dash-community">
     <header className="dash-card-head"><span className="dash-chip chip-orange"><UsersRound /></span><div className="dash-card-name"><h3>Community</h3><small>Share your progress, doubts and stay motivated together.</small></div><Button className="dash-post-btn" asChild><Link to="/account"><Plus />Post</Link></Button></header>
     <div className="dash-cat-row" role="tablist" aria-label="Post categories">{["All", "Progress", "Doubts", "Motivation", "Study Tips"].map(c => <Button variant="ghost" role="tab" aria-selected={filter === c} className={filter === c ? "on" : ""} key={c} onClick={() => setFilter(c)}>{c}</Button>)}</div>
