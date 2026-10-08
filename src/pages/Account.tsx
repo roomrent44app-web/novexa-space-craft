@@ -23,8 +23,6 @@ type Subscription = {
   class_days: string[];
 };
 
-const WEEK_DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-
 const formatDate = (value: string | null) => value
   ? new Date(value).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Kolkata" })
   : "—";
