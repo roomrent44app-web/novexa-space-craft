@@ -103,7 +103,7 @@ export default function StudentDashboard() {
           <header className="dash-card-head">
             <span className="dash-chip chip-blue"><CalendarCheck /></span>
             <div className="dash-card-name"><h3>Your Attendance</h3><small>This Week</small></div>
-            <Link className="dash-card-arrow" to="/account" aria-label="Open full attendance">›</Link>
+            <Link className="dash-card-arrow" to="/dashboard/progress" aria-label="Open full attendance">›</Link>
           </header>
           <p className="dash-week-count"><b>{weekDone}</b> / 7 <span>Days Present</span></p>
           <div className="dash-week-row">
@@ -120,7 +120,7 @@ export default function StudentDashboard() {
           <header className="dash-card-head">
             <span className="dash-chip chip-green"><Target /></span>
             <div className="dash-card-name"><h3>{active ? `${active.duration_days} Days Tracker` : "21 Days Tracker"}</h3><small>Build your habit</small></div>
-            <Link className="dash-card-arrow" to="/account" aria-label="View plan tracker">›</Link>
+            <Link className="dash-card-arrow" to="/dashboard/progress" aria-label="View plan tracker">›</Link>
           </header>
           {active ? (
             <>

@@ -49,7 +49,7 @@ export default function DashboardProgress() {
   const weekDone = week.filter((d) => d.done).length;
 
   const total = preview ? 21 : sub?.duration_days ?? 21;
-  const start = sub?.starts_at ? istDateStr.call(null) && new Date(new Date(sub.starts_at).getTime() + 330 * 60000).toISOString().slice(0, 10) : null;
+  const start = sub?.starts_at ? new Date(new Date(sub.starts_at).getTime() + 330 * 60000).toISOString().slice(0, 10) : null;
   const tracker = Array.from({ length: total }, (_, i) => {
     if (preview) return i < DASHBOARD_PREVIEW.planDay;
     return start ? days.has(addDays(start, i)) : false;
