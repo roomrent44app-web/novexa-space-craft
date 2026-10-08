@@ -28,14 +28,14 @@ import faqCtaAvif from "@/assets/faq-cta-clone.jpg?format=avif&width=1584&qualit
 import faqCtaWebp from "@/assets/faq-cta-clone.jpg?format=webp&width=1584&quality=74&imagetools";
 import aboutHeroAvif from "@/assets/about-hero.jpg?format=avif&width=1600&quality=70&imagetools";
 import aboutHeroWebp from "@/assets/about-hero.jpg?format=webp&width=1600&quality=76&imagetools";
-import foundersHeroAvif from "@/assets/founders-hero-hd.jpg?format=avif&width=1600&quality=70&imagetools";
-import foundersHeroWebp from "@/assets/founders-hero-hd.jpg?format=webp&width=1600&quality=76&imagetools";
-import foundersJourneyAvif from "@/assets/founders-journey-hd.jpg?format=avif&width=1024&quality=68&imagetools";
-import foundersJourneyWebp from "@/assets/founders-journey-hd.jpg?format=webp&width=1024&quality=74&imagetools";
-import foundersSunriseAvif from "@/assets/founders-sunrise-hd.jpg?format=avif&width=1024&quality=68&imagetools";
-import foundersSunriseWebp from "@/assets/founders-sunrise-hd.jpg?format=webp&width=1024&quality=74&imagetools";
-import foundersBannerAvif from "@/assets/founders-banner-hd.jpg?format=avif&width=1536&quality=68&imagetools";
-import foundersBannerWebp from "@/assets/founders-banner-hd.jpg?format=webp&width=1536&quality=74&imagetools";
+import foundersHeroAvif from "@/assets/founders-hero-hd.jpg?format=avif&width=1600&quality=88&imagetools";
+import foundersHeroWebp from "@/assets/founders-hero-hd.jpg?format=webp&width=1600&quality=88&imagetools";
+import foundersJourneyAvif from "@/assets/founders-journey-hd.jpg?format=avif&width=1024&quality=85&imagetools";
+import foundersJourneyWebp from "@/assets/founders-journey-hd.jpg?format=webp&width=1024&quality=88&imagetools";
+import foundersSunriseAvif from "@/assets/founders-sunrise-hd.jpg?format=avif&width=1024&quality=85&imagetools";
+import foundersSunriseWebp from "@/assets/founders-sunrise-hd.jpg?format=webp&width=1024&quality=88&imagetools";
+import foundersBannerAvif from "@/assets/founders-banner-hd.jpg?format=avif&width=1536&quality=85&imagetools";
+import foundersBannerWebp from "@/assets/founders-banner-hd.jpg?format=webp&width=1536&quality=88&imagetools";
 import studentAvif from "@/assets/5am-student.jpg?format=avif&width=900&quality=68&imagetools";
 import studentWebp from "@/assets/5am-student.jpg?format=webp&width=900&quality=74&imagetools";
 
