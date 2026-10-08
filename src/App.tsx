@@ -11,6 +11,7 @@ import About from "./pages/About.tsx";
 import Faqs from "./pages/Faqs.tsx";
 import Blog from "./pages/Blog.tsx";
 import BlogPost from "./pages/BlogPost.tsx";
+import FoundersStory from "./pages/FoundersStory.tsx";
 import Admin from "./pages/Admin.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Account from "./pages/Account.tsx";
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/faqs" element={<Layout><Faqs /></Layout>} />
           <Route path="/blog" element={<Layout><Blog /></Layout>} />
           <Route path="/blog/:slug" element={<Layout><BlogPost /></Layout>} />
+          <Route path="/blog/founders-story" element={<Layout><FoundersStory /></Layout>} />
           <Route path="/dashboard" element={<Layout><StudentDashboard /></Layout>} />
           <Route path="/dashboard/progress" element={<Layout><DashboardProgress /></Layout>} />
           <Route path="/dashboard/goals" element={<Layout><GoalsPlanner /></Layout>} />
