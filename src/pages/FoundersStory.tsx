@@ -39,7 +39,7 @@ export default function FoundersStory() {
           </div>
           <div className="fs-hero-photo">
             <span className="fs-note">Same<br />Students<br />Brighter<br />Mornings ♡</span>
-            <img src={foundersHeroWebp} alt="Dr. Avi Bindal and Dr. Manya Gupta" width={1408} height={896} fetchPriority="high" />
+            <img src={foundersHeroWebp} alt="Dr. Avi Bindal and Dr. Manya Gupta" width={1584} height={1200} fetchPriority="high" />
             <span className="fs-tag fs-tag-avi">
               <strong>Dr. Avi Bindal</strong>
               <em>MBBS<br />Doctor</em>
@@ -114,8 +114,7 @@ export default function FoundersStory() {
         </section>
 
         {/* Belief banner */}
-        <section className="fs-banner">
-          <img className="fs-banner-img" src={foundersBannerWebp} alt="Our Biggest Belief — Brighter Students. Brighter Futures." loading="lazy" />
+        <section className="fs-banner" style={{ backgroundImage: `url(${foundersBannerWebp})` }}>
           <div className="fs-banner-left">
             <span className="fs-eyebrow light">Our Biggest Belief</span>
             <h2>Brighter Students.<br />Brighter Futures.</h2>
