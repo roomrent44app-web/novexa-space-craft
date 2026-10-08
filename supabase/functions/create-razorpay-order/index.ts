@@ -8,12 +8,11 @@ import { z } from 'npm:zod@3.25.76'
 
 const BodySchema = z.object({ planCode: z.string().min(1).max(30), classDays: z.array(z.enum(['Mon','Tue','Wed','Thu','Fri','Sat','Sun'])).max(7).optional() })
 const PLANS: Record<string, { name: string; days: number; amount: number }> = {
-  '3d-149': { name: '3 Days Plan', days: 3, amount: 14900 },
-  '4d-199': { name: '4 Days Plan', days: 4, amount: 19900 },
-  '6d-249': { name: '6 Days Plan', days: 6, amount: 24900 },
-  '9d-499': { name: '9 Days Plan', days: 9, amount: 49900 },
-  '15d-799': { name: '15 Days Plan', days: 15, amount: 79900 },
-  '21d-1099': { name: '21 Days Plan', days: 21, amount: 109900 },
+  '5d-199': { name: '5 Days Plan', days: 5, amount: 19900 },
+  '7d-249': { name: '7 Days Plan', days: 7, amount: 24900 },
+  '9d-349': { name: '9 Days Plan', days: 9, amount: 34900 },
+  '15d-549': { name: '15 Days Plan', days: 15, amount: 54900 },
+  '21d-699': { name: '21 Days Plan', days: 21, amount: 69900 },
 }
 
 const json = (body: unknown, status = 200) => new Response(JSON.stringify(body), {

@@ -16,16 +16,16 @@ export const WEEKLY_PLANS = [
 
 export const PLANS_PAGE_WEEKLY = [
   { days: 3, calls: 3, price: 0, freeTrial: true },
-  { days: 4, calls: 4, price: 199 },
-  { days: 6, calls: 6, price: 249 },
+  { days: 5, calls: 5, price: 199 },
+  { days: 7, calls: 7, price: 249, popular: true },
 ];
 
 export const TRIAL_PLAN = { code: "trial-3d", name: "3 Days Free Trial", days: 3, calls: 3, price: 0 };
 
 export const MONTHLY_PLANS = [
-  { days: 9, calls: 9, price: 499, freeTrial: false },
-  { days: 15, calls: 15, price: 799, freeTrial: false },
-  { days: 21, calls: 21, price: 1099, popular: true, freeTrial: false },
+  { days: 9, calls: 9, price: 349, freeTrial: false },
+  { days: 15, calls: 15, price: 549, freeTrial: false },
+  { days: 21, calls: 21, price: 699, popular: true, freeTrial: false },
 ];
 
 export const PURCHASE_PLANS = [
