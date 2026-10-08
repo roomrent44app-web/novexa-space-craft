@@ -1364,3 +1364,13 @@ img { height: auto; }
   .dash-page .dash-greet h1 svg,.dash-page .chip-orange svg,.dash-page .crown-1,.dash-page .dash-progress span,.dash-page .dash-week-day .on,.dash-page .dash-topbar-actions i{animation:none}
   .dash-page .dash-card,.dash-page .dash-chip,.dash-page .dash-card-arrow,.dash-page .dash-streak-avatar{transition:none}
 }
+
+/* Account profile avatar */
+.account-avatar-row{display:flex;align-items:center;gap:1rem;margin:0 0 1rem}
+.account-avatar{width:72px;height:72px;border-radius:50%;overflow:hidden;flex:none;display:flex;align-items:center;justify-content:center;background:hsl(var(--primary)/.12);color:hsl(var(--primary));border:2px solid hsl(var(--primary)/.25)}
+.account-avatar svg{width:34px;height:34px}
+.account-avatar img{width:100%;height:100%;object-fit:cover}
+.account-avatar-row>div{display:flex;flex-direction:column;gap:.35rem;align-items:flex-start}
+.account-avatar-row small{color:hsl(var(--muted-foreground))}
+.account-avatar-btn{cursor:pointer;position:relative}
+.account-avatar-hint{font-size:.75rem}

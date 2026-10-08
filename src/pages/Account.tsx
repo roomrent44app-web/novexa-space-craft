@@ -44,7 +44,9 @@ export default function Account() {
   const [ready, setReady] = useState(false);
   const [mode, setMode] = useState<"login" | "signup">(params.get("mode") === "signup" ? "signup" : "login");
   const [form, setForm] = useState({ name: "", phone: "", email: "", password: "" });
-  const [profile, setProfile] = useState({ full_name: "", phone: "" });
+  const [profile, setProfile] = useState({ full_name: "", phone: "", avatar_url: "" });
+  const [avatarSrc, setAvatarSrc] = useState("");
+  const [avatarBusy, setAvatarBusy] = useState(false);
   const [msg, setMsg] = useState("");
   const [busy, setBusy] = useState(false);
   const [cls, setCls] = useState<{ meet_link: string; class_time: string; temporary_meet_link: string; temporary_class_time: string; monthly_meet_link: string; monthly_class_time: string; active_link_mode: "temporary" | "monthly" } | null>(null);
@@ -63,14 +65,18 @@ export default function Account() {
     const now = new Date();
     const monthStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1)).toISOString().slice(0, 10);
     const [profileResult, classResult, subscriptionResult, attendanceResult] = await Promise.all([
-      supabase.from("profiles").select("full_name, phone").eq("id", user.id).maybeSingle(),
+      supabase.from("profiles").select("full_name, phone, avatar_url").eq("id", user.id).maybeSingle(),
       supabase.from("class_settings").select("meet_link,class_time,temporary_meet_link,temporary_class_time,monthly_meet_link,monthly_class_time,active_link_mode").eq("id", 1).maybeSingle(),
       supabase.from("subscriptions").select("id,plan_code,plan_name,duration_days,amount_paise,status,starts_at,expires_at,class_days").order("created_at", { ascending: false }),
       supabase.from("attendance").select("id", { count: "exact", head: true }).eq("user_id", user.id).gte("day", monthStart),
     ]);
       if (profileResult.data) {
-        const p = profileResult.data as { full_name: string; phone: string };
-        setProfile({ full_name: (p.full_name ?? "").trim() || fallbackName(user), phone: p.phone ?? "" });
+        const p = profileResult.data as { full_name: string; phone: string; avatar_url: string };
+        setProfile({ full_name: (p.full_name ?? "").trim() || fallbackName(user), phone: p.phone ?? "", avatar_url: p.avatar_url ?? "" });
+        if (p.avatar_url) {
+          const { data: signed } = await supabase.storage.from("avatars").createSignedUrl(p.avatar_url, 3600);
+          setAvatarSrc(signed?.signedUrl ?? "");
+        } else setAvatarSrc("");
       }
     setCls(classResult.data);
     setSubscriptions((subscriptionResult.data ?? []) as Subscription[]);
@@ -109,6 +115,26 @@ export default function Account() {
     const { error } = await supabase.from("profiles").upsert({ id: user.id, ...profile });
     setMsg(error ? error.message : "Profile saved.");
     setBusy(false);
+  };
+
+  const uploadAvatar = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!user || !file) return;
+    if (!file.type.startsWith("image/")) { setMsg("Please choose an image file (JPG/PNG)."); return; }
+    if (file.size > 5 * 1024 * 1024) { setMsg("Photo must be smaller than 5 MB."); return; }
+    setAvatarBusy(true); setMsg("");
+    const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
+    const path = `${user.id}/avatar.${ext}`;
+    const { error: upErr } = await supabase.storage.from("avatars").upload(path, file, { upsert: true, contentType: file.type });
+    if (upErr) { setMsg(upErr.message); setAvatarBusy(false); return; }
+    const { error: dbErr } = await supabase.from("profiles").upsert({ id: user.id, ...profile, avatar_url: path });
+    if (dbErr) { setMsg(dbErr.message); setAvatarBusy(false); return; }
+    const { data: signed } = await supabase.storage.from("avatars").createSignedUrl(path, 3600);
+    setProfile({ ...profile, avatar_url: path });
+    setAvatarSrc(signed?.signedUrl ?? "");
+    setMsg("Profile photo updated.");
+    setAvatarBusy(false);
   };
 
   const pay = async () => {
@@ -175,6 +201,11 @@ export default function Account() {
 
     <Attendance userId={user.id} />
 
-    <section className="account-card account-profile"><div className="account-card-title"><div><small>My details</small><h2>Profile</h2></div><UserRound /></div><div className="account-profile-grid"><label className="adm-label">Full name<input className="adm-input" value={profile.full_name} onChange={(event) => setProfile({ ...profile, full_name: event.target.value })} /></label><label className="adm-label">Mobile<input className="adm-input" value={profile.phone} onChange={(event) => setProfile({ ...profile, phone: event.target.value })} /></label></div><button className="h-btn account-save" disabled={busy} onClick={save}><RefreshCw /> Save Details</button></section>
+    <section className="account-card account-profile"><div className="account-card-title"><div><small>My details</small><h2>Profile</h2></div><UserRound /></div>
+      <div className="account-avatar-row">
+        <span className="account-avatar">{avatarSrc ? <img src={avatarSrc} alt="Profile photo" /> : <UserRound />}</span>
+        <div><small>Profile photo</small><label className="h-btn account-save account-avatar-btn">{avatarBusy ? "Uploading…" : avatarSrc ? "Change Photo" : "Add Photo"}<input type="file" accept="image/*" hidden disabled={avatarBusy} onChange={uploadAvatar} /></label><small className="account-avatar-hint">JPG ya PNG, 5 MB tak</small></div>
+      </div>
+      <div className="account-profile-grid"><label className="adm-label">Full name<input className="adm-input" value={profile.full_name} onChange={(event) => setProfile({ ...profile, full_name: event.target.value })} /></label><label className="adm-label">Mobile<input className="adm-input" value={profile.phone} onChange={(event) => setProfile({ ...profile, phone: event.target.value })} /></label></div><button className="h-btn account-save" disabled={busy} onClick={save}><RefreshCw /> Save Details</button></section>
   </div></main>;
 }
