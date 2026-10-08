@@ -1709,27 +1709,55 @@ li.is-editing input,.gp-add input {flex:1;min-width:0;border:0;background:transp
 .fs-btn{display:inline-flex;align-items:center;gap:8px;background:#e8632b;color:#fff;font-weight:700;font-size:.95rem;padding:12px 22px;border-radius:999px;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease}
 .fs-btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(232,99,43,.35)}
 
+/* Mockup keeps the two-column layout on every screen — scale down instead of stacking */
 @media (max-width:900px){
-  .fs-hero{grid-template-columns:1fr;gap:20px}
-  .fs-hero-copy p{max-width:none}
-  .fs-hero-photo{max-width:560px}
-  .fs-row{grid-template-columns:1fr;gap:20px;padding:28px 0 4px}
-  .fs-row-rev .fs-photo{order:-1}
-  .fs-strip{flex-direction:column;align-items:stretch;gap:14px}
-  .fs-divider{display:none}
-  .fs-banner{grid-template-columns:1fr;gap:16px}
-  .fs-banner-sep{display:none}
-  .fs-banner-right{justify-content:flex-start}
+  .fs-hero{gap:6px;grid-template-columns:.95fr 1.05fr}
+  .fs-row{gap:16px;padding:24px 0 4px}
+  .fs-strip{padding:12px 10px;gap:4px}
+  .fs-badge{gap:8px;padding:0 6px}
+  .fs-banner{gap:14px;padding:24px 22px}
 }
 @media (max-width:600px){
-  .fs-shell{padding:0 14px 44px}
-  .fs-note{top:-8%;right:0;font-size:.78rem}
-  .fs-tag strong{font-size:.68rem}
-  .fs-tag em{font-size:.6rem}
-  .fs-tag svg{width:18px;height:18px}
-  .fs-tag-avi{top:22%;left:4%}
-  .fs-tag-manya{top:20%;right:2%}
-  .fs-badge{padding:0}
-  .fs-pillars{gap:10px}
-  .fs-banner{padding:26px 22px}
+  .fs-shell{padding:0 12px 36px}
+  .fs-back{font-size:.72rem;margin:12px 0 4px}
+  .fs-eyebrow{font-size:.5rem;margin-bottom:6px;padding:2px 6px;background:#fde9da;border-radius:3px}
+  .fs-row .fs-eyebrow,.fs-banner .fs-eyebrow{background:none;padding:0}
+  .fs-hero{padding:8px 0 0}
+  .fs-hero-copy h1{font-size:1.62rem;margin-bottom:8px}
+  .fs-hero-copy p{font-size:.62rem;line-height:1.5}
+  .fs-note{top:-6%;right:0;font-size:.55rem}
+  .fs-tag strong{font-size:.5rem}
+  .fs-tag em{font-size:.44rem}
+  .fs-tag svg{width:14px;height:14px}
+  .fs-tag-avi{top:22%;left:-4%}
+  .fs-tag-manya{top:28%;right:-2%}
+  .fs-strip{margin:12px 0 4px;border-radius:12px;padding:10px 6px}
+  .fs-badge{gap:5px;padding:0 4px}
+  .fs-badge-ic svg{width:18px;height:18px}
+  .fs-badge strong{font-size:.55rem}
+  .fs-badge small{font-size:.46rem}
+  .fs-divider{top:-8px;bottom:-8px}
+  .fs-row{gap:10px;padding:18px 0 2px}
+  .fs-copy h2{font-size:1.02rem;margin-bottom:8px}
+  .fs-copy p{font-size:.58rem;line-height:1.5;margin-bottom:8px}
+  .fs-photo img{border-radius:10px}
+  .fs-quote{font-size:.6rem;padding:8px 10px;gap:6px;border-radius:10px;margin-top:6px}
+  .fs-quote svg{width:14px;height:14px}
+  .fs-heart{width:12px;height:12px}
+  .fs-pillars{gap:6px;padding:6px;border:1px solid #f0e6d8;border-radius:10px}
+  .fs-pillar{padding:10px 4px;border-radius:8px}
+  .fs-pillar-ic svg{width:20px;height:20px}
+  .fs-pillar-ic{margin-bottom:5px}
+  .fs-pillar strong{font-size:.56rem}
+  .fs-pillar small{font-size:.48rem}
+  .fs-banner{gap:10px;padding:16px 14px;border-radius:12px;margin-top:20px;grid-template-columns:1.1fr auto 1fr}
+  .fs-banner h2{font-size:1.02rem}
+  .fs-banner-right p{font-size:.52rem}
+  .fs-more{display:none}
+}
+@media (max-width:600px){
+  .fs-hero{grid-template-columns:.9fr 1.1fr;align-items:end}
+  .fs-hero-photo{margin-right:-12px}
+  .fs-hero-photo img{border-radius:14px 0 0 14px}
+  .fs-shell{padding-bottom:20px}
 }
