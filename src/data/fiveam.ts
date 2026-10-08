@@ -8,24 +8,28 @@ export const CONTACT = {
   domain: "5am.co.in",
 };
 
+export const PAYMENT_LINKS: Record<number, string> = {
+  5: "https://rzp.io/rzp/ec9Ax0n",
+  7: "https://rzp.io/rzp/tqeif7J",
+  9: "https://rzp.io/rzp/ApkgHWf",
+  15: "https://rzp.io/rzp/eO3rjHV",
+  21: "https://rzp.io/rzp/79TlOK3",
+};
+
 export const WEEKLY_PLANS = [
   { days: 3, calls: 3, price: 0, freeTrial: true },
-  { days: 5, calls: 5, price: 199 },
-  { days: 7, calls: 7, price: 249, popular: true },
+  { days: 5, calls: 5, price: 199, payLink: PAYMENT_LINKS[5] },
+  { days: 7, calls: 7, price: 249, popular: true, payLink: PAYMENT_LINKS[7] },
 ];
 
-export const PLANS_PAGE_WEEKLY = [
-  { days: 3, calls: 3, price: 0, freeTrial: true },
-  { days: 5, calls: 5, price: 199 },
-  { days: 7, calls: 7, price: 249, popular: true },
-];
+export const PLANS_PAGE_WEEKLY = WEEKLY_PLANS;
 
-export const TRIAL_PLAN = { code: "trial-3d", name: "3 Days Free Trial", days: 3, calls: 3, price: 0 };
+export const TRIAL_PLAN = { code: "trial-3d", name: "3 Days Free Trial", days: 3, calls: 3, price: 0, payLink: undefined as string | undefined };
 
 export const MONTHLY_PLANS = [
-  { days: 9, calls: 9, price: 349, freeTrial: false },
-  { days: 15, calls: 15, price: 549, freeTrial: false },
-  { days: 21, calls: 21, price: 699, popular: true, freeTrial: false },
+  { days: 9, calls: 9, price: 349, freeTrial: false, payLink: PAYMENT_LINKS[9] },
+  { days: 15, calls: 15, price: 549, freeTrial: false, payLink: PAYMENT_LINKS[15] },
+  { days: 21, calls: 21, price: 699, popular: true, freeTrial: false, payLink: PAYMENT_LINKS[21] },
 ];
 
 export const PURCHASE_PLANS = [
