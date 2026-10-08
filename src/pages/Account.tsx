@@ -44,7 +44,9 @@ export default function Account() {
   const [ready, setReady] = useState(false);
   const [mode, setMode] = useState<"login" | "signup">(params.get("mode") === "signup" ? "signup" : "login");
   const [form, setForm] = useState({ name: "", phone: "", email: "", password: "" });
-  const [profile, setProfile] = useState({ full_name: "", phone: "" });
+  const [profile, setProfile] = useState({ full_name: "", phone: "", avatar_url: "" });
+  const [avatarSrc, setAvatarSrc] = useState("");
+  const [avatarBusy, setAvatarBusy] = useState(false);
   const [msg, setMsg] = useState("");
   const [busy, setBusy] = useState(false);
   const [cls, setCls] = useState<{ meet_link: string; class_time: string; temporary_meet_link: string; temporary_class_time: string; monthly_meet_link: string; monthly_class_time: string; active_link_mode: "temporary" | "monthly" } | null>(null);
