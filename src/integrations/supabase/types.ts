@@ -584,6 +584,7 @@ export type Database = {
       get_wakeup_streaks: {
         Args: never
         Returns: {
+          avatar_url: string
           full_name: string
           streak_days: number
           user_id: string
