@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
-import { Check, ChartNoAxesColumn, Target } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { ChartNoAxesColumn, Check, Target } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { istDateStr, istMonday } from "@/lib/dashboard";
 import { Button } from "@/components/ui/button";
 
-const DAILY_DEFAULTS = ["Complete 3 study sessions", "Revise 1 chapter", "Solve 50 questions", "Read notes (1 hour)"];
+const DAILY_DEFAULTS = ["Complete study session", "Revise one chapter", "Solve 50 questions", "Read notes for 1 hour"];
 const WEEKLY_DEFAULTS = ["Complete planned chapters", "Give 1 mock test", "Revise weak topics", "Maintain 80% attendance", "Stay consistent for 7 days"];
 
 type Goal = { id: string; title: string; done: boolean };
@@ -17,6 +18,7 @@ function GoalsCard({ kind, title, badge, defaults, periodKey, userId }: {
   periodKey: string;
   userId?: string;
 }) {
+  const navigate = useNavigate();
   const [goals, setGoals] = useState<Goal[]>([]);
 
   const load = useCallback(async () => {
@@ -41,7 +43,11 @@ function GoalsCard({ kind, title, badge, defaults, periodKey, userId }: {
   };
 
   return (
-    <section className={`dash-card dash-goals-${kind}`}>
+    <section
+      className={`dash-card dash-goals-${kind}`}
+      onClick={() => navigate(kind === "daily" ? "/dashboard/goals" : "/dashboard/goals?tab=weekly")}
+      aria-label={`Open ${title} in Goals Planner`}
+    >
       <header className="dash-card-head">
         <span className={`dash-chip chip-${kind === "daily" ? "pink" : "blue"}`}>
           {kind === "daily" ? <Target /> : <ChartNoAxesColumn />}
@@ -52,7 +58,7 @@ function GoalsCard({ kind, title, badge, defaults, periodKey, userId }: {
       <ul className="dash-goal-list">
         {goals.map((goal) => (
           <li key={goal.id}>
-            <Button variant="ghost" type="button" aria-pressed={goal.done} onClick={() => toggle(goal)}>
+            <Button variant="ghost" type="button" aria-pressed={goal.done} onClick={(e) => { e.stopPropagation(); toggle(goal); }}>
               <span className="dash-tick">{goal.done && <Check />}</span>
               <span>{goal.title}</span>
             </Button>
