@@ -20,7 +20,7 @@ const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "
 const wd = (d: string) => new Date(d + "T00:00:00Z").getUTCDay();
 
 export default function JournalPage() {
-  useSeo({ path: "/dashboard/journal" } as never);
+  useSeo({ title: "My Journal — 5AM", description: "Your daily study journal and mood record.", path: "/dashboard/journal" });
   const today = istDateStr();
   const [user, setUser] = useState<{ id: string } | null>(null);
   const [ready, setReady] = useState(false);

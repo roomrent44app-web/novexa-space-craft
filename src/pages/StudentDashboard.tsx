@@ -157,6 +157,7 @@ export default function StudentDashboard() {
           </ol>
         </section>
 
+        <Link to="/dashboard/journal" className="dash-card dash-journal-link"><span className="dash-chip chip-pink" aria-hidden="true">📔</span><span className="dash-card-name"><h3>My Journal</h3><small>Write daily thoughts and track your mood</small></span><span className="dash-card-arrow" aria-hidden="true">›</span></Link>
         {user ? <DashboardNotes userId={user.id} /> : <section className="dash-card dash-notes"><header className="dash-card-head"><span className="dash-chip chip-pink"><BookText /></span><div className="dash-card-name"><h3>My Notes</h3><small>Save, organize and access your notes</small></div><Link className="dash-card-arrow" to="/account" aria-label="Open notes">›</Link></header><ul className="dash-note-list"><li><span className="dash-note-icon"><BookText /></span><div className="dash-note-body"><b>Biochemistry Short Notes</b><small>12 pages · Sample note</small></div><Button variant="ghost" size="icon" asChild><Link to="/account" aria-label="Open sample note"><MoreVertical /></Link></Button></li></ul><Button variant="secondary" className="dash-new-note" asChild><Link to="/account"><Plus />Create New Note</Link></Button></section>}
       </div>
 
