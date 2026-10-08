@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
+import { getCachedPosts, loadPosts } from "@/lib/blogCache";
 import { useSeo } from "@/hooks/useSeo";
 
 type Post = { title: string; excerpt: string; content: string; cover_url: string | null; created_at: string };
 
 export default function BlogPost() {
   const { slug = "" } = useParams();
-  const [post, setPost] = useState<Post | null | undefined>(undefined);
+  const find = (list: Post[] | null) => list?.find((p) => (p as Post & { slug: string }).slug === slug);
+  const [post, setPost] = useState<Post | null | undefined>(() => find(getCachedPosts()));
   useSeo({ title: post?.title ?? "Blog", description: post?.excerpt || "Read this article from the 5AM study community.", path: `/blog/${slug}` });
   useEffect(() => {
-    supabase.from("blog_posts").select("title,excerpt,content,cover_url,created_at").eq("slug", slug).maybeSingle()
-      .then(({ data }) => setPost(data ?? null));
+    setPost(find(getCachedPosts()));
+    loadPosts().then((list) => setPost(find(list) ?? null));
   }, [slug]);
   return (
     <div className="cms-page">

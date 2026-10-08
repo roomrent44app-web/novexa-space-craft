@@ -37,9 +37,11 @@ import foundersSunriseWebp from "@/assets/founders-sunrise-hd.jpg?format=webp&wi
 import foundersBannerAvif from "@/assets/founders-banner-hd.jpg?format=avif&width=1536&quality=85&imagetools";
 import foundersBannerWebp from "@/assets/founders-banner-hd.jpg?format=webp&width=1536&quality=88&imagetools";
 import studentAvif from "@/assets/5am-student.jpg?format=avif&width=900&quality=68&imagetools";
+import blogHeroAvif from "@/assets/blog-hero.jpg?format=avif&width=1536&quality=80&imagetools";
+import blogHeroWebp from "@/assets/blog-hero.jpg?format=webp&width=1536&quality=84&imagetools";
 import studentWebp from "@/assets/5am-student.jpg?format=webp&width=900&quality=74&imagetools";
 
-export { heroAvif, heroWebp, communityAvif, communityWebp, ctaAvif, ctaWebp, priyaAvif, priyaWebp, ananyaAvif, ananyaWebp, rohitAvif, rohitWebp, plansHeroAvif, plansHeroWebp, hiwHeroAvif, hiwHeroWebp, hiwCtaAvif, hiwCtaWebp, faqHeroAvif, faqHeroWebp, faqCtaAvif, faqCtaWebp, aboutHeroAvif, aboutHeroWebp, studentAvif, studentWebp, foundersHeroAvif, foundersHeroWebp, foundersJourneyAvif, foundersJourneyWebp, foundersSunriseAvif, foundersSunriseWebp, foundersBannerAvif, foundersBannerWebp };
+export { heroAvif, heroWebp, communityAvif, communityWebp, ctaAvif, ctaWebp, priyaAvif, priyaWebp, ananyaAvif, ananyaWebp, rohitAvif, rohitWebp, plansHeroAvif, plansHeroWebp, hiwHeroAvif, hiwHeroWebp, hiwCtaAvif, hiwCtaWebp, faqHeroAvif, faqHeroWebp, faqCtaAvif, faqCtaWebp, aboutHeroAvif, aboutHeroWebp, studentAvif, studentWebp, foundersHeroAvif, foundersHeroWebp, foundersJourneyAvif, foundersJourneyWebp, foundersSunriseAvif, foundersSunriseWebp, foundersBannerAvif, foundersBannerWebp, blogHeroAvif, blogHeroWebp };
 
 // Per-page images (AVIF first; browsers without AVIF skip those preloads automatically).
 export const PAGE_IMAGES: Record<string, { avif: string[]; webp: string[] }> = {
@@ -49,5 +51,6 @@ export const PAGE_IMAGES: Record<string, { avif: string[]; webp: string[] }> = {
   "/how-it-works": { avif: [hiwHeroAvif, hiwCtaAvif], webp: [hiwHeroWebp, hiwCtaWebp] },
   "/faqs": { avif: [faqHeroAvif, faqCtaAvif], webp: [faqHeroWebp, faqCtaWebp] },
 "/about": { avif: [aboutHeroAvif, studentAvif], webp: [aboutHeroWebp, studentWebp] },
+  "/blog": { avif: [blogHeroAvif, foundersHeroAvif], webp: [blogHeroWebp, foundersHeroWebp] },
   "/blog/founders-story": { avif: [foundersHeroAvif, foundersJourneyAvif, foundersSunriseAvif, foundersBannerAvif], webp: [foundersHeroWebp, foundersJourneyWebp, foundersSunriseWebp, foundersBannerWebp] },
 };

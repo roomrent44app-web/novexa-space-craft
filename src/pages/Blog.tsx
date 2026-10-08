@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, BookOpen, Stethoscope, GraduationCap, Heart, Users, Target, Sun } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { getCachedPosts, loadPosts, subscribePosts } from "@/lib/blogCache";
 import { useSeo } from "@/hooks/useSeo";
-import blogHero from "@/assets/blog-hero.jpg";
+import { blogHeroWebp as blogHero } from "@/data/images";
 
 type Post = { id: string; title: string; slug: string; excerpt: string; cover_url: string | null; created_at: string };
 
@@ -27,11 +27,12 @@ const VALUES = [
 
 export default function Blog() {
   useSeo({ title: "Blog", description: "Study tips, motivation and morning-routine ideas from the 5AM study community.", path: "/blog" });
-  const [posts, setPosts] = useState<Post[] | null>(null);
+  const [posts, setPosts] = useState<Post[] | null>(() => getCachedPosts());
   const [cat, setCat] = useState<Cat>("All");
   useEffect(() => {
-    supabase.from("blog_posts").select("id,title,slug,excerpt,cover_url,created_at").eq("published", true).order("created_at", { ascending: false })
-      .then(({ data }) => setPosts(data ?? []));
+    const off = subscribePosts(setPosts);
+    loadPosts().then(setPosts);
+    return off;
   }, []);
   const shown = useMemo(() => (posts ?? []).filter((p) => cat === "All" || categoryOf(p) === cat), [posts, cat]);
 
@@ -53,7 +54,7 @@ export default function Blog() {
           <div className="bl-list">
             {shown.map((p) => (
               <Link to={`/blog/${p.slug}`} key={p.id} className="bl-card">
-                <div className="bl-img">{p.cover_url && <img src={p.cover_url} alt={p.title} loading="lazy" />}</div>
+                <div className="bl-img">{p.cover_url && <img src={p.cover_url} alt={p.title} decoding="async" />}</div>
                 <div className="bl-body">
                   <time>{new Date(p.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}</time>
                   <h2>{p.title}</h2>
