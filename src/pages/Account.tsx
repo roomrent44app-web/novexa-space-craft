@@ -174,7 +174,22 @@ export default function Account() {
     setBusy(false);
   };
 
+  const saveNewPassword = async (event: React.FormEvent) => {
+    event.preventDefault(); setBusy(true); setMsg("");
+    const { error } = await supabase.auth.updateUser({ password: newPassword });
+    if (error) setMsg(error.message);
+    else { setMsg("Naya password set ho gaya! Ab aap login kar sakte hain."); setResetting(false); setNewPassword(""); }
+    setBusy(false);
+  };
+
   if (!ready) return <main className="account-page"><p>Loading…</p></main>;
+  if (resetting) return <main className="adm-wrap"><div className="adm-card"><form onSubmit={saveNewPassword}>
+    <h1 className="adm-title">Set New Password</h1>
+    <p className="adm-sub">Apna naya password likhiye (kam se kam 6 characters).</p>
+    <label className="adm-label">New Password<input className="adm-input" type="password" required minLength={6} value={newPassword} onChange={(e) => setNewPassword(e.target.value)} /></label>
+    {msg && <p className="adm-sub">{msg}</p>}
+    <button className="h-btn h-btn-orange" disabled={busy} type="submit">{busy ? "Please wait…" : "Save New Password"}</button>
+  </form></div></main>;
   if (!user && mode === "signup") return <main className="adm-wrap"><div className="adm-card"><SignupWizard onLogin={() => { setMode("login"); setMsg(""); }} /></div></main>;
   if (!user) return <main className="adm-wrap"><div className="adm-card"><form onSubmit={submit}>
     <h1 className="adm-title">{mode === "login" ? "Student Login" : "Create Account"}</h1>
