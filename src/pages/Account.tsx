@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { FunctionsHttpError } from "@supabase/supabase-js";
 import { Link } from "react-router-dom";
-import { CalendarClock, CheckCircle2, Clock3, CreditCard, LayoutDashboard, LogOut, RefreshCw, UserRound, Video } from "lucide-react";
+import { CalendarClock, ChartNoAxesColumn, CheckCircle2, ChevronRight, Clock3, CreditCard, LayoutDashboard, LogOut, RefreshCw, Sun, Target, UserRound, Video } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import Attendance from "@/components/site/Attendance";
 import SignupWizard from "@/components/site/SignupWizard";
@@ -227,6 +227,22 @@ export default function Account() {
 
       <section className="account-card account-class"><span className="account-class-icon"><Video /></span><small>{cls?.active_link_mode === "temporary" ? "Temporary Live Class" : "Full Month Live Class"}</small><h2>Join the 5AM Study Room</h2>{activeClassTime && <p>{activeClassTime}</p>}{activeClassLink ? <a className="h-btn h-btn-orange" href={activeClassLink} target="_blank" rel="noreferrer">Join Class <Video /></a> : <p>The class link will appear here soon.</p>}</section>
     </div>
+
+    <section className="h-goals"><div className="h-in">
+      <div className="h-goals-card">
+        <div className="h-goals-head">
+          <span className="h-goals-chip"><Target /></span>
+          <div>
+            <h2>Your Goals</h2>
+            <p>Plan your goals and stay consistent</p>
+          </div>
+        </div>
+        <div className="h-goals-row">
+          <Link className="h-goals-link h-goals-daily" to="/dashboard/goals"><Sun fill="currentColor" strokeWidth={1.4} /> Daily Goals <ChevronRight /></Link>
+          <Link className="h-goals-link h-goals-weekly" to="/dashboard/goals?tab=weekly"><ChartNoAxesColumn /> Weekly Goals <ChevronRight /></Link>
+        </div>
+      </div>
+    </div></section>
 
     <Attendance userId={user.id} />
 
