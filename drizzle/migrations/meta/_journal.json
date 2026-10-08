@@ -127,6 +127,13 @@
       "when": 1791478938672,
       "tag": "0017_community_moderation",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1791479043558,
+      "tag": "0018_streak_avatars",
+      "breakpoints": true
     }
   ]
 }
