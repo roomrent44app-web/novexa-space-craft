@@ -13,3 +13,7 @@ import "./index.css";
 
 const root = document.getElementById("root");
 if (root) createRoot(root).render(<App />);
+
+// Warm blog posts + cover photos in the background so Blog and articles open instantly.
+const warmBlog = () => import("./lib/blogCache").then((m) => m.loadPosts());
+if ("requestIdleCallback" in window) window.requestIdleCallback(() => { warmBlog(); }, { timeout: 2000 }); else setTimeout(warmBlog, 1200);
