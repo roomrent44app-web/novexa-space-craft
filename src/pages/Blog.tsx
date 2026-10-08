@@ -75,7 +75,7 @@ export default function Blog() {
             </ul>
             <p>We are Dr. Avi Bindal and Dr. Manya Gupta — a couple, both doctors, and passionate about education. We understand the challenges, distractions and stress that come with medical preparation because we have lived it ourselves.</p>
             <p>5AM.CO.IN is our way of giving back — a space where students can wake up, study together, stay consistent and become the best version of themselves, one morning at a time.</p>
-            <Link to="/about" className="bl-f-btn">Read Our Full Story <ArrowRight /></Link>
+            <Link to="/blog/founders-story" className="bl-f-btn">Read Our Full Story <ArrowRight /></Link>
           </div>
           <div className="bl-f-right">
             <div className="bl-f-deco"><Sun /><span>Same Students<br />Brighter Mornings ♡</span></div>
