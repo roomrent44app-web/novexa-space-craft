@@ -1631,3 +1631,103 @@ li.is-editing input,.gp-add input {flex:1;min-width:0;border:0;background:transp
   .bl-body p{font-size:.82rem;-webkit-line-clamp:4}
   .bl-founders{grid-template-columns:minmax(0,1fr)}
 }
+
+/* ============ Founders Story page ============ */
+.fs-page{background:#faf6f0;min-height:100vh;overflow-x:hidden}
+.fs-shell{max-width:1060px;margin:0 auto;padding:0 16px 56px}
+.fs-back{display:inline-flex;align-items:center;gap:8px;margin:18px 0 10px;font-size:.95rem;font-weight:600;color:#2b3a55;text-decoration:none}
+.fs-back:hover{color:#e8632b}
+.fs-eyebrow{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#e8632b;margin-bottom:10px}
+.fs-eyebrow.light{color:#ffb27a}
+
+.fs-hero{display:grid;grid-template-columns:1fr 1.05fr;gap:28px;align-items:center;padding:18px 0 8px}
+.fs-hero-copy h1{font-size:clamp(2.1rem,5vw,3.3rem);line-height:1.04;font-weight:800;color:#22304f;margin:0 0 14px}
+.fs-hero-copy h1 span{color:#e8632b}
+.fs-hero-copy p{font-size:1.02rem;line-height:1.6;color:#4a5468;max-width:34ch}
+
+.fs-hero-photo{position:relative;border-radius:22px;overflow:visible}
+.fs-hero-photo img{display:block;width:100%;height:auto;border-radius:22px}
+.fs-note{position:absolute;top:-4%;right:-2%;font-family:"Segoe Script","Bradley Hand","Comic Sans MS",cursive;font-size:.92rem;line-height:1.25;font-weight:600;color:#22304f;text-align:left;transform:rotate(4deg);pointer-events:none}
+.fs-tag{position:absolute;display:flex;flex-direction:column;gap:1px;pointer-events:none}
+.fs-tag strong{font-size:.82rem;font-weight:800;color:#22304f}
+.fs-tag em{font-style:normal;font-size:.72rem;line-height:1.3;color:#22304f}
+.fs-tag em b,.fs-tag em{font-weight:600}
+.fs-tag svg{width:26px;height:26px;color:#22304f;margin-top:2px}
+.fs-tag-avi{top:26%;left:8%;text-align:left;align-items:flex-start}
+.fs-tag-avi svg{transform:rotate(-8deg)}
+.fs-tag-manya{top:24%;right:5%;text-align:left;align-items:flex-start}
+.fs-tag-manya svg{transform:rotate(8deg) scaleX(-1)}
+.fs-spark{position:absolute;color:#e8862b;font-size:1rem;pointer-events:none}
+.fs-spark-1{top:14%;left:2%}
+.fs-spark-2{top:40%;right:-1%;font-size:.8rem}
+.fs-spark-3{bottom:16%;right:10%;font-size:.7rem}
+
+.fs-strip{display:flex;justify-content:space-between;align-items:center;gap:8px;background:#fff;border:1px solid #f0e6d8;border-radius:18px;padding:16px 18px;margin:22px 0 10px;box-shadow:0 10px 28px rgba(34,48,79,.06)}
+.fs-badge{display:flex;align-items:center;gap:12px;flex:1;position:relative;padding:0 8px}
+.fs-divider{position:absolute;left:0;top:-14px;bottom:-14px;width:1px;background:#eee3d3}
+.fs-badge:first-child{padding-left:0}
+.fs-badge:last-child{padding-right:0}
+.fs-badge-ic{display:grid;place-items:center;flex-shrink:0}
+.fs-badge-ic.orange{color:#e8632b}
+.fs-badge-ic.green{color:#1f9d55}
+.fs-badge-ic.red{color:#e0353f}
+.fs-badge-ic svg{width:26px;height:26px}
+.fs-badge strong{display:block;font-size:.92rem;font-weight:800;color:#22304f}
+.fs-badge small{display:block;font-size:.78rem;color:#7a8194}
+
+.fs-row{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;padding:34px 0 6px}
+.fs-row-rev{grid-template-columns:0.95fr 1.05fr}
+.fs-copy h2{font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.12;font-weight:800;color:#22304f;margin:0 0 14px}
+.fs-copy p{font-size:.98rem;line-height:1.65;color:#4a5468;margin:0 0 12px}
+.fs-photo img{display:block;width:100%;height:auto;border-radius:20px;box-shadow:0 14px 34px rgba(34,48,79,.10)}
+
+.fs-quote{display:flex;align-items:center;gap:12px;background:#fbdcbf;border-radius:14px;padding:14px 18px;margin-top:14px;font-size:1rem;font-weight:700;color:#22304f}
+.fs-quote svg{width:26px;height:26px;color:#e8632b;flex-shrink:0}
+.fs-heart{width:20px;height:20px;color:#e0353f;fill:#e0353f}
+
+.fs-pillars{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fs-pillar{background:#f7efe4;border-radius:16px;padding:20px 14px;text-align:center;transition:transform .25s ease,box-shadow .25s ease}
+.fs-pillar:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(34,48,79,.08)}
+.fs-pillar-ic{display:grid;place-items:center;margin-bottom:10px}
+.fs-pillar-ic.orange{color:#e8862b}
+.fs-pillar-ic.red{color:#e0353f}
+.fs-pillar-ic svg{width:30px;height:30px}
+.fs-pillar strong{display:block;font-size:.95rem;font-weight:800;color:#22304f;margin-bottom:4px}
+.fs-pillar small{display:block;font-size:.78rem;line-height:1.45;color:#7a8194}
+
+.fs-banner{position:relative;display:grid;grid-template-columns:1.15fr auto 1fr;align-items:center;gap:26px;border-radius:20px;padding:34px 34px;margin-top:38px;background-size:cover;background-position:center;overflow:hidden;isolation:isolate}
+.fs-banner::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,10,4,.78),rgba(15,10,4,.45) 55%,rgba(15,10,4,.35));z-index:-1}
+.fs-banner h2{font-size:clamp(1.5rem,3.6vw,2.2rem);line-height:1.1;font-weight:800;color:#fff;margin:6px 0 0}
+.fs-banner-sep{width:1px;align-self:stretch;background:rgba(255,255,255,.35)}
+.fs-banner-right{display:flex;align-items:center;gap:14px;justify-content:flex-end}
+.fs-banner-right p{font-size:.98rem;line-height:1.55;color:#f4ece2;margin:0;max-width:34ch}
+.fs-banner .fs-heart{flex-shrink:0}
+
+.fs-more{display:flex;justify-content:center;margin-top:34px}
+.fs-btn{display:inline-flex;align-items:center;gap:8px;background:#e8632b;color:#fff;font-weight:700;font-size:.95rem;padding:12px 22px;border-radius:999px;text-decoration:none;transition:transform .2s ease,box-shadow .2s ease}
+.fs-btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(232,99,43,.35)}
+
+@media (max-width:900px){
+  .fs-hero{grid-template-columns:1fr;gap:20px}
+  .fs-hero-copy p{max-width:none}
+  .fs-hero-photo{max-width:560px}
+  .fs-row{grid-template-columns:1fr;gap:20px;padding:28px 0 4px}
+  .fs-row-rev .fs-photo{order:-1}
+  .fs-strip{flex-direction:column;align-items:stretch;gap:14px}
+  .fs-divider{display:none}
+  .fs-banner{grid-template-columns:1fr;gap:16px}
+  .fs-banner-sep{display:none}
+  .fs-banner-right{justify-content:flex-start}
+}
+@media (max-width:600px){
+  .fs-shell{padding:0 14px 44px}
+  .fs-note{top:-8%;right:0;font-size:.78rem}
+  .fs-tag strong{font-size:.68rem}
+  .fs-tag em{font-size:.6rem}
+  .fs-tag svg{width:18px;height:18px}
+  .fs-tag-avi{top:22%;left:4%}
+  .fs-tag-manya{top:20%;right:2%}
+  .fs-badge{padding:0}
+  .fs-pillars{gap:10px}
+  .fs-banner{padding:26px 22px}
+}
