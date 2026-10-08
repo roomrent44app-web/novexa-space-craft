@@ -581,6 +581,15 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_streak_rankings: {
+        Args: { _period: string }
+        Returns: {
+          avatar_url: string
+          days: number
+          full_name: string
+          user_id: string
+        }[]
+      }
       get_wakeup_streaks: {
         Args: never
         Returns: {
