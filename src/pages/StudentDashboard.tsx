@@ -156,7 +156,7 @@ export default function StudentDashboard() {
           <ol className="dash-streak-list" aria-label={`Your streak: ${myStreak} days`}>
             {top5.map((row, i) => (
               <li key={row.user_id}>
-                <span className={`dash-streak-avatar rank-${i + 1} ${isPreview ? `dash-portrait portrait-${i + 1}` : ""}`}>{isPreview ? <img src={dashboardStudentsWebp} alt={`${row.full_name} — sample portrait`} loading="lazy" width={1000} height={333} /> : ("photo" in row && row.photo) ? <img src={row.photo} alt={row.full_name} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "50%" }} /> : row.full_name.charAt(0).toUpperCase()}</span>
+                <span className={`dash-streak-avatar rank-${i + 1} ${isPreview ? `dash-portrait portrait-${i + 1}` : ""}`}>{isPreview ? <img src={dashboardStudentsWebp} alt={`${row.full_name} — sample portrait`} loading="lazy" width={1000} height={333} /> : ("photo" in row && row.photo) ? <img src={String(row.photo)} alt={row.full_name} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "50%" }} /> : row.full_name.charAt(0).toUpperCase()}</span>
                 <div className="dash-streak-name"><Crown className={`crown-${Math.min(i + 1, 3)}`} /><b>#{i + 1}</b></div>
                 <span className="dash-streak-days">{row.streak_days} days</span>
               </li>
