@@ -104,6 +104,7 @@ export default function SignupWizard({ onLogin }: { onLogin: () => void }) {
     {msg && <p className="adm-sub" role="alert" style={{ color: msg.startsWith("Account created") ? "hsl(var(--primary))" : "hsl(var(--destructive))", fontWeight: 600 }}>{msg}</p>}
     <div className="signup-actions">
       {step > 0 && <button type="button" className="h-btn" onClick={() => { setStep(step - 1); setMsg(""); }}>Back</button>}
+      {step > 0 && step < last && <button type="button" className="h-btn" onClick={() => { setErrors({}); setMsg(""); setStep(step + 1); }}>Skip</button>}
       <button className="h-btn h-btn-orange" disabled={busy} type="submit">{busy ? "Please wait…" : step < last ? "Next" : "Create Account"}</button>
     </div>
     <p className="adm-sub">Already have an account? <button className="acc-text-btn" type="button" onClick={onLogin}>Login</button></p>
