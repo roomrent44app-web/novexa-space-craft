@@ -16,6 +16,7 @@ import NotFound from "./pages/NotFound.tsx";
 import Account from "./pages/Account.tsx";
 import StudentDashboard from "./pages/StudentDashboard.tsx";
 import DashboardProgress from "./pages/DashboardProgress.tsx";
+import GoalsPlanner from "./pages/GoalsPlanner.tsx";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const App = () => (
           <Route path="/blog/:slug" element={<Layout><BlogPost /></Layout>} />
           <Route path="/dashboard" element={<Layout><StudentDashboard /></Layout>} />
           <Route path="/dashboard/progress" element={<Layout><DashboardProgress /></Layout>} />
+          <Route path="/dashboard/goals" element={<Layout><GoalsPlanner /></Layout>} />
           <Route path="/admin" element={<Layout><Admin /></Layout>} />
           <Route path="/account" element={<Layout><Account /></Layout>} />
           <Route path="*" element={<NotFound />} />

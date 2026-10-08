@@ -1432,3 +1432,57 @@ img { height: auto; }
 .h-goals-weekly {background:hsl(235 100% 96%)}
 .h-goals-weekly svg {color:hsl(243 75% 59%)}
 @media (max-width:560px){.h-goals {padding:4px 0 44px}.h-goals-card {padding:16px;border-radius:15px}.h-goals-chip {width:54px;height:54px;flex-basis:54px;border-radius:13px}.h-goals-chip svg {width:32px;height:32px}.h-goals-head h2 {font-size:22px}.h-goals-head p {font-size:14px}.h-goals-row {gap:10px;margin-top:14px}.h-goals-link {padding:14px 12px;font-size:15px;gap:8px;border-radius:12px}.h-goals-link>svg:first-child {width:20px;height:20px;flex-basis:20px}.h-goals-link>svg:last-child {width:16px;height:16px}}
+
+/* ============ Goals Planner page (/dashboard/goals) ============ */
+.gp-shell {max-width:640px}
+.gp-head {display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.gp-chip {width:64px;height:64px;flex:0 0 64px;display:grid;place-items:center;border-radius:16px;background:hsl(348 100% 96%);color:hsl(343 90% 59%)}
+.gp-chip svg {width:34px;height:34px;stroke-width:2.4}
+.gp-head h1 {font-size:30px;font-weight:900;color:hsl(228 34% 9%);line-height:1.15}
+.gp-head p {margin-top:3px;font-size:16px;color:hsl(220 9% 40%)}
+.gp-shell .dash-sample-label {position:static;display:block;margin:0 0 14px;text-align:center}
+.gp-tabs {display:grid;grid-template-columns:1fr 1fr;padding:6px;border-radius:999px;background:hsl(240 10% 94%);margin-bottom:16px}
+.gp-tabs button {min-height:48px;border-radius:999px;font-size:16px;font-weight:800;color:hsl(220 9% 40%);background:transparent;transition:background .2s,color .2s}
+.gp-tabs button.active.is-daily {background:hsl(348 100% 96%);color:hsl(343 90% 59%);box-shadow:inset 0 0 0 1.5px hsl(343 90% 59%/.35)}
+.gp-tabs button.active.is-weekly {background:hsl(235 100% 96%);color:hsl(243 75% 59%);box-shadow:inset 0 0 0 1.5px hsl(243 75% 59%/.35)}
+.gp-card {padding:20px;border-radius:18px}
+.gp-card-head,.gp-progress-head {display:flex;align-items:center;gap:14px}
+.gp-icon {width:56px;height:56px;flex:0 0 56px;display:grid;place-items:center;border-radius:14px}
+.gp-icon svg {width:28px;height:28px}
+.gp-icon-daily {background:hsl(348 100% 96%);color:hsl(343 90% 59%)}
+.gp-icon-weekly {background:hsl(152 60% 93%);color:hsl(152 70% 38%)}
+.gp-card-title {min-width:0}
+.gp-card-title h2 {font-size:22px;font-weight:900;color:hsl(228 34% 9%);line-height:1.2}
+.gp-card-title small {display:block;margin-top:2px;font-size:14px;color:hsl(220 9% 45%)}
+.gp-badge {margin-left:auto;flex:0 0 auto;text-align:center;padding:8px 16px;border-radius:12px;background:hsl(348 100% 96%)}
+.gp-badge b {display:block;font-size:15px;font-weight:900;color:hsl(343 90% 59%)}
+.gp-badge small {display:block;font-size:12px;color:hsl(220 9% 45%);white-space:nowrap}
+.gp-list {margin-top:14px;display:grid;gap:10px}
+.gp-list li,.gp-add {display:flex;align-items:center;gap:12px;min-height:52px;padding:6px 14px;border-radius:14px;border:1px solid hsl(240 8% 92%);background:hsl(0 0% 100%)}
+.gp-list li.is-editing {border-color:hsl(343 90% 59%/.5)}
+.gp-circle,.gp-circle-btn {width:26px;height:26px;flex:0 0 26px;border-radius:50%;border:2px solid hsl(240 6% 80%);display:grid;place-items:center;background:transparent;color:hsl(0 0% 100%)}
+.gp-circle-btn {cursor:pointer;transition:background .2s,border-color .2s}
+.gp-circle-btn svg {width:15px;height:15px;stroke-width:3.2;opacity:0}
+.gp-circle-btn[aria-pressed=true] {background:hsl(152 70% 40%);border-color:hsl(152 70% 40%)}
+.gp-circle-btn[aria-pressed=true] svg {opacity:1}
+.gp-title {flex:1;min-width:0;font-size:16px;color:hsl(228 34% 9%);overflow-wrap:anywhere;text-align:left}
+.gp-pen-btn {margin-left:auto;flex:0 0 auto;width:34px;height:34px;display:grid;place-items:center;border-radius:8px;color:hsl(220 9% 55%);transition:color .2s}
+.gp-pen-btn:hover {color:hsl(343 90% 59%)}
+.gp-pen-btn svg,.gp-add .gp-pen {width:17px;height:17px}
+li.is-editing input,.gp-add input {flex:1;min-width:0;border:0;background:transparent;font-size:16px;color:hsl(228 34% 9%);outline:none}
+.gp-add {margin-top:10px;border-style:dashed;border-color:hsl(240 6% 82%);background:hsl(240 20% 98%)}
+.gp-add input::placeholder {color:hsl(220 9% 65%)}
+.gp-add .gp-pen {flex:0 0 auto;color:hsl(220 9% 65%)}
+.gp-loading {justify-content:center;color:hsl(220 9% 55%);font-size:14px}
+.gp-save {width:100%;margin-top:16px;min-height:56px;font-size:18px;font-weight:800;border-radius:14px;background:hsl(152 70% 40%);color:hsl(0 0% 100%);gap:10px;box-shadow:none}
+.gp-save:hover {background:hsl(152 70% 36%)}
+.gp-progress {margin-top:16px;padding:20px;border-radius:18px}
+.gp-progress-arrow {margin-left:auto;flex:0 0 auto;width:36px;height:36px;display:grid;place-items:center;border-radius:10px;color:hsl(220 9% 45%)}
+.gp-progress-arrow svg {width:22px;height:22px}
+.gp-bar {display:flex;align-items:center;gap:12px;margin-top:16px}
+.gp-bar-track {flex:1;display:block;height:14px;border-radius:999px;background:hsl(240 10% 93%);overflow:hidden}
+.gp-bar-track i {display:block;height:100%;border-radius:999px;background:hsl(152 70% 40%);transition:width .5s}
+.gp-bar b {flex:0 0 auto;font-size:17px;font-weight:900;color:hsl(228 34% 9%)}
+.gp-switch {display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-size:16px;font-weight:800;color:hsl(152 70% 32%)}
+.gp-switch svg {width:18px;height:18px}
+@media (max-width:600px){.gp-head {gap:12px}.gp-chip {width:52px;height:52px;flex-basis:52px;border-radius:13px}.gp-chip svg {width:28px;height:28px}.gp-head h1 {font-size:24px}.gp-head p {font-size:14px}.gp-tabs {padding:5px}.gp-tabs button {min-height:44px;font-size:14px}.gp-card,.gp-progress {padding:16px}.gp-icon {width:48px;height:48px;flex-basis:48px;border-radius:12px}.gp-icon svg {width:24px;height:24px}.gp-card-title h2 {font-size:19px}.gp-card-title small {font-size:12.5px}.gp-badge {padding:6px 12px}.gp-badge small {font-size:11px}.gp-list li,.gp-add {min-height:48px;padding:5px 12px;gap:10px}.gp-title {font-size:15px}.gp-save {min-height:50px;font-size:16px}}

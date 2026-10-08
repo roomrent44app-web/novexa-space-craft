@@ -85,8 +85,8 @@ export default function Index() {
           </div>
         </div>
         <div className="h-goals-row">
-          <Link className="h-goals-link h-goals-daily" to="/dashboard/progress"><Sun fill="currentColor" strokeWidth={1.4} /> Daily Goals <ChevronRight /></Link>
-          <Link className="h-goals-link h-goals-weekly" to="/dashboard/progress"><ChartNoAxesColumn /> Weekly Goals <ChevronRight /></Link>
+          <Link className="h-goals-link h-goals-daily" to="/dashboard/goals"><Sun fill="currentColor" strokeWidth={1.4} /> Daily Goals <ChevronRight /></Link>
+          <Link className="h-goals-link h-goals-weekly" to="/dashboard/goals?tab=weekly"><ChartNoAxesColumn /> Weekly Goals <ChevronRight /></Link>
         </div>
       </div>
     </div></section>
