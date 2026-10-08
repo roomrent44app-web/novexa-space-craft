@@ -1761,3 +1761,10 @@ li.is-editing input,.gp-add input {flex:1;min-width:0;border:0;background:transp
   .fs-hero-photo img{border-radius:14px 0 0 14px}
   .fs-shell{padding-bottom:20px}
 }
+/* Founders hero + banner use art cropped from the supplied mockup (labels baked in) */
+.fs-hero-photo .fs-note,.fs-hero-photo .fs-tag,.fs-hero-photo .fs-spark{display:none}
+.fs-hero-photo img{border-radius:0;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 8%);mask-image:linear-gradient(90deg,transparent 0,#000 8%)}
+.fs-banner{padding:0;display:block;background:none!important;aspect-ratio:684/126}
+.fs-banner::before{display:none}
+.fs-banner>*{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.fs-banner>img.fs-banner-img{position:static;width:100%;height:100%;clip:auto;object-fit:cover;display:block}

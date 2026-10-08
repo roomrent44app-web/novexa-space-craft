@@ -114,7 +114,8 @@ export default function FoundersStory() {
         </section>
 
         {/* Belief banner */}
-        <section className="fs-banner" style={{ backgroundImage: `url(${foundersBannerWebp})` }}>
+        <section className="fs-banner">
+          <img className="fs-banner-img" src={foundersBannerWebp} alt="Our Biggest Belief — Brighter Students. Brighter Futures." loading="lazy" />
           <div className="fs-banner-left">
             <span className="fs-eyebrow light">Our Biggest Belief</span>
             <h2>Brighter Students.<br />Brighter Futures.</h2>
