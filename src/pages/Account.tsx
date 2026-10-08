@@ -57,7 +57,10 @@ export default function Account() {
   const [selectedPlan, setSelectedPlan] = useState(params.get("plan") ?? "21d-699");
 
   useEffect(() => {
-    const { data } = supabase.auth.onAuthStateChange((_e, session) => setUser(session?.user ?? null));
+    const { data } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user ?? null);
+      if (event === "PASSWORD_RECOVERY") setResetting(true);
+    });
     supabase.auth.getUser().then(({ data }) => { setUser(data.user); setReady(true); });
     return () => data.subscription.unsubscribe();
   }, []);
