@@ -151,7 +151,7 @@ export default function StudentDashboard() {
           <header className="dash-card-head">
             <span className="dash-chip chip-orange"><Flame /></span>
             <div className="dash-card-name"><h3>Wake-up Streak</h3><small>Top wake-up streaks</small></div>
-            <Link className="dash-card-arrow" to="/account" aria-label="View wake-up streak">›</Link>
+            <Link className="dash-card-arrow" to="/dashboard/streak" aria-label="View wake-up streak">›</Link>
           </header>
           <ol className="dash-streak-list" aria-label={`Your streak: ${myStreak} days`}>
             {top5.map((row, i) => (
