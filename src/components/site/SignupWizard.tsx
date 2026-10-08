@@ -13,17 +13,17 @@ const STEPS: { title: string; fields: Field[] }[] = [
     { key: "age", label: "Age", type: "number" },
     { key: "city_state", label: "City / State" },
   ]},
-  { title: "Study Details", fields: [
+  { title: "Study Details (optional — you can Skip)", fields: [
     { key: "student_type", label: "Are you a student of", type: "select", options: ["School", "College", "NEET", "UPSC", "Other"] },
     { key: "preparing_for", label: "What are you preparing/studying for?" },
     { key: "class_year", label: "Current Class / Year" },
     { key: "study_goal", label: "Main Study Goal" },
   ]},
-  { title: "Wake-Up Call", fields: [
+  { title: "Wake-Up Call (optional — you can Skip)", fields: [
     { key: "call_language", label: "Preferred call language", type: "select", options: ["Hindi", "English", "Both"] },
     { key: "backup_whatsapp", label: "Backup WhatsApp number (optional)", type: "tel", optional: true },
   ]},
-  { title: "Community Details", fields: [
+  { title: "Community Details (optional — you can Skip)", fields: [
     { key: "heard_from", label: "How did you hear about 5AM.CO.IN?", type: "select", options: ["Instagram", "YouTube", "By friend", "Other"] },
     { key: "why_join", label: "Why do you want to join the 5 AM Study Community?", type: "textarea" },
     { key: "goal_30_days", label: "Your biggest study goal for the next 30 days?", type: "textarea" },
@@ -104,6 +104,7 @@ export default function SignupWizard({ onLogin }: { onLogin: () => void }) {
     {msg && <p className="adm-sub" role="alert" style={{ color: msg.startsWith("Account created") ? "hsl(var(--primary))" : "hsl(var(--destructive))", fontWeight: 600 }}>{msg}</p>}
     <div className="signup-actions">
       {step > 0 && <button type="button" className="h-btn" onClick={() => { setStep(step - 1); setMsg(""); }}>Back</button>}
+      {step > 0 && step < last && <button type="button" className="h-btn" onClick={() => { setErrors({}); setMsg(""); setStep(step + 1); }}>Skip</button>}
       <button className="h-btn h-btn-orange" disabled={busy} type="submit">{busy ? "Please wait…" : step < last ? "Next" : "Create Account"}</button>
     </div>
     <p className="adm-sub">Already have an account? <button className="acc-text-btn" type="button" onClick={onLogin}>Login</button></p>
