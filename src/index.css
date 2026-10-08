@@ -1624,6 +1624,7 @@ li.is-editing input,.gp-add input {flex:1;min-width:0;border:0;background:transp
 .bl-f-ic.red{background:hsl(0 80% 94%);color:hsl(355 80% 52%)}
 @media (max-width:600px){
   .bl-hero{min-height:200px;padding:26px 22px}
+  .bl-hero p{max-width:240px;font-size:.98rem}
   .bl-img{min-height:170px}
   .bl-body{padding:12px 12px;gap:6px}
   .bl-body h2{font-size:1rem}
