@@ -53,7 +53,6 @@ export default function Account() {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [attendanceCount, setAttendanceCount] = useState(0);
   const [selectedPlan, setSelectedPlan] = useState(params.get("plan") ?? "21d-699");
-  const [classDays, setClassDays] = useState<string[]>([]);
 
   useEffect(() => {
     const { data } = supabase.auth.onAuthStateChange((_e, session) => setUser(session?.user ?? null));
@@ -87,8 +86,6 @@ export default function Account() {
   const daysLeft = active?.expires_at ? Math.max(0, Math.ceil((new Date(active.expires_at).getTime() - Date.now()) / 86400000)) : 0;
   const trialUsed = subscriptions.some((s) => s.plan_code === "trial-3d");
   const selected = PURCHASE_PLANS.find((plan) => plan.code === selectedPlan) ?? PURCHASE_PLANS[PURCHASE_PLANS.length - 1];
-  const needsDays = selected.days < 7;
-  const toggleDay = (d: string) => setClassDays((cur) => cur.includes(d) ? cur.filter((x) => x !== d) : cur.length >= selected.days ? cur : [...cur, d]);
   const activeClassLink = cls?.active_link_mode === "temporary" ? cls.temporary_meet_link : cls?.monthly_meet_link;
   const activeClassTime = cls?.active_link_mode === "temporary" ? cls.temporary_class_time : cls?.monthly_class_time;
 
@@ -118,12 +115,11 @@ export default function Account() {
 
   const pay = async () => {
     if (!user || !selected) return;
-    if (needsDays && classDays.length !== selected.days) { setMsg(`Please select exactly ${selected.days} class days.`); return; }
     setBusy(true); setMsg("");
     try {
       if (selected.code === "trial-3d") {
         if (trialUsed) throw new Error("The free trial can be used only once per account.");
-        const { data, error } = await supabase.functions.invoke("activate-free-trial", { body: { classDays } });
+        const { data, error } = await supabase.functions.invoke("activate-free-trial", { body: {} });
         if (error) throw new Error(await fnError(error, "Could not start the free trial. Please try again."));
         if (data?.error) throw new Error(data.error);
         setMsg("Your 3 Days Free Trial is active!");
@@ -131,7 +127,7 @@ export default function Account() {
         window.open(selected.payLink, "_blank", "noopener,noreferrer");
         setMsg("Payment window opened. After payment, your plan will be activated shortly.");
       } else {
-        await purchasePlan(selected.code, { name: profile.full_name, email: user.email ?? "", phone: profile.phone }, needsDays ? classDays : []);
+        await purchasePlan(selected.code, { name: profile.full_name, email: user.email ?? "", phone: profile.phone });
         setMsg("Payment successful. Your plan is active!");
       }
       await loadDashboard();
@@ -171,9 +167,7 @@ export default function Account() {
       <section className="account-card account-plan">
         <div className="account-card-title"><div><small>Subscription</small><h2>{active ? "Your plan is active" : latest?.status === "pending" ? "Payment pending" : "Choose your plan"}</h2></div><span className={`account-status ${active ? "active" : ""}`}>{active ? "Active" : latest?.status === "pending" ? "Pending" : "Inactive"}</span></div>
         {active && <div className="account-plan-details"><div><small>Started</small><b>{formatDate(active.starts_at)}</b></div><div><small>Expires</small><b>{formatDate(active.expires_at)}</b></div><div><small>Paid</small><b>₹{(active.amount_paise / 100).toLocaleString("en-IN")}</b></div></div>}
-        <label className="account-select">{active && daysLeft > 3 ? "Buy another plan" : active ? "Renew your plan" : "Select a plan"}<select value={selectedPlan} onChange={(event) => { setSelectedPlan(event.target.value); setClassDays([]); }}>{PURCHASE_PLANS.map((plan) => <option key={plan.code} value={plan.code}>{plan.name} — {plan.price ? `₹${plan.price.toLocaleString("en-IN")}` : "Free"}</option>)}</select></label>
-        {needsDays && <div className="class-days"><p>Choose your {selected.days} class days in a week <b>({classDays.length}/{selected.days})</b></p><div className="class-days-grid">{WEEK_DAYS.map((d) => <button type="button" key={d} aria-pressed={classDays.includes(d)} className={classDays.includes(d) ? "on" : ""} disabled={!classDays.includes(d) && classDays.length >= selected.days} onClick={() => toggleDay(d)}>{d}</button>)}</div></div>}
-        {active?.class_days?.length ? <p className="adm-sub">Your class days: <b>{active.class_days.join(", ")}</b></p> : null}
+        <label className="account-select">{active && daysLeft > 3 ? "Buy another plan" : active ? "Renew your plan" : "Select a plan"}<select value={selectedPlan} onChange={(event) => setSelectedPlan(event.target.value)}>{PURCHASE_PLANS.map((plan) => <option key={plan.code} value={plan.code}>{plan.name} — {plan.price ? `₹${plan.price.toLocaleString("en-IN")}` : "Free"}</option>)}</select></label>
         <button className="h-btn h-btn-orange" onClick={pay} disabled={busy}><CreditCard /> {busy ? "Please wait…" : selected.code === "trial-3d" ? "Start Free Trial" : `Pay ₹${selected?.price.toLocaleString("en-IN")}`}</button>
         {msg && <p className="adm-sub">{msg}</p>}
       </section>
