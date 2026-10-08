@@ -26,10 +26,6 @@ Deno.serve(async (req) => {
     const { data: { user }, error: userError } = await authClient.auth.getUser()
     if (userError || !user) return json({ error: 'Please log in before starting your free trial.' }, 401)
 
-    const body = await req.json().catch(() => ({})) as { classDays?: unknown }
-    const allowed = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
-    const classDays = Array.isArray(body.classDays) ? [...new Set(body.classDays.filter((d): d is string => typeof d === 'string' && allowed.includes(d)))] : []
-    if (classDays.length !== TRIAL.days) return json({ error: 'Please select exactly 3 class days.' }, 400)
 
     const admin = createClient(url, serviceKey)
     const { data: existing, error: checkError } = await admin
@@ -58,7 +54,7 @@ Deno.serve(async (req) => {
       expires_at: expiresAt.toISOString(),
       razorpay_order_id: `trial_${crypto.randomUUID().replaceAll('-', '').slice(0, 20)}`,
       source: 'free_trial',
-      class_days: classDays,
+      class_days: [],
     })
     if (insertError) {
       console.error('Free trial save failed:', insertError.message)

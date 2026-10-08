@@ -17,7 +17,7 @@ const ChartFilled = () => (
 
 const steps = [
   { n: 1, Icon: () => <CalendarDays fill="hsl(var(--primary) / .18)" />, title: "Choose Your Plan", text: <>Pick a weekly or monthly<br />plan that fits your routine.</> },
-  { n: 2, Icon: () => <Bell fill="currentColor" />, title: "Get Daily Wake-Up Calls", text: <>Receive a wake-up call at<br />5 AM on your selected days.</> },
+  { n: 2, Icon: () => <Bell fill="currentColor" />, title: "Get Daily Wake-Up Calls", text: <>Receive a wake-up call at<br />5 AM every day of your plan.</> },
   { n: 3, Icon: () => <Users fill="currentColor" strokeWidth={1.6} />, title: "Join the Study Room", text: <>Attend live study sessions<br />and stay consistent with a<br />supportive community.</> },
 ];
 

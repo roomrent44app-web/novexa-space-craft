@@ -50,7 +50,7 @@ export const FEATURES = [
 ];
 
 export const FAQS = [
-  { q: "How many wake-up calls will I get and what is the timing?", a: "You will receive **2** follow-up calls on your selected days.\nThe first call is at **4:55 AM** and if you don't answer, the second call will be at **5:10 AM.**" },
+  { q: "How many wake-up calls will I get and what is the timing?", a: "You will receive **2** follow-up calls every day during your plan.\nThe first call is at **4:55 AM** and if you don't answer, the second call will be at **5:10 AM.**" },
   { q: "How will the wake-up call help me?", a: "It is an AI generated reminder call. It motivates you to stand up and take action\nin the moment, so you don't oversleep and can follow your study routine." },
   { q: "Is the amount refundable?", a: "No, the amount is not refundable at any payment." },
   { q: "What should I do after the wake-up call?", a: "After receiving the wake-up call, join our **study link** at 5 AM through the website\nto **study with** students from all over India." },

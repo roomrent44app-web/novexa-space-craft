@@ -6,7 +6,7 @@ const corsHeaders = {
 }
 import { z } from 'npm:zod@3.25.76'
 
-const BodySchema = z.object({ planCode: z.string().min(1).max(30), classDays: z.array(z.enum(['Mon','Tue','Wed','Thu','Fri','Sat','Sun'])).max(7).optional() })
+const BodySchema = z.object({ planCode: z.string().min(1).max(30) })
 const PLANS: Record<string, { name: string; days: number; amount: number }> = {
   '5d-199': { name: '5 Days Plan', days: 5, amount: 19900 },
   '7d-249': { name: '7 Days Plan', days: 7, amount: 24900 },
@@ -41,8 +41,6 @@ Deno.serve(async (req) => {
     if (!parsed.success) return json({ error: 'Invalid plan.' }, 400)
     const plan = PLANS[parsed.data.planCode]
     if (!plan) return json({ error: 'This plan is not available.' }, 400)
-    const classDays = [...new Set(parsed.data.classDays ?? [])]
-    if (plan.days < 7 && classDays.length !== plan.days) return json({ error: `Please select exactly ${plan.days} class days.` }, 400)
 
     const orderResponse = await fetch('https://api.razorpay.com/v1/orders', {
       method: 'POST',
@@ -72,7 +70,7 @@ Deno.serve(async (req) => {
       amount_paise: plan.amount,
       razorpay_order_id: order.id,
       status: 'pending',
-      class_days: plan.days < 7 ? classDays : [],
+      class_days: [],
     })
     if (insertError) {
       console.error('Subscription order save failed:', insertError.message)

@@ -27,7 +27,7 @@ const stats = [["10K+", "Students Joined"], ["Daily", "Live Study Sessions"], ["
 
 const steps = [
   { Icon: ClipboardList, title: "Choose Your Plan", text: <>Pick a weekly or monthly plan<br />that suits you.</> },
-  { Icon: Bell, title: "Get Daily Wake-Up Calls", text: <>Receive a wake-up call at 5 AM<br />on your selected days.</> },
+  { Icon: Bell, title: "Get Daily Wake-Up Calls", text: <>Receive a wake-up call at 5 AM<br />every day of your plan.</> },
   { Icon: UsersFilled, title: "Join the Study Community", text: <>Attend live study sessions and stay consistent with like-minded students.</> },
 ];
 
