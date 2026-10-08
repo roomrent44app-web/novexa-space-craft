@@ -393,6 +393,44 @@ export type Database = {
           },
         ]
       }
+      student_journal: {
+        Row: {
+          body: string
+          created_at: string
+          day: string
+          id: string
+          mood: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          body?: string
+          created_at?: string
+          day: string
+          id?: string
+          mood?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          day?: string
+          id?: string
+          mood?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_journal_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       student_notes: {
         Row: {
           body: string
