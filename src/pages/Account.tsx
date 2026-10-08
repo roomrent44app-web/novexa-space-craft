@@ -117,6 +117,26 @@ export default function Account() {
     setBusy(false);
   };
 
+  const uploadAvatar = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!user || !file) return;
+    if (!file.type.startsWith("image/")) { setMsg("Please choose an image file (JPG/PNG)."); return; }
+    if (file.size > 5 * 1024 * 1024) { setMsg("Photo must be smaller than 5 MB."); return; }
+    setAvatarBusy(true); setMsg("");
+    const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
+    const path = `${user.id}/avatar.${ext}`;
+    const { error: upErr } = await supabase.storage.from("avatars").upload(path, file, { upsert: true, contentType: file.type });
+    if (upErr) { setMsg(upErr.message); setAvatarBusy(false); return; }
+    const { error: dbErr } = await supabase.from("profiles").upsert({ id: user.id, ...profile, avatar_url: path });
+    if (dbErr) { setMsg(dbErr.message); setAvatarBusy(false); return; }
+    const { data: signed } = await supabase.storage.from("avatars").createSignedUrl(path, 3600);
+    setProfile({ ...profile, avatar_url: path });
+    setAvatarSrc(signed?.signedUrl ?? "");
+    setMsg("Profile photo updated.");
+    setAvatarBusy(false);
+  };
+
   const pay = async () => {
     if (!user || !selected) return;
     setBusy(true); setMsg("");
