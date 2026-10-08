@@ -24,7 +24,7 @@ export const WEEKLY_PLANS = [
 
 export const PLANS_PAGE_WEEKLY = WEEKLY_PLANS;
 
-export const TRIAL_PLAN = { code: "trial-3d", name: "3 Days Free Trial", days: 3, calls: 3, price: 0 };
+export const TRIAL_PLAN = { code: "trial-3d", name: "3 Days Free Trial", days: 3, calls: 3, price: 0, payLink: undefined as string | undefined };
 
 export const MONTHLY_PLANS = [
   { days: 9, calls: 9, price: 349, freeTrial: false, payLink: PAYMENT_LINKS[9] },
