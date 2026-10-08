@@ -113,6 +113,13 @@
       "when": 1791478215241,
       "tag": "0015_0015_profile_avatars",
       "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1791478688870,
+      "tag": "0016_student_journal",
+      "breakpoints": true
     }
   ]
 }
