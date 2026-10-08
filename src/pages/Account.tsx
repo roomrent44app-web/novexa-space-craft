@@ -180,6 +180,7 @@ export default function Account() {
     </>}
     <label className="adm-label">Email<input className="adm-input" type="email" required value={form.email} onChange={set("email")} /></label>
     <label className="adm-label">Password<input className="adm-input" type="password" required minLength={6} value={form.password} onChange={set("password")} /></label>
+    {mode === "login" && <p className="adm-sub" style={{ textAlign: "right" }}><button className="acc-text-btn" type="button" disabled={busy} onClick={resetPassword}>Forgot Password?</button></p>}
     {msg && <p className="adm-sub">{msg}</p>}
     <button className="h-btn h-btn-orange" disabled={busy} type="submit">{busy ? "Please wait…" : mode === "login" ? "Login" : "Create Account"}</button>
     <p className="adm-sub">{mode === "login" ? "New here? " : "Already have an account? "}<button className="acc-text-btn" type="button" onClick={() => { setMode(mode === "login" ? "signup" : "login"); setMsg(""); }}>{mode === "login" ? "Create account" : "Login"}</button></p>
