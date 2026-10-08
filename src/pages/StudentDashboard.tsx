@@ -23,7 +23,7 @@ type ActiveSub = {
   expires_at: string | null;
 };
 
-type StreakRow = { user_id: string; full_name: string; streak_days: number };
+type StreakRow = { user_id: string; full_name: string; streak_days: number; avatar_url?: string; photo?: string };
 
 const WEEK_LABELS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
@@ -61,7 +61,15 @@ export default function StudentDashboard() {
     setName(fromProfile || fallbackName(user));
     setActive((subResult.data?.[0] as ActiveSub | undefined) ?? null);
     setPresent(new Set((attendanceResult.data ?? []).map((r: { day: string }) => r.day)));
-    setBoard((streakResult.data ?? []) as StreakRow[]);
+    const rows = (streakResult.data ?? []) as StreakRow[];
+    setBoard(rows);
+    const paths = rows.map((r) => r.avatar_url).filter((p): p is string => !!p);
+    if (paths.length) {
+      supabase.storage.from("avatars").createSignedUrls(paths, 3600).then(({ data: signed }) => {
+        const map = new Map((signed ?? []).map((x) => [x.path, x.signedUrl]));
+        setBoard(rows.map((r) => ({ ...r, photo: r.avatar_url ? map.get(r.avatar_url) ?? undefined : undefined })));
+      });
+    }
   }, [user]);
 
   useEffect(() => { loadAll(); }, [loadAll]);
@@ -148,7 +156,7 @@ export default function StudentDashboard() {
           <ol className="dash-streak-list" aria-label={`Your streak: ${myStreak} days`}>
             {top5.map((row, i) => (
               <li key={row.user_id}>
-                <span className={`dash-streak-avatar rank-${i + 1} ${isPreview ? `dash-portrait portrait-${i + 1}` : ""}`}>{isPreview ? <img src={dashboardStudentsWebp} alt={`${row.full_name} — sample portrait`} loading="lazy" width={1000} height={333} /> : row.full_name.charAt(0).toUpperCase()}</span>
+                <span className={`dash-streak-avatar rank-${i + 1} ${isPreview ? `dash-portrait portrait-${i + 1}` : ""}`}>{isPreview ? <img src={dashboardStudentsWebp} alt={`${row.full_name} — sample portrait`} loading="lazy" width={1000} height={333} /> : ("photo" in row && row.photo) ? <img src={row.photo} alt={row.full_name} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "50%" }} /> : row.full_name.charAt(0).toUpperCase()}</span>
                 <div className="dash-streak-name"><Crown className={`crown-${Math.min(i + 1, 3)}`} /><b>#{i + 1}</b></div>
                 <span className="dash-streak-days">{row.streak_days} days</span>
               </li>
