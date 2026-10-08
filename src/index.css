@@ -1543,3 +1543,12 @@ li.is-editing input,.gp-add input {flex:1;min-width:0;border:0;background:transp
 .jr-entry-body em{font-style:normal;font-weight:500;font-size:.8rem;color:hsl(var(--muted-foreground));margin-left:6px}
 .jr-entry-body small{color:hsl(var(--muted-foreground));font-size:.9rem;overflow-wrap:anywhere}
 @media (max-width:600px){.jr-card{padding:16px}.jr-head h1{font-size:1.3rem}.jr-icon{width:52px;height:52px}.jr-moods{gap:5px}.jr-mood{font-size:.7rem}.jr-mood span{font-size:1.5rem}.jr-save{width:100%}}
+
+/* Community feed continuous motion */
+.dash-feed-window {position:relative;height:300px;overflow:hidden;margin-top:12px;-webkit-mask-image:linear-gradient(to bottom,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(to bottom,transparent,#000 8%,#000 92%,transparent)}
+.dash-feed-window .dash-feed {margin-top:0}
+.dash-feed-loop {animation:dashFeedScroll 18s linear infinite}
+.dash-feed-window:hover .dash-feed-loop,.dash-feed-window:focus-within .dash-feed-loop {animation-play-state:paused}
+@keyframes dashFeedScroll {from {transform:translateY(0)} to {transform:translateY(-50%)}}
+@media (prefers-reduced-motion:reduce) {.dash-feed-loop {animation:none}.dash-feed-window {height:auto;-webkit-mask-image:none;mask-image:none}}
+@media(max-width:600px){.dash-feed-window {height:260px}}
