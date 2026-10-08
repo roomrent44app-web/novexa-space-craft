@@ -164,6 +164,8 @@ main { overflow-x: clip; }
 .nav-link:hover, .nav-link.active { color: hsl(var(--primary)); }
 .nav-link.active::after { content: ""; position: absolute; left: 0; right: 0; bottom: calc(var(--u) * -2); height: calc(var(--u) * 1.6); border-radius: 2px; background: hsl(var(--primary)); }
 .header-cta { margin-left: auto; height: clamp(36px, 4vw, 44px); padding: 0 clamp(20px, 2.4vw, 28px); border-radius: 999px; font-size: clamp(14px, 1.5vw, 16px); font-weight: 600; }
+@media (max-width: 1330px) { .site-nav { gap: 16px; margin-left: 36px; } }
+@media (max-width: 1149px) { .site-header .header-cta { display: none; } }
 @media (max-width: 767px) {
   .site-header-row { height: 64px; padding: 0 16px; justify-content: space-between; }
   .site-nav, .header-cta { display: none; }
