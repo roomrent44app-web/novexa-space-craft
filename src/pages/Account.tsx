@@ -49,13 +49,18 @@ export default function Account() {
   const [avatarBusy, setAvatarBusy] = useState(false);
   const [msg, setMsg] = useState("");
   const [busy, setBusy] = useState(false);
+  const [resetting, setResetting] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
   const [cls, setCls] = useState<{ meet_link: string; class_time: string; temporary_meet_link: string; temporary_class_time: string; monthly_meet_link: string; monthly_class_time: string; active_link_mode: "temporary" | "monthly" } | null>(null);
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [attendanceCount, setAttendanceCount] = useState(0);
   const [selectedPlan, setSelectedPlan] = useState(params.get("plan") ?? "21d-699");
 
   useEffect(() => {
-    const { data } = supabase.auth.onAuthStateChange((_e, session) => setUser(session?.user ?? null));
+    const { data } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user ?? null);
+      if (event === "PASSWORD_RECOVERY") setResetting(true);
+    });
     supabase.auth.getUser().then(({ data }) => { setUser(data.user); setReady(true); });
     return () => data.subscription.unsubscribe();
   }, []);
@@ -106,6 +111,14 @@ export default function Account() {
       const { error } = await supabase.auth.signInWithPassword({ email: form.email, password: form.password });
       if (error) setMsg(error.message);
     }
+    setBusy(false);
+  };
+
+  const resetPassword = async () => {
+    if (!form.email.trim()) { setMsg("Pehle apna Email ID upar likhiye, phir Forgot Password dabaiye."); return; }
+    setBusy(true); setMsg("");
+    const { error } = await supabase.auth.resetPasswordForEmail(form.email.trim(), { redirectTo: window.location.origin + "/account" });
+    setMsg(error ? error.message : "Password reset link aapke email par bhej diya gaya hai. Apna email check kariye.");
     setBusy(false);
   };
 
@@ -161,7 +174,22 @@ export default function Account() {
     setBusy(false);
   };
 
+  const saveNewPassword = async (event: React.FormEvent) => {
+    event.preventDefault(); setBusy(true); setMsg("");
+    const { error } = await supabase.auth.updateUser({ password: newPassword });
+    if (error) setMsg(error.message);
+    else { setMsg("Naya password set ho gaya! Ab aap login kar sakte hain."); setResetting(false); setNewPassword(""); }
+    setBusy(false);
+  };
+
   if (!ready) return <main className="account-page"><p>Loading…</p></main>;
+  if (resetting) return <main className="adm-wrap"><div className="adm-card"><form onSubmit={saveNewPassword}>
+    <h1 className="adm-title">Set New Password</h1>
+    <p className="adm-sub">Apna naya password likhiye (kam se kam 6 characters).</p>
+    <label className="adm-label">New Password<input className="adm-input" type="password" required minLength={6} value={newPassword} onChange={(e) => setNewPassword(e.target.value)} /></label>
+    {msg && <p className="adm-sub">{msg}</p>}
+    <button className="h-btn h-btn-orange" disabled={busy} type="submit">{busy ? "Please wait…" : "Save New Password"}</button>
+  </form></div></main>;
   if (!user && mode === "signup") return <main className="adm-wrap"><div className="adm-card"><SignupWizard onLogin={() => { setMode("login"); setMsg(""); }} /></div></main>;
   if (!user) return <main className="adm-wrap"><div className="adm-card"><form onSubmit={submit}>
     <h1 className="adm-title">{mode === "login" ? "Student Login" : "Create Account"}</h1>
@@ -172,6 +200,7 @@ export default function Account() {
     </>}
     <label className="adm-label">Email<input className="adm-input" type="email" required value={form.email} onChange={set("email")} /></label>
     <label className="adm-label">Password<input className="adm-input" type="password" required minLength={6} value={form.password} onChange={set("password")} /></label>
+    {mode === "login" && <p className="adm-sub" style={{ textAlign: "right" }}><button className="acc-text-btn" type="button" disabled={busy} onClick={resetPassword}>Forgot Password?</button></p>}
     {msg && <p className="adm-sub">{msg}</p>}
     <button className="h-btn h-btn-orange" disabled={busy} type="submit">{busy ? "Please wait…" : mode === "login" ? "Login" : "Create Account"}</button>
     <p className="adm-sub">{mode === "login" ? "New here? " : "Already have an account? "}<button className="acc-text-btn" type="button" onClick={() => { setMode(mode === "login" ? "signup" : "login"); setMsg(""); }}>{mode === "login" ? "Create account" : "Login"}</button></p>
