@@ -65,14 +65,18 @@ export default function Account() {
     const now = new Date();
     const monthStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1)).toISOString().slice(0, 10);
     const [profileResult, classResult, subscriptionResult, attendanceResult] = await Promise.all([
-      supabase.from("profiles").select("full_name, phone").eq("id", user.id).maybeSingle(),
+      supabase.from("profiles").select("full_name, phone, avatar_url").eq("id", user.id).maybeSingle(),
       supabase.from("class_settings").select("meet_link,class_time,temporary_meet_link,temporary_class_time,monthly_meet_link,monthly_class_time,active_link_mode").eq("id", 1).maybeSingle(),
       supabase.from("subscriptions").select("id,plan_code,plan_name,duration_days,amount_paise,status,starts_at,expires_at,class_days").order("created_at", { ascending: false }),
       supabase.from("attendance").select("id", { count: "exact", head: true }).eq("user_id", user.id).gte("day", monthStart),
     ]);
       if (profileResult.data) {
-        const p = profileResult.data as { full_name: string; phone: string };
-        setProfile({ full_name: (p.full_name ?? "").trim() || fallbackName(user), phone: p.phone ?? "" });
+        const p = profileResult.data as { full_name: string; phone: string; avatar_url: string };
+        setProfile({ full_name: (p.full_name ?? "").trim() || fallbackName(user), phone: p.phone ?? "", avatar_url: p.avatar_url ?? "" });
+        if (p.avatar_url) {
+          const { data: signed } = await supabase.storage.from("avatars").createSignedUrl(p.avatar_url, 3600);
+          setAvatarSrc(signed?.signedUrl ?? "");
+        } else setAvatarSrc("");
       }
     setCls(classResult.data);
     setSubscriptions((subscriptionResult.data ?? []) as Subscription[]);
