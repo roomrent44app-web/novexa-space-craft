@@ -127,6 +127,9 @@ export default function Account() {
         if (error) throw new Error(await fnError(error, "Could not start the free trial. Please try again."));
         if (data?.error) throw new Error(data.error);
         setMsg("Your 3 Days Free Trial is active!");
+      } else if (selected.payLink) {
+        window.open(selected.payLink, "_blank", "noopener,noreferrer");
+        setMsg("Payment window opened. After payment, your plan will be activated shortly.");
       } else {
         await purchasePlan(selected.code, { name: profile.full_name, email: user.email ?? "", phone: profile.phone }, needsDays ? classDays : []);
         setMsg("Payment successful. Your plan is active!");
