@@ -17,6 +17,7 @@ import Account from "./pages/Account.tsx";
 import StudentDashboard from "./pages/StudentDashboard.tsx";
 import DashboardProgress from "./pages/DashboardProgress.tsx";
 import GoalsPlanner from "./pages/GoalsPlanner.tsx";
+import RankersStreak from "./pages/RankersStreak.tsx";
 import JournalPage from "./pages/JournalPage.tsx";
 
 const queryClient = new QueryClient();
@@ -38,6 +39,7 @@ const App = () => (
           <Route path="/dashboard" element={<Layout><StudentDashboard /></Layout>} />
           <Route path="/dashboard/progress" element={<Layout><DashboardProgress /></Layout>} />
           <Route path="/dashboard/goals" element={<Layout><GoalsPlanner /></Layout>} />
+          <Route path="/dashboard/streak" element={<Layout><RankersStreak /></Layout>} />
           <Route path="/dashboard/journal" element={<Layout><JournalPage /></Layout>} />
           <Route path="/admin" element={<Layout><Admin /></Layout>} />
           <Route path="/account" element={<Layout><Account /></Layout>} />

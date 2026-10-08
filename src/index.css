@@ -1552,3 +1552,29 @@ li.is-editing input,.gp-add input {flex:1;min-width:0;border:0;background:transp
 @keyframes dashFeedScroll {from {transform:translateY(0)} to {transform:translateY(-50%)}}
 @media (prefers-reduced-motion:reduce) {.dash-feed-loop {animation:none}.dash-feed-window {height:auto;-webkit-mask-image:none;mask-image:none}}
 @media(max-width:600px){.dash-feed-window {height:260px}}
+
+/* Rankers Streak */
+.rk-shell{max-width:720px;margin:0 auto;padding:24px 16px 96px;font-family:"Nunito Sans",sans-serif}
+.rk-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.rk-back{display:grid;place-items:center;width:44px;height:44px;color:hsl(var(--foreground))}
+.rk-crown{width:44px;height:44px;color:hsl(42 95% 52%);fill:hsl(42 95% 52%);flex:none}
+.rk-head h1{font-size:clamp(1.5rem,5vw,2rem);font-weight:800;line-height:1.1}
+.rk-head p{color:hsl(var(--muted-foreground));font-size:.95rem}
+.rk-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;border:1px solid hsl(var(--border));border-radius:16px;background:hsl(var(--card));margin-bottom:16px}
+.rk-tabs button{min-height:44px;border-radius:12px;font-weight:600;color:hsl(var(--muted-foreground))}
+.rk-tabs button.is-active{background:hsl(345 90% 94%);color:hsl(345 85% 48%)}
+.rk-note{text-align:center;color:hsl(var(--muted-foreground));font-size:.9rem;margin:8px 0 12px}.rk-note a{color:hsl(345 85% 48%);font-weight:700}
+.rk-list{display:flex;flex-direction:column;gap:8px;list-style:none;padding:0}
+.rk-row{display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:16px;background:hsl(var(--card));box-shadow:0 2px 10px hsl(0 0% 0%/.05);animation:dashFadeUp .5s both}
+.rk-row.is-first{background:hsl(345 90% 96%)}.rk-row.is-me{outline:2px solid hsl(345 85% 60%)}
+.rk-rank{width:34px;display:flex;flex-direction:column;align-items:center;color:hsl(var(--muted-foreground));font-size:1.1rem;flex:none}
+.rk-rank svg{width:26px;height:26px}
+.rk-rank.rank-1{color:hsl(42 95% 50%)}.rk-rank.rank-1 svg{fill:hsl(42 95% 52%)}
+.rk-rank.rank-2{color:hsl(220 10% 62%)}.rk-rank.rank-2 svg{fill:hsl(220 12% 78%)}
+.rk-rank.rank-3{color:hsl(20 70% 50%)}.rk-rank.rank-3 svg{fill:hsl(20 70% 55%)}
+.rk-avatar{width:56px;height:56px;border-radius:50%;overflow:hidden;flex:none;display:grid;place-items:center;background:hsl(25 95% 90%);color:hsl(25 90% 40%);font-weight:800;font-size:1.3rem;position:relative}
+.rk-avatar:not(.dash-portrait) img{width:100%;height:100%;object-fit:cover}
+.rk-name{flex:1;min-width:0;font-weight:700;font-size:1.05rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rk-name small{color:hsl(var(--muted-foreground));font-weight:600}
+.rk-days{flex:none;padding:6px 14px;border-radius:12px;background:hsl(345 90% 96%);color:hsl(345 85% 48%);font-weight:800}
+@media (max-width:600px){.rk-avatar{width:46px;height:46px}.rk-row{gap:10px;padding:10px 12px}}
