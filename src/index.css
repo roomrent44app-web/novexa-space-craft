@@ -1412,3 +1412,23 @@ img { height: auto; }
 .prog-sprout{width:52px;height:52px;border-radius:50%;background:hsl(152 60% 90%);display:grid;place-items:center;color:hsl(152 70% 38%)}
 .prog-shell .dash-sample-label{position:static;display:block;margin:0 0 12px;text-align:center}
 @media (max-width:600px){.prog-card{padding:16px}.prog-head{gap:10px}.prog-badge{padding:8px 10px}.prog-badge b{font-size:1.05rem}.prog-badge small{font-size:.7rem}.prog-icon{width:52px;height:52px}.prog-head h1,.prog-head h2{font-size:1.2rem}}
+
+/* ============ Home — Your Goals mini section ============ */
+.h-goals {padding:8px 0 56px}
+.h-goals .h-in {max-width:620px}
+.h-goals-card {padding:20px;border-radius:18px;background:hsl(348 100% 99%);border:1px solid hsl(348 60% 95%);box-shadow:0 14px 34px -22px hsl(228 34% 9%/.25)}
+.h-goals-head {display:flex;align-items:center;gap:16px}
+.h-goals-chip {width:64px;height:64px;flex:0 0 64px;display:grid;place-items:center;border-radius:16px;background:hsl(348 100% 96%);color:hsl(343 90% 59%)}
+.h-goals-chip svg {width:38px;height:38px;stroke-width:2.4}
+.h-goals-head h2 {font-size:26px;line-height:1.2;font-weight:900;color:hsl(228 34% 9%)}
+.h-goals-head p {margin-top:3px;font-size:16px;color:hsl(220 9% 40%)}
+.h-goals-row {display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.h-goals-link {display:flex;align-items:center;gap:10px;padding:17px 18px;border-radius:14px;font-size:18px;font-weight:800;color:hsl(228 34% 9%);white-space:nowrap;transition:transform .18s ease,box-shadow .18s ease}
+.h-goals-link:hover {transform:translateY(-2px);box-shadow:0 12px 24px -16px hsl(228 34% 9%/.4)}
+.h-goals-link>svg:first-child {width:23px;height:23px;flex:0 0 23px;stroke-width:1.6}
+.h-goals-link>svg:last-child {width:19px;height:19px;margin-left:auto;stroke-width:2.6}
+.h-goals-daily {background:hsl(348 100% 96%)}
+.h-goals-daily svg {color:hsl(343 90% 59%)}
+.h-goals-weekly {background:hsl(235 100% 96%)}
+.h-goals-weekly svg {color:hsl(243 75% 59%)}
+@media (max-width:560px){.h-goals {padding:4px 0 44px}.h-goals-card {padding:16px;border-radius:15px}.h-goals-chip {width:54px;height:54px;flex-basis:54px;border-radius:13px}.h-goals-chip svg {width:32px;height:32px}.h-goals-head h2 {font-size:22px}.h-goals-head p {font-size:14px}.h-goals-row {gap:10px;margin-top:14px}.h-goals-link {padding:14px 12px;font-size:15px;gap:8px;border-radius:12px}.h-goals-link>svg:first-child {width:20px;height:20px;flex-basis:20px}.h-goals-link>svg:last-child {width:16px;height:16px}}

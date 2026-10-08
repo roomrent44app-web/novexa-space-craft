@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { heroAvif, heroWebp, communityAvif, communityWebp, ctaAvif, ctaWebp, priyaAvif, priyaWebp, ananyaAvif, ananyaWebp, rohitAvif, rohitWebp } from "@/data/images";
-import { ArrowRight, Bell, BookOpen, CalendarDays, ClipboardList, Gift, HeartHandshake, ShieldCheck, Star, Users, Video, Zap } from "lucide-react";
+import { ArrowRight, Bell, BookOpen, CalendarDays, ChartNoAxesColumn, ChevronRight, ClipboardList, Gift, HeartHandshake, ShieldCheck, Star, Sun, Target, Users, Video, Zap } from "lucide-react";
 import { MONTHLY_PLANS, orderLink, WEEKLY_PLANS } from "@/data/fiveam";
 import { useSeo } from "@/hooks/useSeo";
 import { useImagePreload } from "@/hooks/useImagePreload";
@@ -72,6 +72,23 @@ export default function Index() {
     {/* FEATURES */}
     <section className="h-features"><div className="h-in">
       {features.map((f, i) => <div className="h-feature" key={i}><span className="h-feature-ico"><f.Icon /></span><h3>{f.title}</h3><p>{f.text}</p></div>)}
+    </div></section>
+
+    {/* YOUR GOALS */}
+    <section className="h-goals"><div className="h-in">
+      <div className="h-goals-card">
+        <div className="h-goals-head">
+          <span className="h-goals-chip"><Target /></span>
+          <div>
+            <h2>Your Goals</h2>
+            <p>Plan your goals and stay consistent</p>
+          </div>
+        </div>
+        <div className="h-goals-row">
+          <Link className="h-goals-link h-goals-daily" to="/dashboard/progress"><Sun fill="currentColor" strokeWidth={1.4} /> Daily Goals <ChevronRight /></Link>
+          <Link className="h-goals-link h-goals-weekly" to="/dashboard/progress"><ChartNoAxesColumn /> Weekly Goals <ChevronRight /></Link>
+        </div>
+      </div>
     </div></section>
 
     {/* PLANS */}
