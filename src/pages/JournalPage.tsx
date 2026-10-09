@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useSeo } from "@/hooks/useSeo";
 import { addDays, istDateStr } from "@/lib/dashboard";
 
-type Entry = { day: string; mood: string; body: string };
+type Entry = { day: string; mood: string; body: string; updated_at: string };
 const MOODS = [
   { key: "happy", emoji: "😀", label: "Happy" },
   { key: "calm", emoji: "😌", label: "Calm" },
@@ -40,7 +40,7 @@ export default function JournalPage() {
     if (!user) return;
     const [y, m] = month.split("-").map(Number);
     const end = new Date(Date.UTC(y, m, 0)).toISOString().slice(0, 10);
-    const { data } = await supabase.from("student_journal").select("day,mood,body")
+    const { data } = await supabase.from("student_journal").select("day,mood,body,updated_at")
       .eq("user_id", user.id).gte("day", `${month}-01`).lte("day", end);
     const map: Record<string, Entry> = {};
     (data ?? []).forEach((e) => { map[e.day] = e; });
@@ -103,7 +103,8 @@ export default function JournalPage() {
     load();
   };
 
-  const list = Object.values(entries).sort((a, b) => b.day.localeCompare(a.day));
+const list = Object.values(entries).sort((a, b) => b.day.localeCompare(a.day) || b.updated_at.localeCompare(a.updated_at));
+  const timeOf = (iso: string) => new Date(iso).toLocaleTimeString("en-IN", { hour: "numeric", minute: "2-digit", hour12: true, timeZone: "Asia/Kolkata" });
   const future = selected > today;
 
   return (
@@ -189,7 +190,8 @@ export default function JournalPage() {
               <div key={e.day} className="dash-card jr-entry" role="button" tabIndex={0} onClick={() => pick(e.day)} onKeyDown={(ev) => { if (ev.key === "Enter") pick(e.day); }}>
                 <span className={`jr-entry-date${e.day === today ? " is-today" : ""}`}><b>{Number(e.day.slice(8))}</b>{MONTHS[Number(e.day.slice(5, 7)) - 1]}</span>
                 <span className="jr-entry-body">
-                  <b>{e.day === today ? "Today's Journal" : `${WD[wd(e.day)]}'s Journal`} {moodOf(e.mood) && <em>{moodOf(e.mood)!.emoji} {moodOf(e.mood)!.label}</em>}</b>
+<b>{e.day === today ? "Today's Journal" : `${WD[wd(e.day)]}'s Journal`} {moodOf(e.mood) && <em>{moodOf(e.mood)!.emoji} {moodOf(e.mood)!.label}</em>}</b>
+                  <small className="jr-entry-time">{WD[wd(e.day)]}, {Number(e.day.slice(8))} {MONTHS[Number(e.day.slice(5, 7)) - 1]} {e.day.slice(0, 4)} · {timeOf(e.updated_at)}</small>
                   <small>{e.body || "No text — mood only."}</small>
                 </span>
                 <button type="button" className="jr-entry-del" aria-label={`Delete journal entry of ${e.day}`} disabled={busy}
