@@ -1,7 +1,6 @@
 import { ArrowRight, Bell, CalendarDays, ShieldCheck, Users } from "lucide-react";
 import { hiwHeroAvif, hiwHeroWebp, hiwCtaAvif, hiwCtaWebp } from "@/data/images";
 import { Link } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { useSeo } from "@/hooks/useSeo";
 import { useImagePreload } from "@/hooks/useImagePreload";
 
