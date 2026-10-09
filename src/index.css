@@ -1761,3 +1761,12 @@ li.is-editing input,.gp-add input {flex:1;min-width:0;border:0;background:transp
 .fs-hero-photo .fs-note,.fs-hero-photo .fs-tag,.fs-hero-photo .fs-spark{display:none}
 .fs-hero-photo img{border-radius:0;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 8%);mask-image:linear-gradient(90deg,transparent 0,#000 10%)}
 
+
+.dash-comments { margin-top: .5rem; display: grid; gap: .5rem; padding: .75rem; border-radius: 1rem; background: hsl(var(--muted) / .6); }
+.dash-comment { display: flex; gap: .5rem; justify-content: space-between; align-items: flex-start; font-size: .9rem; }
+.dash-comment p { margin: .15rem 0 0; overflow-wrap: anywhere; }
+.dash-comment small { color: hsl(var(--muted-foreground)); }
+.dash-comment button { min-height: 36px; min-width: 36px; display: grid; place-items: center; color: hsl(var(--destructive)); background: none; border: 0; }
+.dash-comment button svg { width: 16px; height: 16px; }
+.dash-comments form { display: flex; gap: .5rem; }
+.dash-comments form input { flex: 1; min-width: 0; }

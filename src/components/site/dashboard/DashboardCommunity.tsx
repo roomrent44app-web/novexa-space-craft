@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Heart, MessageSquarePlus, UsersRound } from "lucide-react";
+import { Heart, MessageCircle, MessageSquarePlus, Trash2, UsersRound } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { timeAgo } from "@/lib/dashboard";
 import { Button } from "@/components/ui/button";
@@ -15,7 +15,9 @@ type Post = {
   content: string;
   created_at: string;
   community_post_likes: { user_id: string }[];
+  community_post_comments: Comment[];
 };
+type Comment = { id: string; user_id: string; author_name: string; content: string; created_at: string };
 
 export default function DashboardCommunity({ userId, displayName }: { userId: string; displayName: string }) {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -24,10 +26,12 @@ export default function DashboardCommunity({ userId, displayName }: { userId: st
   const [category, setCategory] = useState("Progress");
   const [text, setText] = useState("");
   const [busy, setBusy] = useState(false);
+  const [openId, setOpenId] = useState<string | null>(null);
+  const [reply, setReply] = useState("");
 
   const load = useCallback(async () => {
     const { data } = await supabase.from("community_posts")
-      .select("id,user_id,author_name,category,content,created_at,community_post_likes(user_id)")
+      .select("id,user_id,author_name,category,content,created_at,community_post_likes(user_id),community_post_comments(id,user_id,author_name,content,created_at)")
       .order("created_at", { ascending: false }).limit(30);
     setPosts((data ?? []) as unknown as Post[]);
   }, []);
@@ -54,6 +58,23 @@ export default function DashboardCommunity({ userId, displayName }: { userId: st
     }));
     if (liked) await supabase.from("community_post_likes").delete().eq("post_id", post.id).eq("user_id", userId);
     else await supabase.from("community_post_likes").insert({ post_id: post.id, user_id: userId });
+  };
+
+  const addComment = async (event: React.FormEvent, post: Post) => {
+    event.preventDefault();
+    const content = reply.trim();
+    if (!content) return;
+    setBusy(true);
+    const { error } = await supabase.from("community_post_comments")
+      .insert({ post_id: post.id, user_id: userId, author_name: displayName || "Student", content });
+    setBusy(false);
+    if (!error) { setReply(""); await load(); }
+  };
+
+  const deleteComment = async (id: string) => {
+    if (!window.confirm("Delete this comment?")) return;
+    await supabase.from("community_post_comments").delete().eq("id", id);
+    await load();
   };
 
   const visible = filter === "All" ? posts : posts.filter((p) => p.category === filter);
@@ -99,6 +120,26 @@ export default function DashboardCommunity({ userId, displayName }: { userId: st
                 <Button variant="ghost" type="button" className={liked ? "liked" : ""} aria-pressed={liked} onClick={() => toggleLike(post)}>
                   <Heart /> {post.community_post_likes.length}
                 </Button>
+                <Button variant="ghost" type="button" aria-expanded={openId === post.id} onClick={() => { setOpenId(openId === post.id ? null : post.id); setReply(""); }}>
+                  <MessageCircle /> {post.community_post_comments.length}
+                </Button>
+                {openId === post.id && (
+                  <div className="dash-comments">
+                    {[...post.community_post_comments].sort((a, b) => a.created_at.localeCompare(b.created_at)).map((c) => (
+                      <div key={c.id} className="dash-comment">
+                        <div><b>{c.author_name}</b> <small>{timeAgo(c.created_at)}</small><p>{c.content}</p></div>
+                        {(c.user_id === userId || post.user_id === userId) && (
+                          <button type="button" aria-label="Delete comment" onClick={() => deleteComment(c.id)}><Trash2 /></button>
+                        )}
+                      </div>
+                    ))}
+                    {!post.community_post_comments.length && <small>No comments yet.</small>}
+                    <form onSubmit={(e) => addComment(e, post)}>
+                      <input className="dash-input" placeholder="Write a comment…" maxLength={1000} value={reply} onChange={(e) => setReply(e.target.value)} />
+                      <Button type="submit" disabled={busy || !reply.trim()}>Send</Button>
+                    </form>
+                  </div>
+                )}
               </div>
             </li>
           );
