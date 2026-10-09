@@ -86,7 +86,7 @@ export default function About() {
           <span className="p-eyebrow">Join the Community</span>
           <h2>Wake Up. Show Up. Grow.<Rays /></h2>
           <p>Your brighter future starts at 5 AM tomorrow morning.</p>
-          <a className="fq-btn" href={orderLink()} target="_blank" rel="noreferrer"><MessageCircle />Register to Community</a>
+          <Link className="fq-btn" to="/account?mode=signup"><MessageCircle />Register to Community</Link>
         </div>
       </section>
 

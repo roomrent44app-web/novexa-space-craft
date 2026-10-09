@@ -4,7 +4,6 @@ import { NavLink, Link } from "react-router-dom";
 import Logo from "./Logo";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { orderLink } from "@/data/fiveam";
 import { supabase } from "@/integrations/supabase/client";
 
 const links = [
@@ -33,7 +32,7 @@ export default function Header() {
           <Link to="/account?mode=signup" className="nav-link header-signup">Sign Up</Link>
         </>)}
       </div>
-      <a className="h-btn h-btn-orange header-cta" href={orderLink("Community Registration")} target="_blank" rel="noreferrer">Register to Community <ArrowRight /></a>
+      <Link className="h-btn h-btn-orange header-cta" to="/account?mode=signup">Register to Community <ArrowRight /></Link>
       <Button
         variant="ghost"
         size="icon"
@@ -54,7 +53,7 @@ export default function Header() {
         <Link to="/account" onClick={() => setOpen(false)} className="mobile-nav-link">Login</Link>
         <Link to="/account?mode=signup" onClick={() => setOpen(false)} className="mobile-nav-link">Create Account</Link>
       </>)}
-      <a className="h-btn h-btn-orange mobile-register" href={orderLink("Community Registration")} target="_blank" rel="noreferrer" onClick={() => setOpen(false)}>Register to Community <ArrowRight /></a>
+      <Link className="h-btn h-btn-orange mobile-register" to="/account?mode=signup" onClick={() => setOpen(false)}>Register to Community <ArrowRight /></Link>
     </nav>}
   </header>;
 }

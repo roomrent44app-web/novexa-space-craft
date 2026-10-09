@@ -63,7 +63,7 @@ export default function HowItWorks() {
         <span className="p-eyebrow">Let's Do This</span>
         <h2>Same Time.<br />Better You.<Rays /></h2>
         <p>Take the first step towards a focused<br />and more productive you.</p>
-        <a className="hw-btn hw-btn-orange" href={orderLink("Community Registration")} target="_blank" rel="noreferrer">Register to Community <ArrowRight /></a>
+        <Link className="hw-btn hw-btn-orange" to="/account?mode=signup">Register to Community <ArrowRight /></Link>
         <Link className="hw-btn hw-btn-light" to="/plans">View Plans</Link>
         <div className="hw-cta-feats">
           <div><Users /><span>Supportive<br />Community</span></div>
