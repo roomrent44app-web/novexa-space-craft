@@ -54,7 +54,7 @@ export default function Blog() {
           <div className="bl-list">
             {shown.map((p) => (
               <Link to={`/blog/${p.slug}`} key={p.id} className="bl-card">
-                <div className="bl-img">{p.cover_url && <img src={p.cover_url} alt={p.title} decoding="async" />}</div>
+                <div className="bl-img">{p.cover_url && <img src={p.cover_url} alt={p.title} decoding="async" fetchPriority="high" />}</div>
                 <div className="bl-body">
                   <time>{new Date(p.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}</time>
                   <h2>{p.title}</h2>
