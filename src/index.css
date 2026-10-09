@@ -322,7 +322,7 @@ main { overflow-x: clip; }
   .h-step + .h-step::before { display: none; }
   .h-story { height: auto; }
   .h-cta { height: auto; background-position: 70% center; }
-  .h-cta .h-in { padding: 28px 18px 32px; }
+  .h-cta .h-in { padding: 10px 18px 50px; }
   .h-cta-text br { display: none; }
 }
 /* parity refinements */
@@ -483,7 +483,7 @@ main { overflow-x: clip; }
   .h-community { height: max(calc(var(--u) * 282), calc(100vw * 282 / 793 * .86)); max-height: 460px; }
   .h-community-body { display: flex; flex-direction: column; justify-content: center; padding-top: 0; }
   .h-cta { height: max(calc(var(--u) * 221), calc(100vw * 221 / 793 * .8)); max-height: 360px; }
-  .h-cta .h-in { display: flex; flex-direction: column; justify-content: center; height: 100%; padding-top: 0; }
+  .h-cta .h-in { display: flex; flex-direction: column; justify-content: flex-start; height: 100%; padding-top: calc(var(--u) * 16); padding-bottom: calc(var(--u) * 30); }
   .h-hero .h-in { display: flex; flex-direction: column; justify-content: center; padding-top: 0; }
 }
 @media (min-width: 768px) {
