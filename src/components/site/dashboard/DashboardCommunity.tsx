@@ -3,6 +3,7 @@ import { Heart, MessageCircle, MessageSquarePlus, Trash2, UsersRound } from "luc
 import { supabase } from "@/integrations/supabase/client";
 import { timeAgo } from "@/lib/dashboard";
 import { Button } from "@/components/ui/button";
+import CommunityGuidelines from "./CommunityGuidelines";
 
 const CATEGORIES = ["All", "Progress", "Doubts", "Motivation", "Study Tips"] as const;
 const POST_CATEGORIES = CATEGORIES.slice(1) as unknown as string[];
@@ -91,6 +92,8 @@ export default function DashboardCommunity({ userId, displayName }: { userId: st
           <MessageSquarePlus /> {composing ? "Close" : "Post"}
         </Button>
       </header>
+
+      <CommunityGuidelines />
 
       {composing && (
         <form className="dash-post-form" onSubmit={publish}>
