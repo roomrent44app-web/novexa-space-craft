@@ -275,7 +275,7 @@ main { overflow-x: clip; }
 
 /* stories */
 .h-stories { background: linear-gradient(180deg, hsl(32 70% 96%), hsl(var(--cream))); }
-.h-stories .h-in { padding: calc(var(--u) * 29) calc(var(--u) * 36) calc(var(--u) * 24) calc(var(--u) * 40); }
+.h-stories .h-in { padding: calc(var(--u) * 11) calc(var(--u) * 36) calc(var(--u) * 24) calc(var(--u) * 40); }
 .h-stories .h-title { font-size: calc(var(--u) * 28.5); margin-top: calc(var(--u) * 6); margin-left: calc(var(--u) * 6); transform: rotate(-1.2deg); transform-origin: left; display: inline-block; }
 .h-story-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: calc(var(--u) * 12); margin-top: calc(var(--u) * 17); }
 .h-story { display: flex; gap: calc(var(--u) * 10); height: calc(var(--u) * 106); padding: calc(var(--u) * 11) calc(var(--u) * 12); background: hsl(0 0% 100%); border: 1px solid hsl(30 40% 90%); border-radius: calc(var(--u) * 8); box-shadow: 0 calc(var(--u)*4) calc(var(--u)*14) calc(var(--u)*-8) hsl(var(--ink) / .2); }
