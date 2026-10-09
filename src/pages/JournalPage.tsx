@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useSeo } from "@/hooks/useSeo";
 import { addDays, istDateStr } from "@/lib/dashboard";
 
-type Entry = { day: string; mood: string; body: string };
+type Entry = { day: string; mood: string; body: string; updated_at: string };
 const MOODS = [
   { key: "happy", emoji: "😀", label: "Happy" },
   { key: "calm", emoji: "😌", label: "Calm" },
@@ -40,7 +40,7 @@ export default function JournalPage() {
     if (!user) return;
     const [y, m] = month.split("-").map(Number);
     const end = new Date(Date.UTC(y, m, 0)).toISOString().slice(0, 10);
-    const { data } = await supabase.from("student_journal").select("day,mood,body")
+    const { data } = await supabase.from("student_journal").select("day,mood,body,updated_at")
       .eq("user_id", user.id).gte("day", `${month}-01`).lte("day", end);
     const map: Record<string, Entry> = {};
     (data ?? []).forEach((e) => { map[e.day] = e; });
