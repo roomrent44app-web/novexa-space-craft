@@ -1,7 +1,8 @@
 import { useState, type ReactNode } from "react";
 import { faqHeroAvif, faqHeroWebp, faqCtaAvif, faqCtaWebp } from "@/data/images";
 import { ArrowRight, Bell, Clock, IndianRupee, Laptop, Phone, Plus, ShieldCheck, Star, Users } from "lucide-react";
-import { FAQS, orderLink } from "@/data/fiveam";
+import { FAQS } from "@/data/fiveam";
+import { Link } from "react-router-dom";
 import { useSeo } from "@/hooks/useSeo";
 import { useImagePreload } from "@/hooks/useImagePreload";
 
@@ -90,7 +91,7 @@ export default function Faqs() {
         <span className="p-eyebrow">Still Have Questions?</span>
         <h2>We're Here to Help!<Rays /></h2>
         <p>Join thousands of students and start your 5AM journey today.</p>
-        <a className="fq-btn" href={orderLink("Community Registration")} target="_blank" rel="noreferrer">Register to Community <ArrowRight /></a>
+        <Link className="fq-btn" to="/account?mode=signup">Register to Community <ArrowRight /></Link>
       </div>
     </section>
   </div>;

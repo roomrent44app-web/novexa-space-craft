@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { FunctionsHttpError } from "@supabase/supabase-js";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { CalendarClock, ChartNoAxesColumn, CheckCircle2, ChevronRight, Clock3, CreditCard, LayoutDashboard, LogOut, RefreshCw, Sun, Target, Trash2, UserRound, Video } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import Attendance from "@/components/site/Attendance";
@@ -40,6 +40,7 @@ const fnError = async (error: unknown, fallback: string) => {
 export default function Account() {
   useSeo({ title: "Student Panel — 5AM", description: "Manage your 5AM plan, class access and attendance.", path: "/account" });
   const params = useMemo(() => new URLSearchParams(window.location.search), []);
+  const location = useLocation();
   const [user, setUser] = useState<User | null>(null);
   const [ready, setReady] = useState(false);
   const [mode, setMode] = useState<"login" | "signup">(params.get("mode") === "signup" ? "signup" : "login");
@@ -55,6 +56,12 @@ export default function Account() {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [attendanceCount, setAttendanceCount] = useState(0);
   const [selectedPlan, setSelectedPlan] = useState(params.get("plan") ?? "21d-699");
+
+  useEffect(() => {
+    const wanted = new URLSearchParams(location.search).get("mode");
+    if (wanted === "signup" || wanted === "login") setMode(wanted);
+  }, [location.key, location.search]);
+
 
   useEffect(() => {
     const { data } = supabase.auth.onAuthStateChange((event, session) => {

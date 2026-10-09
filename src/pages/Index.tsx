@@ -63,7 +63,7 @@ export default function Index() {
         <p className="h-hero-text">Get daily wake-up calls, live study sessions and a supportive community to stay consistent in your study journey.</p>
         <div className="h-hero-btns">
           <a className="h-btn h-btn-orange h-btn-big" href={orderLink()} target="_blank" rel="noreferrer"><Video className="h-btn-ico" fill="currentColor" /><span>Join the Study Room<br />at 5 AM <ArrowRight /></span></a>
-          <a className="h-btn h-btn-white h-btn-big" href={orderLink("Community Registration")} target="_blank" rel="noreferrer"><Users className="h-btn-ico" /><span>Register to<br />Community <ArrowRight /></span></a>
+          <Link className="h-btn h-btn-white h-btn-big" to="/account?mode=signup"><Users className="h-btn-ico" /><span>Register to<br />Community <ArrowRight /></span></Link>
         </div>
         <div className="h-proof"><span><Users /> Students All Over India</span><span><ShieldCheck /> Safe &amp; Supportive</span><span><Zap /> Build Consistency</span></div>
       </div>
@@ -142,7 +142,7 @@ export default function Index() {
         <p className="h-cta-text">Be part of a supportive community and take one step<br />towards a more focused and productive you.</p>
         <div className="h-cta-btns">
           <a className="h-btn h-btn-orange" href={orderLink()} target="_blank" rel="noreferrer"><Video fill="currentColor" /> Join the Study Room at 5 AM <ArrowRight /></a>
-          <a className="h-btn h-btn-white" href={orderLink("Community Registration")} target="_blank" rel="noreferrer"><Users /> Register to Community <ArrowRight /></a>
+          <Link className="h-btn h-btn-white" to="/account?mode=signup"><Users /> Register to Community <ArrowRight /></Link>
         </div>
       </div>
     </section>
