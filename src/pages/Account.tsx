@@ -211,7 +211,7 @@ export default function Account() {
   </form></div></main>;
   if (!user && mode === "signup") return <main className="adm-wrap"><div className="adm-card"><SignupWizard onLogin={() => { setMode("login"); setMsg(""); }} /></div></main>;
   if (!user) return <main className="adm-wrap"><div className="adm-card"><form onSubmit={submit}>
-    <h1 className="adm-title">{mode === "login" ? "Student Login" : "Create Account"}</h1>
+    <h1 className="adm-title">{mode === "login" ? "Student Login" : "Register"}</h1>
     <p className="adm-sub">Log in to join class, track attendance and manage your plan.</p>
     {mode === "signup" && <>
       <label className="adm-label">Full name<input className="adm-input" required value={form.name} onChange={set("name")} /></label>
@@ -221,8 +221,8 @@ export default function Account() {
     <label className="adm-label">Password<input className="adm-input" type="password" required minLength={6} value={form.password} onChange={set("password")} /></label>
     {mode === "login" && <p className="adm-sub" style={{ textAlign: "right" }}><button className="acc-text-btn" type="button" disabled={busy} onClick={resetPassword}>Forgot Password?</button></p>}
     {msg && <p className="adm-sub">{msg}</p>}
-    <button className="h-btn h-btn-orange" disabled={busy} type="submit">{busy ? "Please wait…" : mode === "login" ? "Login" : "Create Account"}</button>
-    <p className="adm-sub">{mode === "login" ? "New here? " : "Already have an account? "}<button className="acc-text-btn" type="button" onClick={() => { setMode(mode === "login" ? "signup" : "login"); setMsg(""); }}>{mode === "login" ? "Create account" : "Login"}</button></p>
+    <button className="h-btn h-btn-orange" disabled={busy} type="submit">{busy ? "Please wait…" : mode === "login" ? "Login" : "Register"}</button>
+    <p className="adm-sub">{mode === "login" ? "New here? " : "Already have an account? "}<button className="acc-text-btn" type="button" onClick={() => { setMode(mode === "login" ? "signup" : "login"); setMsg(""); }}>{mode === "login" ? "Register" : "Login"}</button></p>
   </form></div></main>;
 
   return <main className="account-page"><div className="account-shell">
