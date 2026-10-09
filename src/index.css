@@ -1255,7 +1255,7 @@ img { height: auto; }
 .dash-tick {width:19px;height:19px;flex:0 0 19px;border-radius:50%;border:1.5px solid hsl(var(--dash-muted)/.5);display:grid;place-items:center;color:hsl(var(--dash-paper))}
 .dash-tick svg {width:13px;height:13px}
 .dash-goal-list button[aria-pressed=true] .dash-tick {background:hsl(var(--dash-green));border-color:hsl(var(--dash-green))}
-.dash-streak,.dash-notes {min-height:196px}
+.dash-streak {min-height:196px}
 .dash-streak-list {margin-top:12px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
 .dash-streak-list li {display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;min-width:0}
 .dash-streak-avatar {width:48px;height:48px;display:grid;place-items:center;border-radius:50%;font-size:20px;font-weight:800;background:hsl(var(--dash-peach));color:hsl(var(--dash-muted))}
@@ -1268,21 +1268,12 @@ img { height: auto; }
 .dash-feed-actions {display:flex;align-items:center;gap:22px}
 .dash-feed-actions a {display:flex;gap:7px;height:30px;min-height:30px;padding:0 6px;color:hsl(var(--dash-muted));font-size:12px}
 .dash-feed-actions svg {width:18px;height:18px}
-.dash-note-body small {display:block;margin-top:3px}
 .dash-streak-list .rank-2 {background:hsl(var(--dash-blue-soft))}.dash-streak-list .rank-3 {background:hsl(var(--dash-green-soft))}.dash-streak-list .rank-4 {background:hsl(var(--dash-pink-soft))}.dash-streak-list .rank-5 {background:hsl(var(--dash-track))}
 .dash-streak-name {display:grid;justify-items:center;gap:0;font-size:12px;font-weight:800}
 .dash-streak-name svg {width:16px;height:16px;fill:currentColor}
 .crown-1 {color:hsl(var(--dash-gold))}.crown-2 {color:hsl(var(--dash-orange))}.crown-3 {color:hsl(var(--dash-muted)/.6)}
 .dash-streak-days {font-size:13px;font-weight:800}
-.dash-notes {background:hsl(var(--dash-pink-soft)/.6)}
-.dash-note-list {margin-top:10px;display:grid;gap:8px;max-height:178px;overflow:auto}
-.dash-note-list li {display:flex;align-items:center;gap:10px;padding:10px;border:1px solid hsl(var(--dash-line));border-radius:10px;background:hsl(var(--dash-paper)/.45)}
-.dash-note-icon {width:38px;height:38px;flex:0 0 38px;display:grid;place-items:center;color:hsl(var(--dash-pink));background:hsl(var(--dash-pink-soft));border-radius:8px}
-.dash-note-icon svg {width:26px;height:26px}
-.dash-note-body {flex:1;min-width:0}.dash-note-body b {font-size:13px;font-weight:800;overflow-wrap:anywhere}.dash-note-body p {font-size:12px;color:hsl(var(--dash-muted));overflow-wrap:anywhere}.dash-note-body small {font-size:12px;color:hsl(var(--dash-muted))}
-.dash-note-list li>button {color:hsl(var(--dash-pink));width:30px;height:36px;flex-shrink:0;padding:0}
-.dash-new-note {width:100%;height:40px;min-height:40px;margin-top:10px;border-radius:10px;font-size:13px;font-weight:800;background:hsl(var(--dash-pink-soft));color:hsl(var(--dash-pink))}
-.dash-note-form,.dash-post-form {margin-top:12px;display:grid;gap:10px}
+.dash-post-form {margin-top:12px;display:grid;gap:10px}
 .dash-input {width:100%;padding:10px 14px;border:1px solid hsl(var(--border));border-radius:8px;background:hsl(var(--dash-paper));font:inherit;font-size:14px}
 .dash-community {padding:12px 14px;min-height:225px}
 .dash-community .dash-card-head {gap:15px}
@@ -1356,10 +1347,10 @@ img { height: auto; }
 .dash-page .dash-topbar-actions i{animation:dashDot 1.6s ease-in-out infinite}
 .dash-page .dash-cat-row button,.dash-page .dash-cat-row a{transition:transform .2s ease,background .2s ease}
 .dash-page .dash-cat-row button:hover,.dash-page .dash-cat-row a:hover{transform:translateY(-2px)}
-.dash-page .dash-feed li,.dash-page .dash-note-list li{transition:transform .2s ease,box-shadow .2s ease}
-.dash-page .dash-feed li:hover,.dash-page .dash-note-list li:hover{transform:translateY(-2px);box-shadow:0 8px 18px -8px hsl(220 30% 30%/.18)}
-.dash-page .dash-post-btn,.dash-page .dash-new-note{transition:transform .2s ease,filter .2s ease}
-.dash-page .dash-post-btn:hover,.dash-page .dash-new-note:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.dash-page .dash-feed li{transition:transform .2s ease,box-shadow .2s ease}
+.dash-page .dash-feed li:hover{transform:translateY(-2px);box-shadow:0 8px 18px -8px hsl(220 30% 30%/.18)}
+.dash-page .dash-post-btn{transition:transform .2s ease,filter .2s ease}
+.dash-page .dash-post-btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
 
 @media(prefers-reduced-motion:reduce){
   .dash-page .dash-greet,.dash-page .dash-grid>.dash-card,.dash-page .dash-community,.dash-page .dash-banner-photo img{animation:none}

@@ -88,7 +88,7 @@ export default function JournalPage() {
       { onConflict: "user_id,day" },
     );
     setBusy(false);
-    if (error) { setMsg("Save nahi hua, dobara try karein."); return; }
+    if (error) { setMsg("Could not save. Please try again."); return; }
     setMsg("Journal entry saved ✓");
     load();
   };
@@ -124,7 +124,7 @@ export default function JournalPage() {
           </div>
           {!ready ? null : !user ? (
             <div className="jr-guest">
-              <p>Apna journal likhne aur roz ka mood save karne ke liye login karein.</p>
+              <p>Please log in to write your journal and save your daily mood.</p>
               <Button asChild><Link to="/account">Login / Sign Up</Link></Button>
             </div>
           ) : (
