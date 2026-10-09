@@ -130,6 +130,18 @@ export default function Account() {
     setBusy(false);
   };
 
+  const deleteAvatar = async () => {
+    if (!user || avatarBusy) return;
+    setAvatarBusy(true); setMsg("");
+    if (profile.avatar_url) await supabase.storage.from("avatars").remove([profile.avatar_url]);
+    const { error } = await supabase.from("profiles").upsert({ id: user.id, ...profile, avatar_url: "" });
+    if (error) { setMsg(error.message); setAvatarBusy(false); return; }
+    setProfile({ ...profile, avatar_url: "" });
+    setAvatarSrc("");
+    setMsg("Profile photo removed.");
+    setAvatarBusy(false);
+  };
+
   const uploadAvatar = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     event.target.value = "";
