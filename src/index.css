@@ -1785,6 +1785,9 @@ li.is-editing input,.gp-add input {flex:1;min-width:0;border:0;background:transp
 .gp-del-btn svg{width:17px;height:17px}
 .jr-delete{border-radius:999px!important;gap:6px}
 .jr-delete svg{width:16px;height:16px}
-.jr-entry-del{flex:none;width:36px;height:36px;display:grid;place-items:center;border-radius:10px;color:hsl(220 9% 55%);transition:color .2s,background .2s}
-.jr-entry-del:hover{color:hsl(0 84% 60%);background:hsl(0 84% 96%)}
-.jr-entry-del svg{width:17px;height:17px}
+.jr-entry-acts{flex:none;display:flex;gap:4px}
+.jr-entry-act{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 8px;border-radius:10px;color:hsl(220 9% 45%);transition:color .2s,background .2s}
+.jr-entry-act small{font-size:.62rem;font-weight:600}
+.jr-entry-act:hover{color:hsl(var(--primary));background:hsl(var(--accent))}
+.jr-entry-act svg{width:16px;height:16px}
+.jr-entry-act.jr-entry-del:hover{color:hsl(0 84% 60%);background:hsl(0 84% 96%)}
