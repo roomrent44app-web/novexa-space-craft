@@ -51,7 +51,7 @@ export default function Header() {
         <Link to="/account" onClick={() => setOpen(false)} className="mobile-nav-link">My Account</Link>
       ) : (<>
         <Link to="/account" onClick={() => setOpen(false)} className="mobile-nav-link">Login</Link>
-        <Link to="/account?mode=signup" onClick={() => setOpen(false)} className="mobile-nav-link">Create Account</Link>
+        <Link to="/account?mode=signup" onClick={() => setOpen(false)} className="mobile-nav-link">Register</Link>
       </>)}
       <Link className="h-btn h-btn-orange mobile-register" to="/account?mode=signup" onClick={() => setOpen(false)}>Register to Community <ArrowRight /></Link>
     </nav>}
