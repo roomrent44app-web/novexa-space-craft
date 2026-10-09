@@ -30,7 +30,7 @@ export default function DashboardProgress() {
     const [a, s] = await Promise.all([
       supabase.from("attendance").select("day").eq("user_id", user.id).gte("day", addDays(istDateStr(), -120)),
       supabase.from("subscriptions").select("duration_days,starts_at").eq("user_id", user.id).eq("status", "active")
-        .gte("expires_at", new Date().toISOString()).order("created_at", { ascending: false }).limit(1),
+        .gte("expires_at", new Date().toISOString()).order("duration_days", { ascending: false }).order("created_at", { ascending: false }).limit(1),
     ]);
     setDays(new Set((a.data ?? []).map((r: { day: string }) => r.day)));
     setSub((s.data?.[0] as Sub | undefined) ?? null);
