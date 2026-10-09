@@ -1,6 +1,6 @@
 import { Bell, BookOpen, ChartLine, Check, HeartHandshake, MessageCircle, Shield, ShieldCheck, Sunrise, Users } from "lucide-react";
 import { aboutHeroAvif, aboutHeroWebp, studentAvif, studentWebp } from "@/data/images";
-import { orderLink } from "@/data/fiveam";
+import { Link } from "react-router-dom";
 import { useSeo } from "@/hooks/useSeo";
 import { useImagePreload } from "@/hooks/useImagePreload";
 

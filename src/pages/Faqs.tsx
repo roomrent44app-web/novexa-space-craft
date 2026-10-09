@@ -1,7 +1,8 @@
 import { useState, type ReactNode } from "react";
 import { faqHeroAvif, faqHeroWebp, faqCtaAvif, faqCtaWebp } from "@/data/images";
 import { ArrowRight, Bell, Clock, IndianRupee, Laptop, Phone, Plus, ShieldCheck, Star, Users } from "lucide-react";
-import { FAQS, orderLink } from "@/data/fiveam";
+import { FAQS } from "@/data/fiveam";
+import { Link } from "react-router-dom";
 import { useSeo } from "@/hooks/useSeo";
 import { useImagePreload } from "@/hooks/useImagePreload";
 
