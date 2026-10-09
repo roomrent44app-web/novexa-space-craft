@@ -29,7 +29,7 @@ export default function Header() {
           <Link to="/account" className="nav-link header-signup">My Account</Link>
         ) : (<>
           <Link to="/account" className="nav-link">Login</Link>
-          <Link to="/account?mode=signup" className="nav-link header-signup">Sign Up</Link>
+          <Link to="/account?mode=signup" className="nav-link header-signup">Register</Link>
         </>)}
       </div>
       <Link className="h-btn h-btn-orange header-cta" to="/account?mode=signup">Register to Community <ArrowRight /></Link>
