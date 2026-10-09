@@ -261,7 +261,10 @@ export default function Account() {
     <section className="account-card account-profile"><div className="account-card-title"><div><small>My details</small><h2>Profile</h2></div><UserRound /></div>
       <div className="account-avatar-row">
         <span className="account-avatar">{avatarSrc ? <img src={avatarSrc} alt="Profile photo" /> : <UserRound />}</span>
-        <div><small>Profile photo</small><label className="h-btn account-save account-avatar-btn">{avatarBusy ? "Uploading…" : avatarSrc ? "Change Photo" : "Add Photo"}<input type="file" accept="image/*" hidden disabled={avatarBusy} onChange={uploadAvatar} /></label><small className="account-avatar-hint">JPG ya PNG, 5 MB tak</small></div>
+        <div><small>Profile photo</small><div className="account-avatar-actions">
+          <label className="h-btn account-save account-avatar-btn">{avatarBusy ? "Uploading…" : avatarSrc ? "Change Photo" : "Add Photo"}<input type="file" accept="image/*" hidden disabled={avatarBusy} onChange={uploadAvatar} /></label>
+          {avatarSrc && <button className="h-btn account-save account-avatar-delete" disabled={avatarBusy} onClick={deleteAvatar}><Trash2 /> Delete Photo</button>}
+        </div><small className="account-avatar-hint">JPG ya PNG, 5 MB tak</small></div>
       </div>
       <div className="account-profile-grid"><label className="adm-label">Full name<input className="adm-input" value={profile.full_name} onChange={(event) => setProfile({ ...profile, full_name: event.target.value })} /></label><label className="adm-label">Mobile<input className="adm-input" value={profile.phone} onChange={(event) => setProfile({ ...profile, phone: event.target.value })} /></label></div><button className="h-btn account-save" disabled={busy} onClick={save}><RefreshCw /> Save Details</button></section>
   </div></main>;
