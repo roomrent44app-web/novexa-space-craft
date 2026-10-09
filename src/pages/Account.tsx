@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { FunctionsHttpError } from "@supabase/supabase-js";
 import { Link } from "react-router-dom";
-import { CalendarClock, ChartNoAxesColumn, CheckCircle2, ChevronRight, Clock3, CreditCard, LayoutDashboard, LogOut, RefreshCw, Sun, Target, UserRound, Video } from "lucide-react";
+import { CalendarClock, ChartNoAxesColumn, CheckCircle2, ChevronRight, Clock3, CreditCard, LayoutDashboard, LogOut, RefreshCw, Sun, Target, Trash2, UserRound, Video } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import Attendance from "@/components/site/Attendance";
 import SignupWizard from "@/components/site/SignupWizard";
@@ -130,6 +130,18 @@ export default function Account() {
     setBusy(false);
   };
 
+  const deleteAvatar = async () => {
+    if (!user || avatarBusy) return;
+    setAvatarBusy(true); setMsg("");
+    if (profile.avatar_url) await supabase.storage.from("avatars").remove([profile.avatar_url]);
+    const { error } = await supabase.from("profiles").upsert({ id: user.id, ...profile, avatar_url: "" });
+    if (error) { setMsg(error.message); setAvatarBusy(false); return; }
+    setProfile({ ...profile, avatar_url: "" });
+    setAvatarSrc("");
+    setMsg("Profile photo removed.");
+    setAvatarBusy(false);
+  };
+
   const uploadAvatar = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     event.target.value = "";
@@ -249,7 +261,10 @@ export default function Account() {
     <section className="account-card account-profile"><div className="account-card-title"><div><small>My details</small><h2>Profile</h2></div><UserRound /></div>
       <div className="account-avatar-row">
         <span className="account-avatar">{avatarSrc ? <img src={avatarSrc} alt="Profile photo" /> : <UserRound />}</span>
-        <div><small>Profile photo</small><label className="h-btn account-save account-avatar-btn">{avatarBusy ? "Uploading…" : avatarSrc ? "Change Photo" : "Add Photo"}<input type="file" accept="image/*" hidden disabled={avatarBusy} onChange={uploadAvatar} /></label><small className="account-avatar-hint">JPG ya PNG, 5 MB tak</small></div>
+        <div><small>Profile photo</small><div className="account-avatar-actions">
+          <label className="h-btn account-save account-avatar-btn">{avatarBusy ? "Uploading…" : avatarSrc ? "Change Photo" : "Add Photo"}<input type="file" accept="image/*" hidden disabled={avatarBusy} onChange={uploadAvatar} /></label>
+          {avatarSrc && <button className="h-btn account-save account-avatar-delete" disabled={avatarBusy} onClick={deleteAvatar}><Trash2 /> Delete Photo</button>}
+        </div><small className="account-avatar-hint">JPG ya PNG, 5 MB tak</small></div>
       </div>
       <div className="account-profile-grid"><label className="adm-label">Full name<input className="adm-input" value={profile.full_name} onChange={(event) => setProfile({ ...profile, full_name: event.target.value })} /></label><label className="adm-label">Mobile<input className="adm-input" value={profile.phone} onChange={(event) => setProfile({ ...profile, phone: event.target.value })} /></label></div><button className="h-btn account-save" disabled={busy} onClick={save}><RefreshCw /> Save Details</button></section>
   </div></main>;
