@@ -1779,3 +1779,11 @@ li.is-editing input,.gp-add input {flex:1;min-width:0;border:0;background:transp
 .dash-guidelines-toggle svg:last-child { transition: transform .2s ease; flex: none; }
 .dash-guidelines-toggle svg.rot:last-child { transform: rotate(180deg); }
 .dash-guidelines-list { margin: 0; padding: 2px 16px 12px 34px; font-size: 13px; line-height: 1.55; color: #6b4a1e; display: grid; gap: 6px; }
+.gp-del-btn{flex:0 0 auto;width:34px;height:34px;display:grid;place-items:center;border-radius:8px;color:hsl(220 9% 55%);transition:color .2s}
+.gp-del-btn:hover{color:hsl(0 84% 60%)}
+.gp-del-btn svg{width:17px;height:17px}
+.jr-delete{border-radius:999px!important;gap:6px}
+.jr-delete svg{width:16px;height:16px}
+.jr-entry-del{flex:none;width:36px;height:36px;display:grid;place-items:center;border-radius:10px;color:hsl(220 9% 55%);transition:color .2s,background .2s}
+.jr-entry-del:hover{color:hsl(0 84% 60%);background:hsl(0 84% 96%)}
+.jr-entry-del svg{width:17px;height:17px}

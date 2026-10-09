@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, BookHeart, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, BookHeart, ChevronLeft, ChevronRight, Trash2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { useSeo } from "@/hooks/useSeo";
@@ -93,6 +93,16 @@ export default function JournalPage() {
     load();
   };
 
+  const remove = async (day: string) => {
+    if (!user) return;
+    setBusy(true);
+    const { error } = await supabase.from("student_journal").delete().eq("user_id", user.id).eq("day", day);
+    setBusy(false);
+    if (error) { setMsg("Could not delete. Please try again."); return; }
+    setMsg("Journal entry deleted");
+    load();
+  };
+
   const list = Object.values(entries).sort((a, b) => b.day.localeCompare(a.day));
   const future = selected > today;
 
@@ -145,6 +155,11 @@ export default function JournalPage() {
               </div>
               <div className="jr-actions">
                 {msg && <span className="jr-msg">{msg}</span>}
+                {entries[selected] && (
+                  <Button type="button" variant="outline" className="jr-delete" onClick={() => remove(selected)} disabled={busy}>
+                    <Trash2 /> Delete Entry
+                  </Button>
+                )}
                 <Button className="jr-save" onClick={save} disabled={busy || future}>{busy ? "Saving..." : "Save Journal Entry"} <ArrowRight /></Button>
               </div>
             </>
@@ -171,13 +186,17 @@ export default function JournalPage() {
             <h2>My Entries</h2>
             {list.length === 0 && <p className="jr-empty">Is mahine abhi koi entry nahi hai.</p>}
             {list.map((e) => (
-              <button type="button" key={e.day} className="dash-card jr-entry" onClick={() => pick(e.day)}>
+              <div key={e.day} className="dash-card jr-entry" role="button" tabIndex={0} onClick={() => pick(e.day)} onKeyDown={(ev) => { if (ev.key === "Enter") pick(e.day); }}>
                 <span className={`jr-entry-date${e.day === today ? " is-today" : ""}`}><b>{Number(e.day.slice(8))}</b>{MONTHS[Number(e.day.slice(5, 7)) - 1]}</span>
                 <span className="jr-entry-body">
                   <b>{e.day === today ? "Today's Journal" : `${WD[wd(e.day)]}'s Journal`} {moodOf(e.mood) && <em>{moodOf(e.mood)!.emoji} {moodOf(e.mood)!.label}</em>}</b>
                   <small>{e.body || "No text — mood only."}</small>
                 </span>
-              </button>
+                <button type="button" className="jr-entry-del" aria-label={`Delete journal entry of ${e.day}`} disabled={busy}
+                  onClick={(ev) => { ev.stopPropagation(); remove(e.day); }}>
+                  <Trash2 />
+                </button>
+              </div>
             ))}
           </section>
         )}
