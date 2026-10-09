@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, BookHeart, ChevronLeft, ChevronRight, Trash2 } from "lucide-react";
+import { ArrowRight, BookHeart, ChevronLeft, ChevronRight, Pencil, Share2, Trash2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { useSeo } from "@/hooks/useSeo";
@@ -103,7 +103,16 @@ export default function JournalPage() {
     load();
   };
 
-const list = Object.values(entries).sort((a, b) => b.day.localeCompare(a.day) || b.updated_at.localeCompare(a.updated_at));
+  const share = async (e: Entry) => {
+    const text = `${WD[wd(e.day)]}, ${Number(e.day.slice(8))} ${MONTHS[Number(e.day.slice(5, 7)) - 1]} ${e.day.slice(0, 4)} — ${moodOf(e.mood)?.label ?? "Journal"}\n\n${e.body || "Mood only."}\n\n— My 5AM Journal`;
+    try {
+      if (navigator.share) { await navigator.share({ title: "My 5AM Journal", text }); return; }
+      await navigator.clipboard.writeText(text);
+      setMsg("Journal entry copied — paste it anywhere to share.");
+    } catch { /* user cancelled */ }
+  };
+
+  const list = Object.values(entries).sort((a, b) => b.day.localeCompare(a.day) || b.updated_at.localeCompare(a.updated_at));
   const timeOf = (iso: string) => new Date(iso).toLocaleTimeString("en-IN", { hour: "numeric", minute: "2-digit", hour12: true, timeZone: "Asia/Kolkata" });
   const future = selected > today;
 
