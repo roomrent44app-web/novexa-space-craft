@@ -122,10 +122,10 @@ export default function Account() {
   };
 
   const resetPassword = async () => {
-    if (!form.email.trim()) { setMsg("Pehle apna Email ID upar likhiye, phir Forgot Password dabaiye."); return; }
+    if (!form.email.trim()) { setMsg("Enter your email address above, then select Forgot Password."); return; }
     setBusy(true); setMsg("");
     const { error } = await supabase.auth.resetPasswordForEmail(form.email.trim(), { redirectTo: window.location.origin + "/account" });
-    setMsg(error ? error.message : "Password reset link aapke email par bhej diya gaya hai. Apna email check kariye.");
+    setMsg(error ? error.message : "A password reset link has been sent to your email. Please check your inbox.");
     setBusy(false);
   };
 
@@ -197,14 +197,14 @@ export default function Account() {
     event.preventDefault(); setBusy(true); setMsg("");
     const { error } = await supabase.auth.updateUser({ password: newPassword });
     if (error) setMsg(error.message);
-    else { setMsg("Naya password set ho gaya! Ab aap login kar sakte hain."); setResetting(false); setNewPassword(""); }
+    else { setMsg("Your new password has been saved. You can now log in."); setResetting(false); setNewPassword(""); }
     setBusy(false);
   };
 
   if (!ready) return <main className="account-page"><p>Loading…</p></main>;
   if (resetting) return <main className="adm-wrap"><div className="adm-card"><form onSubmit={saveNewPassword}>
     <h1 className="adm-title">Set New Password</h1>
-    <p className="adm-sub">Apna naya password likhiye (kam se kam 6 characters).</p>
+    <p className="adm-sub">Enter your new password (at least 6 characters).</p>
     <label className="adm-label">New Password<input className="adm-input" type="password" required minLength={6} value={newPassword} onChange={(e) => setNewPassword(e.target.value)} /></label>
     {msg && <p className="adm-sub">{msg}</p>}
     <button className="h-btn h-btn-orange" disabled={busy} type="submit">{busy ? "Please wait…" : "Save New Password"}</button>
@@ -271,7 +271,7 @@ export default function Account() {
         <div><small>Profile photo</small><div className="account-avatar-actions">
           <label className="h-btn account-save account-avatar-btn">{avatarBusy ? "Uploading…" : avatarSrc ? "Change Photo" : "Add Photo"}<input type="file" accept="image/*" hidden disabled={avatarBusy} onChange={uploadAvatar} /></label>
           {avatarSrc && <button className="h-btn account-save account-avatar-delete" disabled={avatarBusy} onClick={deleteAvatar}><Trash2 /> Delete Photo</button>}
-        </div><small className="account-avatar-hint">JPG ya PNG, 5 MB tak</small></div>
+        </div><small className="account-avatar-hint">JPG or PNG, up to 5 MB</small></div>
       </div>
       <div className="account-profile-grid"><label className="adm-label">Full name<input className="adm-input" value={profile.full_name} onChange={(event) => setProfile({ ...profile, full_name: event.target.value })} /></label><label className="adm-label">Mobile<input className="adm-input" value={profile.phone} onChange={(event) => setProfile({ ...profile, phone: event.target.value })} /></label></div><button className="h-btn account-save" disabled={busy} onClick={save}><RefreshCw /> Save Details</button></section>
   </div></main>;
