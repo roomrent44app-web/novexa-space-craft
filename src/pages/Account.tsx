@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { FunctionsHttpError } from "@supabase/supabase-js";
 import { Link } from "react-router-dom";
-import { CalendarClock, ChartNoAxesColumn, CheckCircle2, ChevronRight, Clock3, CreditCard, LayoutDashboard, LogOut, RefreshCw, Sun, Target, UserRound, Video } from "lucide-react";
+import { CalendarClock, ChartNoAxesColumn, CheckCircle2, ChevronRight, Clock3, CreditCard, LayoutDashboard, LogOut, RefreshCw, Sun, Target, Trash2, UserRound, Video } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import Attendance from "@/components/site/Attendance";
 import SignupWizard from "@/components/site/SignupWizard";
