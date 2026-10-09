@@ -4,6 +4,7 @@ import { Heart, MessageSquare, Plus, Share2, UsersRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DASHBOARD_PREVIEW } from "@/data/dashboardPreview";
 import { dashboardStudentsWebp } from "@/data/images";
+import CommunityGuidelines from "./CommunityGuidelines";
 
 export default function DashboardPreviewCommunity() {
   const [filter, setFilter] = useState("All");
