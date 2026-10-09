@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { Link, useSearchParams } from "react-router-dom";
-import { ArrowRight, CalendarCheck, ChartNoAxesColumn, Check, ChevronRight, Pencil, Target } from "lucide-react";
+import { ArrowRight, CalendarCheck, ChartNoAxesColumn, Check, ChevronRight, Pencil, Target, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useSeo } from "@/hooks/useSeo";
@@ -96,6 +96,13 @@ export default function GoalsPlanner() {
     setGoals((cur) => ({ ...cur, [tab]: [...cur[tab], { id: `local-${Date.now()}`, title, done: false }] }));
   };
 
+  const removeGoal = async (goal: Goal) => {
+    setGoals((cur) => ({ ...cur, [tab]: cur[tab].filter((g) => g.id !== goal.id) }));
+    if (user && !goal.id.startsWith("local-") && !goal.id.startsWith("s-")) {
+      await supabase.from("student_goals").delete().eq("id", goal.id);
+    }
+  };
+
   const saveAll = async () => {
     await commitEdit();
     await addGoal();
@@ -162,6 +169,9 @@ export default function GoalsPlanner() {
                   <span className="gp-title">{goal.title}</span>
                   <button type="button" className="gp-pen-btn" aria-label={`Edit "${goal.title}"`} onClick={() => { setEditingId(goal.id); setEditText(goal.title); }}>
                     <Pencil />
+                  </button>
+                  <button type="button" className="gp-del-btn" aria-label={`Delete "${goal.title}"`} onClick={() => removeGoal(goal)}>
+                    <Trash2 />
                   </button>
                 </>
               )}
