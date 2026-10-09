@@ -1540,6 +1540,7 @@ li.is-editing input,.gp-add input {flex:1;min-width:0;border:0;background:transp
 .jr-entry-body{display:flex;flex-direction:column;gap:4px;min-width:0}
 .jr-entry-body em{font-style:normal;font-weight:500;font-size:.8rem;color:hsl(var(--muted-foreground));margin-left:6px}
 .jr-entry-body small{color:hsl(var(--muted-foreground));font-size:.9rem;overflow-wrap:anywhere}
+.jr-entry-time{font-size:.78rem !important;font-weight:600;color:hsl(var(--primary)) !important;letter-spacing:.02em}
 @media (max-width:600px){.jr-card{padding:16px}.jr-head h1{font-size:1.3rem}.jr-icon{width:52px;height:52px}.jr-moods{gap:5px}.jr-mood{font-size:.7rem}.jr-mood span{font-size:1.5rem}.jr-save{width:100%}}
 
 /* Community feed continuous motion */
