@@ -753,7 +753,7 @@ main { overflow-x: clip; }
 .ab-purpose .p-shell { padding: 0 calc(var(--pu) * 32); }
 .ab-purpose-grid { display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--pu) * 30); align-items: center; }
 .ab-photo { width: 100%; border-radius: calc(var(--pu) * 12); object-fit: cover; box-shadow: 0 calc(var(--pu) * 6) calc(var(--pu) * 24) calc(var(--pu) * -12) hsl(var(--ink) / .3); }
-.ab-purpose-body h2 { position: relative; width: fit-content; margin-top: calc(var(--pu) * 5); font-family: "Fredoka", sans-serif; font-weight: 700; font-size: calc(var(--pu) * 27); line-height: 1.05; letter-spacing: -.005em; transform: rotate(-1deg); }
+.ab-purpose-body h2 { position: relative; width: fit-content; margin-top: calc(var(--pu) * 5); font-family: "Fredoka", sans-serif; font-weight: 700; font-size: calc(var(--pu) * 27); line-height: 1.2; letter-spacing: -.005em; }
 .ab-purpose-body h2 em { font-style: normal; color: hsl(var(--primary)); }
 .ab-purpose-body h2 .p-rays { right: calc(var(--pu) * -38); bottom: calc(var(--pu) * 0); }
 .ab-purpose-body > p { margin-top: calc(var(--pu) * 8); font-size: calc(var(--pu) * 12.4); line-height: 1.45; color: hsl(var(--ink) / .9); }
@@ -764,7 +764,7 @@ main { overflow-x: clip; }
 
 .ab-values { padding: calc(var(--pu) * 6) 0 calc(var(--pu) * 20); }
 .ab-values .p-shell { padding: 0 calc(var(--pu) * 32); }
-.ab-values .p-section-heading h2 { font-family: "Fredoka", sans-serif; font-weight: 700; font-size: calc(var(--pu) * 26.5); -webkit-text-stroke: 0; letter-spacing: -.005em; transform: rotate(-1deg); }
+.ab-values .p-section-heading h2 { font-family: "Fredoka", sans-serif; font-weight: 700; font-size: calc(var(--pu) * 26.5); -webkit-text-stroke: 0; letter-spacing: -.005em; line-height: 1.2; }
 .ab-values .p-section-heading h2 em { font-style: normal; color: hsl(var(--primary)); }
 .ab-values .p-section-heading p { color: hsl(var(--ink)); font-size: calc(var(--pu) * 12.4); }
 .ab-value-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: calc(var(--pu) * 10); margin-top: calc(var(--pu) * 16); }
