@@ -76,14 +76,14 @@ export default function FoundersStory() {
             <p>Through our own preparation days, we realised that success is not just about studying more, but also about having the right environment, consistency and the right people around you.</p>
           </div>
           <div className="fs-photo">
-            <img src={foundersJourneyWebp} alt="Study desk with notebook and coffee mug" width={1024} height={1024} loading="lazy" />
+            <img src={foundersJourneyWebp} alt="Study desk with notebook and coffee mug" width={1024} height={1024} decoding="async" />
           </div>
         </section>
 
         {/* Why 5AM */}
         <section className="fs-row fs-row-rev">
           <div className="fs-photo">
-            <img src={foundersSunriseWebp} alt="Sunrise over the mountains from a study desk" width={1024} height={1024} loading="lazy" />
+            <img src={foundersSunriseWebp} alt="Sunrise over the mountains from a study desk" width={1024} height={1024} decoding="async" />
           </div>
           <div className="fs-copy">
             <span className="fs-eyebrow">Why 5AM.CO.IN</span>

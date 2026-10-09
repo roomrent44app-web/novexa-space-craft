@@ -11,7 +11,9 @@ const listeners = new Set<(p: CachedPost[]) => void>();
 
 try { const raw = localStorage.getItem(KEY); if (raw) posts = JSON.parse(raw); } catch { /* ignore */ }
 
-const warm = (list: CachedPost[]) => list.forEach((p) => { if (p.cover_url) { const i = new Image(); i.decoding = "async"; i.src = p.cover_url; } });
+// Keep references so warmed cover photos stay cached and decoded.
+const warmed = new Map<string, HTMLImageElement>();
+const warm = (list: CachedPost[]) => list.forEach((p) => { if (p.cover_url && !warmed.has(p.cover_url)) { const i = new Image(); i.decoding = "async"; i.src = p.cover_url; warmed.set(p.cover_url, i); } });
 
 export const getCachedPosts = () => posts;
 

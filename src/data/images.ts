@@ -51,6 +51,6 @@ export const PAGE_IMAGES: Record<string, { avif: string[]; webp: string[] }> = {
   "/how-it-works": { avif: [hiwHeroAvif, hiwCtaAvif], webp: [hiwHeroWebp, hiwCtaWebp] },
   "/faqs": { avif: [faqHeroAvif, faqCtaAvif], webp: [faqHeroWebp, faqCtaWebp] },
 "/about": { avif: [aboutHeroAvif, studentAvif], webp: [aboutHeroWebp, studentWebp] },
-  "/blog": { avif: [blogHeroAvif, foundersHeroAvif], webp: [blogHeroWebp, foundersHeroWebp] },
-  "/blog/founders-story": { avif: [foundersHeroAvif, foundersJourneyAvif, foundersSunriseAvif, foundersBannerAvif], webp: [foundersHeroWebp, foundersJourneyWebp, foundersSunriseWebp, foundersBannerWebp] },
+  "/blog": { avif: [blogHeroWebp, foundersHeroWebp, foundersJourneyWebp, foundersSunriseWebp, foundersBannerWebp], webp: [blogHeroWebp, foundersHeroWebp, foundersJourneyWebp, foundersSunriseWebp, foundersBannerWebp] },
+  "/blog/founders-story": { avif: [foundersHeroWebp, foundersJourneyWebp, foundersSunriseWebp, foundersBannerWebp, blogHeroWebp], webp: [foundersHeroWebp, foundersJourneyWebp, foundersSunriseWebp, foundersBannerWebp] },
 };
