@@ -203,10 +203,20 @@ export default function JournalPage() {
                   <small className="jr-entry-time">{WD[wd(e.day)]}, {Number(e.day.slice(8))} {MONTHS[Number(e.day.slice(5, 7)) - 1]} {e.day.slice(0, 4)} · {timeOf(e.updated_at)}</small>
                   <small>{e.body || "No text — mood only."}</small>
                 </span>
-                <button type="button" className="jr-entry-del" aria-label={`Delete journal entry of ${e.day}`} disabled={busy}
-                  onClick={(ev) => { ev.stopPropagation(); remove(e.day); }}>
-                  <Trash2 />
-                </button>
+                <span className="jr-entry-acts">
+                  <button type="button" className="jr-entry-act" aria-label={`Edit journal entry of ${e.day}`} disabled={busy}
+                    onClick={(ev) => { ev.stopPropagation(); pick(e.day); }}>
+                    <Pencil /><small>Edit</small>
+                  </button>
+                  <button type="button" className="jr-entry-act" aria-label={`Share journal entry of ${e.day}`} disabled={busy}
+                    onClick={(ev) => { ev.stopPropagation(); share(e); }}>
+                    <Share2 /><small>Share</small>
+                  </button>
+                  <button type="button" className="jr-entry-act jr-entry-del" aria-label={`Delete journal entry of ${e.day}`} disabled={busy}
+                    onClick={(ev) => { ev.stopPropagation(); remove(e.day); }}>
+                    <Trash2 /><small>Delete</small>
+                  </button>
+                </span>
               </div>
             ))}
           </section>
