@@ -51,7 +51,8 @@ export default function StudentDashboard() {
     const [profileResult, subResult, attendanceResult, streakResult] = await Promise.all([
       supabase.from("profiles").select("full_name").eq("id", user.id).maybeSingle(),
       supabase.from("subscriptions").select("plan_name,duration_days,status,starts_at,expires_at")
-        .eq("status", "active").gte("expires_at", new Date().toISOString()).order("created_at", { ascending: false }).limit(1),
+        .eq("user_id", user.id).eq("status", "active").gte("expires_at", new Date().toISOString())
+        .order("duration_days", { ascending: false }).order("created_at", { ascending: false }).limit(1),
       supabase.from("attendance").select("day").eq("user_id", user.id).gte("day", weekStart).lte("day", addDays(weekStart, 6)),
       supabase.rpc("get_wakeup_streaks"),
     ]);
